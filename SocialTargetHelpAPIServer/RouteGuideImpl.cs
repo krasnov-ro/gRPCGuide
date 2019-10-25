@@ -2,16 +2,17 @@
 using Grpc.Core;
 using System.Collections.Generic;
 using System.Text;
-using gRPCGuideContract.Contract;
+using SocialTargetHelpAPIContract;
 using System.Threading.Tasks;
-using static gRPCGuideContract.Contract.Person.Types;
-using gRPCGuideServer.Models;
+using static SocialTargetHelpAPIContract.Person.Types;
+using SocialTargetHelpAPIServer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Linq;
+using SocialTargetHelpAPIServer;
 
-namespace gRPCGuideServer
+namespace SocialTargetHelpAPIServer
 {
     class RouteGuideImpl : RouteGuide.RouteGuideBase
     {
@@ -29,7 +30,7 @@ namespace gRPCGuideServer
         }
 
         // Простой RPC, который получает запрос от клиента и возвращает ответ 
-        public override Task<GetPersonLifeStatusResponse> GetPersonLifeStatus(GetPersonLifeStatusRequest req, Grpc.Core.ServerCallContext context)
+        public override Task<GetPersonLifeStatusResponse> GetPersonLifeStatus(GetPersonLifeStatusRequest req, ServerCallContext context)
         {
             GetPersonLifeStatusResponse result = null;
             result = FsinDeathCheck(req.LastName, req.FirstName, req.MiddleName, Convert.ToDateTime(req.BirthDate));
@@ -58,7 +59,7 @@ namespace gRPCGuideServer
                     LastName = lastName,
                     FirstName = firstName,
                     MiddleName = middleName,
-                    BirthDate = birthDate.ToString(),
+                    BirthDate = birthDate.ToString("dd.MM.yyyy"),
                     Status = GetPersonLifeStatusResponse.Types.Statuses.Alive.ToString()
                 };
             }

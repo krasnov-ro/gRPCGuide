@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace gRPCGuideServer.Models
+namespace SocialTargetHelpAPIServer.Models
 {
     public partial class CdMetadata
     {

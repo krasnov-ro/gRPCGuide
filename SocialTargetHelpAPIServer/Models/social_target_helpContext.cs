@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace gRPCGuideServer.Models
+namespace SocialTargetHelpAPIServer.Models
 {
     public partial class social_target_helpContext : DbContext
     {

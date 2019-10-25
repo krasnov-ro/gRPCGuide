@@ -1,12 +1,13 @@
 ﻿using Grpc.Core;
 using System;
-using gRPCGuideContract.Contract;
-using gRPCGuideServer.Models;
+using SocialTargetHelpAPIContract;
+using SocialTargetHelpAPIServer.Models;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.Extensions.DependencyInjection;
+using SocialTargetHelpAPIServer;
 
-namespace gRPCGuideServer
+namespace SocialTargetHelpAPIServer
 {
     class Program
     {

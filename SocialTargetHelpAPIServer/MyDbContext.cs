@@ -1,10 +1,10 @@
-﻿using gRPCGuideServer.Models;
+﻿using SocialTargetHelpAPIServer.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace gRPCGuideServer
+namespace SocialTargetHelpAPIServer
 {
     class MyDbContext : social_target_helpContext
     {

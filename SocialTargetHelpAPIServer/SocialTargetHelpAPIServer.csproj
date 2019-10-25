@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\gRPCGuideContract\SocialTargetHelpAPIContract.csproj" />
+    <ProjectReference Include="..\SocialTargetHelpAPIContract\SocialTargetHelpAPIContract.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "gRPCGuideContract.Contract";
+option csharp_namespace = "SocialTargetHelpAPIContract";
 
 service RouteGuide{
 /*

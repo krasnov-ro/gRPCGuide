@@ -1,8 +1,8 @@
 ﻿using Grpc.Core;
-using gRPCGuideContract.Contract;
+using SocialTargetHelpAPIContract;
 using System;
 
-namespace gRPCGuide
+namespace SocialTargetHelpAPIClient
 {
     class Program
     {
