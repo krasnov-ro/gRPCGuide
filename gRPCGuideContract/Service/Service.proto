@@ -7,7 +7,7 @@ service RouteGuide{
 Простой RPC, где клиент отправляет запрос на сервер, используя клиентский объект и ждет ответа,
 чтобы вернуться, так же, как обычный вызов функции
 */
-	rpc GetMessage(SendMessageRequest) returns (SendMessageResponse) {}
+	rpc GetPersonLifeStatus(GetPersonLifeStatusRequest) returns (GetPersonLifeStatusResponse) {}
 
 /*
 На стороне сервера потокового RPC, где клиент отправляет запрос на сервер и получает поток 
@@ -15,14 +15,14 @@ service RouteGuide{
 больше нет сообщений. Как вы можете видеть в нашем примере, вы указываете потоковый метод на 
 стороне сервера, помещая stream ключевое слово перед типом ответа.
 */
-	rpc GetMessageList(SendMessageRequest) returns (stream SendMessageResponse) {}
+	rpc SocialCapMessage(SocialCapRequest) returns (SocialCapResponse) {}
 
 /*
 Потоковый RPC на стороне клиента, когда клиент записывает последовательность сообщений и 
 посылает их на сервер, снова используя указанный поток. Как только клиент закончил писать 
 сообщения, он ждет, пока сервер прочитает их все и вернет свой ответ. 
 */
-	rpc SendMessageList(stream SendMessageRequest) returns (SendMessageResponse) {}
+	rpc SendMessageList(stream GetPersonLifeStatusRequest) returns (GetPersonLifeStatusResponse) {}
 
 /*
 Двунаправленного потокового RPC, где обе стороны отправить последовательность сообщений,
@@ -32,21 +32,44 @@ service RouteGuide{
 сообщение, или некоторая другая комбинация чтения и записи. Порядок сообщений в каждом
 потоке сохраняется. 
 */
-	rpc SendMessage (stream SendMessageRequest) returns (stream SendMessageResponse) {}
+	rpc SendMessage (stream GetPersonLifeStatusRequest) returns (stream GetPersonLifeStatusResponse) {}
 }
 
-message SendMessageRequest {
+message GetPersonLifeStatusRequest {
+	string lastName = 1;
+	string firstName = 2;
+	string middleName = 3;
+	string birthDate = 4;
+	string SenderCode = 5;
+}
+
+message GetPersonLifeStatusResponse {
+	string lastName = 1;
+	string firstName = 2;
+	string middleName = 3;
+	string birthDate = 4; 
+	string status = 5;
+
+	enum Statuses {
+		DEAD = 0;
+		ALIVE = 1;
+	}
+}
+
+message SocialCapRequest {
 	string lastName = 1;
 	string firstName = 2;
 	string middleName = 3;
 	string birthDate = 4;
 }
 
-message SendMessageResponse {
-	string lastName = 1;
-	string firstName = 2;
-	string middleName = 3;
-	string birthDate = 4; 
+message SocialCapResponse {
+	string status = 1;
+
+	enum Statuses {
+		AVAILABLE = 0;
+		ABSENT = 1;
+	}
 }
 
 message Person {

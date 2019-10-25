@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gRPCGuide", "gRPCGuide\gRPCGuide.csproj", "{73127574-4BCA-4353-8B8C-41B003B18FDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialTargetHelpAPIClient", "gRPCGuide\SocialTargetHelpAPIClient.csproj", "{73127574-4BCA-4353-8B8C-41B003B18FDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gRPCGuideContract", "gRPCGuideContract\gRPCGuideContract.csproj", "{47B2E7F1-CC07-4071-88A1-32A61B6DA97B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialTargetHelpAPIContract", "gRPCGuideContract\SocialTargetHelpAPIContract.csproj", "{47B2E7F1-CC07-4071-88A1-32A61B6DA97B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gRPCGuideServer", "gRPCGuideServer\gRPCGuideServer.csproj", "{A6E529D9-BBBF-4E7B-9EF7-AF95044E9E56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialTargetHelpAPIServer", "gRPCGuideServer\SocialTargetHelpAPIServer.csproj", "{A6E529D9-BBBF-4E7B-9EF7-AF95044E9E56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

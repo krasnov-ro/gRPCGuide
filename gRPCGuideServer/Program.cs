@@ -15,17 +15,6 @@ namespace gRPCGuideServer
 
         static void Main(string[] args)
         {
-            var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", true, true);
-
-            var configuration = builder.Build();
-
-            using (var db = new MyDbContext(configuration.GetConnectionString("MyDb")))
-            {
-                var test = db.CdData;
-            }
-
             Server server = new Server
             {
                 Services = { RouteGuide.BindService(new RouteGuideImpl()) },
@@ -41,3 +30,4 @@ namespace gRPCGuideServer
         }
     }
 }
+

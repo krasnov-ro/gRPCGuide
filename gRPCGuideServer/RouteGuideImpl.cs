@@ -7,35 +7,94 @@ using System.Threading.Tasks;
 using static gRPCGuideContract.Contract.Person.Types;
 using gRPCGuideServer.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using System.Linq;
 
 namespace gRPCGuideServer
 {
     class RouteGuideImpl : RouteGuide.RouteGuideBase
     {
-        //private social_target_helpContext _context;
+        private social_target_helpContext _context;
 
-        //public RouteGuideImpl(social_target_helpContext context)
-        //{
-        //    _context = context;
-        //}
+        public RouteGuideImpl()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", true, true);
+
+            var configuration = builder.Build();
+
+            _context = new MyDbContext(configuration.GetConnectionString("MyDb"));
+        }
 
         // Простой RPC, который получает запрос от клиента и возвращает ответ 
-        public override Task<SendMessageResponse> GetMessage(SendMessageRequest request, Grpc.Core.ServerCallContext context)
+        public override Task<GetPersonLifeStatusResponse> GetPersonLifeStatus(GetPersonLifeStatusRequest req, Grpc.Core.ServerCallContext context)
         {
-            SendMessageResponse result = null;
-            DeathCheck(request.LastName, request.FirstName, request.MiddleName, Convert.ToDateTime(request.BirthDate));
+            GetPersonLifeStatusResponse result = null;
+            result = FsinDeathCheck(req.LastName, req.FirstName, req.MiddleName, Convert.ToDateTime(req.BirthDate));
+            return Task.FromResult(result);
+        }
+
+        public GetPersonLifeStatusResponse FsinDeathCheck(string lastName, string firstName, string middleName, DateTime birthDate)
+        {
+            GetPersonLifeStatusResponse result = null;
+            var men = _context.CdData.Where(p => p.CLastName == lastName && p.CFirstName == firstName && p.CMiddleName == middleName && p.DBirthDate == birthDate).FirstOrDefault();
+            if (men != null)
+            {
+                result = new GetPersonLifeStatusResponse()
+                {
+                    LastName = men.CLastName,
+                    FirstName = men.CFirstName,
+                    MiddleName = men.CMiddleName,
+                    BirthDate = men.DBirthDate.ToString(),
+                    Status = GetPersonLifeStatusResponse.Types.Statuses.Dead.ToString()
+                };
+            }
+            else
+            {
+                result = new GetPersonLifeStatusResponse()
+                {
+                    LastName = lastName,
+                    FirstName = firstName,
+                    MiddleName = middleName,
+                    BirthDate = birthDate.ToString(),
+                    Status = GetPersonLifeStatusResponse.Types.Statuses.Alive.ToString()
+                };
+            }
+
+            return result;
+        }
+
+        public override Task<SocialCapResponse> SocialCapMessage(SocialCapRequest req, ServerCallContext context)
+        {
+            SocialCapResponse result = null;
+
+            result = SocCapCheck(req.LastName, req.FirstName, req.MiddleName);
 
             return Task.FromResult(result);
         }
 
-        public Task<CdData> DeathCheck(string lastName, string firstName, string middleName, DateTime birthDate)
+        public SocialCapResponse SocCapCheck(string lastName, string firstName, string middleName)
         {
-            Task<CdData> dPerson;
-            using (social_target_helpContext _context = new social_target_helpContext())
+            SocialCapResponse result = null;
+            var men = _context.CdData.Where(p => p.CLastName == lastName && p.CFirstName == firstName && p.CMiddleName == middleName).FirstOrDefault();
+            if (men != null)
             {
-                dPerson = _context.CdData.SingleOrDefaultAsync(p => p.CLastName == lastName && p.CFirstName == firstName && p.CMiddleName == middleName && p.DBirthDate == birthDate);
+                result = new SocialCapResponse()
+                {
+                    Status = SocialCapResponse.Types.Statuses.Available.ToString()
+                };
             }
-            return dPerson;
+            else
+            {
+                result = new SocialCapResponse()
+                {
+                    Status = SocialCapResponse.Types.Statuses.Absent.ToString()
+                };
+            }
+
+            return result;
         }
     }
 }
