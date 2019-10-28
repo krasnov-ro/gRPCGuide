@@ -9,6 +9,8 @@ namespace SocialTargetHelpAPIServer.Models
         public string CLastName { get; set; }
         public string CFirstName { get; set; }
         public string CMiddleName { get; set; }
-        public DateTime? DBirthDate { get; set; }
+        public DateTime DBirthDate { get; set; }
+        public string CDocumentSerial { get; set; }
+        public string CDocumentNumber { get; set; }
     }
 }

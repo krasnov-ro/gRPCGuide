@@ -18,14 +18,14 @@ namespace SocialTargetHelpAPIServer.Models
         public virtual DbSet<CdData> CdData { get; set; }
         public virtual DbSet<CdMetadata> CdMetadata { get; set; }
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseNpgsql("Server=192.168.2.179;Database=social_target_help;UID=postgres;PWD=motorhead33;");
-//            }
-//        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseNpgsql("Server=192.168.2.179;Database=social_target_help;UID=postgres;PWD=motorhead33;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,19 +37,34 @@ namespace SocialTargetHelpAPIServer.Models
             {
                 entity.ToTable("cd_data", "api_req");
 
+                entity.HasIndex(e => new { e.CDocumentSerial, e.CDocumentNumber })
+                    .HasName("i_document")
+                    .IsUnique();
+
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasDefaultValueSql("nextval('api_req.cd_date_id_seq'::regclass)");
 
+                entity.Property(e => e.CDocumentNumber)
+                    .HasColumnName("c_document_number")
+                    .HasMaxLength(6);
+
+                entity.Property(e => e.CDocumentSerial)
+                    .HasColumnName("c_document_serial")
+                    .HasMaxLength(4);
+
                 entity.Property(e => e.CFirstName)
+                    .IsRequired()
                     .HasColumnName("c_first_name")
                     .HasMaxLength(255);
 
                 entity.Property(e => e.CLastName)
+                    .IsRequired()
                     .HasColumnName("c_last_name")
                     .HasMaxLength(255);
 
                 entity.Property(e => e.CMiddleName)
+                    .IsRequired()
                     .HasColumnName("c_middle_name")
                     .HasMaxLength(255);
 

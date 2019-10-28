@@ -11,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Linq;
 using SocialTargetHelpAPIServer;
+using Newtonsoft.Json.Linq;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace SocialTargetHelpAPIServer
 {
@@ -39,30 +42,81 @@ namespace SocialTargetHelpAPIServer
 
         public GetPersonLifeStatusResponse FsinDeathCheck(string lastName, string firstName, string middleName, DateTime birthDate)
         {
+            String personDocData = null;
             GetPersonLifeStatusResponse result = null;
-            var men = _context.CdData.Where(p => p.CLastName == lastName && p.CFirstName == firstName && p.CMiddleName == middleName && p.DBirthDate == birthDate).FirstOrDefault();
-            if (men != null)
+            try
             {
-                result = new GetPersonLifeStatusResponse()
+                var men = _context.CdData.Where(p => p.CLastName == lastName && p.CFirstName == firstName && p.CMiddleName == middleName && p.DBirthDate == birthDate).SingleOrDefault();
+                if (men != null)
                 {
-                    LastName = men.CLastName,
-                    FirstName = men.CFirstName,
-                    MiddleName = men.CMiddleName,
-                    BirthDate = men.DBirthDate.ToString(),
-                    Status = GetPersonLifeStatusResponse.Types.Statuses.Dead.ToString()
-                };
+                    result = new GetPersonLifeStatusResponse()
+                    {
+                        LastName = men.CLastName,
+                        FirstName = men.CFirstName,
+                        MiddleName = men.CMiddleName,
+                        BirthDate = men.DBirthDate.ToString(),
+                        Status = GetPersonLifeStatusResponse.Types.Statuses.Dead.ToString()
+                    };
+                }
+                else
+                {
+                    result = new GetPersonLifeStatusResponse()
+                    {
+                        LastName = lastName,
+                        FirstName = firstName,
+                        MiddleName = middleName,
+                        BirthDate = birthDate.ToString("dd.MM.yyyy"),
+                        Status = GetPersonLifeStatusResponse.Types.Statuses.Alive.ToString()
+                    };
+                }
             }
-            else
+            catch
             {
-                result = new GetPersonLifeStatusResponse()
+                
+                String JsonResult = null;
+                var Persons = _context.CdData.Where(p => p.CLastName == lastName && p.CFirstName == firstName && p.CMiddleName == middleName && p.DBirthDate == birthDate);
+                foreach (var person in Persons)
                 {
-                    LastName = lastName,
-                    FirstName = firstName,
-                    MiddleName = middleName,
-                    BirthDate = birthDate.ToString("dd.MM.yyyy"),
-                    Status = GetPersonLifeStatusResponse.Types.Statuses.Alive.ToString()
-                };
+                    var fullName = person.CLastName + " " + person.CFirstName + " " + person.CMiddleName;
+
+                     JsonGenerate(JsonResult, fullName, person.CDocumentSerial, person.CDocumentNumber);
+                }
             }
+            return result;
+        }
+
+        public object JsonGenerate(string where, string fullName, string serial, string number)
+        {
+            object result = new {
+                Person = fullName,
+                Passport = new
+                {
+                    Serial = serial,
+                    Number = number
+                }
+            };
+
+            #region Формирование Json в ручную
+            //if (where != null)
+            //{
+            //    where = where.Substring(0, where.Length - 3) +
+            //        ",\n'Person': '" + fullName + "', " +
+            //        "'Passport': " +
+            //            "{ 'Serial': '" + serial + "'," +
+            //            "'Number': '" + number + "' }" +
+            //        "}";
+            //    result = JsonConvert.DeserializeObject(where);
+            //}
+            //else
+            //{
+            //    where = "{ " + "'Person': '" + fullName + "', " +
+            //            "'Passport': " +
+            //                "{ 'Serial': '" + serial + "'," +
+            //                " 'Number': '" + number + "' }," +
+            //            "}";
+            //    result = JsonConvert.DeserializeObject(where);
+            //}
+            #endregion
 
             return result;
         }
