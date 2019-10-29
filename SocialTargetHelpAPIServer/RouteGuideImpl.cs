@@ -5,7 +5,6 @@ using System.Text;
 using SocialTargetHelpAPIContract;
 using System.Threading.Tasks;
 using static SocialTargetHelpAPIContract.Person.Types;
-using SocialTargetHelpAPIServer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
@@ -14,13 +13,15 @@ using SocialTargetHelpAPIServer;
 using Newtonsoft.Json.Linq;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using SocialTargetHelpAPIServer.Models;
+using Npgsql;
 
 namespace SocialTargetHelpAPIServer
 {
     class RouteGuideImpl : RouteGuide.RouteGuideBase
     {
-        private social_target_helpContext _context;
-
+        String _connectionString = null;
+        STH dbContext;
         public RouteGuideImpl()
         {
             var builder = new ConfigurationBuilder()
@@ -29,65 +30,109 @@ namespace SocialTargetHelpAPIServer
 
             var configuration = builder.Build();
 
-            _context = new MyDbContext(configuration.GetConnectionString("MyDb"));
+            dbContext = new STH("PostgreSQL.9.5", configuration.GetConnectionString("MyDb"));
+            _connectionString = configuration.GetConnectionString("MyDb");
         }
 
+        #region Формировнаие ответа для УФСИН
         // Простой RPC, который получает запрос от клиента и возвращает ответ 
-        public override Task<GetPersonLifeStatusResponse> GetPersonLifeStatus(GetPersonLifeStatusRequest req, ServerCallContext context)
+        public override Task<GetPersonLifeStatusListResponse> GetPersonLifeStatus(GetPersonLifeStatusListRequest req, ServerCallContext context)
         {
-            GetPersonLifeStatusResponse result = null;
-            result = FsinDeathCheck(req.LastName, req.FirstName, req.MiddleName, Convert.ToDateTime(req.BirthDate));
-            return Task.FromResult(result);
-        }
-
-        public GetPersonLifeStatusResponse FsinDeathCheck(string lastName, string firstName, string middleName, DateTime birthDate)
-        {
+            GetPersonLifeStatusListResponse result = new GetPersonLifeStatusListResponse();
             String personDocData = null;
-            GetPersonLifeStatusResponse result = null;
+            GetPersonLifeStatusRequest[] persons;
+            IQueryable<fatalzp_sv_cd_umer> men = null;
+
             try
             {
-                var men = _context.CdData.Where(p => p.CLastName == lastName && p.CFirstName == firstName && p.CMiddleName == middleName && p.DBirthDate == birthDate).SingleOrDefault();
-                if (men != null)
+                foreach (var dbPerson in req.Obj)
                 {
-                    result = new GetPersonLifeStatusResponse()
+                    men = dbContext.fatalzp_sv_cd_umer.Where(p =>
+                        //p.Id.ToString() == dbPerson.Guid &&
+                        p.Фамилия == dbPerson.LastName &&
+                        p.Имя == dbPerson.FirstName &&
+                        p.Отчество == dbPerson.MiddleName &&
+                        p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate));
+
+                    if (men.Count() == 1)
                     {
-                        LastName = men.CLastName,
-                        FirstName = men.CFirstName,
-                        MiddleName = men.CMiddleName,
-                        BirthDate = men.DBirthDate.ToString(),
-                        Status = GetPersonLifeStatusResponse.Types.Statuses.Dead.ToString()
-                    };
-                }
-                else
-                {
-                    result = new GetPersonLifeStatusResponse()
+                        var tmp = men.SingleOrDefault();
+                        result.DeadPerson.Add(
+                            new GetPersonLifeStatusListResponse.Types.GetPersonLifeStatusResponse
+                            {
+                                LastName = tmp.Фамилия,
+                                FirstName = tmp.Имя,
+                                MiddleName = tmp.Отчество,
+                                BirthDate = tmp.BirthDate.ToString(),
+                                Status = GetPersonLifeStatusListResponse.Types.Statuses.Dead.ToString()
+                            });
+                    }
+                    else if (men.Count() > 1)
                     {
-                        LastName = lastName,
-                        FirstName = firstName,
-                        MiddleName = middleName,
-                        BirthDate = birthDate.ToString("dd.MM.yyyy"),
-                        Status = GetPersonLifeStatusResponse.Types.Statuses.Alive.ToString()
-                    };
+                        foreach (var i in men)
+                        {
+                            result.DeadPerson.Add(
+                               new GetPersonLifeStatusListResponse.Types.GetPersonLifeStatusResponse
+                               {
+                                   LastName = i.Фамилия,
+                                   FirstName = i.Имя,
+                                   MiddleName = i.Отчество,
+                                   BirthDate = i.BirthDate.ToString(),
+                                   Status = GetPersonLifeStatusListResponse.Types.Statuses.NotSure.ToString()
+                               });
+                        }
+                    }
                 }
             }
             catch
             {
-                
-                String JsonResult = null;
-                var Persons = _context.CdData.Where(p => p.CLastName == lastName && p.CFirstName == firstName && p.CMiddleName == middleName && p.DBirthDate == birthDate);
-                foreach (var person in Persons)
-                {
-                    var fullName = person.CLastName + " " + person.CFirstName + " " + person.CMiddleName;
-
-                     JsonGenerate(JsonResult, fullName, person.CDocumentSerial, person.CDocumentNumber);
-                }
             }
-            return result;
+            return Task.FromResult(result);
         }
+        #endregion
 
+        public override Task<GetPersonPaymentsListResponse> GetPersonPaymentsList(GetPersonPaymentsListRequest req, ServerCallContext context)
+        {
+            GetPersonPaymentsListResponse result = new GetPersonPaymentsListResponse();
+            NpgsqlDataReader personPayments = null;
+            //GetPersonPaymentsResponse[] Payments;
+            IQueryable<fatalzp_sv_cd_umer> men = null;
+
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.CommandText = "public.get_msp";
+                    cmd.Parameters.Add(new NpgsqlParameter("_d_datebegin", Convert.ToDateTime(req.PeriodBegin))/*, new NpgsqlParameter("_d_dateend", req.PeriodEnd), new NpgsqlParameter("_c_snils", req.Snils)*/);
+                    cmd.Parameters.Add(new NpgsqlParameter("_d_dateend", Convert.ToDateTime(req.PeriodEnd)));
+                    cmd.Parameters.Add(new NpgsqlParameter("_c_snils", req.Snils));
+                    //cmd.CommandText = "SELECT * FROM public.get_msp('"+ req.PeriodBegin + 
+                    //                                            "','" + req.PeriodEnd + 
+                    //                                            "','" + req.Snils + "')";
+                    personPayments = cmd.ExecuteReader();
+                    var read = personPayments.Read();
+                    foreach (var i in personPayments)
+                    {
+                        result.Payments.Add(
+                            new GetPersonPaymentsListResponse.Types.GetPersonPaymentsResponse
+                            { }
+                            );
+                    }
+                }
+                conn.Close();
+            }
+
+            
+
+            return Task.FromResult(result);
+        }
         public object JsonGenerate(string where, string fullName, string serial, string number)
         {
-            object result = new {
+            object result = new
+            {
                 Person = fullName,
                 Passport = new
                 {
@@ -133,7 +178,7 @@ namespace SocialTargetHelpAPIServer
         public SocialCapResponse SocCapCheck(string lastName, string firstName, string middleName)
         {
             SocialCapResponse result = null;
-            var men = _context.CdData.Where(p => p.CLastName == lastName && p.CFirstName == firstName && p.CMiddleName == middleName).FirstOrDefault();
+            var men = dbContext.fatalzp_sv_cd_umer.Where(p => p.Фамилия == lastName && p.Имя == firstName && p.Отчество == middleName).FirstOrDefault();
             if (men != null)
             {
                 result = new SocialCapResponse()

@@ -1,0 +1,55 @@
+﻿using System;
+using System.Linq;
+<#@ template language="C#" debug="True" hostSpecific="True"                            #>
+<#@ output extension=".generated.cs"                                                   #>
+<#@ include file="$(LinqToDBT4PostgreSQLTemplatesDirectory)LinqToDB.PostgreSQL.Tools.ttinclude" #>
+<#@ include file="$(LinqToDBT4PostgreSQLTemplatesDirectory)PluralizationService.ttinclude"      #>
+<# //@ include file="$(ProjectDir)LinqToDB.Templates\LinqToDB.PostgreSQL.Tools.ttinclude" #>
+<# //@ include file="$(ProjectDir)LinqToDB.Templates\PluralizationService.ttinclude"      #>
+<#
+  DataContextName   = "STH";
+
+  PluralizeClassNames            = false;
+  SingularizeClassNames          = false;
+  PluralizeDataContextPropertyNames    = false;
+  SingularizeDataContextPropertyNames    = false;
+
+  NormalizeNames              = false;
+
+  GenerateFindExtensions          = false;
+  GenerateCaseSensitiveNames        = false;
+  OneToManyAssociationType        = "IEnumerable<{0}>";
+  IsCompactColumnAliases          = false;
+  GenerateBackReferences = false;
+
+  GenerateProcedureErrors          = false;
+
+	NamespaceName = "SocialTargetHelpAPIServer.Models";
+
+	LoadPostgreSQLMetadata("192.168.2.179", "5432", "social_target_help", "postgres", "motorhead33");
+//	LoadPostgreSQLMetadata(string connectionString);
+
+var schemasIncluded = new[] { "fatalzp" };
+  var tablesIncluded = new Dictionary<String, String[]>
+  {
+    { "sozags", new [] { "СОЗАГС_1", "СОЗАГС_1В" } },
+    { "zags", new [] { "СТАГС", "СПДУЛ", "СДРАГС", "СВЗАГС", "ОКСМ" } }
+  };
+  
+  Tables = Tables.Where(p => schemasIncluded.Contains(p.Value.Schema)
+    || tablesIncluded.Any(td => td.Key == p.Value.Schema && td.Value.Any(t => t == p.Value.TableName)))
+    .ToDictionary(p => p.Key, p => p.Value);
+  Procedures = Procedures.Where(p => schemasIncluded.Contains(p.Value.Schema))
+    .ToDictionary(p => p.Key, p => p.Value);
+
+foreach (var t in Tables.Values) {
+      t.TypeName = t.Schema + "_" + (
+          PluralizeClassNames   ? ToPlural  (t.TypeName) :
+          SingularizeClassNames ? ToSingular(t.TypeName) : t.TypeName);
+      t.DataContextPropertyName = (
+          PluralizeDataContextPropertyNames   ? ToPlural  (t.TypeName) :
+          SingularizeDataContextPropertyNames ? ToSingular(t.TypeName) : t.TypeName);
+  }
+
+GenerateModel();
+#>

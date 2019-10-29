@@ -7,7 +7,7 @@ service RouteGuide{
 Простой RPC, где клиент отправляет запрос на сервер, используя клиентский объект и ждет ответа,
 чтобы вернуться, так же, как обычный вызов функции
 */
-	rpc GetPersonLifeStatus(GetPersonLifeStatusRequest) returns (GetPersonLifeStatusResponse) {}
+	rpc GetPersonLifeStatus(GetPersonLifeStatusListRequest) returns (GetPersonLifeStatusListResponse) {}
 
 /*
 На стороне сервера потокового RPC, где клиент отправляет запрос на сервер и получает поток 
@@ -22,7 +22,7 @@ service RouteGuide{
 посылает их на сервер, снова используя указанный поток. Как только клиент закончил писать 
 сообщения, он ждет, пока сервер прочитает их все и вернет свой ответ. 
 */
-	rpc SendMessageList(stream GetPersonLifeStatusRequest) returns (GetPersonLifeStatusResponse) {}
+	rpc GetPersonPaymentsList(GetPersonPaymentsListRequest) returns (GetPersonPaymentsListResponse) {}
 
 /*
 Двунаправленного потокового RPC, где обе стороны отправить последовательность сообщений,
@@ -32,28 +32,55 @@ service RouteGuide{
 сообщение, или некоторая другая комбинация чтения и записи. Порядок сообщений в каждом
 потоке сохраняется. 
 */
-	rpc SendMessage (stream GetPersonLifeStatusRequest) returns (stream GetPersonLifeStatusResponse) {}
+	rpc SendMessage (stream SocialCapRequest) returns (stream SocialCapResponse) {}
+}
+message GetPersonPaymentsListRequest {
+	string snils = 1;
+	string periodBegin = 2;
+	string periodEnd = 3;
+}
+message GetPersonPaymentsListResponse{
+	repeated GetPersonPaymentsResponse payments = 1;
+
+	message GetPersonPaymentsResponse {
+		string dateCalculation = 1;
+		string dateBegin = 2;
+		string dateEnd = 3;
+		string Title = 4;
+		string name = 5;
+		string paymentSum = 6;
+	}
 }
 
 message GetPersonLifeStatusRequest {
-	string lastName = 1;
-	string firstName = 2;
-	string middleName = 3;
-	string birthDate = 4;
-	string SenderCode = 5;
+	string guid = 1;
+	string lastName = 2;
+	string firstName = 3;
+	string middleName = 4;
+	string birthDate = 5;
 }
 
-message GetPersonLifeStatusResponse {
-	string lastName = 1;
-	string firstName = 2;
-	string middleName = 3;
-	string birthDate = 4; 
-	string status = 5;
+message GetPersonLifeStatusListRequest {
+	repeated GetPersonLifeStatusRequest obj = 1;
+}
+
+message GetPersonLifeStatusListResponse {
+
+	message GetPersonLifeStatusResponse {
+		string lastName = 1;
+		string firstName = 2;
+		string middleName = 3;
+		string birthDate = 4; 
+		string status = 5;
+	}
 
 	enum Statuses {
 		DEAD = 0;
 		ALIVE = 1;
+		NOT_SURE = 2;
 	}
+
+	repeated GetPersonLifeStatusResponse deadPerson = 1;
 }
 
 message SocialCapRequest {
