@@ -15,6 +15,8 @@ using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using SocialTargetHelpAPIServer.Models;
 using Npgsql;
+using System.Globalization;
+using NpgsqlTypes;
 
 namespace SocialTargetHelpAPIServer
 {
@@ -94,7 +96,6 @@ namespace SocialTargetHelpAPIServer
         public override Task<GetPersonPaymentsListResponse> GetPersonPaymentsList(GetPersonPaymentsListRequest req, ServerCallContext context)
         {
             GetPersonPaymentsListResponse result = new GetPersonPaymentsListResponse();
-            NpgsqlDataReader personPayments = null;
             //GetPersonPaymentsResponse[] Payments;
             IQueryable<fatalzp_sv_cd_umer> men = null;
 
@@ -112,23 +113,52 @@ namespace SocialTargetHelpAPIServer
                     //cmd.CommandText = "SELECT * FROM public.get_msp('"+ req.PeriodBegin + 
                     //                                            "','" + req.PeriodEnd + 
                     //                                            "','" + req.Snils + "')";
-                    personPayments = cmd.ExecuteReader();
-                    var read = personPayments.Read();
-                    foreach (var i in personPayments)
+                    cmd.ExecuteNonQuery();
+                    using (var personPayments = cmd.ExecuteReader())
                     {
-                        result.Payments.Add(
-                            new GetPersonPaymentsListResponse.Types.GetPersonPaymentsResponse
-                            { }
-                            );
+                        while (personPayments.Read())
+                        {
+                            String CalcDate = null;
+                            DateTime calculationDate = new DateTime();
+
+                            try
+                            {
+                                var date1 = personPayments.GetDate(personPayments.GetOrdinal("d_date_calculation"));
+                                var date2 = new DateTime(date1.Year, date1.Month, date1.Day);
+                                calculationDate = date2;
+                                CalcDate = calculationDate.ToString("yyyy-MM-dd");
+                            }
+                            catch
+                            {
+                                CalcDate = "";
+                            }
+
+                            result.Payments.Add(
+                                new GetPersonPaymentsListResponse.Types.GetPersonPaymentsResponse
+                                { 
+                                    DateCalculation = CalcDate,
+                                    DateBegin = ReadDate(personPayments, "d_begin").ToString("yyyy-MM-dd"),
+                                    DateEnd = ReadDate(personPayments, "d_end").ToString("yyyy-MM-dd"),
+                                    Title = personPayments[3].ToString(),
+                                    Name = personPayments[4].ToString(),
+                                    PaymentSum = personPayments[5].ToString()
+                                });
+                        }
                     }
                 }
                 conn.Close();
             }
 
-            
-
             return Task.FromResult(result);
         }
+
+        private DateTime ReadDate(NpgsqlDataReader reader, String fieldName)
+        {
+            NpgsqlDate? d = reader.GetDate(reader.GetOrdinal(fieldName));
+            var d2 = new DateTime(d.Value.Year, d.Value.Month, d.Value.Day);
+            return d2;
+        }
+
         public object JsonGenerate(string where, string fullName, string serial, string number)
         {
             object result = new

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using SocialTargetHelpAPIClient.Models;
 using SocialTargetHelpAPIContract;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -14,6 +15,7 @@ namespace SocialTargetHelpAPIClient
         {
             Channel channel = new Channel("localhost:88", ChannelCredentials.Insecure);
             var client = new RouteGuide.RouteGuideClient(channel);
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
 
             var builder = new ConfigurationBuilder()
                  .SetBasePath(Directory.GetCurrentDirectory())
@@ -86,14 +88,22 @@ namespace SocialTargetHelpAPIClient
 
                 var socPortalReq = new GetPersonPaymentsListRequest()
                 {
-                    PeriodBegin = "2013-10-23 10:38:43.733172",
-                    PeriodEnd = "2019-10-23 10:38:43.733172",
+                    PeriodBegin = "2016-10-23",
+                    PeriodEnd = "2019-10-23",
                     Snils = "024-030-563-89"
                 };
 
                 var socPortalRes = client.GetPersonPaymentsList(socPortalReq);
                 #endregion
-
+                foreach(var t in socPortalRes.Payments)
+                {
+                    Console.WriteLine("\nCalculationDate: " + t.DateCalculation.ToString(culture) +
+                                      "\nBeginDate: " + t.DateBegin.ToString(culture) +
+                                      "\nEndDate: " + t.DateEnd.ToString(culture) +
+                                      "\nTitle: " + t.Title +
+                                      "\nName: " + t.Name +
+                                      "\nPaymentSum: " + t.PaymentSum);
+                }
                 Console.WriteLine("________________________________________________________");
                 Console.WriteLine("\nPress <Escape> to exit, press any other key to repeat...\n");
             }
