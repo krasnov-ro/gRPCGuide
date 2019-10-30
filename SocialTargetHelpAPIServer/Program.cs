@@ -16,9 +16,16 @@ namespace SocialTargetHelpAPIServer
 
         static void Main(string[] args)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile("secureSettings.json", true, true);
+
+            var configuration = builder.Build();
+
             Server server = new Server
             {
-                Services = { RouteGuide.BindService(new RouteGuideImpl()) },
+                Services = { RouteGuide.BindService(new RouteGuideImpl(configuration)) },
                 Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
             };
             server.Start();

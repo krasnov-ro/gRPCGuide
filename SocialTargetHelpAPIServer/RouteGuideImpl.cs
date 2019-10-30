@@ -24,73 +24,67 @@ namespace SocialTargetHelpAPIServer
     {
         String _connectionString = null;
         STH dbContext;
-        public RouteGuideImpl()
+        public RouteGuideImpl(IConfigurationRoot configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true, true);
-
-            var configuration = builder.Build();
-
             dbContext = new STH("PostgreSQL.9.5", configuration.GetConnectionString("MyDb"));
             _connectionString = configuration.GetConnectionString("MyDb");
         }
 
         #region Формировнаие ответа для УФСИН
-        // Простой RPC, который получает запрос от клиента и возвращает ответ 
-        public override Task<GetPersonLifeStatusListResponse> GetPersonLifeStatus(GetPersonLifeStatusListRequest req, ServerCallContext context)
-        {
-            GetPersonLifeStatusListResponse result = new GetPersonLifeStatusListResponse();
-            String personDocData = null;
-            GetPersonLifeStatusRequest[] persons;
-            IQueryable<fatalzp_sv_cd_umer> men = null;
+        //// Простой RPC, который получает запрос от клиента и возвращает ответ 
+        //public override Task<GetPersonLifeStatusListResponse> GetPersonLifeStatus(GetPersonLifeStatusListRequest req, ServerCallContext context)
+        //{
+        //    GetPersonLifeStatusListResponse result = new GetPersonLifeStatusListResponse();
+        //    String personDocData = null;
+        //    GetPersonLifeStatusRequest[] persons;
+        //    IQueryable<fatalzp_sv_cd_umer> men = null;
 
-            try
-            {
-                foreach (var dbPerson in req.Obj)
-                {
-                    men = dbContext.fatalzp_sv_cd_umer.Where(p =>
-                        //p.Id.ToString() == dbPerson.Guid &&
-                        p.Фамилия == dbPerson.LastName &&
-                        p.Имя == dbPerson.FirstName &&
-                        p.Отчество == dbPerson.MiddleName &&
-                        p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate));
+        //    try
+        //    {
+        //        foreach (var dbPerson in req.Obj)
+        //        {
+        //            men = dbContext.fatalzp_sv_cd_umer.Where(p =>
+        //                //p.Id.ToString() == dbPerson.Guid &&
+        //                p.Фамилия == dbPerson.LastName &&
+        //                p.Имя == dbPerson.FirstName &&
+        //                p.Отчество == dbPerson.MiddleName &&
+        //                p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate));
 
-                    if (men.Count() == 1)
-                    {
-                        var tmp = men.SingleOrDefault();
-                        result.DeadPerson.Add(
-                            new GetPersonLifeStatusListResponse.Types.GetPersonLifeStatusResponse
-                            {
-                                LastName = tmp.Фамилия,
-                                FirstName = tmp.Имя,
-                                MiddleName = tmp.Отчество,
-                                BirthDate = tmp.BirthDate.ToString(),
-                                Status = GetPersonLifeStatusListResponse.Types.Statuses.Dead.ToString()
-                            });
-                    }
-                    else if (men.Count() > 1)
-                    {
-                        foreach (var i in men)
-                        {
-                            result.DeadPerson.Add(
-                               new GetPersonLifeStatusListResponse.Types.GetPersonLifeStatusResponse
-                               {
-                                   LastName = i.Фамилия,
-                                   FirstName = i.Имя,
-                                   MiddleName = i.Отчество,
-                                   BirthDate = i.BirthDate.ToString(),
-                                   Status = GetPersonLifeStatusListResponse.Types.Statuses.NotSure.ToString()
-                               });
-                        }
-                    }
-                }
-            }
-            catch
-            {
-            }
-            return Task.FromResult(result);
-        }
+        //            if (men.Count() == 1)
+        //            {
+        //                var tmp = men.SingleOrDefault();
+        //                result.DeadPerson.Add(
+        //                    new GetPersonLifeStatusListResponse.Types.GetPersonLifeStatusResponse
+        //                    {
+        //                        LastName = tmp.Фамилия,
+        //                        FirstName = tmp.Имя,
+        //                        MiddleName = tmp.Отчество,
+        //                        BirthDate = tmp.BirthDate.ToString(),
+        //                        Status = GetPersonLifeStatusListResponse.Types.Statuses.Dead.ToString()
+        //                    });
+        //            }
+        //            else if (men.Count() > 1)
+        //            {
+        //                foreach (var i in men)
+        //                {
+        //                    result.DeadPerson.Add(
+        //                       new GetPersonLifeStatusListResponse.Types.GetPersonLifeStatusResponse
+        //                       {
+        //                           LastName = i.Фамилия,
+        //                           FirstName = i.Имя,
+        //                           MiddleName = i.Отчество,
+        //                           BirthDate = i.BirthDate.ToString(),
+        //                           Status = GetPersonLifeStatusListResponse.Types.Statuses.NotSure.ToString()
+        //                       });
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    return Task.FromResult(result);
+        //}
         #endregion
 
         public override Task<GetPersonPaymentsListResponse> GetPersonPaymentsList(GetPersonPaymentsListRequest req, ServerCallContext context)
