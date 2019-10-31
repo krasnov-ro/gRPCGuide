@@ -8,6 +8,7 @@ namespace SocialTargetHelpAPIServer
     class Startup
     {
     }
+
     //public class ConnectionStringSettings : IConnectionStringSettings
     //{
     //    public string ConnectionString { get; set; }
