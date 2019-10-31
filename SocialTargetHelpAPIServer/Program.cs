@@ -1,41 +1,117 @@
-﻿using Grpc.Core;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
-using SocialTargetHelpAPIContract;
-using Microsoft.Extensions.Configuration;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Serilog;
+using System.Threading;
+using Grpc.Core;
+using SocialTargetHelpAPIContract;
+using Topshelf;
 
 namespace SocialTargetHelpAPIServer
 {
     class Program
     {
+        private static IConfigurationRoot ApplicationConfig = null;
+
         static void Main(string[] args)
         {
-            var builder = new ConfigurationBuilder()
+            var runAsService = !(Debugger.IsAttached || args.Contains("--console"));
+            if (runAsService)
+            {
+                Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            }
+
+            ApplicationConfig = GetApplicationConfiguration();
+
+            ConfigureLogging();
+
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            var logger = serviceProvider.GetService<ILogger<Program>>();
+
+            var grpcServer = CreateGrpcServer();
+
+            if (runAsService)
+            {
+                logger.LogInformation($"Main. Starting service...");
+
+                HostFactory.Run(serviceConfig =>
+                {
+                    serviceConfig.Service<GrpcHostedService>(serviceInstance =>
+                    {
+                        serviceInstance.ConstructUsing(() => new GrpcHostedService(grpcServer));
+                        serviceInstance.WhenStarted(execute => execute.Start());
+                        serviceInstance.WhenStopped(execute => execute.Stop());
+                    });
+                    serviceConfig.SetServiceName("_SocialTargetHelpAPI");
+                    serviceConfig.SetDisplayName("_SocialTargetHelpAPI");
+                    serviceConfig.StartAutomatically();
+                });
+
+                logger.LogInformation($"Main. Service started");
+            }
+            else
+            {
+                logger.LogInformation($"Main. Starting console app...");
+
+                grpcServer.Start();
+
+                logger.LogInformation($"Main. Console app started");
+
+                Console.ReadKey();
+            }
+
+            Log.CloseAndFlush();
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddLogging(configure => configure.AddSerilog());
+        }
+
+        private static IConfigurationRoot GetApplicationConfiguration()
+        {
+            var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appSettings.json", true, true)
-                .AddJsonFile("secureSettings.json", true, true);
-            var configuration = builder.Build();
+                .AddJsonFile("secureSettings.json", true, true)
+                .AddJsonFile("serilogConfig.json");
+            var configuration = configBuilder.Build();
 
-            var listenPorts = configuration.GetSection("listen_ports").GetChildren()
+            return configuration;
+        }
+
+        private static void ConfigureLogging()
+        {
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(ApplicationConfig)
+                .CreateLogger();
+        }
+
+        private static Server CreateGrpcServer()
+        {
+            var connectionString = Program.ApplicationConfig.GetConnectionString("MyDb");
+            var listenPorts = Program.ApplicationConfig.GetSection("listenPorts").GetChildren()
                 .Select(p => new ServerPort(p.GetSection("host").Value, Convert.ToInt32(p.GetSection("port").Value), ServerCredentials.Insecure))
                 .ToArray();
-            var connectionString = configuration.GetConnectionString("MyDb");
 
-            Server server = new Server
+            var server = new Server
             {
                 Services = { RouteGuide.BindService(new RouteGuideImpl("PostgreSQL.9.5", connectionString)) }
             };
             foreach (var listenPort in listenPorts)
                 server.Ports.Add(listenPort);
-            server.Start();
 
-            var listening = String.Join(Environment.NewLine, listenPorts.Select(p => $"\t{p.Host}:{p.Port}"));
-            Console.WriteLine($"Server is running and listening to:{Environment.NewLine}{listening}");
-            Console.WriteLine("Press any key to stop the server...");
-            Console.ReadKey();
-
-            server.ShutdownAsync().Wait();
+            return server;
         }
     }
 }

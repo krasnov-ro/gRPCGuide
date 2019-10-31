@@ -1,0 +1,28 @@
+﻿{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Debug",
+      "Override": {
+        "Microsoft": "Error",
+        "Microsoft.AspNetCore.Hosting": "Error",
+        "Microsoft.AspNetCore.Mvc": "Error",
+        "System": "Error"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": {
+          "path": "C:\\LOGS\\SocialTargetHelpAPI\\log_.log",
+          "rollingInterval": "Day"
+        }
+      },
+      {
+        "Name": "Console"
+      }
+    ],
+    "Properties": {
+      "Application": "SocialTargetHelpAPI"
+    }
+  }
+}

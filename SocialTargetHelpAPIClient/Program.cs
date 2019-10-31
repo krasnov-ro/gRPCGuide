@@ -24,7 +24,7 @@ namespace SocialTargetHelpAPIClient
 
             var configuration = builder.Build();
 
-            var dbContext = new STH("PostgreSQL.9.5", configuration.GetConnectionString("MyDb"));
+            //var dbContext = new STH("PostgreSQL.9.5", configuration.GetConnectionString("MyDb"));
 
             do
             {
