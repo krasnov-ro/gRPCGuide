@@ -4,30 +4,23 @@ using System.Collections.Generic;
 using System.Text;
 using SocialTargetHelpAPIContract;
 using System.Threading.Tasks;
-using static SocialTargetHelpAPIContract.Person.Types;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 using System.Linq;
-using SocialTargetHelpAPIServer;
-using Newtonsoft.Json.Linq;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 using SocialTargetHelpAPIServer.Models;
 using Npgsql;
-using System.Globalization;
 using NpgsqlTypes;
 
 namespace SocialTargetHelpAPIServer
 {
     class RouteGuideImpl : RouteGuide.RouteGuideBase
     {
-        String _connectionString = null;
-        STH dbContext;
-        public RouteGuideImpl(IConfigurationRoot configuration)
+        private String _connectionString = null;
+        private STH dbContext = null;
+
+        public RouteGuideImpl(String providerName, String connectionString)
         {
-            dbContext = new STH("PostgreSQL.9.5", configuration.GetConnectionString("MyDb"));
-            _connectionString = configuration.GetConnectionString("MyDb");
+            _connectionString = connectionString;
+            dbContext = new STH(providerName, connectionString);
         }
 
         #region Формировнаие ответа для УФСИН
@@ -129,7 +122,7 @@ namespace SocialTargetHelpAPIServer
 
                             result.Payments.Add(
                                 new GetPersonPaymentsListResponse.Types.GetPersonPaymentsResponse
-                                { 
+                                {
                                     DateCalculation = CalcDate,
                                     DateBegin = ReadDate(personPayments, "d_begin").ToString("yyyy-MM-dd"),
                                     DateEnd = ReadDate(personPayments, "d_end").ToString("yyyy-MM-dd"),

@@ -1,36 +1,37 @@
 ﻿using Grpc.Core;
 using System;
+using System.Linq;
 using SocialTargetHelpAPIContract;
-using SocialTargetHelpAPIServer.Models;
 using Microsoft.Extensions.Configuration;
 using System.IO;
-using Microsoft.Extensions.DependencyInjection;
-using SocialTargetHelpAPIServer;
 
 namespace SocialTargetHelpAPIServer
 {
     class Program
     {
-
-        const int Port = 88;
-
         static void Main(string[] args)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile("appSettings.json", true, true)
                 .AddJsonFile("secureSettings.json", true, true);
-
             var configuration = builder.Build();
+
+            var listenPorts = configuration.GetSection("listen_ports").GetChildren()
+                .Select(p => new ServerPort(p.GetSection("host").Value, Convert.ToInt32(p.GetSection("port").Value), ServerCredentials.Insecure))
+                .ToArray();
+            var connectionString = configuration.GetConnectionString("MyDb");
 
             Server server = new Server
             {
-                Services = { RouteGuide.BindService(new RouteGuideImpl(configuration)) },
-                Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
+                Services = { RouteGuide.BindService(new RouteGuideImpl("PostgreSQL.9.5", connectionString)) }
             };
+            foreach (var listenPort in listenPorts)
+                server.Ports.Add(listenPort);
             server.Start();
 
-            Console.WriteLine("Greeter server listening on port " + Port);
+            var listening = String.Join(Environment.NewLine, listenPorts.Select(p => $"\t{p.Host}:{p.Port}"));
+            Console.WriteLine($"Server is running and listening to:{Environment.NewLine}{listening}");
             Console.WriteLine("Press any key to stop the server...");
             Console.ReadKey();
 
