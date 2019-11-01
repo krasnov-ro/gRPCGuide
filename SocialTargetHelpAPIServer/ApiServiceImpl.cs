@@ -2,7 +2,7 @@
 using Grpc.Core;
 using System.Collections.Generic;
 using System.Text;
-using SocialTargetHelpAPIContract;
+using SocialTargetHelpAPI.Contract;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
@@ -12,12 +12,12 @@ using NpgsqlTypes;
 
 namespace SocialTargetHelpAPIServer
 {
-    class RouteGuideImpl : RouteGuide.RouteGuideBase
+    class ApiServiceImpl : ApiService.ApiServiceBase
     {
         private String _connectionString = null;
         private STH dbContext = null;
 
-        public RouteGuideImpl(String providerName, String connectionString)
+        public ApiServiceImpl(String providerName, String connectionString)
         {
             _connectionString = connectionString;
             dbContext = new STH(providerName, connectionString);
@@ -80,9 +80,9 @@ namespace SocialTargetHelpAPIServer
         //}
         #endregion
 
-        public override Task<GetPersonPaymentsListResponse> GetPersonPaymentsList(GetPersonPaymentsListRequest req, ServerCallContext context)
+        public override Task<GetPersonPaymentsResponse> GetPersonPayments(GetPersonPaymentsRequest req, ServerCallContext context)
         {
-            GetPersonPaymentsListResponse result = new GetPersonPaymentsListResponse();
+            var result = new GetPersonPaymentsResponse();
             //GetPersonPaymentsResponse[] Payments;
             IQueryable<fatalzp_sv_cd_umer> men = null;
 
@@ -121,14 +121,14 @@ namespace SocialTargetHelpAPIServer
                             }
 
                             result.Payments.Add(
-                                new GetPersonPaymentsListResponse.Types.GetPersonPaymentsResponse
+                                new PersonPayment()
                                 {
                                     DateCalculation = CalcDate,
                                     DateBegin = ReadDate(personPayments, "d_begin").ToString("yyyy-MM-dd"),
                                     DateEnd = ReadDate(personPayments, "d_end").ToString("yyyy-MM-dd"),
                                     Title = personPayments[3].ToString(),
                                     Name = personPayments[4].ToString(),
-                                    PaymentSum = personPayments[5].ToString()
+                                    PaymentSum = Convert.ToDouble(personPayments[5].ToString())
                                 });
                         }
                     }
@@ -183,35 +183,35 @@ namespace SocialTargetHelpAPIServer
             return result;
         }
 
-        public override Task<SocialCapResponse> SocialCapMessage(SocialCapRequest req, ServerCallContext context)
-        {
-            SocialCapResponse result = null;
+        //public override Task<SocialCapResponse> SocialCapMessage(SocialCapRequest req, ServerCallContext context)
+        //{
+        //    SocialCapResponse result = null;
 
-            result = SocCapCheck(req.LastName, req.FirstName, req.MiddleName);
+        //    result = SocCapCheck(req.LastName, req.FirstName, req.MiddleName);
 
-            return Task.FromResult(result);
-        }
+        //    return Task.FromResult(result);
+        //}
 
-        public SocialCapResponse SocCapCheck(string lastName, string firstName, string middleName)
-        {
-            SocialCapResponse result = null;
-            var men = dbContext.fatalzp_sv_cd_umer.Where(p => p.Фамилия == lastName && p.Имя == firstName && p.Отчество == middleName).FirstOrDefault();
-            if (men != null)
-            {
-                result = new SocialCapResponse()
-                {
-                    Status = SocialCapResponse.Types.Statuses.Available.ToString()
-                };
-            }
-            else
-            {
-                result = new SocialCapResponse()
-                {
-                    Status = SocialCapResponse.Types.Statuses.Absent.ToString()
-                };
-            }
+        //public SocialCapResponse SocCapCheck(string lastName, string firstName, string middleName)
+        //{
+        //    SocialCapResponse result = null;
+        //    var men = dbContext.fatalzp_sv_cd_umer.Where(p => p.Фамилия == lastName && p.Имя == firstName && p.Отчество == middleName).FirstOrDefault();
+        //    if (men != null)
+        //    {
+        //        result = new SocialCapResponse()
+        //        {
+        //            Status = SocialCapResponse.Types.Statuses.Available.ToString()
+        //        };
+        //    }
+        //    else
+        //    {
+        //        result = new SocialCapResponse()
+        //        {
+        //            Status = SocialCapResponse.Types.Statuses.Absent.ToString()
+        //        };
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

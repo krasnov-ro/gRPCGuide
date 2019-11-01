@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 using Serilog;
 using System.Threading;
 using Grpc.Core;
-using SocialTargetHelpAPIContract;
 using Topshelf;
+using SocialTargetHelpAPI.Contract;
 
 namespace SocialTargetHelpAPIServer
 {
@@ -106,7 +106,7 @@ namespace SocialTargetHelpAPIServer
 
             var server = new Server
             {
-                Services = { RouteGuide.BindService(new RouteGuideImpl("PostgreSQL.9.5", connectionString)) }
+                Services = { ApiService.BindService(new ApiServiceImpl("PostgreSQL.9.5", connectionString)) }
             };
             foreach (var listenPort in listenPorts)
                 server.Ports.Add(listenPort);

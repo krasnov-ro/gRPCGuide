@@ -1,7 +1,7 @@
 ﻿using Grpc.Core;
 using Microsoft.Extensions.Configuration;
 using SocialTargetHelpAPIClient.Models;
-using SocialTargetHelpAPIContract;
+using SocialTargetHelpAPI.Contract;
 using System;
 using System.Globalization;
 using System.IO;
@@ -13,8 +13,8 @@ namespace SocialTargetHelpAPIClient
     {
         static void Main(string[] args)
         {
-            Channel channel = new Channel("localhost:88", ChannelCredentials.Insecure);
-            var client = new RouteGuide.RouteGuideClient(channel);
+            Channel channel = new Channel("soc:8088", ChannelCredentials.Insecure);
+            var client = new ApiService.ApiServiceClient(channel);
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
 
             var builder = new ConfigurationBuilder()
@@ -87,14 +87,14 @@ namespace SocialTargetHelpAPIClient
 
                 #region Запрос от социального портала
 
-                var socPortalReq = new GetPersonPaymentsListRequest()
+                var socPortalReq = new GetPersonPaymentsRequest()
                 {
                     PeriodBegin = "2016-10-23",
                     PeriodEnd = "2019-10-23",
                     Snils = "024-030-563-89"
                 };
 
-                var socPortalRes = client.GetPersonPaymentsList(socPortalReq);
+                var socPortalRes = client.GetPersonPayments(socPortalReq);
                 #endregion
                 foreach(var t in socPortalRes.Payments)
                 {

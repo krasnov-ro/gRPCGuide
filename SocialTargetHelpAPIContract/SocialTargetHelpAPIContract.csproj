@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Service\Service.proto" />
+    <Protobuf Include="Service\ApiService.proto" />
   </ItemGroup>
 
   <ItemGroup>

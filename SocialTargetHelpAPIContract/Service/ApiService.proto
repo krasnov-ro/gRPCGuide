@@ -1,0 +1,68 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SocialTargetHelpAPI.Contract";
+
+service ApiService {
+
+/*
+Потоковый RPC на стороне клиента, когда клиент записывает последовательность сообщений и 
+посылает их на сервер, снова используя указанный поток. Как только клиент закончил писать 
+сообщения, он ждет, пока сервер прочитает их все и вернет свой ответ. 
+*/
+	rpc GetPersonPayments(GetPersonPaymentsRequest) returns (GetPersonPaymentsResponse) {}
+/*
+Простой RPC, где клиент отправляет запрос на сервер, используя клиентский объект и ждет ответа,
+чтобы вернуться, так же, как обычный вызов функции
+*/
+	rpc GetPersonsLifeStatus(GetPersonsLifeStatusRequest) returns (GetPersonsLifeStatusResponse) {}
+}
+
+message GetPersonPaymentsRequest {
+	string snils = 1;
+	string periodBegin = 2;
+	string periodEnd = 3;
+}
+
+message GetPersonPaymentsResponse{
+	repeated PersonPayment payments = 1;
+}
+
+message PersonPayment {
+	string dateCalculation = 1;
+	string dateBegin = 2;
+	string dateEnd = 3;
+	string title = 4;
+	string name = 5;
+	double paymentSum = 6;
+}
+
+message GetPersonsLifeStatusRequest {
+	repeated PersonLifeStatusRequest requestData = 1;
+}
+
+message GetPersonsLifeStatusResponse {
+	repeated PersonLifeStatusResponse responseData = 1;
+}
+
+message PersonLifeStatusRequest {
+	string guid = 1;
+	string lastName = 2;
+	string firstName = 3;
+	string middleName = 4;
+	string birthDate = 5;
+}
+
+message PersonLifeStatusResponse {
+	string guid = 1;
+	string lastName = 2;
+	string firstName = 3;
+	string middleName = 4;
+	string birthDate = 5; 
+	PersonLifeStatus status = 6;
+}
+
+enum PersonLifeStatus {
+	NOT_SURE = 0;
+	DEAD = 1;
+	ALIVE = 2;
+}
