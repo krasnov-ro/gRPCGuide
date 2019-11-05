@@ -862,6 +862,7 @@ namespace SocialTargetHelpAPIClient.Models
 		[Column,        Nullable] public Guid?  f_house_fias_reg_code     { get; set; } // uuid
 		[Column,        Nullable] public Guid?  f_house_fias_live_code    { get; set; } // uuid
 		[Column,        Nullable] public int?   f_snils_validation_status { get; set; } // integer
+		[Column,        Nullable] public string c_snils11                 { get; set; } // character(11)
 
 		#region Associations
 

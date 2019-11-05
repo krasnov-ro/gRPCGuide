@@ -15,12 +15,12 @@ namespace SocialTargetHelpAPIServer
     class ApiServiceImpl : ApiService.ApiServiceBase
     {
         private String _connectionString = null;
-        private STH dbContext = null;
+        //private STH dbContext = null;
 
         public ApiServiceImpl(String providerName, String connectionString)
         {
             _connectionString = connectionString;
-            dbContext = new STH(providerName, connectionString);
+            //dbContext = new STH(providerName, connectionString);
         }
 
         #region Формировнаие ответа для УФСИН
@@ -82,58 +82,72 @@ namespace SocialTargetHelpAPIServer
 
         public override Task<GetPersonPaymentsResponse> GetPersonPayments(GetPersonPaymentsRequest req, ServerCallContext context)
         {
-            var result = new GetPersonPaymentsResponse();
-            //GetPersonPaymentsResponse[] Payments;
-            IQueryable<fatalzp_sv_cd_umer> men = null;
-
-            using (var conn = new NpgsqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
+                var payments = new List<PersonPayment>();
+
+                using (var conn = new NpgsqlConnection(_connectionString))
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    conn.Open();
 
-                    cmd.CommandText = "public.get_msp";
-                    cmd.Parameters.Add(new NpgsqlParameter("_d_datebegin", Convert.ToDateTime(req.PeriodBegin)));
-                    cmd.Parameters.Add(new NpgsqlParameter("_d_dateend", Convert.ToDateTime(req.PeriodEnd)));
-                    cmd.Parameters.Add(new NpgsqlParameter("_c_snils", req.Snils));
-                    cmd.ExecuteNonQuery();
-                    using (var personPayments = cmd.ExecuteReader())
+                    using (var cmd = conn.CreateCommand())
                     {
-                        while (personPayments.Read())
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandText = "public.get_msp";
+                        cmd.Parameters.Add(new NpgsqlParameter("_c_snils", req.Snils));
+                        cmd.Parameters.Add(new NpgsqlParameter("_d_datebegin", NpgsqlDbType.Date) { Value = Convert.ToDateTime(req.PeriodBegin) });
+                        cmd.Parameters.Add(new NpgsqlParameter("_d_dateend", NpgsqlDbType.Date) { Value = Convert.ToDateTime(req.PeriodEnd) });
+
+                        using (var dbPayments = cmd.ExecuteReader())
                         {
-                            String CalcDate = null;
-                            DateTime calculationDate = new DateTime();
-
-                            try
+                            while (dbPayments.Read())
                             {
-                                var date1 = personPayments.GetDate(personPayments.GetOrdinal("d_date_calculation"));
-                                var date2 = new DateTime(date1.Year, date1.Month, date1.Day);
-                                calculationDate = date2;
-                                CalcDate = calculationDate.ToString("yyyy-MM-dd");
-                            }
-                            catch
-                            {
-                                CalcDate = "";
-                            }
+                                String CalcDate = null;
+                                DateTime calculationDate = new DateTime();
 
-                            result.Payments.Add(
-                                new PersonPayment()
+                                try
                                 {
-                                    DateCalculation = CalcDate,
-                                    DateBegin = ReadDate(personPayments, "d_begin").ToString("yyyy-MM-dd"),
-                                    DateEnd = ReadDate(personPayments, "d_end").ToString("yyyy-MM-dd"),
-                                    Title = personPayments[3].ToString(),
-                                    Name = personPayments[4].ToString(),
-                                    PaymentSum = Convert.ToDouble(personPayments[5].ToString())
-                                });
+                                    var date1 = dbPayments.GetDate(dbPayments.GetOrdinal("d_date_calculation"));
+                                    var date2 = new DateTime(date1.Year, date1.Month, date1.Day);
+                                    calculationDate = date2;
+                                    CalcDate = calculationDate.ToString("yyyy-MM-dd");
+                                }
+                                catch
+                                {
+                                    CalcDate = "";
+                                }
+
+                                payments.Add(
+                                    new PersonPayment()
+                                    {
+                                        DateCalculation = CalcDate,
+                                        DateBegin = ReadDate(dbPayments, "d_begin").ToString("yyyy-MM-dd"),
+                                        DateEnd = ReadDate(dbPayments, "d_end").ToString("yyyy-MM-dd"),
+                                        Title = dbPayments[3].ToString(),
+                                        Name = dbPayments[4].ToString(),
+                                        PaymentSum = Convert.ToDouble(dbPayments[5].ToString())
+                                    });
+                            }
                         }
                     }
+                    conn.Close();
                 }
-                conn.Close();
-            }
 
-            return Task.FromResult(result);
+                var result = new GetPersonPaymentsResponse()
+                {
+                    Payments = { payments }
+                };
+                return Task.FromResult(result);
+            }
+            catch (Exception exception)
+            {
+                var result = new GetPersonPaymentsResponse()
+                {
+                    Errors = { new Error() { Code = "unknown_error", Description = "Непредвиденная ошибка" } }
+                };
+
+                return Task.FromResult(result);
+            }
         }
 
         private DateTime ReadDate(NpgsqlDataReader reader, String fieldName)
