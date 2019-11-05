@@ -24,7 +24,7 @@ namespace SocialTargetHelpAPIClient
 
             var configuration = builder.Build();
 
-            //var dbContext = new STH("PostgreSQL.9.5", configuration.GetConnectionString("MyDb"));
+            var dbContext = new STH("PostgreSQL.9.5", configuration.GetConnectionString("MyDb"));
 
             do
             {
@@ -32,55 +32,37 @@ namespace SocialTargetHelpAPIClient
 
                 #region Запрос от УФСИН 
 
-                //var cd_deals = dbContext.fsin_cd_deals;
-                //GetPersonLifeStatusRequest[] persons = null;
-                //var cd_persons = dbContext.public_cd_persons;
-                //IQueryable<public_cd_persons> dbPersonsFilter = null;
-                //foreach (var dbDeal in cd_deals)
-                //{
-                //    if (dbPersonsFilter != null)
-                //       dbPersonsFilter = dbPersonsFilter.Concat(cd_persons.Where(p => p.id == dbDeal.f_cd_persons));
+                var cd_deals = dbContext.fsin_cd_deals;
+                GetPersonsLifeStatusRequest[] persons = null;
+                var cd_persons = dbContext.public_cd_persons;
+                IQueryable<public_cd_persons> dbPersonsFilter = null;
+                foreach (var dbDeal in cd_deals)
+                {
+                    if (dbPersonsFilter != null)
+                        dbPersonsFilter = dbPersonsFilter.Concat(cd_persons.Where(p => p.id == dbDeal.f_cd_persons));
 
-                //    else
-                //        dbPersonsFilter = cd_persons.Where(p => p.id == dbDeal.f_cd_persons);
-                //}
-                //var personsData = dbPersonsFilter.Select(dbPerson => new GetPersonLifeStatusRequest()
-                //{
-                //    LastName = dbPerson.c_surname,
-                //    FirstName = dbPerson.c_first_name,
-                //    MiddleName = dbPerson.c_patronymic,
-                //    BirthDate = dbPerson.d_birthday.ToString()
-                //    //Guid = id
-                //})
-                //    .ToArray();
+                    else
+                        dbPersonsFilter = cd_persons.Where(p => p.id == dbDeal.f_cd_persons);
+                }
 
-                //GetPersonLifeStatusListRequest FsinRequest = new GetPersonLifeStatusListRequest()
-                //{
-                //    Obj = { personsData }
-                //};
+                var personsData = dbPersonsFilter.Select(dbPerson => new PersonLifeStatusRequest()
+                {
+                    LastName = dbPerson.c_surname,
+                    FirstName = dbPerson.c_first_name,
+                    MiddleName = dbPerson.c_patronymic,
+                    BirthDate = dbPerson.d_birthday.ToString(),
+                    Guid = Guid.NewGuid().ToString()
+                }).ToArray();
 
-                //#region Заполение массива запроса через Foreach
-                ////foreach (var dbPerson in dbPersons)
-                ////{
-                ////    string id = Guid.NewGuid().ToString();
-                ////    persons = new GetPersonLifeStatusRequest[]
-                ////    {
-                ////        new GetPersonLifeStatusRequest()
-                ////        { LastName = dbPerson.CLastName, FirstName = dbPerson.CFirstName, MiddleName = dbPerson.CMiddleName, BirthDate = dbPerson.DBirthDate.ToString("dd.MM.yyyy"), Guid = id }
-                ////    };
+                GetPersonsLifeStatusRequest FsinRequest = new GetPersonsLifeStatusRequest()
+                {
+                    RequestData = { personsData }
+                };
 
-                ////    FsinRequest.Obj.Add(persons);
-                ////}
-                //#endregion
+                var FsinResponse = client.GetPersonsLifeStatus(FsinRequest);
 
-                //var FsinResponse = client.GetPersonLifeStatus(FsinRequest);
-                ////var FsinResult =
-                ////    "\nФИО: " + FsinResponse.LastName + " " + FsinResponse.FirstName + " " + FsinResponse.MiddleName + "\n" +
-                ////    "Дата рождения: " + FsinResponse.BirthDate + "\n" +
-                ////    "Статус: " + FsinResponse.Status;
-
-                //Console.WriteLine();
-                //Console.WriteLine($"Информация о человеке: ");
+                Console.WriteLine();
+                Console.WriteLine($"Информация о человеке: ");
                 #endregion
 
                 Console.WriteLine("--------------------------------------------------------");
@@ -96,6 +78,7 @@ namespace SocialTargetHelpAPIClient
 
                 var socPortalRes = client.GetPersonPayments(socPortalReq);
                 #endregion
+
                 foreach(var t in socPortalRes.Payments)
                 {
                     Console.WriteLine("\nCalculationDate: " + t.DateCalculation.ToString(culture) +

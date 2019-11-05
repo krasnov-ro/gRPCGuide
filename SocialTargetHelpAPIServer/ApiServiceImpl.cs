@@ -25,59 +25,59 @@ namespace SocialTargetHelpAPIServer
 
         #region Формировнаие ответа для УФСИН
         //// Простой RPC, который получает запрос от клиента и возвращает ответ 
-        //public override Task<GetPersonLifeStatusListResponse> GetPersonLifeStatus(GetPersonLifeStatusListRequest req, ServerCallContext context)
-        //{
-        //    GetPersonLifeStatusListResponse result = new GetPersonLifeStatusListResponse();
-        //    String personDocData = null;
-        //    GetPersonLifeStatusRequest[] persons;
-        //    IQueryable<fatalzp_sv_cd_umer> men = null;
+        public override Task<GetPersonsLifeStatusResponse> GetPersonsLifeStatus(GetPersonsLifeStatusRequest req, ServerCallContext context)
+        {
+            GetPersonsLifeStatusResponse result = new GetPersonsLifeStatusResponse();
+            String personDocData = null;
+            PersonLifeStatusRequest[] persons;
+            IQueryable<fatalzp_sv_cd_umer> men = null;
 
-        //    try
-        //    {
-        //        foreach (var dbPerson in req.Obj)
-        //        {
-        //            men = dbContext.fatalzp_sv_cd_umer.Where(p =>
-        //                //p.Id.ToString() == dbPerson.Guid &&
-        //                p.Фамилия == dbPerson.LastName &&
-        //                p.Имя == dbPerson.FirstName &&
-        //                p.Отчество == dbPerson.MiddleName &&
-        //                p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate));
+            try
+            {
+                foreach (var dbPerson in req.RequestData)
+                {
+                    men = dbContext.fatalzp_sv_cd_umer.Where(p =>
+                        //p.Id.ToString() == dbPerson.Guid &&
+                        p.Фамилия == dbPerson.LastName &&
+                        p.Имя == dbPerson.FirstName &&
+                        p.Отчество == dbPerson.MiddleName &&
+                        p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate));
 
-        //            if (men.Count() == 1)
-        //            {
-        //                var tmp = men.SingleOrDefault();
-        //                result.DeadPerson.Add(
-        //                    new GetPersonLifeStatusListResponse.Types.GetPersonLifeStatusResponse
-        //                    {
-        //                        LastName = tmp.Фамилия,
-        //                        FirstName = tmp.Имя,
-        //                        MiddleName = tmp.Отчество,
-        //                        BirthDate = tmp.BirthDate.ToString(),
-        //                        Status = GetPersonLifeStatusListResponse.Types.Statuses.Dead.ToString()
-        //                    });
-        //            }
-        //            else if (men.Count() > 1)
-        //            {
-        //                foreach (var i in men)
-        //                {
-        //                    result.DeadPerson.Add(
-        //                       new GetPersonLifeStatusListResponse.Types.GetPersonLifeStatusResponse
-        //                       {
-        //                           LastName = i.Фамилия,
-        //                           FirstName = i.Имя,
-        //                           MiddleName = i.Отчество,
-        //                           BirthDate = i.BirthDate.ToString(),
-        //                           Status = GetPersonLifeStatusListResponse.Types.Statuses.NotSure.ToString()
-        //                       });
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch
-        //    {
-        //    }
-        //    return Task.FromResult(result);
-        //}
+                    if (men.Count() == 1)
+                    {
+                        var tmp = men.SingleOrDefault();
+                        result.ResponseData.Add(
+                            new PersonLifeStatusResponse
+                            {
+                                LastName = tmp.Фамилия,
+                                FirstName = tmp.Имя,
+                                MiddleName = tmp.Отчество,
+                                BirthDate = tmp.BirthDate.ToString(),
+                                Status = PersonLifeStatus.Dead
+                            });
+                    }
+                    else if (men.Count() > 1)
+                    {
+                        foreach (var i in men)
+                        {
+                            result.ResponseData.Add(
+                               new PersonLifeStatusResponse
+                               {
+                                   LastName = i.Фамилия,
+                                   FirstName = i.Имя,
+                                   MiddleName = i.Отчество,
+                                   BirthDate = i.BirthDate.ToString(),
+                                   Status = PersonLifeStatus.NotSure
+                               });
+                        }
+                    }
+                }
+            }
+            catch
+            {
+            }
+            return Task.FromResult(result);
+        }
         #endregion
 
         public override Task<GetPersonPaymentsResponse> GetPersonPayments(GetPersonPaymentsRequest req, ServerCallContext context)
@@ -94,12 +94,9 @@ namespace SocialTargetHelpAPIServer
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                     cmd.CommandText = "public.get_msp";
-                    cmd.Parameters.Add(new NpgsqlParameter("_d_datebegin", Convert.ToDateTime(req.PeriodBegin))/*, new NpgsqlParameter("_d_dateend", req.PeriodEnd), new NpgsqlParameter("_c_snils", req.Snils)*/);
+                    cmd.Parameters.Add(new NpgsqlParameter("_d_datebegin", Convert.ToDateTime(req.PeriodBegin)));
                     cmd.Parameters.Add(new NpgsqlParameter("_d_dateend", Convert.ToDateTime(req.PeriodEnd)));
                     cmd.Parameters.Add(new NpgsqlParameter("_c_snils", req.Snils));
-                    //cmd.CommandText = "SELECT * FROM public.get_msp('"+ req.PeriodBegin + 
-                    //                                            "','" + req.PeriodEnd + 
-                    //                                            "','" + req.Snils + "')";
                     cmd.ExecuteNonQuery();
                     using (var personPayments = cmd.ExecuteReader())
                     {
@@ -182,36 +179,5 @@ namespace SocialTargetHelpAPIServer
 
             return result;
         }
-
-        //public override Task<SocialCapResponse> SocialCapMessage(SocialCapRequest req, ServerCallContext context)
-        //{
-        //    SocialCapResponse result = null;
-
-        //    result = SocCapCheck(req.LastName, req.FirstName, req.MiddleName);
-
-        //    return Task.FromResult(result);
-        //}
-
-        //public SocialCapResponse SocCapCheck(string lastName, string firstName, string middleName)
-        //{
-        //    SocialCapResponse result = null;
-        //    var men = dbContext.fatalzp_sv_cd_umer.Where(p => p.Фамилия == lastName && p.Имя == firstName && p.Отчество == middleName).FirstOrDefault();
-        //    if (men != null)
-        //    {
-        //        result = new SocialCapResponse()
-        //        {
-        //            Status = SocialCapResponse.Types.Statuses.Available.ToString()
-        //        };
-        //    }
-        //    else
-        //    {
-        //        result = new SocialCapResponse()
-        //        {
-        //            Status = SocialCapResponse.Types.Statuses.Absent.ToString()
-        //        };
-        //    }
-
-        //    return result;
-        //}
     }
 }

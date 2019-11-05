@@ -4,11 +4,6 @@ option csharp_namespace = "SocialTargetHelpAPI.Contract";
 
 service ApiService {
 
-/*
-Потоковый RPC на стороне клиента, когда клиент записывает последовательность сообщений и 
-посылает их на сервер, снова используя указанный поток. Как только клиент закончил писать 
-сообщения, он ждет, пока сервер прочитает их все и вернет свой ответ. 
-*/
 	rpc GetPersonPayments(GetPersonPaymentsRequest) returns (GetPersonPaymentsResponse) {}
 /*
 Простой RPC, где клиент отправляет запрос на сервер, используя клиентский объект и ждет ответа,
