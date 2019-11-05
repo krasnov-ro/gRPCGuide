@@ -34,6 +34,7 @@ namespace SocialTargetHelpAPIServer.Models
 	/// </summary>
 	public partial class STH : LinqToDB.Data.DataConnection
 	{
+		public ITable<api_req_requests>                                        api_req_requests                                        { get { return this.GetTable<api_req_requests>(); } }
 		public ITable<fatalzp_d_FATALZPRequest>                                fatalzp_d_FATALZPRequest                                { get { return this.GetTable<fatalzp_d_FATALZPRequest>(); } }
 		public ITable<fatalzp_d_АдрКЛАДРТип>                                   fatalzp_d_АдрКЛАДРТип                                   { get { return this.GetTable<fatalzp_d_АдрКЛАДРТип>(); } }
 		public ITable<fatalzp_d_АдрФИАСТип>                                    fatalzp_d_АдрФИАСТип                                    { get { return this.GetTable<fatalzp_d_АдрФИАСТип>(); } }
@@ -94,6 +95,16 @@ namespace SocialTargetHelpAPIServer.Models
 
 		partial void InitDataContext  ();
 		partial void InitMappingSchema();
+	}
+
+	[Table(Schema="api_req", Name="requests")]
+	public partial class api_req_requests
+	{
+		[PrimaryKey, Identity] public int       id        { get; set; } // integer
+		[Column,     Nullable] public DateTime? req_date  { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public string    request   { get; set; } // character varying(25000)
+		[Column,     Nullable] public string    response  { get; set; } // character varying(2500)
+		[Column,     Nullable] public string    from_whom { get; set; } // character varying(256)
 	}
 
 	[Table(Schema="fatalzp", Name="d_FATALZPRequest")]

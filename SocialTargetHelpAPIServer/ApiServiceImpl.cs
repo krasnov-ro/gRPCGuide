@@ -8,23 +8,26 @@ using Microsoft.Extensions.Configuration;
 using System.Linq;
 using SocialTargetHelpAPIServer.Models;
 using Npgsql;
+using NLog;
 using NpgsqlTypes;
+using LinqToDB;
+using Newtonsoft.Json;
 
 namespace SocialTargetHelpAPIServer
 {
     class ApiServiceImpl : ApiService.ApiServiceBase
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private String _connectionString = null;
-        //private STH dbContext = null;
+        private STH dbContext = null;
 
         public ApiServiceImpl(String providerName, String connectionString)
         {
             _connectionString = connectionString;
-            //dbContext = new STH(providerName, connectionString);
+            dbContext = new STH(providerName, connectionString);
         }
 
         #region Формировнаие ответа для УФСИН
-        //// Простой RPC, который получает запрос от клиента и возвращает ответ 
         public override Task<GetPersonsLifeStatusResponse> GetPersonsLifeStatus(GetPersonsLifeStatusRequest req, ServerCallContext context)
         {
             GetPersonsLifeStatusResponse result = new GetPersonsLifeStatusResponse();
@@ -73,15 +76,19 @@ namespace SocialTargetHelpAPIServer
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                logger.Error(ex);
             }
+            LogInDB(req.ToString(), result.ToString());
             return Task.FromResult(result);
         }
         #endregion
 
+        #region Формировнаие ответа для Соц. портала
         public override Task<GetPersonPaymentsResponse> GetPersonPayments(GetPersonPaymentsRequest req, ServerCallContext context)
         {
+            string log = req.ToString();
             try
             {
                 var payments = new List<PersonPayment>();
@@ -137,6 +144,7 @@ namespace SocialTargetHelpAPIServer
                 {
                     Payments = { payments }
                 };
+                LogInDB(req.ToString(), result.Payments.ToString());
                 return Task.FromResult(result);
             }
             catch (Exception exception)
@@ -145,7 +153,7 @@ namespace SocialTargetHelpAPIServer
                 {
                     Errors = { new Error() { Code = "unknown_error", Description = "Непредвиденная ошибка" } }
                 };
-
+                logger.Error(exception);
                 return Task.FromResult(result);
             }
         }
@@ -156,6 +164,7 @@ namespace SocialTargetHelpAPIServer
             var d2 = new DateTime(d.Value.Year, d.Value.Month, d.Value.Day);
             return d2;
         }
+        #endregion
 
         public object JsonGenerate(string where, string fullName, string serial, string number)
         {
@@ -192,6 +201,19 @@ namespace SocialTargetHelpAPIServer
             #endregion
 
             return result;
+        }
+
+        public void LogInDB(string req, string response)
+        {
+            api_req_requests requests = new api_req_requests
+            {
+                req_date = DateTime.Now,
+                request = req,
+                response = response,
+                from_whom = this.GetType().ToString()
+            };
+            dbContext.Insert(requests);
+            dbContext.Update<api_req_requests>(requests);
         }
     }
 }
