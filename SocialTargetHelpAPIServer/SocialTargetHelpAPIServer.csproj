@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ApiServiceImpl.cs~RFb5f6bfc3.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="linq2db.PostgreSQL" Version="2.9.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.1.0" />

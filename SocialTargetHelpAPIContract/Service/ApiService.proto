@@ -23,8 +23,9 @@ message GetPersonPaymentsRequest {
 	string periodEnd = 3;
 }
 
-message GetPersonPaymentsResponse{
+message GetPersonPaymentsResponse {
 	repeated PersonPayment payments = 1;
+	repeated Error errors = 2;
 }
 
 message PersonPayment {
@@ -42,6 +43,7 @@ message GetPersonsLifeStatusRequest {
 
 message GetPersonsLifeStatusResponse {
 	repeated PersonLifeStatusResponse responseData = 1;
+	repeated Error errors = 2;
 }
 
 message PersonLifeStatusRequest {
@@ -65,4 +67,10 @@ enum PersonLifeStatus {
 	NOT_SURE = 0;
 	DEAD = 1;
 	ALIVE = 2;
+}
+
+message Error {
+	string code = 1;
+	string description = 2;
+	string exception = 3;
 }
