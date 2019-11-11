@@ -47,9 +47,9 @@ namespace SocialTargetHelpAPIClient
 
                 var personsData = dbPersonsFilter.Select(dbPerson => new PersonLifeStatusRequest()
                 {
-                    LastName = dbPerson.c_surname,
-                    FirstName = dbPerson.c_first_name,
-                    MiddleName = dbPerson.c_patronymic,
+                    LastName = dbPerson.c_surname.ToUpper(),
+                    FirstName = dbPerson.c_first_name.ToUpper(),
+                    MiddleName = dbPerson.c_patronymic.ToUpper(),
                     BirthDate = dbPerson.d_birthday.ToString(),
                     Guid = Guid.NewGuid().ToString()
                 }).ToArray();
