@@ -60,7 +60,7 @@ namespace SocialTargetHelpAPIServer
                                 LastName = tmp.Фамилия,
                                 FirstName = tmp.Имя,
                                 MiddleName = tmp.Отчество,
-                                BirthDate = Convert.ToDateTime(tmp.BirthDate).ToString("dd.MM.yyyy"),
+                                BirthDate = Convert.ToDateTime(tmp.BirthDate).ToString("yyyy-MM-dd"),
                                 Status = PersonLifeStatus.Dead
                             });
                     }
