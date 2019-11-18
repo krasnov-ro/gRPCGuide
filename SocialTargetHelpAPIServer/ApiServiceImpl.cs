@@ -12,6 +12,8 @@ using NLog;
 using NpgsqlTypes;
 using LinqToDB;
 using Newtonsoft.Json;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace SocialTargetHelpAPIServer
 {
@@ -30,14 +32,11 @@ namespace SocialTargetHelpAPIServer
         #region Формировнаие ответа для УФСИН
         public override Task<GetPersonsLifeStatusResponse> GetPersonsLifeStatus(GetPersonsLifeStatusRequest req, ServerCallContext context)
         {
-
-            foreach(var d in req.RequestData)
-            { }
-
             GetPersonsLifeStatusResponse result = new GetPersonsLifeStatusResponse();
             String personDocData = null;
             PersonLifeStatusRequest[] persons;
             IQueryable<fatalzp_sv_cd_umer> men = null;
+            IQueryable<fatalzp_sv_cd_umer> docMen = null;
 
             try
             {
@@ -61,22 +60,50 @@ namespace SocialTargetHelpAPIServer
                                 FirstName = tmp.Имя,
                                 MiddleName = tmp.Отчество,
                                 BirthDate = Convert.ToDateTime(tmp.BirthDate).ToString("yyyy-MM-dd"),
+                                DocSeria = Encrypt(tmp.СерНомДок.Trim().Substring(0, 4)),
+                                DocNumber = Encrypt(tmp.СерНомДок.Trim().Substring(4, 6)),
                                 Status = PersonLifeStatus.Dead
                             });
                     }
                     else if (men.Count() > 1)
                     {
-                        foreach (var i in men)
+                        string docSeriaNumber = null;
+                        docMen = men.Where(p =>
+                            p.Фамилия.ToUpper() == dbPerson.LastName &&
+                            p.Имя.ToUpper() == dbPerson.FirstName &&
+                            p.Отчество.ToUpper() == dbPerson.MiddleName &&
+                            p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate) &&
+                            p.СерНомДок == Decrypt(dbPerson.DocSeria) + Decrypt(dbPerson.DocNumber)
+                            );
+                        if (docMen != null)
                         {
+                            var tmp = docMen.SingleOrDefault();
                             result.ResponseData.Add(
-                               new PersonLifeStatusResponse
-                               {
-                                   LastName = i.Фамилия,
-                                   FirstName = i.Имя,
-                                   MiddleName = i.Отчество,
-                                   BirthDate = i.BirthDate.ToString(),
-                                   Status = PersonLifeStatus.NotSure
-                               });
+                            new PersonLifeStatusResponse
+                            {
+                                LastName = tmp.Фамилия,
+                                FirstName = tmp.Имя,
+                                MiddleName = tmp.Отчество,
+                                BirthDate = Convert.ToDateTime(tmp.BirthDate).ToString("yyyy-MM-dd"),
+                                DocSeria = Encrypt(tmp.СерНомДок.Trim().Substring(0, 4)),
+                                DocNumber = Encrypt(tmp.СерНомДок.Trim().Substring(4, 6)),
+                                Status = PersonLifeStatus.Dead
+                            });
+                        }
+                        else
+                        {
+                            foreach (var i in men)
+                            {
+                                result.ResponseData.Add(
+                                   new PersonLifeStatusResponse
+                                   {
+                                       LastName = i.Фамилия,
+                                       FirstName = i.Имя,
+                                       MiddleName = i.Отчество,
+                                       BirthDate = i.BirthDate.ToString(),
+                                       Status = PersonLifeStatus.NotSure
+                                   });
+                            }
                         }
                     }
                     else if (men.Count() == 0)
@@ -88,6 +115,8 @@ namespace SocialTargetHelpAPIServer
                                 FirstName = dbPerson.FirstName,
                                 MiddleName = dbPerson.MiddleName,
                                 BirthDate = dbPerson.BirthDate.ToString(),
+                                DocSeria = dbPerson.DocSeria,
+                                DocNumber = dbPerson.DocNumber,
                                 Status = PersonLifeStatus.Alive
                             });
                     }
@@ -232,6 +261,53 @@ namespace SocialTargetHelpAPIServer
             };
             dbContext.Insert(requests);
             dbContext.Update<api_req_requests>(requests);
+        }
+
+        // Decrypt
+        public static string Decrypt(string cipherText)
+        {
+            string EncryptionKey = "abc123";
+            cipherText = cipherText.Replace(" ", "+");
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+        }
+
+        // Encrypt
+        public static string Encrypt(string clearText)
+        {
+            string EncryptionKey = "abc123";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
         }
     }
 }

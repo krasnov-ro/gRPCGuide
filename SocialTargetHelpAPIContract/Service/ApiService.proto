@@ -47,6 +47,8 @@ message PersonLifeStatusRequest {
 	string firstName = 3;
 	string middleName = 4;
 	string birthDate = 5;
+	string docSeria = 6;
+	string docNumber = 7;
 }
 
 message PersonLifeStatusResponse {
@@ -55,7 +57,9 @@ message PersonLifeStatusResponse {
 	string firstName = 3;
 	string middleName = 4;
 	string birthDate = 5; 
-	PersonLifeStatus status = 6;
+	string docSeria = 6;
+	string docNumber = 7;
+	PersonLifeStatus status = 8;
 }
 
 enum PersonLifeStatus {
