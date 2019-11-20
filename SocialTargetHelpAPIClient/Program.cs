@@ -47,6 +47,7 @@ namespace SocialTargetHelpAPIClient
                         dbPersonsFilter = cd_persons.Where(p => p.id == dbDeal.f_cd_persons);
                 }
 
+                // Передадим инфу о наших челиках, персональные данные зашифруем
                 var personsData = dbPersonsFilter.Select(dbPerson => new PersonLifeStatusRequest()
                 {
                     LastName = dbPerson.c_surname.ToUpper(),

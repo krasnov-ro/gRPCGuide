@@ -42,6 +42,7 @@ namespace SocialTargetHelpAPIServer
             {
                 foreach (var dbPerson in req.RequestData)
                 {
+                    // Найдем всех людей подходяжих по ФИО и дате рождения
                     men = dbContext.fatalzp_sv_cd_umer.Where(p =>
                         //p.Id.ToString() == dbPerson.Guid &&
                         p.Фамилия.ToUpper() == dbPerson.LastName &&
@@ -50,6 +51,7 @@ namespace SocialTargetHelpAPIServer
                         p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate)
                         );
 
+                    // Если такой человек один, то мы отправим инфу по этому челику, персональные данные зашифруем
                     if (men.Count() == 1)
                     {
                         var tmp = men.SingleOrDefault();
@@ -65,6 +67,7 @@ namespace SocialTargetHelpAPIServer
                                 Status = PersonLifeStatus.Dead
                             });
                     }
+                    // Если таких несколько то мы попытаемся поискать по паспортным данным
                     else if (men.Count() > 1)
                     {
                         string docSeriaNumber = null;
@@ -75,6 +78,7 @@ namespace SocialTargetHelpAPIServer
                             p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate) &&
                             p.СерНомДок == Decrypt(dbPerson.DocSeria) + Decrypt(dbPerson.DocNumber)
                             );
+                        // Если такой челик нашелся то отправим по нему инфу, персональные данные зашифруем
                         if (docMen != null)
                         {
                             var tmp = docMen.SingleOrDefault();
@@ -90,6 +94,7 @@ namespace SocialTargetHelpAPIServer
                                 Status = PersonLifeStatus.Dead
                             });
                         }
+                        // Если такой челик не нашелся в списке умерших, то все хорошо, он жив, наверное, может быть, маловероятно, но  это не точно
                         else
                         {
                             foreach (var i in men)
@@ -106,6 +111,8 @@ namespace SocialTargetHelpAPIServer
                             }
                         }
                     }
+
+                    // Если челика с такими ФИО и датой рождения нет, то скорее всего он жив
                     else if (men.Count() == 0)
                     {
                         result.ResponseData.Add(

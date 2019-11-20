@@ -29,6 +29,7 @@
   <ItemGroup>
     <None Update="secureSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Code</SubType>
     </None>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
