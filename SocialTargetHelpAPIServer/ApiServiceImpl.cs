@@ -31,6 +31,10 @@ namespace SocialTargetHelpAPIServer
 
         public override Task<GetPersonsLifeStatusResponse> GetPersonsLifeStatus(GetPersonsLifeStatusRequest req, ServerCallContext context)
         {
+
+            foreach(var d in req.RequestData)
+            { }
+
             GetPersonsLifeStatusResponse result = new GetPersonsLifeStatusResponse();
             IQueryable<fatalzp_fatalzp_sv_cd_umer> men = null;
 
@@ -40,10 +44,11 @@ namespace SocialTargetHelpAPIServer
                 {
                     men = dbContext.fatalzp_sv_cd_umer.Where(p =>
                         //p.Id.ToString() == dbPerson.Guid &&
-                        p.Фамилия == dbPerson.LastName &&
-                        p.Имя == dbPerson.FirstName &&
-                        p.Отчество == dbPerson.MiddleName &&
-                        p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate));
+                        p.Фамилия.ToUpper() == dbPerson.LastName &&
+                        p.Имя.ToUpper() == dbPerson.FirstName &&
+                        p.Отчество.ToUpper() == dbPerson.MiddleName &&
+                        p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate)
+                        );
 
                     if (men.Count() == 1)
                     {
@@ -54,7 +59,7 @@ namespace SocialTargetHelpAPIServer
                                 LastName = tmp.Фамилия,
                                 FirstName = tmp.Имя,
                                 MiddleName = tmp.Отчество,
-                                BirthDate = tmp.BirthDate.ToString(),
+                                BirthDate = Convert.ToDateTime(tmp.BirthDate).ToString("yyyy-MM-dd"),
                                 Status = PersonLifeStatus.Dead
                             });
                     }
@@ -72,6 +77,18 @@ namespace SocialTargetHelpAPIServer
                                    Status = PersonLifeStatus.NotSure
                                });
                         }
+                    }
+                    else if (men.Count() == 0)
+                    {
+                        result.ResponseData.Add(
+                            new PersonLifeStatusResponse
+                            {
+                                LastName = dbPerson.LastName,
+                                FirstName = dbPerson.FirstName,
+                                MiddleName = dbPerson.MiddleName,
+                                BirthDate = dbPerson.BirthDate.ToString(),
+                                Status = PersonLifeStatus.Alive
+                            });
                     }
                 }
             }
@@ -303,6 +320,7 @@ namespace SocialTargetHelpAPIServer
             return result;
         }
 
+        // Сохранение запроса и ответа в базу данных
         public void LogInDB(string req, string response)
         {
             var apiRequest = new api_req_api_req_requests
