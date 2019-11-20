@@ -90,6 +90,7 @@ namespace SocialTargetHelpAPIClient
 
                 #region Запрос от социального портала
 
+                // Передаем период выплат за который мы хотим получить информацию о выплатах челика с передаваемым снилсом
                 var socPortalReq = new GetPersonPaymentsRequest()
                 {
                     PeriodBegin = "2016-10-23",

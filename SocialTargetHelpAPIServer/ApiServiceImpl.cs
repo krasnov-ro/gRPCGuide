@@ -139,6 +139,7 @@ namespace SocialTargetHelpAPIServer
         #endregion
 
         #region Формировнаие ответа для Соц. портала
+        // Ищем выплаты человека с полученным снилс за полученный период 
         public override Task<GetPersonPaymentsResponse> GetPersonPayments(GetPersonPaymentsRequest req, ServerCallContext context)
         {
             string log = req.ToString();
@@ -150,6 +151,7 @@ namespace SocialTargetHelpAPIServer
                 {
                     conn.Open();
 
+                    // Вызываем хранимку которая возвращает выплаты по данному челики за указанный период
                     using (var cmd = conn.CreateCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
