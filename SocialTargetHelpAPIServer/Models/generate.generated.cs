@@ -18,9 +18,13 @@ using System.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Net.NetworkInformation;
+using System.Reflection;
 
 using LinqToDB;
+using LinqToDB.Common;
+using LinqToDB.Data;
 using LinqToDB.Mapping;
 
 using NpgsqlTypes;
@@ -34,47 +38,1537 @@ namespace SocialTargetHelpAPIServer.Models
 	/// </summary>
 	public partial class STH : LinqToDB.Data.DataConnection
 	{
-		public ITable<api_req_requests>                                        api_req_requests                                        { get { return this.GetTable<api_req_requests>(); } }
-		public ITable<fatalzp_d_FATALZPRequest>                                fatalzp_d_FATALZPRequest                                { get { return this.GetTable<fatalzp_d_FATALZPRequest>(); } }
-		public ITable<fatalzp_d_АдрКЛАДРТип>                                   fatalzp_d_АдрКЛАДРТип                                   { get { return this.GetTable<fatalzp_d_АдрКЛАДРТип>(); } }
-		public ITable<fatalzp_d_АдрФИАСТип>                                    fatalzp_d_АдрФИАСТип                                    { get { return this.GetTable<fatalzp_d_АдрФИАСТип>(); } }
-		public ITable<fatalzp_d_ВидНаимКодТип>                                 fatalzp_d_ВидНаимКодТип                                 { get { return this.GetTable<fatalzp_d_ВидНаимКодТип>(); } }
-		public ITable<fatalzp_d_ВидНаимТип>                                    fatalzp_d_ВидНаимТип                                    { get { return this.GetTable<fatalzp_d_ВидНаимТип>(); } }
-		public ITable<fatalzp_d_ГражданствоТип>                                fatalzp_d_ГражданствоТип                                { get { return this.GetTable<fatalzp_d_ГражданствоТип>(); } }
-		public ITable<fatalzp_d_ДатаДокТип>                                    fatalzp_d_ДатаДокТип                                    { get { return this.GetTable<fatalzp_d_ДатаДокТип>(); } }
-		public ITable<fatalzp_d_ЗапАктТип>                                     fatalzp_d_ЗапАктТип                                     { get { return this.GetTable<fatalzp_d_ЗапАктТип>(); } }
-		public ITable<fatalzp_d_МестоТип>                                      fatalzp_d_МестоТип                                      { get { return this.GetTable<fatalzp_d_МестоТип>(); } }
-		public ITable<fatalzp_d_МЖПослИн>                                      fatalzp_d_МЖПослИн                                      { get { return this.GetTable<fatalzp_d_МЖПослИн>(); } }
-		public ITable<fatalzp_d_МЖПослРФ>                                      fatalzp_d_МЖПослРФ                                      { get { return this.GetTable<fatalzp_d_МЖПослРФ>(); } }
-		public ITable<fatalzp_d_МЖПослТип>                                     fatalzp_d_МЖПослТип                                     { get { return this.GetTable<fatalzp_d_МЖПослТип>(); } }
-		public ITable<fatalzp_d_НомерТип>                                      fatalzp_d_НомерТип                                      { get { return this.GetTable<fatalzp_d_НомерТип>(); } }
-		public ITable<fatalzp_d_НомерТипЗданиеCollection_fatalzp_d_А_BF94C0E4> fatalzp_d_НомерТипЗданиеCollection_fatalzp_d_А_BF94C0E4 { get { return this.GetTable<fatalzp_d_НомерТипЗданиеCollection_fatalzp_d_А_BF94C0E4>(); } }
-		public ITable<fatalzp_d_ОрганЗАГСТип>                                  fatalzp_d_ОрганЗАГСТип                                  { get { return this.GetTable<fatalzp_d_ОрганЗАГСТип>(); } }
-		public ITable<fatalzp_d_ПрдСведРег>                                    fatalzp_d_ПрдСведРег                                    { get { return this.GetTable<fatalzp_d_ПрдСведРег>(); } }
-		public ITable<fatalzp_d_СведДокОснТип>                                 fatalzp_d_СведДокОснТип                                 { get { return this.GetTable<fatalzp_d_СведДокОснТип>(); } }
-		public ITable<fatalzp_d_СведДокТип>                                    fatalzp_d_СведДокТип                                    { get { return this.GetTable<fatalzp_d_СведДокТип>(); } }
-		public ITable<fatalzp_d_СведИзмАГСТип>                                 fatalzp_d_СведИзмАГСТип                                 { get { return this.GetTable<fatalzp_d_СведИзмАГСТип>(); } }
-		public ITable<fatalzp_d_СведРегСмерт>                                  fatalzp_d_СведРегСмерт                                  { get { return this.GetTable<fatalzp_d_СведРегСмерт>(); } }
-		public ITable<fatalzp_d_СведСвидетТип>                                 fatalzp_d_СведСвидетТип                                 { get { return this.GetTable<fatalzp_d_СведСвидетТип>(); } }
-		public ITable<fatalzp_d_СведСвидетТипПовтСвидетCollec_AD026169>        fatalzp_d_СведСвидетТипПовтСвидетCollec_AD026169        { get { return this.GetTable<fatalzp_d_СведСвидетТипПовтСвидетCollec_AD026169>(); } }
-		public ITable<fatalzp_d_СведУмер>                                      fatalzp_d_СведУмер                                      { get { return this.GetTable<fatalzp_d_СведУмер>(); } }
-		public ITable<fatalzp_d_СтатусЗаписи>                                  fatalzp_d_СтатусЗаписи                                  { get { return this.GetTable<fatalzp_d_СтатусЗаписи>(); } }
-		public ITable<fatalzp_d_ТипНаимТип>                                    fatalzp_d_ТипНаимТип                                    { get { return this.GetTable<fatalzp_d_ТипНаимТип>(); } }
-		public ITable<fatalzp_d_УдЛичнФЛТип>                                   fatalzp_d_УдЛичнФЛТип                                   { get { return this.GetTable<fatalzp_d_УдЛичнФЛТип>(); } }
-		public ITable<fatalzp_d_ФИОПрТип>                                      fatalzp_d_ФИОПрТип                                      { get { return this.GetTable<fatalzp_d_ФИОПрТип>(); } }
-		public ITable<fatalzp_sv_cd_umer>                                      fatalzp_sv_cd_umer                                      { get { return this.GetTable<fatalzp_sv_cd_umer>(); } }
-		public ITable<fatalzp_sv_cd_umer_all>                                  fatalzp_sv_cd_umer_all                                  { get { return this.GetTable<fatalzp_sv_cd_umer_all>(); } }
-		public ITable<fatalzp_sv_cd_umer_cut>                                  fatalzp_sv_cd_umer_cut                                  { get { return this.GetTable<fatalzp_sv_cd_umer_cut>(); } }
-		public ITable<fatalzp_sv_cd_umer_pension>                              fatalzp_sv_cd_umer_pension                              { get { return this.GetTable<fatalzp_sv_cd_umer_pension>(); } }
-		public ITable<fatalzp_sv_cd_umer_poor>                                 fatalzp_sv_cd_umer_poor                                 { get { return this.GetTable<fatalzp_sv_cd_umer_poor>(); } }
-		public ITable<fatalzp_sv_cd_umer_subsidy>                              fatalzp_sv_cd_umer_subsidy                              { get { return this.GetTable<fatalzp_sv_cd_umer_subsidy>(); } }
-		public ITable<sozags_СОЗАГС_1>                                         sozags_СОЗАГС_1                                         { get { return this.GetTable<sozags_СОЗАГС_1>(); } }
-		public ITable<sozags_СОЗАГС_1В>                                        sozags_СОЗАГС_1В                                        { get { return this.GetTable<sozags_СОЗАГС_1В>(); } }
-		public ITable<zags_ОКСМ>                                               zags_ОКСМ                                               { get { return this.GetTable<zags_ОКСМ>(); } }
-		public ITable<zags_СВЗАГС>                                             zags_СВЗАГС                                             { get { return this.GetTable<zags_СВЗАГС>(); } }
-		public ITable<zags_СДРАГС>                                             zags_СДРАГС                                             { get { return this.GetTable<zags_СДРАГС>(); } }
-		public ITable<zags_СПДУЛ>                                              zags_СПДУЛ                                              { get { return this.GetTable<zags_СПДУЛ>(); } }
-		public ITable<zags_СТАГС>                                              zags_СТАГС                                              { get { return this.GetTable<zags_СТАГС>(); } }
+		public ITable<api_req_api_req_requests>                                             api_req_requests                                             { get { return this.GetTable<api_req_api_req_requests>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cd_calculation_base>                                    common_cd_calculation_base                                   { get { return this.GetTable<common_common_cd_calculation_base>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cd_case_base>                                           common_cd_case_base                                          { get { return this.GetTable<common_common_cd_case_base>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=История дела]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cd_case_history>                                        common_cd_case_history                                       { get { return this.GetTable<common_common_cd_case_history>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Сведения о назначенных МСП]
+		/// </summary>
+		public ITable<common_common_cd_egisso_data>                                         common_cd_egisso_data                                        { get { return this.GetTable<common_common_cd_egisso_data>(); } }
+		public ITable<common_common_cd_errors>                                              common_cd_errors                                             { get { return this.GetTable<common_common_cd_errors>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёты по которым не сформированы выплаты]
+		/// </summary>
+		public ITable<common_common_cd_org_bad_cases>                                       common_cd_org_bad_cases                                      { get { return this.GetTable<common_common_cd_org_bad_cases>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=История удержаний]
+		/// </summary>
+		public ITable<common_common_cd_retention_history>                                   common_cd_retention_history                                  { get { return this.GetTable<common_common_cd_retention_history>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Удержание]
+		/// </summary>
+		public ITable<common_common_cd_retentions>                                          common_cd_retentions                                         { get { return this.GetTable<common_common_cd_retentions>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Заявления]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.AppendAuditTrailProperty]
+		/// </summary>
+		public ITable<common_common_cd_rsmv_applications_base>                              common_cd_rsmv_applications_base                             { get { return this.GetTable<common_common_cd_rsmv_applications_base>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Операции]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cd_rsmv_operations>                                     common_cd_rsmv_operations                                    { get { return this.GetTable<common_common_cd_rsmv_operations>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<common_common_cd_rsmv_operations_integration>                         common_cd_rsmv_operations_integration                        { get { return this.GetTable<common_common_cd_rsmv_operations_integration>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды документов на печать]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_calculation_report_types>                            common_cs_calculation_report_types                           { get { return this.GetTable<common_common_cs_calculation_report_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Вид расчёта]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_calculation_type>                                    common_cs_calculation_type                                   { get { return this.GetTable<common_common_cs_calculation_type>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь родственных отношений и вкладок]
+		/// </summary>
+		public ITable<common_common_cs_family_relation_tab_links>                           common_cs_family_relation_tab_links                          { get { return this.GetTable<common_common_cs_family_relation_tab_links>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Месяцы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cs_months>                                              common_cs_months                                             { get { return this.GetTable<common_common_cs_months>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Организации]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_orgs>                                                common_cs_orgs                                               { get { return this.GetTable<common_common_cs_orgs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды выплатных документов]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_payment_array_types>                                 common_cs_payment_array_types                                { get { return this.GetTable<common_common_cs_payment_array_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Вид выплаты]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cs_payment_type>                                        common_cs_payment_type                                       { get { return this.GetTable<common_common_cs_payment_type>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы удержания]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_retention_statuses>                                  common_cs_retention_statuses                                 { get { return this.GetTable<common_common_cs_retention_statuses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы удержания]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_retention_types>                                     common_cs_retention_types                                    { get { return this.GetTable<common_common_cs_retention_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы заявлений]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_rsmv_application_statuses>                           common_cs_rsmv_application_statuses                          { get { return this.GetTable<common_common_cs_rsmv_application_statuses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Способы получения результата оказания услуги]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_rsmv_informing_types>                                common_cs_rsmv_informing_types                               { get { return this.GetTable<common_common_cs_rsmv_informing_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы операций]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_rsmv_operation_types>                                common_cs_rsmv_operation_types                               { get { return this.GetTable<common_common_cs_rsmv_operation_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды услуг]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_rsmv_service_types>                                  common_cs_rsmv_service_types                                 { get { return this.GetTable<common_common_cs_rsmv_service_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Способы перечисления средств]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_rsmv_transfer_methods>                               common_cs_rsmv_transfer_methods                              { get { return this.GetTable<common_common_cs_rsmv_transfer_methods>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы валидации СНИЛСа]
+		/// [XMeta.DefaultProperty=c_title]
+		/// </summary>
+		public ITable<common_common_cs_snils_validation_statuses>                           common_cs_snils_validation_statuses                          { get { return this.GetTable<common_common_cs_snils_validation_statuses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cs_statuses>                                            common_cs_statuses                                           { get { return this.GetTable<common_common_cs_statuses>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_tabs>                                                common_cs_tabs                                               { get { return this.GetTable<common_common_cs_tabs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы]
+		/// [XMeta.DefaultProperty=c_type_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cs_types>                                               common_cs_types                                              { get { return this.GetTable<common_common_cs_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Привязки органов ЗАГС к организациям]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<common_common_f_orgs_zags>                                            common_f_orgs_zags                                           { get { return this.GetTable<common_common_f_orgs_zags>(); } }
+		public ITable<common_common_person_all>                                             common_person_all                                            { get { return this.GetTable<common_common_person_all>(); } }
+		public ITable<fatalzp_fatalzp_d_FATALZPRequest>                                     fatalzp_d_FATALZPRequest                                     { get { return this.GetTable<fatalzp_fatalzp_d_FATALZPRequest>(); } }
+		public ITable<fatalzp_fatalzp_d_АдрКЛАДРТип>                                        fatalzp_d_АдрКЛАДРТип                                        { get { return this.GetTable<fatalzp_fatalzp_d_АдрКЛАДРТип>(); } }
+		public ITable<fatalzp_fatalzp_d_АдрФИАСТип>                                         fatalzp_d_АдрФИАСТип                                         { get { return this.GetTable<fatalzp_fatalzp_d_АдрФИАСТип>(); } }
+		public ITable<fatalzp_fatalzp_d_ВидНаимКодТип>                                      fatalzp_d_ВидНаимКодТип                                      { get { return this.GetTable<fatalzp_fatalzp_d_ВидНаимКодТип>(); } }
+		public ITable<fatalzp_fatalzp_d_ВидНаимТип>                                         fatalzp_d_ВидНаимТип                                         { get { return this.GetTable<fatalzp_fatalzp_d_ВидНаимТип>(); } }
+		public ITable<fatalzp_fatalzp_d_ГражданствоТип>                                     fatalzp_d_ГражданствоТип                                     { get { return this.GetTable<fatalzp_fatalzp_d_ГражданствоТип>(); } }
+		public ITable<fatalzp_fatalzp_d_ДатаДокТип>                                         fatalzp_d_ДатаДокТип                                         { get { return this.GetTable<fatalzp_fatalzp_d_ДатаДокТип>(); } }
+		public ITable<fatalzp_fatalzp_d_ЗапАктТип>                                          fatalzp_d_ЗапАктТип                                          { get { return this.GetTable<fatalzp_fatalzp_d_ЗапАктТип>(); } }
+		public ITable<fatalzp_fatalzp_d_МестоТип>                                           fatalzp_d_МестоТип                                           { get { return this.GetTable<fatalzp_fatalzp_d_МестоТип>(); } }
+		public ITable<fatalzp_fatalzp_d_МЖПослИн>                                           fatalzp_d_МЖПослИн                                           { get { return this.GetTable<fatalzp_fatalzp_d_МЖПослИн>(); } }
+		public ITable<fatalzp_fatalzp_d_МЖПослРФ>                                           fatalzp_d_МЖПослРФ                                           { get { return this.GetTable<fatalzp_fatalzp_d_МЖПослРФ>(); } }
+		public ITable<fatalzp_fatalzp_d_МЖПослТип>                                          fatalzp_d_МЖПослТип                                          { get { return this.GetTable<fatalzp_fatalzp_d_МЖПослТип>(); } }
+		public ITable<fatalzp_fatalzp_d_НомерТип>                                           fatalzp_d_НомерТип                                           { get { return this.GetTable<fatalzp_fatalzp_d_НомерТип>(); } }
+		public ITable<fatalzp_fatalzp_d_НомерТипЗданиеCollection_fatalzp_d_А_BF94C0E4>      fatalzp_d_НомерТипЗданиеCollection_fatalzp_d_А_BF94C0E4      { get { return this.GetTable<fatalzp_fatalzp_d_НомерТипЗданиеCollection_fatalzp_d_А_BF94C0E4>(); } }
+		public ITable<fatalzp_fatalzp_d_ОрганЗАГСТип>                                       fatalzp_d_ОрганЗАГСТип                                       { get { return this.GetTable<fatalzp_fatalzp_d_ОрганЗАГСТип>(); } }
+		public ITable<fatalzp_fatalzp_d_ПрдСведРег>                                         fatalzp_d_ПрдСведРег                                         { get { return this.GetTable<fatalzp_fatalzp_d_ПрдСведРег>(); } }
+		public ITable<fatalzp_fatalzp_d_СведДокОснТип>                                      fatalzp_d_СведДокОснТип                                      { get { return this.GetTable<fatalzp_fatalzp_d_СведДокОснТип>(); } }
+		public ITable<fatalzp_fatalzp_d_СведДокТип>                                         fatalzp_d_СведДокТип                                         { get { return this.GetTable<fatalzp_fatalzp_d_СведДокТип>(); } }
+		public ITable<fatalzp_fatalzp_d_СведИзмАГСТип>                                      fatalzp_d_СведИзмАГСТип                                      { get { return this.GetTable<fatalzp_fatalzp_d_СведИзмАГСТип>(); } }
+		public ITable<fatalzp_fatalzp_d_СведРегСмерт>                                       fatalzp_d_СведРегСмерт                                       { get { return this.GetTable<fatalzp_fatalzp_d_СведРегСмерт>(); } }
+		public ITable<fatalzp_fatalzp_d_СведСвидетТип>                                      fatalzp_d_СведСвидетТип                                      { get { return this.GetTable<fatalzp_fatalzp_d_СведСвидетТип>(); } }
+		public ITable<fatalzp_fatalzp_d_СведСвидетТипПовтСвидетCollec_AD026169>             fatalzp_d_СведСвидетТипПовтСвидетCollec_AD026169             { get { return this.GetTable<fatalzp_fatalzp_d_СведСвидетТипПовтСвидетCollec_AD026169>(); } }
+		public ITable<fatalzp_fatalzp_d_СведУмер>                                           fatalzp_d_СведУмер                                           { get { return this.GetTable<fatalzp_fatalzp_d_СведУмер>(); } }
+		public ITable<fatalzp_fatalzp_d_СтатусЗаписи>                                       fatalzp_d_СтатусЗаписи                                       { get { return this.GetTable<fatalzp_fatalzp_d_СтатусЗаписи>(); } }
+		public ITable<fatalzp_fatalzp_d_ТипНаимТип>                                         fatalzp_d_ТипНаимТип                                         { get { return this.GetTable<fatalzp_fatalzp_d_ТипНаимТип>(); } }
+		public ITable<fatalzp_fatalzp_d_УдЛичнФЛТип>                                        fatalzp_d_УдЛичнФЛТип                                        { get { return this.GetTable<fatalzp_fatalzp_d_УдЛичнФЛТип>(); } }
+		public ITable<fatalzp_fatalzp_d_ФИОПрТип>                                           fatalzp_d_ФИОПрТип                                           { get { return this.GetTable<fatalzp_fatalzp_d_ФИОПрТип>(); } }
+		public ITable<fatalzp_fatalzp_sv_cd_umer>                                           fatalzp_sv_cd_umer                                           { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer>(); } }
+		public ITable<fatalzp_fatalzp_sv_cd_umer_all>                                       fatalzp_sv_cd_umer_all                                       { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_all>(); } }
+		public ITable<fatalzp_fatalzp_sv_cd_umer_cut>                                       fatalzp_sv_cd_umer_cut                                       { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_cut>(); } }
+		public ITable<fatalzp_fatalzp_sv_cd_umer_pension>                                   fatalzp_sv_cd_umer_pension                                   { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_pension>(); } }
+		public ITable<fatalzp_fatalzp_sv_cd_umer_poor>                                      fatalzp_sv_cd_umer_poor                                      { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_poor>(); } }
+		public ITable<fatalzp_fatalzp_sv_cd_umer_subsidy>                                   fatalzp_sv_cd_umer_subsidy                                   { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_subsidy>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Реестр адресообразующих элементов]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cd_address_objects>                                         fias_cd_address_objects                                      { get { return this.GetTable<fias_fias_cd_address_objects>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Реестр образующих элементов]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<fias_fias_cd_addrobj>                                                 fias_cd_addrobj                                              { get { return this.GetTable<fias_fias_cd_addrobj>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Сведения по отдельным зданиям, сооружениям]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<fias_fias_cd_house>                                                   fias_cd_house                                                { get { return this.GetTable<fias_fias_cd_house>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Интервалы домов]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cd_houseint>                                                fias_cd_houseint                                             { get { return this.GetTable<fias_fias_cd_houseint>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Сведения по помещениям]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cd_room>                                                    fias_cd_room                                                 { get { return this.GetTable<fias_fias_cd_room>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статус актуальности ФИАС]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cs_actstat>                                                 fias_cs_actstat                                              { get { return this.GetTable<fias_fias_cs_actstat>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статус центра]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cs_centerst>                                                fias_cs_centerst                                             { get { return this.GetTable<fias_fias_cs_centerst>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статус актуальности выгрузки ФИАС формата КЛАДР]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cs_curentst>                                                fias_cs_curentst                                             { get { return this.GetTable<fias_fias_cs_curentst>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Признак владения]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cs_eststat>                                                 fias_cs_eststat                                              { get { return this.GetTable<fias_fias_cs_eststat>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статус состояния объектов недвижимости]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cs_hststat>                                                 fias_cs_hststat                                              { get { return this.GetTable<fias_fias_cs_hststat>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статус интервала домов]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cs_intvstat>                                                fias_cs_intvstat                                             { get { return this.GetTable<fias_fias_cs_intvstat>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статус действия]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cs_operstat>                                                fias_cs_operstat                                             { get { return this.GetTable<fias_fias_cs_operstat>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы адресных объектов]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cs_socrbase>                                                fias_cs_socrbase                                             { get { return this.GetTable<fias_fias_cs_socrbase>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Признак строения]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_cs_strstat>                                                 fias_cs_strstat                                              { get { return this.GetTable<fias_fias_cs_strstat>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Версии обновлений наборов данных внешних систем]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<fias_fias_ms_version>                                                 fias_ms_version                                              { get { return this.GetTable<fias_fias_ms_version>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Факты назначения]
+		/// </summary>
+		public ITable<msz_msz_cd_case>                                                      msz_cd_case                                                  { get { return this.GetTable<msz_msz_cd_case>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Изменение факта назначения]
+		/// </summary>
+		public ITable<msz_msz_cd_changed_case>                                              msz_cd_changed_case                                          { get { return this.GetTable<msz_msz_cd_changed_case>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Органы назначающие МСЗ]
+		/// [XMeta.DefaultProperty=c_title]
+		/// </summary>
+		public ITable<msz_msz_cd_contract_suppliers>                                        msz_cd_contract_suppliers                                    { get { return this.GetTable<msz_msz_cd_contract_suppliers>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Выгрузка данных]
+		/// [XMeta.DefaultProperty=c_filename]
+		/// </summary>
+		public ITable<msz_msz_cd_file>                                                      msz_cd_file                                                  { get { return this.GetTable<msz_msz_cd_file>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Личные данные в сведениях о назначении]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<msz_msz_cd_link_person_case>                                          msz_cd_link_person_case                                      { get { return this.GetTable<msz_msz_cd_link_person_case>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Локальные МСЗ организаций]
+		/// 
+		/// </summary>
+		public ITable<msz_msz_cd_local_msz_orgs_subsystems_links>                           msz_cd_local_msz_orgs_subsystems_links                       { get { return this.GetTable<msz_msz_cd_local_msz_orgs_subsystems_links>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Поставщики информации]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<msz_msz_cd_parent_suppliers>                                          msz_cd_parent_suppliers                                      { get { return this.GetTable<msz_msz_cd_parent_suppliers>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы изменения фактов назначения]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<msz_msz_cs_changed_case_types>                                        msz_cs_changed_case_types                                    { get { return this.GetTable<msz_msz_cs_changed_case_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Единицы измерения]
+		/// [XMeta.DefaultProperty=c_nameshort]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<msz_msz_cs_fed_edizm>                                                 msz_cs_fed_edizm                                             { get { return this.GetTable<msz_msz_cs_fed_edizm>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Формы предоставления]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<msz_msz_cs_fed_form>                                                  msz_cs_fed_form                                              { get { return this.GetTable<msz_msz_cs_fed_form>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Уровни регулирования]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<msz_msz_cs_fed_level>                                                 msz_cs_fed_level                                             { get { return this.GetTable<msz_msz_cs_fed_level>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Классификатор МСЗ]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<msz_msz_cs_fed_msz>                                                   msz_cs_fed_msz                                               { get { return this.GetTable<msz_msz_cs_fed_msz>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Категории получателей МСЗ]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<msz_msz_cs_fed_msz_category>                                          msz_cs_fed_msz_category                                      { get { return this.GetTable<msz_msz_cs_fed_msz_category>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Категории получателей субсидии ЖКУ]
+		/// </summary>
+		public ITable<msz_msz_cs_link_msz_category_living_min>                              msz_cs_link_msz_category_living_min                          { get { return this.GetTable<msz_msz_cs_link_msz_category_living_min>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Категории получателей для МСЗ]
+		/// </summary>
+		public ITable<msz_msz_cs_link_msz_category_msz>                                     msz_cs_link_msz_category_msz                                 { get { return this.GetTable<msz_msz_cs_link_msz_category_msz>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Локальные МСЗ]
+		/// [XMeta.DefaultProperty=c_title]
+		/// </summary>
+		public ITable<msz_msz_cs_local_msz>                                                 msz_cs_local_msz                                             { get { return this.GetTable<msz_msz_cs_local_msz>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Категории локальных МСЗ]
+		/// [XMeta.DefaultProperty=c_title]
+		/// </summary>
+		public ITable<msz_msz_cs_local_msz_category>                                        msz_cs_local_msz_category                                    { get { return this.GetTable<msz_msz_cs_local_msz_category>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Тип пакета]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<msz_msz_cs_package_type>                                              msz_cs_package_type                                          { get { return this.GetTable<msz_msz_cs_package_type>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<msz_msz_cs_status>                                                    msz_cs_status                                                { get { return this.GetTable<msz_msz_cs_status>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Организации предоставляющие МСЗ]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<msz_msz_cs_suppliers>                                                 msz_cs_suppliers                                             { get { return this.GetTable<msz_msz_cs_suppliers>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<msz_msz_import_CD_ParentSupplers>                                     msz_import_CD_ParentSupplers                                 { get { return this.GetTable<msz_msz_import_CD_ParentSupplers>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<msz_msz_import_CS_Fed_MSZ>                                            msz_import_CS_Fed_MSZ                                        { get { return this.GetTable<msz_msz_import_CS_Fed_MSZ>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<msz_msz_import_CS_Fed_MSZ_Category>                                   msz_import_CS_Fed_MSZ_Category                               { get { return this.GetTable<msz_msz_import_CS_Fed_MSZ_Category>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<msz_msz_import_CS_LinkMSZCategoryMSZ>                                 msz_import_CS_LinkMSZCategoryMSZ                             { get { return this.GetTable<msz_msz_import_CS_LinkMSZCategoryMSZ>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<msz_msz_import_CS_Local_MSZ>                                          msz_import_CS_Local_MSZ                                      { get { return this.GetTable<msz_msz_import_CS_Local_MSZ>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<msz_msz_import_CS_Local_MSZ_Category>                                 msz_import_CS_Local_MSZ_Category                             { get { return this.GetTable<msz_msz_import_CS_Local_MSZ_Category>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Дополнительные выплаты к должностному окладу]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<pension_pension_cd_additional_payments>                               pension_cd_additional_payments                               { get { return this.GetTable<pension_pension_cd_additional_payments>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёт]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.BaseType=common_cd_calculation_base]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// </summary>
+		public ITable<pension_pension_cd_calculation>                                       pension_cd_calculation                                       { get { return this.GetTable<pension_pension_cd_calculation>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.BaseType=common_cd_case_base]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// </summary>
+		public ITable<pension_pension_cd_case>                                              pension_cd_case                                              { get { return this.GetTable<pension_pension_cd_case>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Стаж]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<pension_pension_cd_experience>                                        pension_cd_experience                                        { get { return this.GetTable<pension_pension_cd_experience>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=что то]
+		/// </summary>
+		public ITable<pension_pension_cd_export_msp>                                        pension_cd_export_msp                                        { get { return this.GetTable<pension_pension_cd_export_msp>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Страховая пенсия]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<pension_pension_cd_insurance_pension>                                 pension_cd_insurance_pension                                 { get { return this.GetTable<pension_pension_cd_insurance_pension>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Перерасчёты]
+		/// </summary>
+		public ITable<pension_pension_cd_recalculation>                                     pension_cd_recalculation                                     { get { return this.GetTable<pension_pension_cd_recalculation>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Обмен данными для назначения ФСД]
+		/// </summary>
+		public ITable<pension_pension_cd_request_response_files>                            pension_cd_request_response_files                            { get { return this.GetTable<pension_pension_cd_request_response_files>(); } }
+		public ITable<pension_pension_cd_test_persons>                                      pension_cd_test_persons                                      { get { return this.GetTable<pension_pension_cd_test_persons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Ветераны]
+		/// </summary>
+		public ITable<pension_pension_cd_veteran_persons>                                   pension_cd_veteran_persons                                   { get { return this.GetTable<pension_pension_cd_veteran_persons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Архивные должности]
+		/// </summary>
+		public ITable<pension_pension_cs_archive_post>                                      pension_cs_archive_post                                      { get { return this.GetTable<pension_pension_cs_archive_post>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Причины прекращения]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<pension_pension_cs_cancel_reasons>                                    pension_cs_cancel_reasons                                    { get { return this.GetTable<pension_pension_cs_cancel_reasons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Справочник организаций]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<pension_pension_cs_companies>                                         pension_cs_companies                                         { get { return this.GetTable<pension_pension_cs_companies>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Стаж государственной гражданской службы, стаж муниципальной службы для назначения пенсии за выслугу лет]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<pension_pension_cs_experience_ggs>                                    pension_cs_experience_ggs                                    { get { return this.GetTable<pension_pension_cs_experience_ggs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Место работы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<pension_pension_cs_organization>                                      pension_cs_organization                                      { get { return this.GetTable<pension_pension_cs_organization>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Справочник соответствия государственных должностей]
+		/// </summary>
+		public ITable<pension_pension_cs_past_post>                                         pension_cs_past_post                                         { get { return this.GetTable<pension_pension_cs_past_post>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Основания для изменения размера пенсии]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<pension_pension_cs_pension_change_reasons>                            pension_cs_pension_change_reasons                            { get { return this.GetTable<pension_pension_cs_pension_change_reasons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Вид пенсии]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<pension_pension_cs_pension_type>                                      pension_cs_pension_type                                      { get { return this.GetTable<pension_pension_cs_pension_type>(); } }
+		/// <summary>
+		/// [XMeta.DefaultProperty=c_type]
+		/// </summary>
+		public ITable<pension_pension_cs_pfr_files_type>                                    pension_cs_pfr_files_type                                    { get { return this.GetTable<pension_pension_cs_pfr_files_type>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Реестр должностей государственной гражданской службы Чувашской Республики]
+		/// </summary>
+		public ITable<pension_pension_cs_post>                                              pension_cs_post                                              { get { return this.GetTable<pension_pension_cs_post>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Категории должностей]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<pension_pension_cs_post_category>                                     pension_cs_post_category                                     { get { return this.GetTable<pension_pension_cs_post_category>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Группы должностей]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<pension_pension_cs_post_group>                                        pension_cs_post_group                                        { get { return this.GetTable<pension_pension_cs_post_group>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Раздел]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<pension_pension_cs_post_list>                                         pension_cs_post_list                                         { get { return this.GetTable<pension_pension_cs_post_list>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Причины увольнения]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<pension_pension_cs_quit_reasons>                                      pension_cs_quit_reasons                                      { get { return this.GetTable<pension_pension_cs_quit_reasons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Размеры окладов за классный чин государственных гражданских служащих Чувашской Республики]
+		/// </summary>
+		public ITable<pension_pension_cs_rank>                                              pension_cs_rank                                              { get { return this.GetTable<pension_pension_cs_rank>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Размеры должностных окладов государственных гражданских служащих Чувашской Республики]
+		/// </summary>
+		public ITable<pension_pension_cs_salary>                                            pension_cs_salary                                            { get { return this.GetTable<pension_pension_cs_salary>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь архивных и новых должностей]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<pension_pension_cs_salary_archive_post>                               pension_cs_salary_archive_post                               { get { return this.GetTable<pension_pension_cs_salary_archive_post>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Размеры денежного вознаграждения государственных должностей Чувашской Республики]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<pension_pension_cs_summary_post_list>                                 pension_cs_summary_post_list                                 { get { return this.GetTable<pension_pension_cs_summary_post_list>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Условия работы]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<pension_pension_cs_work_condition>                                    pension_cs_work_condition                                    { get { return this.GetTable<pension_pension_cs_work_condition>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Признак работы]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_title]
+		/// </summary>
+		public ITable<pension_pension_cs_work_marks>                                        pension_cs_work_marks                                        { get { return this.GetTable<pension_pension_cs_work_marks>(); } }
+		public ITable<pension_pension_cv_veteran_persons>                                   pension_cv_veteran_persons                                   { get { return this.GetTable<pension_pension_cv_veteran_persons>(); } }
+		public ITable<pension_pension_pension_changes>                                      pension_pension_changes                                      { get { return this.GetTable<pension_pension_pension_changes>(); } }
+		public ITable<pension_pension_statistic_long_service>                               pension_statistic_long_service                               { get { return this.GetTable<pension_pension_statistic_long_service>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_AuditDataItemPersistent>                                       public_AuditDataItemPersistent                               { get { return this.GetTable<public_AuditDataItemPersistent>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_AuditedObjectWeakReference>                                    public_AuditedObjectWeakReference                            { get { return this.GetTable<public_AuditedObjectWeakReference>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_BaseTreeNode>                                                  public_BaseTreeNode                                          { get { return this.GetTable<public_BaseTreeNode>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_CalculationReportParams>                                       public_CalculationReportParams                               { get { return this.GetTable<public_CalculationReportParams>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Вложения]
+		/// </summary>
+		public ITable<public_cd_attachments>                                                public_cd_attachments                                        { get { return this.GetTable<public_cd_attachments>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Изменения]
+		/// </summary>
+		public ITable<public_cd_changes>                                                    public_cd_changes                                            { get { return this.GetTable<public_cd_changes>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Закрытие месяца]
+		/// </summary>
+		public ITable<public_cd_close_open_month>                                           public_cd_close_open_month                                   { get { return this.GetTable<public_cd_close_open_month>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Привязка доменов к организациям]
+		/// </summary>
+		public ITable<public_cd_org_domains>                                                public_cd_org_domains                                        { get { return this.GetTable<public_cd_org_domains>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Территории обслуживания организаций]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_cd_org_territories>                                            public_cd_org_territories                                    { get { return this.GetTable<public_cd_org_territories>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связи упол. органов с районами]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<public_cd_orgs_districts>                                             public_cd_orgs_districts                                     { get { return this.GetTable<public_cd_orgs_districts>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь организаций с подсистемами]
+		/// </summary>
+		public ITable<public_cd_orgs_subsystems>                                            public_cd_orgs_subsystems                                    { get { return this.GetTable<public_cd_orgs_subsystems>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Запрос на корректировку]
+		/// </summary>
+		public ITable<public_cd_person_corrections>                                         public_cd_person_corrections                                 { get { return this.GetTable<public_cd_person_corrections>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Физические лица]
+		/// </summary>
+		public ITable<public_cd_persons>                                                    public_cd_persons                                            { get { return this.GetTable<public_cd_persons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=График доставки почтовых отделений]
+		/// </summary>
+		public ITable<public_cd_post_addresses>                                             public_cd_post_addresses                                     { get { return this.GetTable<public_cd_post_addresses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Релизы]
+		/// </summary>
+		public ITable<public_cd_releases>                                                   public_cd_releases                                           { get { return this.GetTable<public_cd_releases>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь пользователей с подсистемами]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<public_cd_users_subsystems>                                           public_cd_users_subsystems                                   { get { return this.GetTable<public_cd_users_subsystems>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_ConfirmationWindowParameters>                                  public_ConfirmationWindowParameters                          { get { return this.GetTable<public_ConfirmationWindowParameters>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Филиалы доставочных организаций]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_bank_filials>                                               public_cs_bank_filials                                       { get { return this.GetTable<public_cs_bank_filials>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы доставочных организаций]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_bank_types>                                                 public_cs_bank_types                                         { get { return this.GetTable<public_cs_bank_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Доставочные организации]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_banks>                                                      public_cs_banks                                              { get { return this.GetTable<public_cs_banks>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Настройки формирования сводных описей]
+		/// </summary>
+		public ITable<public_cs_banks_inventory_settings>                                   public_cs_banks_inventory_settings                           { get { return this.GetTable<public_cs_banks_inventory_settings>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Должности руководителей]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_boss_posts>                                                 public_cs_boss_posts                                         { get { return this.GetTable<public_cs_boss_posts>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Степени родства]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_cognation_types>                                            public_cs_cognation_types                                    { get { return this.GetTable<public_cs_cognation_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Конфигурация]
+		/// </summary>
+		public ITable<public_cs_config>                                                     public_cs_config                                             { get { return this.GetTable<public_cs_config>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы представительства]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_delegate_categories>                                        public_cs_delegate_categories                                { get { return this.GetTable<public_cs_delegate_categories>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Ведомство]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_departments>                                                public_cs_departments                                        { get { return this.GetTable<public_cs_departments>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Районы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_districts>                                                  public_cs_districts                                          { get { return this.GetTable<public_cs_districts>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Организации, выдающие документы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_document_issues_orgs>                                       public_cs_document_issues_orgs                               { get { return this.GetTable<public_cs_document_issues_orgs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Группа документов]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_document_type_groups>                                       public_cs_document_type_groups                               { get { return this.GetTable<public_cs_document_type_groups>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды документов]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_document_types>                                             public_cs_document_types                                     { get { return this.GetTable<public_cs_document_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы документов, подтверждающих степень родства]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_document_types_cognation_proof>                             public_cs_document_types_cognation_proof                     { get { return this.GetTable<public_cs_document_types_cognation_proof>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы документов, подтверждающих полномочия законного представителя]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_document_types_delegation_proof>                            public_cs_document_types_delegation_proof                    { get { return this.GetTable<public_cs_document_types_delegation_proof>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Домены]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_domains>                                                    public_cs_domains                                            { get { return this.GetTable<public_cs_domains>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Справочник типа недвижимости]
+		/// [XMeta.DefaultProperty=c_type]
+		/// </summary>
+		public ITable<public_cs_house_type>                                                 public_cs_house_type                                         { get { return this.GetTable<public_cs_house_type>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы для обмена информацией]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_info_sharing_statuses>                                      public_cs_info_sharing_statuses                              { get { return this.GetTable<public_cs_info_sharing_statuses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Тип запроса]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_info_sharing_types>                                         public_cs_info_sharing_types                                 { get { return this.GetTable<public_cs_info_sharing_types>(); } }
+		/// <summary>
+		/// [XMeta.DefaultProperty=c_status]
+		/// </summary>
+		public ITable<public_cs_martial_status>                                             public_cs_martial_status                                     { get { return this.GetTable<public_cs_martial_status>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды нормативных документов]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_normative_doc_types>                                        public_cs_normative_doc_types                                { get { return this.GetTable<public_cs_normative_doc_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Нормативные документы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_normative_documents>                                        public_cs_normative_documents                                { get { return this.GetTable<public_cs_normative_documents>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь организаций с филиалами доставочных организаций]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<public_cs_org_bank_filial_links>                                      public_cs_org_bank_filial_links                              { get { return this.GetTable<public_cs_org_bank_filial_links>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Уполномоченные органы по назначению адресной социальной помощи]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_organizations>                                              public_cs_organizations                                      { get { return this.GetTable<public_cs_organizations>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы релизов]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<public_cs_realeses_statuses>                                          public_cs_realeses_statuses                                  { get { return this.GetTable<public_cs_realeses_statuses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Регионы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_regions>                                                    public_cs_regions                                            { get { return this.GetTable<public_cs_regions>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды регистрации]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_registration_types>                                         public_cs_registration_types                                 { get { return this.GetTable<public_cs_registration_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Поселения]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<public_cs_settlements>                                                public_cs_settlements                                        { get { return this.GetTable<public_cs_settlements>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.DisplayName=Пол]
+		/// </summary>
+		public ITable<public_cs_sex>                                                        public_cs_sex                                                { get { return this.GetTable<public_cs_sex>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<public_cs_subsystems>                                                 public_cs_subsystems                                         { get { return this.GetTable<public_cs_subsystems>(); } }
+		public ITable<public_deal_id>                                                       public_deal_id                                               { get { return this.GetTable<public_deal_id>(); } }
+		public ITable<public_deal_oktmo>                                                    public_deal_oktmo                                            { get { return this.GetTable<public_deal_oktmo>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<public_Event>                                                         public_Event                                                 { get { return this.GetTable<public_Event>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_FileAttachment>                                                public_FileAttachment                                        { get { return this.GetTable<public_FileAttachment>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_FileData>                                                      public_FileData                                              { get { return this.GetTable<public_FileData>(); } }
+		public ITable<public_k>                                                             public_k                                                     { get { return this.GetTable<public_k>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_ManagementCompanies_Requests>                                  public_ManagementCompanies_Requests                          { get { return this.GetTable<public_ManagementCompanies_Requests>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_ManagementCompanies_Responses>                                 public_ManagementCompanies_Responses                         { get { return this.GetTable<public_ManagementCompanies_Responses>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_ModelDifference>                                               public_ModelDifference                                       { get { return this.GetTable<public_ModelDifference>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_ModelDifferenceAspect>                                         public_ModelDifferenceAspect                                 { get { return this.GetTable<public_ModelDifferenceAspect>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PaymentCore>                                                   public_PaymentCore                                           { get { return this.GetTable<public_PaymentCore>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PaymentDocPensionParams>                                       public_PaymentDocPensionParams                               { get { return this.GetTable<public_PaymentDocPensionParams>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PaymentDocSubsidyParams>                                       public_PaymentDocSubsidyParams                               { get { return this.GetTable<public_PaymentDocSubsidyParams>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PaymentOneTime>                                                public_PaymentOneTime                                        { get { return this.GetTable<public_PaymentOneTime>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PaymentOneTimePension>                                         public_PaymentOneTimePension                                 { get { return this.GetTable<public_PaymentOneTimePension>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PaymentOneTimeSubsidy>                                         public_PaymentOneTimeSubsidy                                 { get { return this.GetTable<public_PaymentOneTimeSubsidy>(); } }
+		public ITable<public_pens_paymentlist>                                              public_pens_paymentlist                                      { get { return this.GetTable<public_pens_paymentlist>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PensionPaymentStatParams>                                      public_PensionPaymentStatParams                              { get { return this.GetTable<public_PensionPaymentStatParams>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PermissionPolicyMemberPermissionsObject>                       public_PermissionPolicyMemberPermissionsObject               { get { return this.GetTable<public_PermissionPolicyMemberPermissionsObject>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PermissionPolicyNavigationPermissionsObject>                   public_PermissionPolicyNavigationPermissionsObject           { get { return this.GetTable<public_PermissionPolicyNavigationPermissionsObject>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PermissionPolicyObjectPermissionsObject>                       public_PermissionPolicyObjectPermissionsObject               { get { return this.GetTable<public_PermissionPolicyObjectPermissionsObject>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PermissionPolicyRole>                                          public_PermissionPolicyRole                                  { get { return this.GetTable<public_PermissionPolicyRole>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PermissionPolicyTypePermissionsObject>                         public_PermissionPolicyTypePermissionsObject                 { get { return this.GetTable<public_PermissionPolicyTypePermissionsObject>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PermissionPolicyUser>                                          public_PermissionPolicyUser                                  { get { return this.GetTable<public_PermissionPolicyUser>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PermissionPolicyUserUsers_PermissionPolicyRoleRoles>           public_PermissionPolicyUserUsers_PermissionPolicyRoleRoles   { get { return this.GetTable<public_PermissionPolicyUserUsers_PermissionPolicyRoleRoles>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PFR_FileAttachment>                                            public_PFR_FileAttachment                                    { get { return this.GetTable<public_PFR_FileAttachment>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PfrParams>                                                     public_PfrParams                                             { get { return this.GetTable<public_PfrParams>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_RecalculationSubsidyParams>                                    public_RecalculationSubsidyParams                            { get { return this.GetTable<public_RecalculationSubsidyParams>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_ReportDataV2>                                                  public_ReportDataV2                                          { get { return this.GetTable<public_ReportDataV2>(); } }
+		public ITable<public_res>                                                           public_res                                                   { get { return this.GetTable<public_res>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<public_Resource>                                                      public_Resource                                              { get { return this.GetTable<public_Resource>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<public_ResourceResources_EventEvents>                                 public_ResourceResources_EventEvents                         { get { return this.GetTable<public_ResourceResources_EventEvents>(); } }
+		public ITable<public_result>                                                        public_result                                                { get { return this.GetTable<public_result>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_SmevTypes>                                                     public_SmevTypes                                             { get { return this.GetTable<public_SmevTypes>(); } }
+		public ITable<public_sv_releases>                                                   public_sv_releases                                           { get { return this.GetTable<public_sv_releases>(); } }
+		public ITable<public_sys_columns>                                                   public_sys_columns                                           { get { return this.GetTable<public_sys_columns>(); } }
+		public ITable<public_sys_entities>                                                  public_sys_entities                                          { get { return this.GetTable<public_sys_entities>(); } }
+		public ITable<public_sys_foreign_keys>                                              public_sys_foreign_keys                                      { get { return this.GetTable<public_sys_foreign_keys>(); } }
+		public ITable<public_total>                                                         public_total                                                 { get { return this.GetTable<public_total>(); } }
+		public ITable<public_total_bad>                                                     public_total_bad                                             { get { return this.GetTable<public_total_bad>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// [XMeta.DefaultProperty=f_org]
+		/// </summary>
+		public ITable<public_UserPolicyModel>                                               public_UserPolicyModel                                       { get { return this.GetTable<public_UserPolicyModel>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_XPObjectType>                                                  public_XPObjectType                                          { get { return this.GetTable<public_XPObjectType>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_XPWeakReference>                                               public_XPWeakReference                                       { get { return this.GetTable<public_XPWeakReference>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Логи чтения входящих запросов]
+		/// </summary>
+		public ITable<smev_smev_cd_get_request_logs>                                        smev_cd_get_request_logs                                     { get { return this.GetTable<smev_smev_cd_get_request_logs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Логи чтения ответов на запросы]
+		/// </summary>
+		public ITable<smev_smev_cd_get_response_logs>                                       smev_cd_get_response_logs                                    { get { return this.GetTable<smev_smev_cd_get_response_logs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Вложения входящих СМЭВ-запросов]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<smev_smev_cd_incoming_request_attachments>                            smev_cd_incoming_request_attachments                         { get { return this.GetTable<smev_smev_cd_incoming_request_attachments>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Вложения ответов на входящие СМЭВ-запросы]
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DefaultProperty=c_name]
+		/// 
+		/// 
+		/// 
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<smev_smev_cd_incoming_request_attachments_out>                        smev_cd_incoming_request_attachments_out                     { get { return this.GetTable<smev_smev_cd_incoming_request_attachments_out>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Ошибки обработки запросов]
+		/// </summary>
+		public ITable<smev_smev_cd_incoming_request_handle_errors>                          smev_cd_incoming_request_handle_errors                       { get { return this.GetTable<smev_smev_cd_incoming_request_handle_errors>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Входящие СМЭВ-запросы]
+		/// </summary>
+		public ITable<smev_smev_cd_incoming_requests>                                       smev_cd_incoming_requests                                    { get { return this.GetTable<smev_smev_cd_incoming_requests>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Вложения исходящих СМЭВ-запросов]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<smev_smev_cd_outgoing_request_attachments>                            smev_cd_outgoing_request_attachments                         { get { return this.GetTable<smev_smev_cd_outgoing_request_attachments>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Исходящие СМЭВ-запросы]
+		/// </summary>
+		public ITable<smev_smev_cd_outgoing_requests>                                       smev_cd_outgoing_requests                                    { get { return this.GetTable<smev_smev_cd_outgoing_requests>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Логи отправки исходящих запросов]
+		/// </summary>
+		public ITable<smev_smev_cd_send_request_logs>                                       smev_cd_send_request_logs                                    { get { return this.GetTable<smev_smev_cd_send_request_logs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Логи отправки ответов на запросы]
+		/// </summary>
+		public ITable<smev_smev_cd_send_response_logs>                                      smev_cd_send_response_logs                                   { get { return this.GetTable<smev_smev_cd_send_response_logs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Версии видов сведений]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<smev_smev_cs_inquiry_type_versions>                                   smev_cs_inquiry_type_versions                                { get { return this.GetTable<smev_smev_cs_inquiry_type_versions>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды сведений]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<smev_smev_cs_inquiry_types>                                           smev_cs_inquiry_types                                        { get { return this.GetTable<smev_smev_cs_inquiry_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы отправки СМЭВ-запросов]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<smev_smev_cs_send_statuses>                                           smev_cs_send_statuses                                        { get { return this.GetTable<smev_smev_cs_send_statuses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Версии СМЭВ]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<smev_smev_cs_smev_versions>                                           smev_cs_smev_versions                                        { get { return this.GetTable<smev_smev_cs_smev_versions>(); } }
+		public ITable<sozags_sozags_СОЗАГС_1>                                               sozags_СОЗАГС_1                                              { get { return this.GetTable<sozags_sozags_СОЗАГС_1>(); } }
+		public ITable<sozags_sozags_СОЗАГС_1В>                                              sozags_СОЗАГС_1В                                             { get { return this.GetTable<sozags_sozags_СОЗАГС_1В>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_calculation_living_communal_payment>               subsidy_cd_calculation_living_communal_payment               { get { return this.GetTable<subsidy_subsidy_cd_calculation_living_communal_payment>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Периоды расчётов]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_calculation_periods>                               subsidy_cd_calculation_periods                               { get { return this.GetTable<subsidy_subsidy_cd_calculation_periods>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь расчётов с ФЛ]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_calculation_persons>                               subsidy_cd_calculation_persons                               { get { return this.GetTable<subsidy_subsidy_cd_calculation_persons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёты]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.BaseType=common_cd_calculation_base]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_calculations>                                      subsidy_cd_calculations                                      { get { return this.GetTable<subsidy_subsidy_cd_calculations>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=История дела]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_case_history>                                      subsidy_cd_case_history                                      { get { return this.GetTable<subsidy_subsidy_cd_case_history>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.BaseType=common_cd_case_base]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_cases>                                             subsidy_cd_cases                                             { get { return this.GetTable<subsidy_subsidy_cd_cases>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Периоды ЖКУ]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_cases_ghku>                                        subsidy_cd_cases_ghku                                        { get { return this.GetTable<subsidy_subsidy_cd_cases_ghku>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Услуги]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_cases_ghku_periods>                                subsidy_cd_cases_ghku_periods                                { get { return this.GetTable<subsidy_subsidy_cd_cases_ghku_periods>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Организации, предоставляющие ЖКУ]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_cases_management_companies>                        subsidy_cd_cases_management_companies                        { get { return this.GetTable<subsidy_subsidy_cd_cases_management_companies>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Выгрузка данных]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_export_ghkh>                                       subsidy_cd_export_ghkh                                       { get { return this.GetTable<subsidy_subsidy_cd_export_ghkh>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Файлы выгрузки для ЖКХ]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_export_ghkh_docs>                                  subsidy_cd_export_ghkh_docs                                  { get { return this.GetTable<subsidy_subsidy_cd_export_ghkh_docs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Количество ЛПХ]
+		/// [XMeta.DefaultProperty=f_calculation_person]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_farm_counts>                                       subsidy_cd_farm_counts                                       { get { return this.GetTable<subsidy_subsidy_cd_farm_counts>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Выплатные документы]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_payment_docs>                                      subsidy_cd_payment_docs                                      { get { return this.GetTable<subsidy_subsidy_cd_payment_docs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Выплата]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_payments>                                          subsidy_cd_payments                                          { get { return this.GetTable<subsidy_subsidy_cd_payments>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Выплатной массив]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_payments_array>                                    subsidy_cd_payments_array                                    { get { return this.GetTable<subsidy_subsidy_cd_payments_array>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Опись]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_payments_array_inventory>                          subsidy_cd_payments_array_inventory                          { get { return this.GetTable<subsidy_subsidy_cd_payments_array_inventory>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Сводная опись]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_payments_array_inventory_main>                     subsidy_cd_payments_array_inventory_main                     { get { return this.GetTable<subsidy_subsidy_cd_payments_array_inventory_main>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_payments_array_inventory_main_docs>                subsidy_cd_payments_array_inventory_main_docs                { get { return this.GetTable<subsidy_subsidy_cd_payments_array_inventory_main_docs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=История выплат]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_payments_history>                                  subsidy_cd_payments_history                                  { get { return this.GetTable<subsidy_subsidy_cd_payments_history>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Доходы]
+		/// [XMeta.DefaultProperty=f_calculation_person]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_person_incomes>                                    subsidy_cd_person_incomes                                    { get { return this.GetTable<subsidy_subsidy_cd_person_incomes>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_progress>                                          subsidy_cd_progress                                          { get { return this.GetTable<subsidy_subsidy_cd_progress>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Перерасчёты]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_recalculations>                                    subsidy_cd_recalculations                                    { get { return this.GetTable<subsidy_subsidy_cd_recalculations>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Возвраты]
+		/// </summary>
+		public ITable<subsidy_subsidy_cd_refunds>                                           subsidy_cd_refunds                                           { get { return this.GetTable<subsidy_subsidy_cd_refunds>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы расчётов]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_calculation_statuses>                              subsidy_cs_calculation_statuses                              { get { return this.GetTable<subsidy_subsidy_cs_calculation_statuses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды расчёта]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_calculation_types>                                 subsidy_cs_calculation_types                                 { get { return this.GetTable<subsidy_subsidy_cs_calculation_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Причины прекращения]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_cancel_reasons>                                    subsidy_cs_cancel_reasons                                    { get { return this.GetTable<subsidy_subsidy_cs_cancel_reasons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы дел]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_case_statuses>                                     subsidy_cs_case_statuses                                     { get { return this.GetTable<subsidy_subsidy_cs_case_statuses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Организации-работодатели]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_companies>                                         subsidy_cs_companies                                         { get { return this.GetTable<subsidy_subsidy_cs_companies>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Причины постановки на контроль]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_control_reasons>                                   subsidy_cs_control_reasons                                   { get { return this.GetTable<subsidy_subsidy_cs_control_reasons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Пользователи жилых помещений]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_dwelling_users>                                    subsidy_cs_dwelling_users                                    { get { return this.GetTable<subsidy_subsidy_cs_dwelling_users>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Причины неоплаты]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_failure_payment_reasons>                           subsidy_cs_failure_payment_reasons                           { get { return this.GetTable<subsidy_subsidy_cs_failure_payment_reasons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Родственные отношения]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_family_relations>                                  subsidy_cs_family_relations                                  { get { return this.GetTable<subsidy_subsidy_cs_family_relations>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Нормативы доходов от ЛПХ]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_farm_normatives>                                   subsidy_cs_farm_normatives                                   { get { return this.GetTable<subsidy_subsidy_cs_farm_normatives>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы ЖКУ]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_ghku_types>                                        subsidy_cs_ghku_types                                        { get { return this.GetTable<subsidy_subsidy_cs_ghku_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды домовладений]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_house_ownership_types>                             subsidy_cs_house_ownership_types                             { get { return this.GetTable<subsidy_subsidy_cs_house_ownership_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Тип дома]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_house_types>                                       subsidy_cs_house_types                                       { get { return this.GetTable<subsidy_subsidy_cs_house_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды жилищного фонда]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_housing_stock_types>                               subsidy_cs_housing_stock_types                               { get { return this.GetTable<subsidy_subsidy_cs_housing_stock_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Периоды учёта доходов]
+		/// 
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_income_accounting>                                 subsidy_cs_income_accounting                                 { get { return this.GetTable<subsidy_subsidy_cs_income_accounting>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды доходов]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_income_types>                                      subsidy_cs_income_types                                      { get { return this.GetTable<subsidy_subsidy_cs_income_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Последнее расчётное число месяца]
+		/// [XMeta.DefaultProperty=n_day]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_last_calculation_day>                              subsidy_cs_last_calculation_day                              { get { return this.GetTable<subsidy_subsidy_cs_last_calculation_day>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Размеры прожиточных минимумов]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_living_minimums>                                   subsidy_cs_living_minimums                                   { get { return this.GetTable<subsidy_subsidy_cs_living_minimums>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Организации, предоставляющие ЖКУ]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_management_companies>                              subsidy_cs_management_companies                              { get { return this.GetTable<subsidy_subsidy_cs_management_companies>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Максимально допустимая доля расходов]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_maximum_share_costs>                               subsidy_cs_maximum_share_costs                               { get { return this.GetTable<subsidy_subsidy_cs_maximum_share_costs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Единицы измерения]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_measure_units>                                     subsidy_cs_measure_units                                     { get { return this.GetTable<subsidy_subsidy_cs_measure_units>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Нормативы и тарифы на ЖКУ]
+		/// [XMeta.DefaultProperty=f_type]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_normatives_and_tarifs_ghku>                        subsidy_cs_normatives_and_tarifs_ghku                        { get { return this.GetTable<subsidy_subsidy_cs_normatives_and_tarifs_ghku>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Способы выплаты]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_payment_methods>                                   subsidy_cs_payment_methods                                   { get { return this.GetTable<subsidy_subsidy_cs_payment_methods>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Способы выплаты]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_payment_types>                                     subsidy_cs_payment_types                                     { get { return this.GetTable<subsidy_subsidy_cs_payment_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы выплатных массивов]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_payments_array_statuses>                           subsidy_cs_payments_array_statuses                           { get { return this.GetTable<subsidy_subsidy_cs_payments_array_statuses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь фл с льготами]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_priveleges_persons>                                subsidy_cs_priveleges_persons                                { get { return this.GetTable<subsidy_subsidy_cs_priveleges_persons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Категории льгот]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_privileges>                                        subsidy_cs_privileges                                        { get { return this.GetTable<subsidy_subsidy_cs_privileges>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Причины перерасчёта]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_recalculation_reasons>                             subsidy_cs_recalculation_reasons                             { get { return this.GetTable<subsidy_subsidy_cs_recalculation_reasons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Статусы возврата]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_refund_statuses>                                   subsidy_cs_refund_statuses                                   { get { return this.GetTable<subsidy_subsidy_cs_refund_statuses>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Законные представители]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_representers>                                      subsidy_cs_representers                                      { get { return this.GetTable<subsidy_subsidy_cs_representers>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Республиканский стандарт нормативной площади жилого помещения]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_republic_area_standarts>                           subsidy_cs_republic_area_standarts                           { get { return this.GetTable<subsidy_subsidy_cs_republic_area_standarts>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Типы поселений]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_settlement_types>                                  subsidy_cs_settlement_types                                  { get { return this.GetTable<subsidy_subsidy_cs_settlement_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Социально-демографические группы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_socio_demographic_groups>                          subsidy_cs_socio_demographic_groups                          { get { return this.GetTable<subsidy_subsidy_cs_socio_demographic_groups>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Нормативы потребления твёрдых видов топлива]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_solid_fuel_normatives>                             subsidy_cs_solid_fuel_normatives                             { get { return this.GetTable<subsidy_subsidy_cs_solid_fuel_normatives>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Размеры ССЖКУ]
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_standart_payment_living_communal_service_averages> subsidy_cs_standart_payment_living_communal_service_averages { get { return this.GetTable<subsidy_subsidy_cs_standart_payment_living_communal_service_averages>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Вид субсидии]
+		/// [XMeta.DefaultProperty=c_name]
+		/// 
+		/// </summary>
+		public ITable<subsidy_subsidy_cs_subsidy_types>                                     subsidy_cs_subsidy_types                                     { get { return this.GetTable<subsidy_subsidy_cs_subsidy_types>(); } }
+		public ITable<subsidy_subsidy_sv_case_orgs>                                         subsidy_sv_case_orgs                                         { get { return this.GetTable<subsidy_subsidy_sv_case_orgs>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<subsidy_subsidy_test_calculation_periods>                             subsidy_test_calculation_periods                             { get { return this.GetTable<subsidy_subsidy_test_calculation_periods>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<subsidy_subsidy_test_liv_m>                                           subsidy_test_liv_m                                           { get { return this.GetTable<subsidy_subsidy_test_liv_m>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<subsidy_subsidy_test_value>                                           subsidy_test_value                                           { get { return this.GetTable<subsidy_subsidy_test_value>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<subsidy_subsidy_tmp_calculation_periods>                              subsidy_tmp_calculation_periods                              { get { return this.GetTable<subsidy_subsidy_tmp_calculation_periods>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<subsidy_subsidy_tmp_ssghku>                                           subsidy_tmp_ssghku                                           { get { return this.GetTable<subsidy_subsidy_tmp_ssghku>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёты]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_calculations>                                    veterans_cd_calculations                                     { get { return this.GetTable<veterans_veterans_cd_calculations>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение ежемесячной денежной компенсации, установленной частями 9, 10 и 13 статьи 3 Федерального закона « денежном довольствии военнослужащих и предоставлении им отдельных выплат», военнослужащим и гражданам, призванным на военные сборы, пенсионное обеспечение которых осуществляется Пенсионным фондом Российской Федерации, и членам их семей]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_army_payment>                               veterans_cd_case_army_payment                                { get { return this.GetTable<veterans_veterans_cd_case_army_payment>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Обеспечение проведение ремонта индивидуальных жилых домов, принадлежащих членам семей военнослужащих, сотрудников органов внутренних дел Российской Федерации, учреждений и органов уголовно-исполнительной системы, федеральной противопожарной службы Государственной противопожарной службы, органов по контролю за оборотом наркотических средств и психотропных веществ, таможенных органов Российской Федерации, потерявшим кормильца]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_army_repair>                                veterans_cd_case_army_repair                                 { get { return this.GetTable<veterans_veterans_cd_case_army_repair>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение и выплата дополнительной выплаты инвалидам боевых действий]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_battle>                                     veterans_cd_case_battle                                      { get { return this.GetTable<veterans_veterans_cd_case_battle>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Предоставление компенсации расходов на уплату взноса на капитальный ремонт общего имущества в многоквартирном доме отдельным категориям граждан в Чувашской Республике]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_capital_repair>                             veterans_cd_case_capital_repair                              { get { return this.GetTable<veterans_veterans_cd_case_capital_repair>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Предоставление гражданам, проживающим в Чувашской Республике, страдающим хронической почечной недостаточностью, денежной компенсации стоимости проезда к месту проведения процедуры программного гемодиализа и обратно]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_chron_travel>                               veterans_cd_case_chron_travel                                { get { return this.GetTable<veterans_veterans_cd_case_chron_travel>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Предоставление ежемесячной компенсации расходов на оплату жилого помещения, коммунальных услуг, в том числе на уплату взноса на капитальный ремонт общего имущества в многоквартирном доме отдельным категориям граждан, имеющих на это право в соответствии с законом Чувашской Республики «О социальной поддержке отдельных категорий граждан по оплате жилищно-коммунальных услуг»]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_communal>                                   veterans_cd_case_communal                                    { get { return this.GetTable<veterans_veterans_cd_case_communal>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение и выплата денежной компенсации части затрат на проезд отдельным категориям граждан в Чувашской Республике]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_comp_movement>                              veterans_cd_case_comp_movement                               { get { return this.GetTable<veterans_veterans_cd_case_comp_movement>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Ответ от поставщиков услуг связи]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_comp_res>                                   veterans_cd_case_comp_res                                    { get { return this.GetTable<veterans_veterans_cd_case_comp_res>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Предоставление ветеранам труда и ветеранам труда Чувашской Республики денежной компенсации в размере 50-процентной стоимости предоставления абоненту в пользование абонентской линии (проводной линии) сети местной телефонной связи]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_comp_trud>                                  veterans_cd_case_comp_trud                                   { get { return this.GetTable<veterans_veterans_cd_case_comp_trud>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Предоставление социального пособия на погребение умерших граждан, не подлежавших обязательному социальному страхованию на случай временной нетрудоспособности и в связи с материнством на день смерти и не являвшихся пенсионерами, а также в случае рождения мертвого ребенка по истечении 154 дней беременности, а также возмещение стоимости гарантированного перечня услуг по погребению специализированной службе по вопросам похоронного дела]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_death>                                      veterans_cd_case_death                                       { get { return this.GetTable<veterans_veterans_cd_case_death>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Осуществление ежегодной денежной выплаты лицам, награжденным нагрудным знаком «Почетный донор России»]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_donor>                                      veterans_cd_case_donor                                       { get { return this.GetTable<veterans_veterans_cd_case_donor>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение и выплата ежемесячных денежных выплат реабилитированным лицам и лицам, признанным пострадавшими от политических репрессий]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_edv_rehab>                                  veterans_cd_case_edv_rehab                                   { get { return this.GetTable<veterans_veterans_cd_case_edv_rehab>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение и выплата ежемесячных денежных выплат ветеранам труда, ветеранам труда Чувашской Республики, труженикам тыла военных лет]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_edv_trud>                                   veterans_cd_case_edv_trud                                    { get { return this.GetTable<veterans_veterans_cd_case_edv_trud>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение и выплата инвалидам (в том числе детям-инвалидам), имеющим транспортные средства в соответствии с медицинскими показаниями, или их законным представителям компенсации уплаченной ими страховой премии по договору]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_inv_transport>                              veterans_cd_case_inv_transport                               { get { return this.GetTable<veterans_veterans_cd_case_inv_transport>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Оказание бесплатной юридической помощи в казенном учреждении Чувашской Республики «Центр предоставления мер социальной поддержки» Министерства труда и социальной защиты Чувашской Республики]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_jur_help>                                   veterans_cd_case_jur_help                                    { get { return this.GetTable<veterans_veterans_cd_case_jur_help>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение денежной компенсации в возмещение вреда, причиненного здоровью граждан в связи с радиационным воздействием вследствие чернобыльской катастрофы и аварии в 1957 году на производственном объединении «Маяк»]
+		/// [XMeta.BaseType=veterans_cd_cases]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_rad_health>                                 veterans_cd_case_rad_health                                  { get { return this.GetTable<veterans_veterans_cd_case_rad_health>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Все назначения]
+		/// [XMeta.BaseType=common_cd_case_base]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+		/// </summary>
+		public ITable<veterans_veterans_cd_cases>                                           veterans_cd_cases                                            { get { return this.GetTable<veterans_veterans_cd_cases>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь дел с управляющими компаниями]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_cases_management_companies>                      veterans_cd_cases_management_companies                       { get { return this.GetTable<veterans_veterans_cd_cases_management_companies>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Умершие]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_death_persons>                                   veterans_cd_death_persons                                    { get { return this.GetTable<veterans_veterans_cd_death_persons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Состав семьи]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_family>                                          veterans_cd_family                                           { get { return this.GetTable<veterans_veterans_cd_family>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Награды ФЛ]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_person_awards>                                   veterans_cd_person_awards                                    { get { return this.GetTable<veterans_veterans_cd_person_awards>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Документы для категорий ФЛ]
+		/// </summary>
+		public ITable<veterans_veterans_cd_person_category_docs>                            veterans_cd_person_category_docs                             { get { return this.GetTable<veterans_veterans_cd_person_category_docs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Категории ФЛ]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_person_citizen_categories>                       veterans_cd_person_citizen_categories                        { get { return this.GetTable<veterans_veterans_cd_person_citizen_categories>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Файл запроса]
+		/// </summary>
+		public ITable<veterans_veterans_cd_req_res_files_jkh>                               veterans_cd_req_res_files_jkh                                { get { return this.GetTable<veterans_veterans_cd_req_res_files_jkh>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Обмен данными для назначения ФСД]
+		/// </summary>
+		public ITable<veterans_veterans_cd_request_response_files>                          veterans_cd_request_response_files                           { get { return this.GetTable<veterans_veterans_cd_request_response_files>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Факты осуществления трудовой деятельности]
+		/// </summary>
+		public ITable<veterans_veterans_cd_work_facts>                                      veterans_cd_work_facts                                       { get { return this.GetTable<veterans_veterans_cd_work_facts>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды наград]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_award_types>                                     veterans_cs_award_types                                      { get { return this.GetTable<veterans_veterans_cs_award_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Награды]
+		/// [XMeta.DefaultProperty=c_name_short]
+		/// </summary>
+		public ITable<veterans_veterans_cs_awards>                                          veterans_cs_awards                                           { get { return this.GetTable<veterans_veterans_cs_awards>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Категории граждан]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_citizen_categories>                              veterans_cs_citizen_categories                               { get { return this.GetTable<veterans_veterans_cs_citizen_categories>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Периоды выплаты]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_payment_periods>                                 veterans_cs_payment_periods                                  { get { return this.GetTable<veterans_veterans_cs_payment_periods>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Источники финансирования]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_payment_sources>                                 veterans_cs_payment_sources                                  { get { return this.GetTable<veterans_veterans_cs_payment_sources>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды причин]
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_reason_types>                                    veterans_cs_reason_types                                     { get { return this.GetTable<veterans_veterans_cs_reason_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Основания]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_reasons>                                         veterans_cs_reasons                                          { get { return this.GetTable<veterans_veterans_cs_reasons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Услуги-категории-награды]
+		/// </summary>
+		public ITable<veterans_veterans_cs_service_category_awards>                         veterans_cs_service_category_awards                          { get { return this.GetTable<veterans_veterans_cs_service_category_awards>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга-категория-НПА]
+		/// </summary>
+		public ITable<veterans_veterans_cs_service_category_base_docs>                      veterans_cs_service_category_base_docs                       { get { return this.GetTable<veterans_veterans_cs_service_category_base_docs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Категории-услуги]
+		/// </summary>
+		public ITable<veterans_veterans_cs_service_citizen_categories>                      veterans_cs_service_citizen_categories                       { get { return this.GetTable<veterans_veterans_cs_service_citizen_categories>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Размеры услуг-категорий]
+		/// </summary>
+		public ITable<veterans_veterans_cs_service_citizen_category_sizes>                  veterans_cs_service_citizen_category_sizes                   { get { return this.GetTable<veterans_veterans_cs_service_citizen_category_sizes>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Группа МСП]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_service_group>                                   veterans_cs_service_group                                    { get { return this.GetTable<veterans_veterans_cs_service_group>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=МСП]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_services>                                        veterans_cs_services                                         { get { return this.GetTable<veterans_veterans_cs_services>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь МСП с группой]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cs_services_groups>                                 veterans_cs_services_groups                                  { get { return this.GetTable<veterans_veterans_cs_services_groups>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь МСП с НПА]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cs_services_normative_docs>                         veterans_cs_services_normative_docs                          { get { return this.GetTable<veterans_veterans_cs_services_normative_docs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь МСП с организациями]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cs_services_orgs>                                   veterans_cs_services_orgs                                    { get { return this.GetTable<veterans_veterans_cs_services_orgs>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<veterans_veterans_import_awards>                                      veterans_import_awards                                       { get { return this.GetTable<veterans_veterans_import_awards>(); } }
+		public ITable<veterans_veterans_sv_veterans_comm_services>                          veterans_sv_veterans_comm_services                           { get { return this.GetTable<veterans_veterans_sv_veterans_comm_services>(); } }
+		public ITable<veterans_veterans_sv_veterans_communal>                               veterans_sv_veterans_communal                                { get { return this.GetTable<veterans_veterans_sv_veterans_communal>(); } }
+		public ITable<veterans_veterans_sv_veterans_for_request>                            veterans_sv_veterans_for_request                             { get { return this.GetTable<veterans_veterans_sv_veterans_for_request>(); } }
+		public ITable<zags_zags_ОКСМ>                                                       zags_ОКСМ                                                    { get { return this.GetTable<zags_zags_ОКСМ>(); } }
+		public ITable<zags_zags_СВЗАГС>                                                     zags_СВЗАГС                                                  { get { return this.GetTable<zags_zags_СВЗАГС>(); } }
+		public ITable<zags_zags_СДРАГС>                                                     zags_СДРАГС                                                  { get { return this.GetTable<zags_zags_СДРАГС>(); } }
+		public ITable<zags_zags_СПДУЛ>                                                      zags_СПДУЛ                                                   { get { return this.GetTable<zags_zags_СПДУЛ>(); } }
+		public ITable<zags_zags_СТАГС>                                                      zags_СТАГС                                                   { get { return this.GetTable<zags_zags_СТАГС>(); } }
 
 		partial void InitMappingSchema()
 		{
@@ -95,20 +1589,3406 @@ namespace SocialTargetHelpAPIServer.Models
 
 		partial void InitDataContext  ();
 		partial void InitMappingSchema();
+
+		#region Table Functions
+
+		#region calculate_periods
+
+		[Sql.TableFunction(Schema="subsidy", Name="calculate_periods")]
+		public ITable<calculate_periodsResult> calculate_periods(int? _dwelling_user, int? _district, int? _settlement, int? _house_ownership_type, bool? _capital_repair, int? _house_type, int? _count_location, int? n_count_location, int? n_all_members, decimal? n_percapita_income, decimal? maximum_share_cost, decimal? aggregate_family_income, decimal? living_communal_service_payment, NpgsqlDate? _begin, NpgsqlDate? _end, int? n_count_emp, int? n_count_pens, int? n_count_child, Guid? n_calc)
+		{
+			return this.GetTable<calculate_periodsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_dwelling_user,
+				_district,
+				_settlement,
+				_house_ownership_type,
+				_capital_repair,
+				_house_type,
+				_count_location,
+				n_count_location,
+				n_all_members,
+				n_percapita_income,
+				maximum_share_cost,
+				aggregate_family_income,
+				living_communal_service_payment,
+				_begin,
+				_end,
+				n_count_emp,
+				n_count_pens,
+				n_count_child,
+				n_calc);
+		}
+
+		public partial class calculate_periodsResult
+		{
+			public NpgsqlDate? d_begin                     { get; set; }
+			public NpgsqlDate? d_end                       { get; set; }
+			public decimal?    n_family_living_minimum     { get; set; }
+			public decimal?    n_adjustment_coeff          { get; set; }
+			public string      c_adjustement_coeff_formula { get; set; }
+			public decimal?    n_ssghku                    { get; set; }
+			public string      c_ssghku_formula            { get; set; }
+			public decimal?    n_subsidy                   { get; set; }
+			public string      c_subsidy_formula           { get; set; }
+			public decimal?    n_payout                    { get; set; }
+			public decimal?    n_calculated_subsidy        { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_setting_surcharge
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_setting_surcharge")]
+		public ITable<rpt_pension_setting_surchargeResult> rpt_pension_setting_surcharge(Guid? _calc)
+		{
+			return this.GetTable<rpt_pension_setting_surchargeResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_calc);
+		}
+
+		public partial class rpt_pension_setting_surchargeResult
+		{
+			public NpgsqlDate? _decision_commision { get; set; }
+			public string      _number_commision   { get; set; }
+			public string      _fio                { get; set; }
+			public string      _boss_post          { get; set; }
+			public string      _boss_fio           { get; set; }
+			public int?        _exp_percent        { get; set; }
+			public NpgsqlDate? _date_start         { get; set; }
+			public string      _work_condition1    { get; set; }
+			public string      _work_condition2    { get; set; }
+			public string      _work_condition3    { get; set; }
+			public string      _post               { get; set; }
+			public string      _company            { get; set; }
+			public string      _pension_type       { get; set; }
+			public decimal?    _summ               { get; set; }
+			public string      _month              { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_inventory_summary_list
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_inventory_summary_list")]
+		public ITable<rpt_payments_inventory_summary_listResult> rpt_payments_inventory_summary_list(string ids)
+		{
+			return this.GetTable<rpt_payments_inventory_summary_listResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				ids);
+		}
+
+		public partial class rpt_payments_inventory_summary_listResult
+		{
+			public int?     num            { get; set; }
+			public string   bank_filial    { get; set; }
+			public string   payment_method { get; set; }
+			public int?     count          { get; set; }
+			public decimal? sum            { get; set; }
+			public int?     total_count    { get; set; }
+			public decimal? total_sum      { get; set; }
+			public string   _type          { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_list_by_filials_payments
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_list_by_filials_payments")]
+		public ITable<rpt_payments_list_by_filials_paymentsResult> rpt_payments_list_by_filials_payments(int? array_id, string pension_type)
+		{
+			return this.GetTable<rpt_payments_list_by_filials_paymentsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				array_id,
+				pension_type);
+		}
+
+		public partial class rpt_payments_list_by_filials_paymentsResult
+		{
+			public int?     id               { get; set; }
+			public string   case_number      { get; set; }
+			public string   pers_data        { get; set; }
+			public string   address_plain    { get; set; }
+			public string   checking_account { get; set; }
+			public decimal? payment_sum      { get; set; }
+			public string   period           { get; set; }
+			public bool?    enrollment_mark  { get; set; }
+		}
+
+		#endregion
+
+		#region get_address_object_tree
+
+		[Sql.TableFunction(Schema="fias", Name="get_address_object_tree")]
+		public ITable<get_address_object_treeResult> get_address_object_tree(Guid? a_aoguid, short? a_currstatus, bool? a_include_siblings)
+		{
+			return this.GetTable<get_address_object_treeResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				a_aoguid,
+				a_currstatus,
+				a_include_siblings);
+		}
+
+		public partial class get_address_object_treeResult
+		{
+			public Guid?  aoguid     { get; set; }
+			public Guid?  parent     { get; set; }
+			public short? currstatus { get; set; }
+			public bool?  isalive    { get; set; }
+			public short? aolevel    { get; set; }
+			public string shortname  { get; set; }
+			public string formalname { get; set; }
+			public string postalcode { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_subsidy_oszn_cases_denied
+
+		[Sql.TableFunction(Schema="public", Name="rpt_subsidy_oszn_cases_denied")]
+		public ITable<rpt_subsidy_oszn_cases_deniedResult> rpt_subsidy_oszn_cases_denied(int? org, NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_subsidy_oszn_cases_deniedResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org,
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_subsidy_oszn_cases_deniedResult
+		{
+			public int?        _number_row  { get; set; }
+			public string      _fio         { get; set; }
+			public string      _address     { get; set; }
+			public NpgsqlDate? _date        { get; set; }
+			public string      _case_number { get; set; }
+			public int?        _total       { get; set; }
+			public int?        _total_good  { get; set; }
+			public string      _oszn        { get; set; }
+			public int?        _total_bad   { get; set; }
+		}
+
+		#endregion
+
+		#region get_msp_by_snils
+
+		[Sql.TableFunction(Schema="public", Name="get_msp_by_snils")]
+		public ITable<get_msp_by_snilsResult> get_msp_by_snils(object snils_array)
+		{
+			return this.GetTable<get_msp_by_snilsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				snils_array);
+		}
+
+		public partial class get_msp_by_snilsResult
+		{
+			public string snils      { get; set; }
+			public Array  msp_string { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_decision_long_service_commision
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_decision_long_service_commision")]
+		public ITable<rpt_pension_decision_long_service_commisionResult> rpt_pension_decision_long_service_commision(Guid? _calc)
+		{
+			return this.GetTable<rpt_pension_decision_long_service_commisionResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_calc);
+		}
+
+		public partial class rpt_pension_decision_long_service_commisionResult
+		{
+			public NpgsqlDate? _decision_commision { get; set; }
+			public string      _number_commision   { get; set; }
+			public NpgsqlDate? _date_start         { get; set; }
+			public string      _fio                { get; set; }
+			public string      _post               { get; set; }
+			public int?        _exp_year           { get; set; }
+			public int?        _exp_percent        { get; set; }
+			public string      _boss_post          { get; set; }
+			public string      _boss_fio           { get; set; }
+			public string      _month              { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_spravka_poor_family_appeal
+
+		[Sql.TableFunction(Schema="public", Name="rpt_spravka_poor_family_appeal")]
+		public ITable<rpt_spravka_poor_family_appealResult> rpt_spravka_poor_family_appeal(int? person)
+		{
+			return this.GetTable<rpt_spravka_poor_family_appealResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				person);
+		}
+
+		public partial class rpt_spravka_poor_family_appealResult
+		{
+			public string      _address        { get; set; }
+			public string      _number         { get; set; }
+			public NpgsqlDate? _start          { get; set; }
+			public NpgsqlDate? _end            { get; set; }
+			public decimal?    _living_min     { get; set; }
+			public decimal?    _average_income { get; set; }
+			public string      _boss_post      { get; set; }
+			public string      _org            { get; set; }
+			public string      _boss_fio       { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_unpaid_msp_pb
+
+		[Sql.TableFunction(Schema="public", Name="rpt_unpaid_msp_pb")]
+		public ITable<rpt_unpaid_msp_pbResult> rpt_unpaid_msp_pb(int? month, int? year)
+		{
+			return this.GetTable<rpt_unpaid_msp_pbResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				month,
+				year);
+		}
+
+		public partial class rpt_unpaid_msp_pbResult
+		{
+			public string   org           { get; set; }
+			public string   unpaid_reason { get; set; }
+			public int?     p_count       { get; set; }
+			public decimal? summ          { get; set; }
+			public decimal? unpaid_parth  { get; set; }
+		}
+
+		#endregion
+
+		#region find_fias_addresses
+
+		[Sql.TableFunction(Schema="subsidy", Name="find_fias_addresses")]
+		public ITable<find_fias_addressesResult0> find_fias_addresses0(string city)
+		{
+			return this.GetTable<find_fias_addressesResult0>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				city);
+		}
+
+		public partial class find_fias_addressesResult0
+		{
+			public Guid?    id                { get; set; }
+			public string   old_address       { get; set; }
+			public string   fias_address_text { get; set; }
+			public Guid?    fias_code         { get; set; }
+			public decimal? sim               { get; set; }
+			public int?     rang              { get; set; }
+		}
+
+		#endregion
+
+		#region pension_expirience_repl
+
+		[Sql.TableFunction(Schema="pension", Name="pension_expirience_repl")]
+		public ITable<pension_expirience_replResult> pension_expirience_repl(Guid? _case)
+		{
+			return this.GetTable<pension_expirience_replResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_case);
+		}
+
+		public partial class pension_expirience_replResult
+		{
+			public NpgsqlDate? d_date_start   { get; set; }
+			public NpgsqlDate? d_date_enddate { get; set; }
+			public int?        n_coefficient  { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_inventory_main_post
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_inventory_main_post")]
+		public ITable<rpt_payments_inventory_main_postResult> rpt_payments_inventory_main_post(Guid? inventory_id)
+		{
+			return this.GetTable<rpt_payments_inventory_main_postResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				inventory_id);
+		}
+
+		public partial class rpt_payments_inventory_main_postResult
+		{
+			public int?     _n_pp        { get; set; }
+			public string   _district    { get; set; }
+			public decimal? _sum         { get; set; }
+			public decimal? _percent     { get; set; }
+			public string   otd          { get; set; }
+			public string   payment_type { get; set; }
+			public int?     org          { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_poor_count_3
+
+		[Sql.TableFunction(Schema="public", Name="rpt_poor_count_3")]
+		public ITable<rpt_poor_count_3Result> rpt_poor_count_3(NpgsqlDate? _date)
+		{
+			return this.GetTable<rpt_poor_count_3Result>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_date);
+		}
+
+		public partial class rpt_poor_count_3Result
+		{
+			public int?     number_pp       { get; set; }
+			public string   district        { get; set; }
+			public int?     count_family    { get; set; }
+			public int?     count_person    { get; set; }
+			public decimal? average_income  { get; set; }
+			public decimal? average_liv_min { get; set; }
+			public decimal? difference      { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_spravka
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_spravka")]
+		public ITable<rpt_pension_spravkaResult> rpt_pension_spravka(Guid? _case)
+		{
+			return this.GetTable<rpt_pension_spravkaResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_case);
+		}
+
+		public partial class rpt_pension_spravkaResult
+		{
+			public string      fio              { get; set; }
+			public NpgsqlDate? birthday         { get; set; }
+			public string      address          { get; set; }
+			public string      snils            { get; set; }
+			public NpgsqlDate? date_appointment { get; set; }
+			public string      boss_post        { get; set; }
+			public string      boss_fio         { get; set; }
+			public string      glavbuch_fio     { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_spravka_poor_family
+
+		[Sql.TableFunction(Schema="public", Name="rpt_spravka_poor_family")]
+		public ITable<rpt_spravka_poor_familyResult> rpt_spravka_poor_family(int? person)
+		{
+			return this.GetTable<rpt_spravka_poor_familyResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				person);
+		}
+
+		public partial class rpt_spravka_poor_familyResult
+		{
+			public string _person { get; set; }
+		}
+
+		#endregion
+
+		#region generate_paymentdocs
+
+		[Sql.TableFunction(Schema="pension", Name="generate_paymentdocs")]
+		public ITable<generate_paymentdocsResult> generate_paymentdocs(int? bank_filial, int? org, int? payment_type, string subsystem)
+		{
+			return this.GetTable<generate_paymentdocsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				bank_filial,
+				org,
+				payment_type,
+				subsystem);
+		}
+
+		public partial class generate_paymentdocsResult
+		{
+			public string _number           { get; set; }
+			public int?   _payment_array_id { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_oszn_information
+
+		[Sql.TableFunction(Schema="public", Name="rpt_oszn_information")]
+		public ITable<rpt_oszn_informationResult> rpt_oszn_information(int? _org, NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_oszn_informationResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_org,
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_oszn_informationResult
+		{
+			public string _n_pp     { get; set; }
+			public string _title    { get; set; }
+			public string _ed_izm   { get; set; }
+			public string _value    { get; set; }
+			public string _org_name { get; set; }
+		}
+
+		#endregion
+
+		#region find_fias_addresses
+
+		[Sql.TableFunction(Schema="pension", Name="find_fias_addresses")]
+		public ITable<find_fias_addressesResult1> find_fias_addresses1(string city)
+		{
+			return this.GetTable<find_fias_addressesResult1>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				city);
+		}
+
+		public partial class find_fias_addressesResult1
+		{
+			public Guid?    id                { get; set; }
+			public string   old_address       { get; set; }
+			public string   fias_address_text { get; set; }
+			public Guid?    fias_code         { get; set; }
+			public decimal? sim               { get; set; }
+			public int?     rang              { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_count_assiginment_subsidy_ghku
+
+		[Sql.TableFunction(Schema="public", Name="rpt_count_assiginment_subsidy_ghku")]
+		public ITable<rpt_count_assiginment_subsidy_ghkuResult> rpt_count_assiginment_subsidy_ghku(DateTime? d_datebegin, DateTime? d_dateend)
+		{
+			return this.GetTable<rpt_count_assiginment_subsidy_ghkuResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				d_datebegin,
+				d_dateend);
+		}
+
+		public partial class rpt_count_assiginment_subsidy_ghkuResult
+		{
+			public string   c_title { get; set; }
+			public decimal? n_avg   { get; set; }
+			public decimal? n_max   { get; set; }
+			public decimal? n_min   { get; set; }
+			public int?     n_count { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_subsidy_oszn_reestr_payments
+
+		[Sql.TableFunction(Schema="public", Name="rpt_subsidy_oszn_reestr_payments")]
+		public ITable<rpt_subsidy_oszn_reestr_paymentsResult> rpt_subsidy_oszn_reestr_payments(int? org, NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_subsidy_oszn_reestr_paymentsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org,
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_subsidy_oszn_reestr_paymentsResult
+		{
+			public int?        _number_row { get; set; }
+			public string      _fio        { get; set; }
+			public string      _address    { get; set; }
+			public decimal?    _payment    { get; set; }
+			public decimal?    _to_pay     { get; set; }
+			public string      _oszn       { get; set; }
+			public NpgsqlDate? _d_start    { get; set; }
+			public NpgsqlDate? _d_end      { get; set; }
+			public int?        total       { get; set; }
+			public int?        total_good  { get; set; }
+			public int?        total_bad   { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_array_main_inventory
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_array_main_inventory")]
+		public ITable<rpt_payments_array_main_inventoryResult> rpt_payments_array_main_inventory(Guid? main_inventory_id)
+		{
+			return this.GetTable<rpt_payments_array_main_inventoryResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				main_inventory_id);
+		}
+
+		public partial class rpt_payments_array_main_inventoryResult
+		{
+			public string   org_name  { get; set; }
+			public string   bank_name { get; set; }
+			public int?     count_org { get; set; }
+			public decimal? summ_org  { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_poor_anketa_second
+
+		[Sql.TableFunction(Schema="public", Name="rpt_poor_anketa_second")]
+		public ITable<rpt_poor_anketa_secondResult> rpt_poor_anketa_second(Guid? sc)
+		{
+			return this.GetTable<rpt_poor_anketa_secondResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				sc);
+		}
+
+		public partial class rpt_poor_anketa_secondResult
+		{
+			public string   c_fio         { get; set; }
+			public string   c_income_type { get; set; }
+			public decimal? first_month   { get; set; }
+			public decimal? second_month  { get; set; }
+			public decimal? third_month   { get; set; }
+			public decimal? total_income  { get; set; }
+		}
+
+		#endregion
+
+		#region pension_rpt_calculation_decision_surcharge
+
+		[Sql.TableFunction(Schema="public", Name="pension_rpt_calculation_decision_surcharge")]
+		public ITable<pension_rpt_calculation_decision_surchargeResult> pension_rpt_calculation_decision_surcharge(Guid? n_calc)
+		{
+			return this.GetTable<pension_rpt_calculation_decision_surchargeResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				n_calc);
+		}
+
+		public partial class pension_rpt_calculation_decision_surchargeResult
+		{
+			public NpgsqlDate? case_date  { get; set; }
+			public NpgsqlDate? calc_date  { get; set; }
+			public string      fio        { get; set; }
+			public string      post       { get; set; }
+			public decimal?    summ       { get; set; }
+			public int?        experience { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_array_inventory
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_array_inventory")]
+		public ITable<rpt_payments_array_inventoryResult> rpt_payments_array_inventory(int? inventory_id)
+		{
+			return this.GetTable<rpt_payments_array_inventoryResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				inventory_id);
+		}
+
+		public partial class rpt_payments_array_inventoryResult
+		{
+			public string      org         { get; set; }
+			public string      bank        { get; set; }
+			public string      bank_filial { get; set; }
+			public int?        count       { get; set; }
+			public decimal?    summ        { get; set; }
+			public string      _month      { get; set; }
+			public int?        _year       { get; set; }
+			public NpgsqlDate? now         { get; set; }
+			public int?        _number     { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_payments_history_persinfo
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_payments_history_persinfo")]
+		public ITable<rpt_pension_payments_history_persinfoResult> rpt_pension_payments_history_persinfo(Guid? _case)
+		{
+			return this.GetTable<rpt_pension_payments_history_persinfoResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_case);
+		}
+
+		public partial class rpt_pension_payments_history_persinfoResult
+		{
+			public string      _fio          { get; set; }
+			public NpgsqlDate? _birthdate    { get; set; }
+			public string      _address      { get; set; }
+			public NpgsqlDate? _appointment  { get; set; }
+			public string      _boss_post    { get; set; }
+			public string      _boss_fio     { get; set; }
+			public string      _glavbuch_fio { get; set; }
+			public string      _number       { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_subsidy_oszn_settlement_recipient
+
+		[Sql.TableFunction(Schema="public", Name="rpt_subsidy_oszn_settlement_recipient")]
+		public ITable<rpt_subsidy_oszn_settlement_recipientResult> rpt_subsidy_oszn_settlement_recipient(int? org, NpgsqlDate? period)
+		{
+			return this.GetTable<rpt_subsidy_oszn_settlement_recipientResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org,
+				period);
+		}
+
+		public partial class rpt_subsidy_oszn_settlement_recipientResult
+		{
+			public int?     _number_row { get; set; }
+			public string   _settlement { get; set; }
+			public string   _location   { get; set; }
+			public int?     _count      { get; set; }
+			public decimal? _summ       { get; set; }
+			public string   _comment    { get; set; }
+			public string   _oszn       { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_paid_msp_pb
+
+		[Sql.TableFunction(Schema="public", Name="rpt_paid_msp_pb")]
+		public ITable<rpt_paid_msp_pbResult> rpt_paid_msp_pb(int? month, int? year)
+		{
+			return this.GetTable<rpt_paid_msp_pbResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				month,
+				year);
+		}
+
+		public partial class rpt_paid_msp_pbResult
+		{
+			public string   kbk_code { get; set; }
+			public string   kbk_name { get; set; }
+			public string   org      { get; set; }
+			public int?     count_d  { get; set; }
+			public decimal? summ_d   { get; set; }
+			public int?     count_n  { get; set; }
+			public decimal? summ_n   { get; set; }
+			public int?     count    { get; set; }
+			public decimal? summ     { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_needed_org_info
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_needed_org_info")]
+		public ITable<rpt_payments_needed_org_infoResult> rpt_payments_needed_org_info(int? org, string ids)
+		{
+			return this.GetTable<rpt_payments_needed_org_infoResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org,
+				ids);
+		}
+
+		public partial class rpt_payments_needed_org_infoResult
+		{
+			public NpgsqlDate? _date        { get; set; }
+			public string      _month       { get; set; }
+			public string      _org_name    { get; set; }
+			public string      _boss_post   { get; set; }
+			public string      _boss_name   { get; set; }
+			public int?        _total_count { get; set; }
+			public decimal?    _total_summ  { get; set; }
+		}
+
+		#endregion
+
+		#region create_payments
+
+		[Sql.TableFunction(Schema="pension", Name="create_payments")]
+		public ITable<create_paymentsResult> create_payments(int? _org)
+		{
+			return this.GetTable<create_paymentsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_org);
+		}
+
+		public partial class create_paymentsResult
+		{
+			public string message { get; set; }
+			public string ids     { get; set; }
+			public string info    { get; set; }
+		}
+
+		#endregion
+
+		#region pension_rpt_calculation_decision_long_service
+
+		[Sql.TableFunction(Schema="public", Name="pension_rpt_calculation_decision_long_service")]
+		public ITable<pension_rpt_calculation_decision_long_serviceResult> pension_rpt_calculation_decision_long_service(Guid? n_calc)
+		{
+			return this.GetTable<pension_rpt_calculation_decision_long_serviceResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				n_calc);
+		}
+
+		public partial class pension_rpt_calculation_decision_long_serviceResult
+		{
+			public NpgsqlDate? case_date   { get; set; }
+			public NpgsqlDate? calc_date   { get; set; }
+			public string      fio         { get; set; }
+			public string      post        { get; set; }
+			public string      workplace   { get; set; }
+			public decimal?    summ        { get; set; }
+			public int?        percent     { get; set; }
+			public NpgsqlDate? retire_date { get; set; }
+			public int?        exp         { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_list_by_filials
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_list_by_filials")]
+		public ITable<rpt_payments_list_by_filialsResult> rpt_payments_list_by_filials(int? array_id)
+		{
+			return this.GetTable<rpt_payments_list_by_filialsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				array_id);
+		}
+
+		public partial class rpt_payments_list_by_filialsResult
+		{
+			public string      name_org        { get; set; }
+			public string      number_array    { get; set; }
+			public string      list_msz        { get; set; }
+			public int?        t_month         { get; set; }
+			public int?        t_year          { get; set; }
+			public string      name_bank       { get; set; }
+			public string      name_filial     { get; set; }
+			public NpgsqlDate? date_generate   { get; set; }
+			public int?        count_recipient { get; set; }
+			public decimal?    additional_sum  { get; set; }
+			public decimal?    payment_sum     { get; set; }
+			public string      fio_boss        { get; set; }
+			public string      fio_glavbuh     { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_poor_count_4
+
+		[Sql.TableFunction(Schema="public", Name="rpt_poor_count_4")]
+		public ITable<rpt_poor_count_4Result> rpt_poor_count_4(NpgsqlDate? _date)
+		{
+			return this.GetTable<rpt_poor_count_4Result>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_date);
+		}
+
+		public partial class rpt_poor_count_4Result
+		{
+			public int?     number_pp { get; set; }
+			public string   district  { get; set; }
+			public int?     col_4     { get; set; }
+			public int?     col_5     { get; set; }
+			public int?     col_6     { get; set; }
+			public int?     col_7     { get; set; }
+			public int?     col_8     { get; set; }
+			public int?     col_9     { get; set; }
+			public int?     col_10    { get; set; }
+			public decimal? col_11    { get; set; }
+			public int?     col_12    { get; set; }
+			public int?     col_13    { get; set; }
+			public int?     col_14    { get; set; }
+			public decimal? col_15    { get; set; }
+			public int?     col_16    { get; set; }
+			public decimal? col_17    { get; set; }
+			public int?     col_18    { get; set; }
+			public int?     col_19    { get; set; }
+			public int?     col_20    { get; set; }
+			public int?     col_21    { get; set; }
+			public int?     col_22    { get; set; }
+			public int?     col_23    { get; set; }
+			public int?     col_24    { get; set; }
+			public int?     col_25    { get; set; }
+			public int?     col_26    { get; set; }
+			public int?     col_27    { get; set; }
+			public int?     col_28    { get; set; }
+			public int?     col_29    { get; set; }
+			public int?     col_30    { get; set; }
+			public int?     col_31    { get; set; }
+			public int?     col_32    { get; set; }
+			public int?     col_33    { get; set; }
+			public int?     col_34    { get; set; }
+			public int?     col_35    { get; set; }
+			public int?     col_36    { get; set; }
+			public int?     col_37    { get; set; }
+			public int?     col_38    { get; set; }
+			public int?     col_39    { get; set; }
+			public int?     col_40    { get; set; }
+			public int?     col_41    { get; set; }
+			public int?     col_42    { get; set; }
+			public int?     col_43    { get; set; }
+			public int?     col_44    { get; set; }
+			public int?     col_45    { get; set; }
+			public int?     col_46    { get; set; }
+			public int?     col_47    { get; set; }
+			public int?     col_48    { get; set; }
+			public int?     col_49    { get; set; }
+			public int?     col_50    { get; set; }
+			public int?     col_51    { get; set; }
+			public int?     col_52    { get; set; }
+			public int?     col_53    { get; set; }
+			public int?     col_54    { get; set; }
+			public int?     col_55    { get; set; }
+			public int?     col_56    { get; set; }
+			public int?     col_57    { get; set; }
+			public int?     col_58    { get; set; }
+			public int?     col_59    { get; set; }
+			public int?     col_60    { get; set; }
+			public int?     col_61    { get; set; }
+		}
+
+		#endregion
+
+		#region get_msp
+
+		[Sql.TableFunction(Schema="public", Name="get_msp")]
+		public ITable<get_mspResult> get_msp(string _c_snils, NpgsqlDate? _d_datebegin, NpgsqlDate? _d_dateend)
+		{
+			return this.GetTable<get_mspResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_c_snils,
+				_d_datebegin,
+				_d_dateend);
+		}
+
+		public partial class get_mspResult
+		{
+			public NpgsqlDate? d_date_calculation { get; set; }
+			public NpgsqlDate? d_begin            { get; set; }
+			public NpgsqlDate? d_end              { get; set; }
+			public string      c_title            { get; set; }
+			public string      c_name             { get; set; }
+			public decimal?    n_payment_sum      { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_payments_history1
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_payments_history1")]
+		public ITable<rpt_pension_payments_history1Result> rpt_pension_payments_history1(Guid? _case, NpgsqlDate? _start, NpgsqlDate? _finish)
+		{
+			return this.GetTable<rpt_pension_payments_history1Result>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_case,
+				_start,
+				_finish);
+		}
+
+		public partial class rpt_pension_payments_history1Result
+		{
+			public NpgsqlDate? _begin      { get; set; }
+			public NpgsqlDate? _end        { get; set; }
+			public decimal?    _summ       { get; set; }
+			public decimal?    _total_summ { get; set; }
+			public string      _sum_str    { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_summary_inventory_payments
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_summary_inventory_payments")]
+		public ITable<rpt_payments_summary_inventory_paymentsResult> rpt_payments_summary_inventory_payments(int? _bank, int? _month, int? _year)
+		{
+			return this.GetTable<rpt_payments_summary_inventory_paymentsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_bank,
+				_month,
+				_year);
+		}
+
+		public partial class rpt_payments_summary_inventory_paymentsResult
+		{
+			public int?     id              { get; set; }
+			public string   name_filial     { get; set; }
+			public string   payment_method  { get; set; }
+			public int?     count_recipient { get; set; }
+			public decimal? payment_sum     { get; set; }
+		}
+
+		#endregion
+
+		#region get_latest_calculations
+
+		[Sql.TableFunction(Schema="pension", Name="get_latest_calculations")]
+		public ITable<get_latest_calculationsResult> get_latest_calculations()
+		{
+			return this.GetTable<get_latest_calculationsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod());
+		}
+
+		public partial class get_latest_calculationsResult
+		{
+			public string txt { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_unpaid_msp
+
+		[Sql.TableFunction(Schema="public", Name="rpt_unpaid_msp")]
+		public ITable<rpt_unpaid_mspResult> rpt_unpaid_msp(int? month, int? year)
+		{
+			return this.GetTable<rpt_unpaid_mspResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				month,
+				year);
+		}
+
+		public partial class rpt_unpaid_mspResult
+		{
+			public string   org           { get; set; }
+			public string   unpaid_reason { get; set; }
+			public int?     p_count       { get; set; }
+			public decimal? summ          { get; set; }
+			public decimal? unpaid_parth  { get; set; }
+		}
+
+		#endregion
+
+		#region dblink_get_notify
+
+		[Sql.TableFunction(Schema="public", Name="dblink_get_notify")]
+		public ITable<dblink_get_notifyResult> dblink_get_notify(string conname)
+		{
+			return this.GetTable<dblink_get_notifyResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				conname);
+		}
+
+		public partial class dblink_get_notifyResult
+		{
+			public string notify_name { get; set; }
+			public int?   be_pid      { get; set; }
+			public string extra       { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_ku_information_payment
+
+		[Sql.TableFunction(Schema="public", Name="rpt_ku_information_payment")]
+		public ITable<rpt_ku_information_paymentResult> rpt_ku_information_payment(NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_ku_information_paymentResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_ku_information_paymentResult
+		{
+			public string dist_name { get; set; }
+			public string r5        { get; set; }
+			public string r6        { get; set; }
+			public string r7        { get; set; }
+			public string r8        { get; set; }
+			public string r9        { get; set; }
+			public string r10       { get; set; }
+			public string r11       { get; set; }
+			public string r12       { get; set; }
+			public string r13       { get; set; }
+			public string r14       { get; set; }
+			public string r15       { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_paid_msp_rf
+
+		[Sql.TableFunction(Schema="public", Name="rpt_paid_msp_rf")]
+		public ITable<rpt_paid_msp_rfResult> rpt_paid_msp_rf(int? month, int? year)
+		{
+			return this.GetTable<rpt_paid_msp_rfResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				month,
+				year);
+		}
+
+		public partial class rpt_paid_msp_rfResult
+		{
+			public string   kbk_code { get; set; }
+			public string   kbk_name { get; set; }
+			public string   org      { get; set; }
+			public int?     count_d  { get; set; }
+			public decimal? summ_d   { get; set; }
+			public int?     count_n  { get; set; }
+			public decimal? summ_n   { get; set; }
+			public int?     count    { get; set; }
+			public decimal? summ     { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_ku_information
+
+		[Sql.TableFunction(Schema="public", Name="rpt_ku_information")]
+		public ITable<rpt_ku_informationResult> rpt_ku_information(NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_ku_informationResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_ku_informationResult
+		{
+			public string dist_name { get; set; }
+			public string r1        { get; set; }
+			public string r2        { get; set; }
+			public string r3        { get; set; }
+			public string r4        { get; set; }
+			public string r5        { get; set; }
+			public string r6        { get; set; }
+			public string r7        { get; set; }
+			public string r8        { get; set; }
+			public string r9        { get; set; }
+			public string r10       { get; set; }
+			public string r11       { get; set; }
+			public string r12       { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_poor_anketa_first
+
+		[Sql.TableFunction(Schema="public", Name="rpt_poor_anketa_first")]
+		public ITable<rpt_poor_anketa_firstResult> rpt_poor_anketa_first(Guid? sc)
+		{
+			return this.GetTable<rpt_poor_anketa_firstResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				sc);
+		}
+
+		public partial class rpt_poor_anketa_firstResult
+		{
+			public string      c_fio             { get; set; }
+			public NpgsqlDate? d_birthday        { get; set; }
+			public string      c_family_relation { get; set; }
+			public string      c_avocation       { get; set; }
+			public string      c_work_place      { get; set; }
+			public string      c_education       { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_poor_appeal_protocol_family
+
+		[Sql.TableFunction(Schema="public", Name="rpt_poor_appeal_protocol_family")]
+		public ITable<rpt_poor_appeal_protocol_familyResult> rpt_poor_appeal_protocol_family(Guid? appeal)
+		{
+			return this.GetTable<rpt_poor_appeal_protocol_familyResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				appeal);
+		}
+
+		public partial class rpt_poor_appeal_protocol_familyResult
+		{
+			public int?        _number     { get; set; }
+			public string      _relation   { get; set; }
+			public string      _fio        { get; set; }
+			public NpgsqlDate? _birthday   { get; set; }
+			public decimal?    _income     { get; set; }
+			public string      _sdg        { get; set; }
+			public decimal?    _liv_min    { get; set; }
+			public string      _priveleges { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_export_calculations
+
+		[Sql.TableFunction(Schema="public", Name="rpt_export_calculations")]
+		public ITable<rpt_export_calculationsResult> rpt_export_calculations(int? org)
+		{
+			return this.GetTable<rpt_export_calculationsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org);
+		}
+
+		public partial class rpt_export_calculationsResult
+		{
+			public string      _id           { get; set; }
+			public NpgsqlDate? _period       { get; set; }
+			public NpgsqlDate? _date         { get; set; }
+			public int?        _count_family { get; set; }
+			public string      _liv_payment  { get; set; }
+			public string      _subsidy      { get; set; }
+			public string      _recalc       { get; set; }
+			public string      _payment      { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_inventory_main
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_inventory_main")]
+		public ITable<rpt_payments_inventory_mainResult> rpt_payments_inventory_main(Guid? inventory_id)
+		{
+			return this.GetTable<rpt_payments_inventory_mainResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				inventory_id);
+		}
+
+		public partial class rpt_payments_inventory_mainResult
+		{
+			public int?     n_pp          { get; set; }
+			public string   org           { get; set; }
+			public string   bank          { get; set; }
+			public int?     count         { get; set; }
+			public decimal? summ          { get; set; }
+			public decimal? comission     { get; set; }
+			public string   file_name     { get; set; }
+			public string   payment_type  { get; set; }
+			public string   resident_type { get; set; }
+			public int?     prefix_number { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_definition_surcharge
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_definition_surcharge")]
+		public ITable<rpt_pension_definition_surchargeResult> rpt_pension_definition_surcharge(Guid? _calc, string _status)
+		{
+			return this.GetTable<rpt_pension_definition_surchargeResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_calc,
+				_status);
+		}
+
+		public partial class rpt_pension_definition_surchargeResult
+		{
+			public NpgsqlDate? _decision_ministry  { get; set; }
+			public string      _number_ministry    { get; set; }
+			public string      _fio                { get; set; }
+			public NpgsqlDate? _decision_commision { get; set; }
+			public string      _number_commision   { get; set; }
+			public string      _payment_type       { get; set; }
+			public string      _boss_post          { get; set; }
+			public string      _boss_fio           { get; set; }
+			public string      _cancel_reason      { get; set; }
+			public NpgsqlDate? _cancel_date        { get; set; }
+			public string      _pension_type       { get; set; }
+			public int?        _exp_percent        { get; set; }
+			public string      _post               { get; set; }
+			public string      _company            { get; set; }
+			public decimal?    _total_pension      { get; set; }
+			public decimal?    _surcharge_pension  { get; set; }
+			public decimal?    _insurance_pension  { get; set; }
+			public NpgsqlDate? _date_start         { get; set; }
+			public NpgsqlDate? _date_stop          { get; set; }
+			public string      _month              { get; set; }
+		}
+
+		#endregion
+
+		#region calculation_subsidy_ma
+
+		[Sql.TableFunction(Schema="subsidy", Name="calculation_subsidy_ma")]
+		public ITable<calculation_subsidy_maResult> calculation_subsidy_ma(int? _dwelling_user, int? _district, int? _settlement, int? _house_ownership_type, bool? _capital_repair, int? _house_type, decimal? n_living_min_emp, decimal? n_living_min_pen, decimal? n_living_min_child, int? n_all_members, decimal? living_communal_service_payment, int? _count_location, int? n_count_location, decimal? n_percapita_income, NpgsqlDate? _begin, NpgsqlDate? _end, NpgsqlDate? liv_d_begin, NpgsqlDate? liv_d_end, int? n_count_emp, int? n_count_pens, int? n_count_child, decimal? maximum_share_cost, decimal? aggregate_family_income, Guid? n_calc)
+		{
+			return this.GetTable<calculation_subsidy_maResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_dwelling_user,
+				_district,
+				_settlement,
+				_house_ownership_type,
+				_capital_repair,
+				_house_type,
+				n_living_min_emp,
+				n_living_min_pen,
+				n_living_min_child,
+				n_all_members,
+				living_communal_service_payment,
+				_count_location,
+				n_count_location,
+				n_percapita_income,
+				_begin,
+				_end,
+				liv_d_begin,
+				liv_d_end,
+				n_count_emp,
+				n_count_pens,
+				n_count_child,
+				maximum_share_cost,
+				aggregate_family_income,
+				n_calc);
+		}
+
+		public partial class calculation_subsidy_maResult
+		{
+			public decimal?    ssghku                   { get; set; }
+			public string      ssghku_formula           { get; set; }
+			public decimal?    adjustment_coeff         { get; set; }
+			public string      adjustment_coeff_formula { get; set; }
+			public decimal?    subsidy                  { get; set; }
+			public string      c_subsidy_formula        { get; set; }
+			public decimal?    family_living_minimum    { get; set; }
+			public NpgsqlDate? d_begin                  { get; set; }
+			public NpgsqlDate? d_end                    { get; set; }
+			public decimal?    payout                   { get; set; }
+			public decimal?    calculated_subsidy       { get; set; }
+		}
+
+		#endregion
+
+		#region get_salary_from_year
+
+		[Sql.TableFunction(Schema="pension", Name="get_salary_from_year")]
+		public ITable<get_salary_from_yearResult> get_salary_from_year(decimal? n_sal, decimal? n_rank, NpgsqlDate? d_begin, NpgsqlDate? d_end)
+		{
+			return this.GetTable<get_salary_from_yearResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				n_sal,
+				n_rank,
+				d_begin,
+				d_end);
+		}
+
+		public partial class get_salary_from_yearResult
+		{
+			public decimal?    sum_sal        { get; set; }
+			public decimal?    sum_rank       { get; set; }
+			public NpgsqlDate? _start         { get; set; }
+			public NpgsqlDate? _end           { get; set; }
+			public int?        _days_in_month { get; set; }
+			public int?        _work_days     { get; set; }
+			public decimal?    sal_before     { get; set; }
+			public decimal?    rank_before    { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_district_subsidies_test
+
+		[Sql.TableFunction(Schema="public", Name="rpt_district_subsidies_test")]
+		public ITable<rpt_district_subsidies_testResult> rpt_district_subsidies_test(int? _org, NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_district_subsidies_testResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_org,
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_district_subsidies_testResult
+		{
+			public int?     n_pp               { get; set; }
+			public string   year_month         { get; set; }
+			public int?     processed_count    { get; set; }
+			public int?     processed_families { get; set; }
+			public int?     assigned_count     { get; set; }
+			public int?     assigned_families  { get; set; }
+			public decimal? payment_sum        { get; set; }
+			public int?     total              { get; set; }
+			public string   org_name           { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_export_general_info
+
+		[Sql.TableFunction(Schema="public", Name="rpt_export_general_info")]
+		public ITable<rpt_export_general_infoResult> rpt_export_general_info(int? org)
+		{
+			return this.GetTable<rpt_export_general_infoResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org);
+		}
+
+		public partial class rpt_export_general_infoResult
+		{
+			public string      _id                { get; set; }
+			public string      _snils             { get; set; }
+			public string      _doc_type          { get; set; }
+			public string      _doc_seria         { get; set; }
+			public string      _doc_number        { get; set; }
+			public NpgsqlDate? _doc_date          { get; set; }
+			public string      _surname           { get; set; }
+			public string      _name              { get; set; }
+			public string      _middlename        { get; set; }
+			public string      _sex               { get; set; }
+			public NpgsqlDate? _birthday          { get; set; }
+			public string      _birthplace        { get; set; }
+			public string      _address           { get; set; }
+			public Guid?       _fias              { get; set; }
+			public string      _apartment_number  { get; set; }
+			public string      _room_number       { get; set; }
+			public string      _registration_type { get; set; }
+			public NpgsqlDate? _begin             { get; set; }
+			public NpgsqlDate? _end               { get; set; }
+			public string      _status            { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_decision_long_service_stoped
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_decision_long_service_stoped")]
+		public ITable<rpt_pension_decision_long_service_stopedResult> rpt_pension_decision_long_service_stoped(Guid? _calc, string _status)
+		{
+			return this.GetTable<rpt_pension_decision_long_service_stopedResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_calc,
+				_status);
+		}
+
+		public partial class rpt_pension_decision_long_service_stopedResult
+		{
+			public NpgsqlDate? _decision_ministry { get; set; }
+			public string      _number_ministry   { get; set; }
+			public string      _fio               { get; set; }
+			public string      _boss_post         { get; set; }
+			public string      _boss_fio          { get; set; }
+			public string      _cancel_reason     { get; set; }
+			public string      _stop_type         { get; set; }
+			public NpgsqlDate? _date_stop         { get; set; }
+			public string      _post              { get; set; }
+			public string      _company           { get; set; }
+			public string      _type              { get; set; }
+			public string      status             { get; set; }
+			public NpgsqlDate? date_start         { get; set; }
+			public decimal?    summ               { get; set; }
+			public int?        experience_percent { get; set; }
+			public string      _month             { get; set; }
+			public decimal?    _insurance_pension { get; set; }
+			public decimal?    _pens_sum          { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_spravka_poor_person_padej
+
+		[Sql.TableFunction(Schema="public", Name="rpt_spravka_poor_person_padej")]
+		public ITable<rpt_spravka_poor_person_padejResult> rpt_spravka_poor_person_padej(int? person)
+		{
+			return this.GetTable<rpt_spravka_poor_person_padejResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				person);
+		}
+
+		public partial class rpt_spravka_poor_person_padejResult
+		{
+			public string      _person    { get; set; }
+			public NpgsqlDate? _birthday  { get; set; }
+			public string      _address   { get; set; }
+			public string      _boss_post { get; set; }
+			public string      _boss_fio  { get; set; }
+			public string      _he        { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_settlement_subsidies
+
+		[Sql.TableFunction(Schema="public", Name="rpt_settlement_subsidies")]
+		public ITable<rpt_settlement_subsidiesResult> rpt_settlement_subsidies(int? _settlement, NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_settlement_subsidiesResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_settlement,
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_settlement_subsidiesResult
+		{
+			public int?     n_pp               { get; set; }
+			public string   year_month         { get; set; }
+			public int?     processed_count    { get; set; }
+			public int?     processed_families { get; set; }
+			public int?     assigned_count     { get; set; }
+			public int?     assigned_families  { get; set; }
+			public decimal? payment_sum        { get; set; }
+			public int?     total              { get; set; }
+			public string   settlement_name    { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_error_import
+
+		[Sql.TableFunction(Schema="public", Name="rpt_error_import")]
+		public ITable<rpt_error_importResult> rpt_error_import()
+		{
+			return this.GetTable<rpt_error_importResult>(this, (MethodInfo)MethodBase.GetCurrentMethod());
+		}
+
+		public partial class rpt_error_importResult
+		{
+			public string c_number { get; set; }
+			public string err      { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_ku_information_payment_test
+
+		[Sql.TableFunction(Schema="public", Name="rpt_ku_information_payment_test")]
+		public ITable<rpt_ku_information_payment_testResult> rpt_ku_information_payment_test(NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_ku_information_payment_testResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_ku_information_payment_testResult
+		{
+			public string dist_name { get; set; }
+			public string r5        { get; set; }
+			public string r6        { get; set; }
+			public string r7        { get; set; }
+			public string r8        { get; set; }
+			public string r9        { get; set; }
+			public string r10       { get; set; }
+			public string r11       { get; set; }
+			public string r12       { get; set; }
+			public string r13       { get; set; }
+			public string r14       { get; set; }
+			public string r15       { get; set; }
+		}
+
+		#endregion
+
+		#region open_payment_month
+
+		[Sql.TableFunction(Schema="subsidy", Name="open_payment_month")]
+		public ITable<open_payment_monthResult> open_payment_month(int? _org, Guid? progress_id)
+		{
+			return this.GetTable<open_payment_monthResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_org,
+				progress_id);
+		}
+
+		public partial class open_payment_monthResult
+		{
+			public string message { get; set; }
+			public string ids     { get; set; }
+			public string info    { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_oszn_information_test
+
+		[Sql.TableFunction(Schema="public", Name="rpt_oszn_information_test")]
+		public ITable<rpt_oszn_information_testResult> rpt_oszn_information_test(int? _org, NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_oszn_information_testResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_org,
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_oszn_information_testResult
+		{
+			public string _n_pp     { get; set; }
+			public string _title    { get; set; }
+			public string _ed_izm   { get; set; }
+			public string _value    { get; set; }
+			public string _org_name { get; set; }
+		}
+
+		#endregion
+
+		#region create_commision_resident_docs
+
+		[Sql.TableFunction(Schema="common", Name="create_commision_resident_docs")]
+		public ITable<create_commision_resident_docsResult> create_commision_resident_docs(string arrays)
+		{
+			return this.GetTable<create_commision_resident_docsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				arrays);
+		}
+
+		public partial class create_commision_resident_docsResult
+		{
+			public string file_name { get; set; }
+			public string info      { get; set; }
+		}
+
+		#endregion
+
+		#region get_veterans_comm_services
+
+		[Sql.TableFunction(Schema="veterans", Name="get_veterans_comm_services")]
+		public ITable<get_veterans_comm_servicesResult> get_veterans_comm_services(string _inn)
+		{
+			return this.GetTable<get_veterans_comm_servicesResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_inn);
+		}
+
+		public partial class get_veterans_comm_servicesResult
+		{
+			public int?   distrist_code         { get; set; }
+			public string c_number_addition     { get; set; }
+			public string c_last_name           { get; set; }
+			public string c_first_name          { get; set; }
+			public string c_patronymic          { get; set; }
+			public string c_address_code        { get; set; }
+			public string c_locality_name       { get; set; }
+			public string c_street              { get; set; }
+			public string c_house               { get; set; }
+			public string c_corps               { get; set; }
+			public string c_flat                { get; set; }
+			public string c_phone               { get; set; }
+			public string c_account_number      { get; set; }
+			public string c_inn                 { get; set; }
+			public string c_locality_short_name { get; set; }
+			public string c_street_short        { get; set; }
+			public Guid?  f_case                { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_poor_count_all2
+
+		[Sql.TableFunction(Schema="public", Name="rpt_poor_count_all2")]
+		public ITable<rpt_poor_count_all2Result> rpt_poor_count_all2(NpgsqlDate? _date)
+		{
+			return this.GetTable<rpt_poor_count_all2Result>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_date);
+		}
+
+		public partial class rpt_poor_count_all2Result
+		{
+			public int?   number_pp { get; set; }
+			public string district  { get; set; }
+			public int?   january   { get; set; }
+			public int?   february  { get; set; }
+			public int?   march     { get; set; }
+			public int?   april     { get; set; }
+			public int?   may       { get; set; }
+			public int?   june      { get; set; }
+			public int?   july      { get; set; }
+			public int?   august    { get; set; }
+			public int?   september { get; set; }
+			public int?   october   { get; set; }
+			public int?   november  { get; set; }
+			public int?   december  { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_needed_list
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_needed_list")]
+		public ITable<rpt_payments_needed_listResult> rpt_payments_needed_list(string ids)
+		{
+			return this.GetTable<rpt_payments_needed_listResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				ids);
+		}
+
+		public partial class rpt_payments_needed_listResult
+		{
+			public string   _name  { get; set; }
+			public int?     _count { get; set; }
+			public decimal? _summ  { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_export_payment
+
+		[Sql.TableFunction(Schema="public", Name="rpt_export_payment")]
+		public ITable<rpt_export_paymentResult> rpt_export_payment(int? org)
+		{
+			return this.GetTable<rpt_export_paymentResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org);
+		}
+
+		public partial class rpt_export_paymentResult
+		{
+			public string      _id           { get; set; }
+			public string      _payment_type { get; set; }
+			public NpgsqlDate? _date         { get; set; }
+			public string      _sum          { get; set; }
+			public string      _status       { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_summary_inventory
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_summary_inventory")]
+		public ITable<rpt_payments_summary_inventoryResult> rpt_payments_summary_inventory(int? _org, string _number_arr, int? _bank_filial, int? _month, int? _year)
+		{
+			return this.GetTable<rpt_payments_summary_inventoryResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_org,
+				_number_arr,
+				_bank_filial,
+				_month,
+				_year);
+		}
+
+		public partial class rpt_payments_summary_inventoryResult
+		{
+			public string      name_department { get; set; }
+			public string      number_array    { get; set; }
+			public string      list_msz        { get; set; }
+			public int?        t_month         { get; set; }
+			public int?        t_year          { get; set; }
+			public string      name_bank       { get; set; }
+			public NpgsqlDate? date_generate   { get; set; }
+			public int?        count_recipient { get; set; }
+			public decimal?    additional_sum  { get; set; }
+			public decimal?    payment_sum     { get; set; }
+			public string      fio_boss        { get; set; }
+			public string      fio_glavbuh     { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_poor_count_all
+
+		[Sql.TableFunction(Schema="public", Name="rpt_poor_count_all")]
+		public ITable<rpt_poor_count_allResult> rpt_poor_count_all(NpgsqlDate? _date)
+		{
+			return this.GetTable<rpt_poor_count_allResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_date);
+		}
+
+		public partial class rpt_poor_count_allResult
+		{
+			public int?   number_pp { get; set; }
+			public string district  { get; set; }
+			public int?   january   { get; set; }
+			public int?   february  { get; set; }
+			public int?   march     { get; set; }
+			public int?   april     { get; set; }
+			public int?   may       { get; set; }
+			public int?   june      { get; set; }
+			public int?   july      { get; set; }
+			public int?   august    { get; set; }
+			public int?   september { get; set; }
+			public int?   october   { get; set; }
+			public int?   november  { get; set; }
+			public int?   december  { get; set; }
+		}
+
+		#endregion
+
+		#region generate_bank_paymentdocs
+
+		[Sql.TableFunction(Schema="subsidy", Name="generate_bank_paymentdocs")]
+		public ITable<generate_bank_paymentdocsResult> generate_bank_paymentdocs(int? bank_filial, int? org, int? payment_type, string subsystem)
+		{
+			return this.GetTable<generate_bank_paymentdocsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				bank_filial,
+				org,
+				payment_type,
+				subsystem);
+		}
+
+		public partial class generate_bank_paymentdocsResult
+		{
+			public string _number           { get; set; }
+			public int?   _payment_array_id { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_subsidy_ended_cases
+
+		[Sql.TableFunction(Schema="public", Name="rpt_subsidy_ended_cases")]
+		public ITable<rpt_subsidy_ended_casesResult> rpt_subsidy_ended_cases(int? org, NpgsqlDate? end_date)
+		{
+			return this.GetTable<rpt_subsidy_ended_casesResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org,
+				end_date);
+		}
+
+		public partial class rpt_subsidy_ended_casesResult
+		{
+			public int?        _number_row  { get; set; }
+			public string      _number_case { get; set; }
+			public NpgsqlDate? _date_calc   { get; set; }
+			public string      _fio         { get; set; }
+			public string      _address     { get; set; }
+			public string      _phone       { get; set; }
+			public string      _oszn        { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_payments_history2
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_payments_history2")]
+		public ITable<rpt_pension_payments_history2Result> rpt_pension_payments_history2(Guid? _case, NpgsqlDate? _start, NpgsqlDate? _finish)
+		{
+			return this.GetTable<rpt_pension_payments_history2Result>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_case,
+				_start,
+				_finish);
+		}
+
+		public partial class rpt_pension_payments_history2Result
+		{
+			public NpgsqlDate? _begin      { get; set; }
+			public NpgsqlDate? _end        { get; set; }
+			public decimal?    _summ       { get; set; }
+			public decimal?    _total_summ { get; set; }
+			public string      _sum_str    { get; set; }
+			public NpgsqlDate? _min_begin  { get; set; }
+			public NpgsqlDate? _max_end    { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_subsidy_oszn_settlement_recipient_list
+
+		[Sql.TableFunction(Schema="public", Name="rpt_subsidy_oszn_settlement_recipient_list")]
+		public ITable<rpt_subsidy_oszn_settlement_recipient_listResult> rpt_subsidy_oszn_settlement_recipient_list(int? org, NpgsqlDate? period)
+		{
+			return this.GetTable<rpt_subsidy_oszn_settlement_recipient_listResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org,
+				period);
+		}
+
+		public partial class rpt_subsidy_oszn_settlement_recipient_listResult
+		{
+			public int?        _number_row  { get; set; }
+			public string      _number_case { get; set; }
+			public string      _settlement  { get; set; }
+			public string      _location    { get; set; }
+			public NpgsqlDate? _begin       { get; set; }
+			public string      _fio         { get; set; }
+			public string      _address     { get; set; }
+			public decimal?    _summ        { get; set; }
+			public string      _comment     { get; set; }
+			public string      _oszn        { get; set; }
+			public int?        _count       { get; set; }
+		}
+
+		#endregion
+
+		#region close_payment_month
+
+		[Sql.TableFunction(Schema="subsidy", Name="close_payment_month")]
+		public ITable<close_payment_monthResult> close_payment_month(int? _org, int? _month, int? _year, string _subsystem)
+		{
+			return this.GetTable<close_payment_monthResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_org,
+				_month,
+				_year,
+				_subsystem);
+		}
+
+		public partial class close_payment_monthResult
+		{
+			public string message { get; set; }
+			public string ids     { get; set; }
+			public string info    { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_export_decision_msp
+
+		[Sql.TableFunction(Schema="public", Name="rpt_export_decision_msp")]
+		public ITable<rpt_export_decision_mspResult> rpt_export_decision_msp(int? org)
+		{
+			return this.GetTable<rpt_export_decision_mspResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org);
+		}
+
+		public partial class rpt_export_decision_mspResult
+		{
+			public string      _id            { get; set; }
+			public string      _decision_type { get; set; }
+			public string      _number        { get; set; }
+			public NpgsqlDate? _date          { get; set; }
+			public string      _code          { get; set; }
+			public NpgsqlDate? _date_action   { get; set; }
+			public string      _status        { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_service_note
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_service_note")]
+		public ITable<rpt_pension_service_noteResult> rpt_pension_service_note(int? org, NpgsqlDate? _date)
+		{
+			return this.GetTable<rpt_pension_service_noteResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org,
+				_date);
+		}
+
+		public partial class rpt_pension_service_noteResult
+		{
+			public string      name         { get; set; }
+			public int?        cur_count    { get; set; }
+			public decimal?    cur_sum      { get; set; }
+			public decimal?    cur_average  { get; set; }
+			public NpgsqlDate? cur_date     { get; set; }
+			public int?        prev_count   { get; set; }
+			public decimal?    prev_sum     { get; set; }
+			public decimal?    prev_average { get; set; }
+			public NpgsqlDate? prev_date    { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_decision_long_service
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_decision_long_service")]
+		public ITable<rpt_pension_decision_long_serviceResult> rpt_pension_decision_long_service(Guid? _calc)
+		{
+			return this.GetTable<rpt_pension_decision_long_serviceResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_calc);
+		}
+
+		public partial class rpt_pension_decision_long_serviceResult
+		{
+			public NpgsqlDate? _decision_ministry  { get; set; }
+			public string      _number_ministry    { get; set; }
+			public NpgsqlDate? _decision_commision { get; set; }
+			public string      _number_commision   { get; set; }
+			public NpgsqlDate? _case_date          { get; set; }
+			public string      _fio                { get; set; }
+			public string      _post               { get; set; }
+			public string      _company            { get; set; }
+			public decimal?    _summ               { get; set; }
+			public int?        _experience_percent { get; set; }
+			public int?        _experience_year    { get; set; }
+			public decimal?    _month_payment      { get; set; }
+			public string      _type               { get; set; }
+			public NpgsqlDate? _insurance_date     { get; set; }
+			public decimal?    _insurance_summ     { get; set; }
+			public string      _post_boss          { get; set; }
+			public string      _fio_boss           { get; set; }
+			public decimal?    _pension_size       { get; set; }
+			public string      _month              { get; set; }
+			public string      _month_com          { get; set; }
+		}
+
+		#endregion
+
+		#region calculation_subsidy_ssghku
+
+		[Sql.TableFunction(Schema="subsidy", Name="calculation_subsidy_ssghku")]
+		public ITable<calculation_subsidy_ssghkuResult> calculation_subsidy_ssghku(decimal? living_communal_service_payment, int? _count_location, int? n_count_location, decimal? n_percapita_income, decimal? family_living_minimum, NpgsqlDate? _begin, NpgsqlDate? _end, NpgsqlDate? liv_d_begin, NpgsqlDate? liv_d_end, decimal? one, decimal? two, decimal? three, decimal? maximum_share_cost, decimal? aggregate_family_income, NpgsqlDate? s_d_begin, NpgsqlDate? s_d_end, Guid? n_calc, bool? b_empty_ssghku)
+		{
+			return this.GetTable<calculation_subsidy_ssghkuResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				living_communal_service_payment,
+				_count_location,
+				n_count_location,
+				n_percapita_income,
+				family_living_minimum,
+				_begin,
+				_end,
+				liv_d_begin,
+				liv_d_end,
+				one,
+				two,
+				three,
+				maximum_share_cost,
+				aggregate_family_income,
+				s_d_begin,
+				s_d_end,
+				n_calc,
+				b_empty_ssghku);
+		}
+
+		public partial class calculation_subsidy_ssghkuResult
+		{
+			public decimal?    ssghku                   { get; set; }
+			public string      ssghku_formula           { get; set; }
+			public decimal?    adjustment_coeff         { get; set; }
+			public string      adjustment_coeff_formula { get; set; }
+			public decimal?    subsidy                  { get; set; }
+			public string      c_subsidy_formula        { get; set; }
+			public NpgsqlDate? t_begin                  { get; set; }
+			public NpgsqlDate? t_end                    { get; set; }
+			public decimal?    payout                   { get; set; }
+			public decimal?    calculated_subsidy       { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_payments_inventory_summary_org_info
+
+		[Sql.TableFunction(Schema="public", Name="rpt_payments_inventory_summary_org_info")]
+		public ITable<rpt_payments_inventory_summary_org_infoResult> rpt_payments_inventory_summary_org_info(int? org, string ids)
+		{
+			return this.GetTable<rpt_payments_inventory_summary_org_infoResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org,
+				ids);
+		}
+
+		public partial class rpt_payments_inventory_summary_org_infoResult
+		{
+			public string      _name          { get; set; }
+			public string      _boss_name     { get; set; }
+			public string      _boss_post     { get; set; }
+			public string      _glavbuch_name { get; set; }
+			public NpgsqlDate? _now           { get; set; }
+			public int?        _total_count   { get; set; }
+			public decimal?    _total_sum     { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_poor_appeal_decision_notification_family
+
+		[Sql.TableFunction(Schema="public", Name="rpt_poor_appeal_decision_notification_family")]
+		public ITable<rpt_poor_appeal_decision_notification_familyResult> rpt_poor_appeal_decision_notification_family(Guid? appeal)
+		{
+			return this.GetTable<rpt_poor_appeal_decision_notification_familyResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				appeal);
+		}
+
+		public partial class rpt_poor_appeal_decision_notification_familyResult
+		{
+			public string   _fio    { get; set; }
+			public decimal? _income { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_district_subsidies
+
+		[Sql.TableFunction(Schema="public", Name="rpt_district_subsidies")]
+		public ITable<rpt_district_subsidiesResult> rpt_district_subsidies(int? _org, NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_district_subsidiesResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_org,
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_district_subsidiesResult
+		{
+			public int?     n_pp               { get; set; }
+			public string   year_month         { get; set; }
+			public int?     processed_count    { get; set; }
+			public int?     processed_families { get; set; }
+			public int?     assigned_count     { get; set; }
+			public int?     assigned_families  { get; set; }
+			public decimal? payment_sum        { get; set; }
+			public int?     total              { get; set; }
+			public string   org_name           { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_info_pens
+
+		[Sql.TableFunction(Schema="public", Name="rpt_info_pens")]
+		public ITable<rpt_info_pensResult> rpt_info_pens(int? vid_payment, NpgsqlDate? _start, NpgsqlDate? _finish)
+		{
+			return this.GetTable<rpt_info_pensResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				vid_payment,
+				_start,
+				_finish);
+		}
+
+		public partial class rpt_info_pensResult
+		{
+			public string   c_local_msz_title { get; set; }
+			public long?    count_all         { get; set; }
+			public decimal? payment_sum       { get; set; }
+			public decimal? avg_sum           { get; set; }
+			public long?    kol_per_naz       { get; set; }
+			public long?    sv5               { get; set; }
+			public long?    cancel_work       { get; set; }
+			public long?    cancel_pens       { get; set; }
+		}
+
+		#endregion
+
+		#region calculation_subsidy
+
+		[Sql.TableFunction(Schema="subsidy", Name="calculation_subsidy")]
+		public ITable<calculation_subsidyResult> calculation_subsidy(int? _dwelling_user, int? _district, int? _settlement, int? _house_ownership_type, bool? _capital_repair, int? _house_type, decimal? n_living_min_emp, decimal? n_living_min_pen, decimal? n_living_min_child, int? n_all_members, decimal? living_communal_service_payment, int? _count_location, int? n_count_location, decimal? n_percapita_income, NpgsqlDate? _begin, NpgsqlDate? _end, NpgsqlDate? liv_d_begin, NpgsqlDate? liv_d_end, int? n_count_emp, int? n_count_pens, int? n_count_child, decimal? maximum_share_cost, decimal? aggregate_family_income, Guid? n_calc)
+		{
+			return this.GetTable<calculation_subsidyResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_dwelling_user,
+				_district,
+				_settlement,
+				_house_ownership_type,
+				_capital_repair,
+				_house_type,
+				n_living_min_emp,
+				n_living_min_pen,
+				n_living_min_child,
+				n_all_members,
+				living_communal_service_payment,
+				_count_location,
+				n_count_location,
+				n_percapita_income,
+				_begin,
+				_end,
+				liv_d_begin,
+				liv_d_end,
+				n_count_emp,
+				n_count_pens,
+				n_count_child,
+				maximum_share_cost,
+				aggregate_family_income,
+				n_calc);
+		}
+
+		public partial class calculation_subsidyResult
+		{
+			public decimal?    ssghku                   { get; set; }
+			public string      ssghku_formula           { get; set; }
+			public decimal?    adjustment_coeff         { get; set; }
+			public string      adjustment_coeff_formula { get; set; }
+			public decimal?    subsidy                  { get; set; }
+			public string      c_subsidy_formula        { get; set; }
+			public decimal?    family_living_minimum    { get; set; }
+			public NpgsqlDate? d_begin                  { get; set; }
+			public NpgsqlDate? d_end                    { get; set; }
+			public decimal?    payout                   { get; set; }
+			public decimal?    calculated_subsidy       { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_poor_appeal_decision_notification
+
+		[Sql.TableFunction(Schema="public", Name="rpt_poor_appeal_decision_notification")]
+		public ITable<rpt_poor_appeal_decision_notificationResult> rpt_poor_appeal_decision_notification(Guid? appeal, Guid? user_id)
+		{
+			return this.GetTable<rpt_poor_appeal_decision_notificationResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				appeal,
+				user_id);
+		}
+
+		public partial class rpt_poor_appeal_decision_notificationResult
+		{
+			public string      _fio          { get; set; }
+			public string      _address      { get; set; }
+			public NpgsqlDate? _date         { get; set; }
+			public int?        _count_family { get; set; }
+			public string      _number       { get; set; }
+			public decimal?    _income       { get; set; }
+			public decimal?    _liv_min      { get; set; }
+			public NpgsqlDate? _begin        { get; set; }
+			public NpgsqlDate? _end          { get; set; }
+			public string      _boss_post    { get; set; }
+			public string      _boss_fio     { get; set; }
+			public string      _user_name    { get; set; }
+			public string      _org_name     { get; set; }
+			public NpgsqlDate? _case_date    { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_poor_count_org
+
+		[Sql.TableFunction(Schema="public", Name="rpt_poor_count_org")]
+		public ITable<rpt_poor_count_orgResult> rpt_poor_count_org(int? org, NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_poor_count_orgResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				org,
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_poor_count_orgResult
+		{
+			public string _type         { get; set; }
+			public int?   _count_cases  { get; set; }
+			public int?   _count_people { get; set; }
+			public string _boss_post    { get; set; }
+			public string _boss_fio     { get; set; }
+		}
+
+		#endregion
+
+		#region get_documents
+
+		[Sql.TableFunction(Schema="veterans", Name="get_documents")]
+		public ITable<get_documentsResult> get_documents(int? person_id)
+		{
+			return this.GetTable<get_documentsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				person_id);
+		}
+
+		public partial class get_documentsResult
+		{
+			public string      f_category  { get; set; }
+			public string      c_name      { get; set; }
+			public string      c_series    { get; set; }
+			public string      c_number    { get; set; }
+			public NpgsqlDate? d_issue     { get; set; }
+			public string      c_issuer    { get; set; }
+			public NpgsqlDate? d_doc_start { get; set; }
+			public NpgsqlDate? d_doc_end   { get; set; }
+		}
+
+		#endregion
+
+		#region dblink_get_pkey
+
+		[Sql.TableFunction(Schema="public", Name="dblink_get_pkey")]
+		public ITable<dblink_get_pkeyResult> dblink_get_pkey(string par296)
+		{
+			return this.GetTable<dblink_get_pkeyResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				par296);
+		}
+
+		public partial class dblink_get_pkeyResult
+		{
+			public int?   position { get; set; }
+			public string colname  { get; set; }
+		}
+
+		#endregion
+
+		#endregion
 	}
 
 	[Table(Schema="api_req", Name="requests")]
-	public partial class api_req_requests
+	public partial class api_req_api_req_requests
 	{
 		[PrimaryKey, Identity] public int       id        { get; set; } // integer
 		[Column,     Nullable] public DateTime? req_date  { get; set; } // timestamp (6) without time zone
-		[Column,     Nullable] public string    request   { get; set; } // character varying(25000)
-		[Column,     Nullable] public string    response  { get; set; } // character varying(2500)
+		[Column,     Nullable] public string    request   { get; set; } // character varying
+		[Column,     Nullable] public string    response  { get; set; } // character varying
 		[Column,     Nullable] public string    from_whom { get; set; } // character varying(256)
 	}
 
+	/// <summary>
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cd_calculation_base")]
+	public partial class common_common_cd_calculation_base
+	{
+		[PrimaryKey, NotNull    ] public Guid id         { get; set; } // uuid
+		[Column,        Nullable] public int? ObjectType { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_common_cd_calculation_base_ObjectType_1EC25311
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_common_cd_calculation_base_ObjectType_1EC25311")]
+		public public_XPObjectType cdcalculationbaseObjectType1EC { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Назначение]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cd_case_base")]
+	public partial class common_common_cd_case_base
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id                 { get; set; } // uuid
+		[Column,        Nullable] public int?   ObjectType         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Заявитель]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("f_org == '@This.f_org'")]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_person           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Способ выплаты]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("Iif('@This.f_subsystem.c_alias' == 'pension', c_alias = 'bank' or c_alias = 'stoped' or c_alias = 'paused', c_alias = 'bank' or c_alias = 'post' or c_alias = 'stoped' or c_alias = 'paused')")]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_payment_method   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRequiredField("", DefaultContexts.Save)]
+		/// </summary>
+		[Column,        Nullable] public int?   f_org              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_subsystem        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Филиал доставочной организации]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("f_bank_filial_cs_org_bank_filial_linksCollection[f_org == '@This.f_org' and f_bank_filial.f_payment_method == '@This.f_payment_method']")]
+		/// 
+		/// </summary>
+		[Column,     NotNull    ] public int    f_bank_filial      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Расчётный счёт]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string c_checking_account { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Доставочный участок]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 100)]
+		/// </summary>
+		[Column,        Nullable] public int?   n_post_site        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата доставки]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 100)]
+		/// </summary>
+		[Column,        Nullable] public int?   n_post_day         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int    n_number           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_number           { get; set; } // character varying(8)
+		/// <summary>
+		/// [XMeta.DisplayName=Заявление из РСМВ]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_rsmv_application { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_base_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_case_base_fkey_f_org")]
+		public public_cs_organizations cdcasebasefkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_case_base_fkey_f_person
+		/// </summary>
+		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_base_fkey_f_person")]
+		public public_cd_persons cdcasebasefkeyfperson { get; set; }
+
+		/// <summary>
+		/// cd_case_base_fkey_f_rsmv_application
+		/// </summary>
+		[Association(ThisKey="f_rsmv_application", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_case_base_fkey_f_rsmv_application")]
+		public common_common_cd_rsmv_applications_base cdcasebasefkeyfrsmvapplication { get; set; }
+
+		/// <summary>
+		/// cd_case_base_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_base_fkey_f_subsystem")]
+		public public_cs_subsystems cdcasebasefkeyfsubsystem { get; set; }
+
+		/// <summary>
+		/// FK_common_cd_case_base_ObjectType_7DBFEB88
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_common_cd_case_base_ObjectType_7DBFEB88")]
+		public public_XPObjectType cdcasebaseObjectType7DBFEB { get; set; }
+
+		/// <summary>
+		/// cd_case_fkey_f_bank_filial
+		/// </summary>
+		[Association(ThisKey="f_bank_filial", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_fkey_f_bank_filial")]
+		public public_cs_bank_filials cdcasefkeyfbankfilial { get; set; }
+
+		/// <summary>
+		/// cd_case_fkey_f_payment_method
+		/// </summary>
+		[Association(ThisKey="f_payment_method", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_fkey_f_payment_method")]
+		public subsidy_subsidy_cs_payment_methods cdcasefkeyfpaymentmethod { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=История дела]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cd_case_history")]
+	public partial class common_common_cd_case_history
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid     id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid     f_case    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,     NotNull] public Guid     f_user    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// </summary>
+		[Column,     NotNull] public Guid     f_status  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Время изменения]
+		/// [XMeta.DisplayFormat=dd.MM.yyyy HH:mm:ss]
+		/// </summary>
+		[Column,     NotNull] public DateTime d_updated { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_history_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_history_fkey_f_case")]
+		public common_common_cd_case_base cdcasehistoryfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_case_history_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_history_fkey_f_status")]
+		public common_common_cs_statuses cdcasehistoryfkeyfstatu { get; set; }
+
+		/// <summary>
+		/// cd_case_history_fkey_f_user
+		/// </summary>
+		[Association(ThisKey="f_user", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_history_fkey_f_user")]
+		public public_UserPolicyModel cdcasehistoryfkeyfuser { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Сведения о назначенных МСП]
+	/// </summary>
+	[Table(Schema="common", Name="cd_egisso_data")]
+	public partial class common_common_cd_egisso_data
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=СНИЛС]
+		/// </summary>
+		[Column,        Nullable] public string    c_snils      { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия]
+		/// </summary>
+		[Column,        Nullable] public string    c_family     { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя]
+		/// </summary>
+		[Column,        Nullable] public string    c_name       { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество]
+		/// </summary>
+		[Column,        Nullable] public string    c_patronymic { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата рождения]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_birthdate  { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=ОНМСЗ]
+		/// </summary>
+		[Column,        Nullable] public string    c_onmsz      { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Федеральная мера]
+		/// </summary>
+		[Column,        Nullable] public string    c_fedmszname { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// </summary>
+		[Column,        Nullable] public decimal?  n_summ       { get; set; } // numeric
+		/// <summary>
+		/// [XMeta.DisplayName=С]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_s          { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=По]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_po         { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата основания]
+		/// </summary>
+		[Column,        Nullable] public string    c_osn        { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Пользователь]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?     f_user       { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_egisso_data_fkey_f_user
+		/// </summary>
+		[Association(ThisKey="f_user", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_egisso_data_fkey_f_user")]
+		public public_UserPolicyModel cdegissodatafkeyfuser { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="common", Name="cd_errors", IsView=true)]
+	public partial class common_common_cd_errors
+	{
+		[Column(SkipOnUpdate=true), Nullable] public long?       row_number        { get; set; } // bigint
+		[Column(SkipOnUpdate=true), Nullable] public int?        f_id_organization { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public string      c_organization    { get; set; } // character varying(250)
+		[Column(SkipOnUpdate=true), Nullable] public string      ps                { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string      prioritet         { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public NpgsqlDate? srok              { get; set; } // date
+		[Column(SkipOnUpdate=true), Nullable] public string      c_number          { get; set; } // character varying(8)
+		[Column(SkipOnUpdate=true), Nullable] public string      error             { get; set; } // text
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Расчёты по которым не сформированы выплаты]
+	/// </summary>
+	[Table(Schema="common", Name="cd_org_bad_cases")]
+	public partial class common_common_cd_org_bad_cases
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=ОСЗН]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_org   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Год]
+		/// </summary>
+		[Column,     NotNull    ] public int    n_year  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Месяц]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_month { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Список]
+		/// </summary>
+		[Column,        Nullable] public string c_list  { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Пользователь]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_user  { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_org_bad_cases_fkey_f_month
+		/// </summary>
+		[Association(ThisKey="f_month", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_org_bad_cases_fkey_f_month")]
+		public common_common_cs_months cdorgbadcasesfkeyfmonth { get; set; }
+
+		/// <summary>
+		/// cd_org_bad_cases_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_org_bad_cases_fkey_f_org")]
+		public public_cs_organizations cdorgbadcasesfkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_org_bad_cases_fkey_f_user
+		/// </summary>
+		[Association(ThisKey="f_user", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_org_bad_cases_fkey_f_user")]
+		public public_UserPolicyModel cdorgbadcasesfkeyfuser { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=История удержаний]
+	/// </summary>
+	[Table(Schema="common", Name="cd_retention_history")]
+	public partial class common_common_cd_retention_history
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid    id          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Год]
+		/// </summary>
+		[Column,     NotNull    ] public int     n_year      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Месяц]
+		/// </summary>
+		[Column,     NotNull    ] public int     f_month     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Удержание]
+		/// </summary>
+		[Column,     NotNull    ] public Guid    f_retention { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Удержанная сумма]
+		/// </summary>
+		[Column,     NotNull    ] public decimal n_summ      { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Выплата]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?   f_payment   { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_retention_history_fkey_f_month
+		/// </summary>
+		[Association(ThisKey="f_month", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_retention_history_fkey_f_month")]
+		public common_common_cs_months cdretentionhistoryfkeyfmonth { get; set; }
+
+		/// <summary>
+		/// cd_retention_history_fkey_f_payment
+		/// </summary>
+		[Association(ThisKey="f_payment", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_retention_history_fkey_f_payment")]
+		public subsidy_subsidy_cd_payments cdretentionhistoryfkeyfpayment { get; set; }
+
+		/// <summary>
+		/// cd_retention_history_fkey_f_retention
+		/// </summary>
+		[Association(ThisKey="f_retention", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_retention_history_fkey_f_retention")]
+		public common_common_cd_retentions cdretentionhistoryfkeyfretention { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Удержание]
+	/// </summary>
+	[Table(Schema="common", Name="cd_retentions")]
+	public partial class common_common_cd_retentions
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid       id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала удержания]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_begin   { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма к удержанию]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 1, 1000000)]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_total   { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Удержанная сумма]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_current { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Остаток]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_remain  { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_case    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Тип удержания]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_type    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_status  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Основание]
+		/// </summary>
+		[Column,        Nullable] public string     c_reason  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Размер удержания]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_size    { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_retentions_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_retentions_fkey_f_case")]
+		public common_common_cd_case_base cdretentionsfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_retentions_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_retentions_fkey_f_status")]
+		public common_common_cs_retention_statuses cdretentionsfkeyfstatu { get; set; }
+
+		/// <summary>
+		/// cd_retentions_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_retentions_fkey_f_type")]
+		public common_common_cs_retention_types cdretentionsfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Заявления]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.AppendAuditTrailProperty]
+	/// </summary>
+	[Table(Schema="common", Name="cd_rsmv_applications_base")]
+	public partial class common_common_cd_rsmv_applications_base
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id                      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Вид услуги]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_type                  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_status                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата подачи заявления]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_submit_timestamp      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Срок выдачи]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_issue_deadline        { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    c_number                { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Признак запроса отмены заявителем]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_cancel_requested      { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Причина запроса отмены заявителем]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_cancel_request_reason { get; set; } // character varying(4000)
+		/// <summary>
+		/// [XMeta.DisplayName=ОКТМО]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    c_oktmo                 { get; set; } // character(11)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер в ЛК ЕПГУ]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    c_epgu_number           { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор брони]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    c_book_id               { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата и время создания записи]
+		/// [XMeta.SetDefaultValueStage=BeforeSaving]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  s_time_created          { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Логин пользователя, создавшего запись]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    s_user_created          { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата и время последнего изменения записи]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? s_time_last_updated     { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Логин пользователя, последним изменившего запись]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    s_user_last_updated     { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата и время удаления записи]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? s_time_deleted          { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Логин пользователя, удалившего запись]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    s_user_deleted          { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_org                   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Номер (целое число)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?      n_number                { get; set; } // integer
+		[Column,        Nullable] public int?      ObjectType              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Контур]
+		/// [XMeta.DisplayFormat.BooleanTrueText=промышленный]
+		/// [XMeta.DisplayFormat.BooleanFalseText=тестовый]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_productive            { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Результат отправлен в МФЦ]
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_result_sent_to_mfc    { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// cd_rsmv_applications_base_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_rsmv_applications_base_fkey_f_org")]
+		public public_cs_organizations cdrsmvapplicationsbasefkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_rsmv_applications_base_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_rsmv_applications_base_fkey_f_status")]
+		public common_common_cs_rsmv_application_statuses cdrsmvapplicationsbasefkeyfstatu { get; set; }
+
+		/// <summary>
+		/// cd_rsmv_applications_base_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_rsmv_applications_base_fkey_f_type")]
+		public common_common_cs_rsmv_service_types cdrsmvapplicationsbasefkeyftype { get; set; }
+
+		/// <summary>
+		/// cd_rsmv_applications_base_fkey_ObjectType
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_rsmv_applications_base_fkey_ObjectType")]
+		public public_XPObjectType cdrsmvapplicationsbasefkeyObjectType { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Операции]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cd_rsmv_operations")]
+	public partial class common_common_cd_rsmv_operations
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid     id               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Заявление]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid     f_application    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Тип операции]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int      f_operation_type { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата и время операции]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime d_timestamp      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Примечание/комментарий]
+		/// [XMeta.Delayed]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string   c_notes          { get; set; } // character varying(4000)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя пользователя]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string   c_user_name      { get; set; } // character varying(100)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_rsmv_operations_fkey_f_application
+		/// </summary>
+		[Association(ThisKey="f_application", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_rsmv_operations_fkey_f_application")]
+		public common_common_cd_rsmv_applications_base cdrsmvoperationsfkeyfapplication { get; set; }
+
+		/// <summary>
+		/// cd_rsmv_operations_fkey_f_operation_type
+		/// </summary>
+		[Association(ThisKey="f_operation_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_rsmv_operations_fkey_f_operation_type")]
+		public common_common_cs_rsmv_operation_types cdrsmvoperationsfkeyfoperationtype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="common", Name="cd_rsmv_operations_integration")]
+	public partial class common_common_cd_rsmv_operations_integration
+	{
+		[PrimaryKey, Identity] public int      id               { get; set; } // integer
+		[Column,     NotNull ] public string   c_system         { get; set; } // character varying(100)
+		[Column,     NotNull ] public Guid     f_operation      { get; set; } // uuid
+		[Column,     NotNull ] public DateTime d_sent_timestamp { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// cd_rsmv_operations_integration_fkey_f_operation
+		/// </summary>
+		[Association(ThisKey="f_operation", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_rsmv_operations_integration_fkey_f_operation")]
+		public common_common_cd_rsmv_operations cdrsmvoperationsintegrationfkeyfoperation { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды документов на печать]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_calculation_report_types")]
+	public partial class common_common_cs_calculation_report_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Вид расчёта]
+		/// </summary>
+		[Column,     NotNull] public Guid   f_type { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Отчёт]
+		/// </summary>
+		[Column,     NotNull] public string c_rpt  { get; set; } // character varying(200)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_calculation_report_types_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_calculation_report_types_fkey_f_type")]
+		public common_common_cs_calculation_type cscalculationreporttypesfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Вид расчёта]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_calculation_type")]
+	public partial class common_common_cs_calculation_type
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(200)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь родственных отношений и вкладок]
+	/// </summary>
+	[Table(Schema="common", Name="cs_family_relation_tab_links")]
+	public partial class common_common_cs_family_relation_tab_links
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id                { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Родственное отношение]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull] public int  f_family_relation { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вкладка]
+		/// </summary>
+		[Column,     NotNull] public Guid f_tab             { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_family_relation_tab_links_fkey_f_family_relation
+		/// </summary>
+		[Association(ThisKey="f_family_relation", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_family_relation_tab_links_fkey_f_family_relation")]
+		public subsidy_subsidy_cs_family_relations csfamilyrelationtablinksfkeyffamilyrelation { get; set; }
+
+		/// <summary>
+		/// cs_family_relation_tab_links_fkey_f_tab
+		/// </summary>
+		[Association(ThisKey="f_tab", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_family_relation_tab_links_fkey_f_tab")]
+		public common_common_cs_tabs csfamilyrelationtablinksfkeyftab { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Месяцы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cs_months")]
+	public partial class common_common_cs_months
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Организации]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_orgs")]
+	public partial class common_common_cs_orgs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid    id                  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string  c_name              { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string  c_address           { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (код ФИАС)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?   f_address_fias_code { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор дома ФИАС]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?   f_house_fias_code   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Широта]
+		/// [XMeta.DisplayFormat=N4]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal n_latitude          { get; set; } // numeric(10,4)
+		/// <summary>
+		/// [XMeta.DisplayName=Долгота]
+		/// [XMeta.DisplayFormat=N4]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal n_longitude         { get; set; } // numeric(10,4)
+		/// <summary>
+		/// [XMeta.DisplayName=График работы]
+		/// </summary>
+		[Column,        Nullable] public string  c_graphic           { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Руководитель]
+		/// </summary>
+		[Column,        Nullable] public string  c_boss              { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Телефон]
+		/// </summary>
+		[Column,        Nullable] public string  c_phone             { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Электронная почта]
+		/// </summary>
+		[Column,        Nullable] public string  c_email             { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Факс]
+		/// </summary>
+		[Column,        Nullable] public string  c_fax               { get; set; } // character varying(20)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды выплатных документов]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_payment_array_types")]
+	public partial class common_common_cs_payment_array_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull] public string c_code { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Показывать в пенсии]
+		/// </summary>
+		[Column,     NotNull] public bool   b_pens { get; set; } // boolean
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Вид выплаты]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cs_payment_type")]
+	public partial class common_common_cs_payment_type
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы удержания]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_retention_statuses")]
+	public partial class common_common_cs_retention_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы удержания]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_retention_types")]
+	public partial class common_common_cs_retention_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы заявлений]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_rsmv_application_statuses")]
+	public partial class common_common_cs_rsmv_application_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull ] public string c_code { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Способы получения результата оказания услуги]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_rsmv_informing_types")]
+	public partial class common_common_cs_rsmv_informing_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public string c_code { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы операций]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_rsmv_operation_types")]
+	public partial class common_common_cs_rsmv_operation_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name        { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull    ] public string c_code        { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Начальный статус]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_status_from { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Конечный статус]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_status_to   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование действия]
+		/// </summary>
+		[Column,        Nullable] public string c_action_name { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Приоритет]
+		/// </summary>
+		[Column,        Nullable] public int?   n_priority    { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_rsmv_operation_types_fkey_f_status_from
+		/// </summary>
+		[Association(ThisKey="f_status_from", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_rsmv_operation_types_fkey_f_status_from")]
+		public common_common_cs_rsmv_application_statuses csrsmvoperationtypesfkeyfstatusfrom { get; set; }
+
+		/// <summary>
+		/// cs_rsmv_operation_types_fkey_f_status_to
+		/// </summary>
+		[Association(ThisKey="f_status_to", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_rsmv_operation_types_fkey_f_status_to")]
+		public common_common_cs_rsmv_application_statuses csrsmvoperationtypesfkeyfstatusto { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды услуг]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_rsmv_service_types")]
+	public partial class common_common_cs_rsmv_service_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name       { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull    ] public string c_code       { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Код на ЕПГУ]
+		/// </summary>
+		[Column,        Nullable] public string c_code_epgu  { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование краткое]
+		/// </summary>
+		[Column,        Nullable] public string c_name_short { get; set; } // character varying(200)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Способы перечисления средств]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_rsmv_transfer_methods")]
+	public partial class common_common_cs_rsmv_transfer_methods
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull ] public string c_code { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы валидации СНИЛСа]
+	/// [XMeta.DefaultProperty=c_title]
+	/// </summary>
+	[Table(Schema="common", Name="cs_snils_validation_statuses")]
+	public partial class common_common_cs_snils_validation_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     Nullable] public string c_title { get; set; } // character varying(255)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     Nullable] public string c_alias { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cs_statuses")]
+	public partial class common_common_cs_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_tabs")]
+	public partial class common_common_cs_tabs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name  { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы]
+	/// [XMeta.DefaultProperty=c_type_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cs_types")]
+	public partial class common_common_cs_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Тип]
+		/// </summary>
+		[Column,     NotNull ] public string c_type_name { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull ] public string c_type      { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Привязки органов ЗАГС к организациям]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="common", Name="f_orgs_zags")]
+	public partial class common_common_f_orgs_zags
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int  id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Орган ЗАГС]
+		/// </summary>
+		[Column,     NotNull ] public Guid f_zags { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// </summary>
+		[Column,     NotNull ] public int  f_org  { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// f_orgs_zags_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="f_orgs_zags_fkey_f_org")]
+		public public_cs_organizations forgszagsfkeyforg { get; set; }
+
+		/// <summary>
+		/// f_orgs_zags_fkey_f_zags
+		/// </summary>
+		[Association(ThisKey="f_zags", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="f_orgs_zags_fkey_f_zags")]
+		public sozags_sozags_СОЗАГС_1 forgszagsfkeyfzag { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="common", Name="person_all", IsView=true)]
+	public partial class common_common_person_all
+	{
+		[Column(SkipOnUpdate=true), Nullable] public long?     _row_number { get; set; } // bigint
+		[Column(SkipOnUpdate=true), Nullable] public int?      _pers       { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public string    _number     { get; set; } // character varying(8)
+		[Column(SkipOnUpdate=true), Nullable] public DateTime? _case_date  { get; set; } // timestamp (6) without time zone
+		[Column(SkipOnUpdate=true), Nullable] public string    _status     { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string    _msz        { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string    _rel        { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public DateTime? _begin      { get; set; } // timestamp (6) without time zone
+		[Column(SkipOnUpdate=true), Nullable] public DateTime? _end        { get; set; } // timestamp (6) without time zone
+		[Column(SkipOnUpdate=true), Nullable] public string    _oszn       { get; set; } // character varying(250)
+	}
+
 	[Table(Schema="fatalzp", Name="d_FATALZPRequest")]
-	public partial class fatalzp_d_FATALZPRequest
+	public partial class fatalzp_fatalzp_d_FATALZPRequest
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id          { get; set; } // uuid
 		[Column,        Nullable] public string    ИдСвед      { get; set; } // character varying(36)
@@ -119,7 +4999,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="d_АдрКЛАДРТип")]
-	public partial class fatalzp_d_АдрКЛАДРТип
+	public partial class fatalzp_fatalzp_d_АдрКЛАДРТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id         { get; set; } // uuid
 		[Column,        Nullable] public string Индекс     { get; set; } // character varying(6)
@@ -135,7 +5015,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="d_АдрФИАСТип")]
-	public partial class fatalzp_d_АдрФИАСТип
+	public partial class fatalzp_fatalzp_d_АдрФИАСТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id              { get; set; } // uuid
 		[Column,        Nullable] public string Регион          { get; set; } // character varying(2)
@@ -158,49 +5038,49 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_АдрФИАСТип_ГородСелПо_060CB91A
 		/// </summary>
 		[Association(ThisKey="ГородСелПоселен", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_АдрФИАСТип_ГородСелПо_060CB91A")]
-		public fatalzp_d_ВидНаимКодТип dАдрФИАСТипГородСелПо060CB91A { get; set; }
+		public fatalzp_fatalzp_d_ВидНаимКодТип dАдрФИАСТипГородСелПо060CB91A { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_АдрФИАСТип_МуниципРай_30395C9F
 		/// </summary>
 		[Association(ThisKey="МуниципРайон", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_АдрФИАСТип_МуниципРай_30395C9F")]
-		public fatalzp_d_ВидНаимКодТип dАдрФИАСТипМуниципРай30395C9F { get; set; }
+		public fatalzp_fatalzp_d_ВидНаимКодТип dАдрФИАСТипМуниципРай30395C9F { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_АдрФИАСТип_НаселенПун_C3A2560D
 		/// </summary>
 		[Association(ThisKey="НаселенПункт", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_АдрФИАСТип_НаселенПун_C3A2560D")]
-		public fatalzp_d_ВидНаимТип dАдрФИАСТипНаселенПунC3A2560D { get; set; }
+		public fatalzp_fatalzp_d_ВидНаимТип dАдрФИАСТипНаселенПунC3A2560D { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_АдрФИАСТип_ПомещЗдани_77790FC6
 		/// </summary>
 		[Association(ThisKey="ПомещЗдания", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_АдрФИАСТип_ПомещЗдани_77790FC6")]
-		public fatalzp_d_НомерТип dАдрФИАСТипПомещЗдани77790FC { get; set; }
+		public fatalzp_fatalzp_d_НомерТип dАдрФИАСТипПомещЗдани77790FC { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_АдрФИАСТип_ПомещКварт_9CB46192
 		/// </summary>
 		[Association(ThisKey="ПомещКвартиры", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_АдрФИАСТип_ПомещКварт_9CB46192")]
-		public fatalzp_d_НомерТип dАдрФИАСТипПомещКварт9CB { get; set; }
+		public fatalzp_fatalzp_d_НомерТип dАдрФИАСТипПомещКварт9CB { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_АдрФИАСТип_ЭлПланСтру_7D03E2B3
 		/// </summary>
 		[Association(ThisKey="ЭлПланСтруктур", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_АдрФИАСТип_ЭлПланСтру_7D03E2B3")]
-		public fatalzp_d_ТипНаимТип dАдрФИАСТипЭлПланСтру7D03E2B { get; set; }
+		public fatalzp_fatalzp_d_ТипНаимТип dАдрФИАСТипЭлПланСтру7D03E2B { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_АдрФИАСТип_ЭлУлДорСет_AA464B7C
 		/// </summary>
 		[Association(ThisKey="ЭлУлДорСети", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_АдрФИАСТип_ЭлУлДорСет_AA464B7C")]
-		public fatalzp_d_ТипНаимТип dАдрФИАСТипЭлУлДорСетAA464B7C { get; set; }
+		public fatalzp_fatalzp_d_ТипНаимТип dАдрФИАСТипЭлУлДорСетAA464B7C { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_ВидНаимКодТип")]
-	public partial class fatalzp_d_ВидНаимКодТип
+	public partial class fatalzp_fatalzp_d_ВидНаимКодТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id     { get; set; } // uuid
 		[Column,        Nullable] public char?  ВидКод { get; set; } // character varying(1)
@@ -208,7 +5088,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="d_ВидНаимТип")]
-	public partial class fatalzp_d_ВидНаимТип
+	public partial class fatalzp_fatalzp_d_ВидНаимТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id   { get; set; } // uuid
 		[Column,        Nullable] public string Вид  { get; set; } // character varying(50)
@@ -216,7 +5096,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="d_ГражданствоТип")]
-	public partial class fatalzp_d_ГражданствоТип
+	public partial class fatalzp_fatalzp_d_ГражданствоТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id         { get; set; } // uuid
 		[Column,        Nullable] public string ОКСМ       { get; set; } // character varying(3)
@@ -229,13 +5109,13 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_ГражданствоТип_Страна_DCF59FEB
 		/// </summary>
 		[Association(ThisKey="Страна", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_ГражданствоТип_Страна_DCF59FEB")]
-		public zags_ОКСМ dГражданствоТипСтранаDCF59FEB { get; set; }
+		public zags_zags_ОКСМ dГражданствоТипСтранаDCF59FEB { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_ДатаДокТип")]
-	public partial class fatalzp_d_ДатаДокТип
+	public partial class fatalzp_fatalzp_d_ДатаДокТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id      { get; set; } // uuid
 		[Column,        Nullable] public string День    { get; set; } // character varying(2)
@@ -246,7 +5126,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="d_ЗапАктТип")]
-	public partial class fatalzp_d_ЗапАктТип
+	public partial class fatalzp_fatalzp_d_ЗапАктТип
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id           { get; set; } // uuid
 		[Column,        Nullable] public Guid?     ОрганЗАГС    { get; set; } // uuid
@@ -263,25 +5143,25 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_ЗапАктТип_ЗАГС_EC19214A
 		/// </summary>
 		[Association(ThisKey="ЗАГС", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_ЗапАктТип_ЗАГС_EC19214A")]
-		public sozags_СОЗАГС_1 dЗапАктТипЗАГСEC19214A { get; set; }
+		public sozags_sozags_СОЗАГС_1 dЗапАктТипЗАГСEC19214A { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_ЗапАктТип_ОрганЗАГС_3A8F873D
 		/// </summary>
 		[Association(ThisKey="ОрганЗАГС", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_ЗапАктТип_ОрганЗАГС_3A8F873D")]
-		public fatalzp_d_ОрганЗАГСТип dЗапАктТипОрганЗАГС3A8F873D { get; set; }
+		public fatalzp_fatalzp_d_ОрганЗАГСТип dЗапАктТипОрганЗАГС3A8F873D { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_ЗапАктТип_ТипАкт_CDDCE3EE
 		/// </summary>
 		[Association(ThisKey="ТипАкт", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_ЗапАктТип_ТипАкт_CDDCE3EE")]
-		public zags_СТАГС dЗапАктТипТипАктCDDCE3EE { get; set; }
+		public zags_zags_СТАГС dЗапАктТипТипАктCDDCE3EE { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_МестоТип")]
-	public partial class fatalzp_d_МестоТип
+	public partial class fatalzp_fatalzp_d_МестоТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id          { get; set; } // uuid
 		[Column,        Nullable] public int?   ПризнМесто  { get; set; } // integer
@@ -303,13 +5183,13 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_МестоТип_Страна_636D8DAF
 		/// </summary>
 		[Association(ThisKey="Страна", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_МестоТип_Страна_636D8DAF")]
-		public zags_ОКСМ dМестоТипСтрана636D8DAF { get; set; }
+		public zags_zags_ОКСМ dМестоТипСтрана636D8DAF { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_МЖПослИн")]
-	public partial class fatalzp_d_МЖПослИн
+	public partial class fatalzp_fatalzp_d_МЖПослИн
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id         { get; set; } // uuid
 		[Column,        Nullable] public string ОКСМ       { get; set; } // character varying(3)
@@ -323,13 +5203,13 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_МЖПослИн_Страна_DE861262
 		/// </summary>
 		[Association(ThisKey="Страна", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_МЖПослИн_Страна_DE861262")]
-		public zags_ОКСМ dМЖПослИнСтранаDE { get; set; }
+		public zags_zags_ОКСМ dМЖПослИнСтранаDE { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_МЖПослРФ")]
-	public partial class fatalzp_d_МЖПослРФ
+	public partial class fatalzp_fatalzp_d_МЖПослРФ
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id         { get; set; } // uuid
 		[Column,        Nullable] public Guid?  АдрКЛАДР   { get; set; } // uuid
@@ -345,19 +5225,19 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_МЖПослРФ_АдрКЛАДР_A0316F8F
 		/// </summary>
 		[Association(ThisKey="АдрКЛАДР", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_МЖПослРФ_АдрКЛАДР_A0316F8F")]
-		public fatalzp_d_АдрКЛАДРТип dМЖПослРФАдрКЛАДРA0316F8F { get; set; }
+		public fatalzp_fatalzp_d_АдрКЛАДРТип dМЖПослРФАдрКЛАДРA0316F8F { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_МЖПослРФ_АдрФИАС_5880A2E2
 		/// </summary>
 		[Association(ThisKey="АдрФИАС", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_МЖПослРФ_АдрФИАС_5880A2E2")]
-		public fatalzp_d_АдрФИАСТип dМЖПослРФАдрФИАС5880A2E { get; set; }
+		public fatalzp_fatalzp_d_АдрФИАСТип dМЖПослРФАдрФИАС5880A2E { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_МЖПослТип")]
-	public partial class fatalzp_d_МЖПослТип
+	public partial class fatalzp_fatalzp_d_МЖПослТип
 	{
 		[PrimaryKey, NotNull    ] public Guid  Id       { get; set; } // uuid
 		[Column,        Nullable] public Guid? МЖПослИн { get; set; } // uuid
@@ -369,19 +5249,19 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_МЖПослТип_МЖПослИн_0DCD02F3
 		/// </summary>
 		[Association(ThisKey="МЖПослИн", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_МЖПослТип_МЖПослИн_0DCD02F3")]
-		public fatalzp_d_МЖПослИн dМЖПослТипМЖПослИн0DCD02F { get; set; }
+		public fatalzp_fatalzp_d_МЖПослИн dМЖПослТипМЖПослИн0DCD02F { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_МЖПослТип_МЖПослРФ_0DCD1EEA
 		/// </summary>
 		[Association(ThisKey="МЖПослРФ", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_МЖПослТип_МЖПослРФ_0DCD1EEA")]
-		public fatalzp_d_МЖПослРФ dМЖПослТипМЖПослРФ0DCD1EEA { get; set; }
+		public fatalzp_fatalzp_d_МЖПослРФ dМЖПослТипМЖПослРФ0DCD1EEA { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_НомерТип")]
-	public partial class fatalzp_d_НомерТип
+	public partial class fatalzp_fatalzp_d_НомерТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id    { get; set; } // uuid
 		[Column,        Nullable] public string Тип   { get; set; } // character varying(50)
@@ -389,7 +5269,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="d_НомерТипЗданиеCollection_fatalzp_d_А_BF94C0E4")]
-	public partial class fatalzp_d_НомерТипЗданиеCollection_fatalzp_d_А_BF94C0E4
+	public partial class fatalzp_fatalzp_d_НомерТипЗданиеCollection_fatalzp_d_А_BF94C0E4
 	{
 		[Column,        Nullable] public Guid? АдрФИАСТипCollection { get; set; } // uuid
 		[Column,        Nullable] public Guid? ЗданиеCollection     { get; set; } // uuid
@@ -402,19 +5282,19 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_НомерТипЗданиеCollection_fa_52FFE115
 		/// </summary>
 		[Association(ThisKey="ЗданиеCollection", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_НомерТипЗданиеCollection_fa_52FFE115")]
-		public fatalzp_d_НомерТип dНомерТипЗданиеCollectionfa52FFE { get; set; }
+		public fatalzp_fatalzp_d_НомерТип dНомерТипЗданиеCollectionfa52FFE { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_НомерТипЗданиеCollection_fa_EBC7492B
 		/// </summary>
 		[Association(ThisKey="АдрФИАСТипCollection", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_НомерТипЗданиеCollection_fa_EBC7492B")]
-		public fatalzp_d_АдрФИАСТип dНомерТипЗданиеCollectionfaEBC7492B { get; set; }
+		public fatalzp_fatalzp_d_АдрФИАСТип dНомерТипЗданиеCollectionfaEBC7492B { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_ОрганЗАГСТип")]
-	public partial class fatalzp_d_ОрганЗАГСТип
+	public partial class fatalzp_fatalzp_d_ОрганЗАГСТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id       { get; set; } // uuid
 		[Column,        Nullable] public string НаимЗАГС { get; set; } // character varying(1000)
@@ -422,7 +5302,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="d_ПрдСведРег")]
-	public partial class fatalzp_d_ПрдСведРег
+	public partial class fatalzp_fatalzp_d_ПрдСведРег
 	{
 		[PrimaryKey, NotNull    ] public Guid  Id       { get; set; } // uuid
 		[Column,        Nullable] public Guid? СведУмер { get; set; } // uuid
@@ -433,13 +5313,13 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_ПрдСведРег_СведУмер_6CAEF2E7
 		/// </summary>
 		[Association(ThisKey="СведУмер", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_ПрдСведРег_СведУмер_6CAEF2E7")]
-		public fatalzp_d_СведУмер dПрдСведРегСведУмер6CAEF2E { get; set; }
+		public fatalzp_fatalzp_d_СведУмер dПрдСведРегСведУмер6CAEF2E { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_СведДокОснТип")]
-	public partial class fatalzp_d_СведДокОснТип
+	public partial class fatalzp_fatalzp_d_СведДокОснТип
 	{
 		[PrimaryKey, NotNull    ] public Guid  Id        { get; set; } // uuid
 		[Column,        Nullable] public Guid? ДокОсн    { get; set; } // uuid
@@ -451,19 +5331,19 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_СведДокОснТип_ДокОсн_EDC3D444
 		/// </summary>
 		[Association(ThisKey="ДокОсн", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведДокОснТип_ДокОсн_EDC3D444")]
-		public fatalzp_d_СведДокТип dСведДокОснТипДокОснEDC3D { get; set; }
+		public fatalzp_fatalzp_d_СведДокТип dСведДокОснТипДокОснEDC3D { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведДокОснТип_ЗапАктО_356408B0
 		/// </summary>
 		[Association(ThisKey="ЗапАктОсн", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведДокОснТип_ЗапАктО_356408B0")]
-		public fatalzp_d_ЗапАктТип dСведДокОснТипЗапАктО356408B { get; set; }
+		public fatalzp_fatalzp_d_ЗапАктТип dСведДокОснТипЗапАктО356408B { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_СведДокТип")]
-	public partial class fatalzp_d_СведДокТип
+	public partial class fatalzp_fatalzp_d_СведДокТип
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id               { get; set; } // uuid
 		[Column,        Nullable] public string    НаимОрг          { get; set; } // character varying(255)
@@ -482,25 +5362,25 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_СведДокТип_ВидДок_B7F23A28
 		/// </summary>
 		[Association(ThisKey="ВидДок", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведДокТип_ВидДок_B7F23A28")]
-		public zags_СДРАГС dСведДокТипВидДокB7F23A { get; set; }
+		public zags_zags_СДРАГС dСведДокТипВидДокB7F23A { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведДокТип_ФИОИП_4165625E
 		/// </summary>
 		[Association(ThisKey="ФИОИП", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведДокТип_ФИОИП_4165625E")]
-		public fatalzp_d_ФИОПрТип dСведДокТипФИОИП4165625E { get; set; }
+		public fatalzp_fatalzp_d_ФИОПрТип dСведДокТипФИОИП4165625E { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведДокТип_ФИОФЛ_41657C5A
 		/// </summary>
 		[Association(ThisKey="ФИОФЛ", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведДокТип_ФИОФЛ_41657C5A")]
-		public fatalzp_d_ФИОПрТип dСведДокТипФИОФЛ41657C5A { get; set; }
+		public fatalzp_fatalzp_d_ФИОПрТип dСведДокТипФИОФЛ41657C5A { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_СведИзмАГСТип")]
-	public partial class fatalzp_d_СведИзмАГСТип
+	public partial class fatalzp_fatalzp_d_СведИзмАГСТип
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id               { get; set; } // uuid
 		[Column,        Nullable] public int?      ПрСведДокИспрАГС { get; set; } // integer
@@ -518,25 +5398,25 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_СведИзмАГСТип_ВидСвед_7339686A
 		/// </summary>
 		[Association(ThisKey="ВидСвед", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведИзмАГСТип_ВидСвед_7339686A")]
-		public zags_СВЗАГС dСведИзмАГСТипВидСвед7339686A { get; set; }
+		public zags_zags_СВЗАГС dСведИзмАГСТипВидСвед7339686A { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведИзмАГСТип_СведДок_3A7E8CCA
 		/// </summary>
 		[Association(ThisKey="СведДокИспрАГС", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведИзмАГСТип_СведДок_3A7E8CCA")]
-		public fatalzp_d_СведДокОснТип dСведИзмАГСТипСведДок3A7E8CCA { get; set; }
+		public fatalzp_fatalzp_d_СведДокОснТип dСведИзмАГСТипСведДок3A7E8CCA { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведИзмАГСТип_СведРег_9A6645EB
 		/// </summary>
 		[Association(ThisKey="СведРегСмерт", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведИзмАГСТип_СведРег_9A6645EB")]
-		public fatalzp_d_СведРегСмерт dСведИзмАГСТипСведРег9A6645EB { get; set; }
+		public fatalzp_fatalzp_d_СведРегСмерт dСведИзмАГСТипСведРег9A6645EB { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_СведРегСмерт")]
-	public partial class fatalzp_d_СведРегСмерт
+	public partial class fatalzp_fatalzp_d_СведРегСмерт
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id             { get; set; } // uuid
 		[Column,        Nullable] public Guid?     ОрганЗАГС      { get; set; } // uuid
@@ -558,55 +5438,55 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_СведРегСмерт_FATALZPRequest_BC0DC7CE
 		/// </summary>
 		[Association(ThisKey="FATALZPRequest", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведРегСмерт_FATALZPRequest_BC0DC7CE")]
-		public fatalzp_d_FATALZPRequest dСведРегСмертFATALZPRequestBC0DC7CE { get; set; }
+		public fatalzp_fatalzp_d_FATALZPRequest dСведРегСмертFATALZPRequestBC0DC7CE { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведРегСмерт_ЗАГС_44D63034
 		/// </summary>
 		[Association(ThisKey="ЗАГС", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведРегСмерт_ЗАГС_44D63034")]
-		public sozags_СОЗАГС_1 dСведРегСмертЗАГС44D { get; set; }
+		public sozags_sozags_СОЗАГС_1 dСведРегСмертЗАГС44D { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведРегСмерт_ОрганЗАГ_7CF70CC8
 		/// </summary>
 		[Association(ThisKey="ОрганЗАГС", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведРегСмерт_ОрганЗАГ_7CF70CC8")]
-		public fatalzp_d_ОрганЗАГСТип dСведРегСмертОрганЗАГ7CF70CC { get; set; }
+		public fatalzp_fatalzp_d_ОрганЗАГСТип dСведРегСмертОрганЗАГ7CF70CC { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведРегСмерт_ПрдСведР_DF04EE77
 		/// </summary>
 		[Association(ThisKey="ПрдСведРег", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведРегСмерт_ПрдСведР_DF04EE77")]
-		public fatalzp_d_ПрдСведРег dСведРегСмертПрдСведРDF04EE { get; set; }
+		public fatalzp_fatalzp_d_ПрдСведРег dСведРегСмертПрдСведРDF04EE { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведРегСмерт_СведАнну_BBC5EA66
 		/// </summary>
 		[Association(ThisKey="СведАннулирАГС", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведРегСмерт_СведАнну_BBC5EA66")]
-		public fatalzp_d_СведИзмАГСТип dСведРегСмертСведАннуBBC5EA { get; set; }
+		public fatalzp_fatalzp_d_СведИзмАГСТип dСведРегСмертСведАннуBBC5EA { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведРегСмерт_СведВосс_379DE1AF
 		/// </summary>
 		[Association(ThisKey="СведВосстанАГС", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведРегСмерт_СведВосс_379DE1AF")]
-		public fatalzp_d_СведИзмАГСТип dСведРегСмертСведВосс379DE1AF { get; set; }
+		public fatalzp_fatalzp_d_СведИзмАГСТип dСведРегСмертСведВосс379DE1AF { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведРегСмерт_СведСвид_DC83BA81
 		/// </summary>
 		[Association(ThisKey="СведСвидет", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведРегСмерт_СведСвид_DC83BA81")]
-		public fatalzp_d_СведСвидетТип dСведРегСмертСведСвидDC83BA { get; set; }
+		public fatalzp_fatalzp_d_СведСвидетТип dСведРегСмертСведСвидDC83BA { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведРегСмерт_СтатусЗа_593902E2
 		/// </summary>
 		[Association(ThisKey="СтатусЗаписи", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведРегСмерт_СтатусЗа_593902E2")]
-		public fatalzp_d_СтатусЗаписи dСведРегСмертСтатусЗа593902E { get; set; }
+		public fatalzp_fatalzp_d_СтатусЗаписи dСведРегСмертСтатусЗа593902E { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_СведСвидетТип")]
-	public partial class fatalzp_d_СведСвидетТип
+	public partial class fatalzp_fatalzp_d_СведСвидетТип
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id            { get; set; } // uuid
 		[Column,        Nullable] public string    СерияСвидет   { get; set; } // character varying(8)
@@ -615,7 +5495,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="d_СведСвидетТипПовтСвидетCollec_AD026169")]
-	public partial class fatalzp_d_СведСвидетТипПовтСвидетCollec_AD026169
+	public partial class fatalzp_fatalzp_d_СведСвидетТипПовтСвидетCollec_AD026169
 	{
 		[Column,        Nullable] public Guid? СведРегСмертCollection { get; set; } // uuid
 		[Column,        Nullable] public Guid? ПовтСвидетCollection   { get; set; } // uuid
@@ -628,19 +5508,19 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_СведСвидетТипПовтСви_3DB3431F
 		/// </summary>
 		[Association(ThisKey="СведРегСмертCollection", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведСвидетТипПовтСви_3DB3431F")]
-		public fatalzp_d_СведРегСмерт dСведСвидетТипПовтСви3DB3431F { get; set; }
+		public fatalzp_fatalzp_d_СведРегСмерт dСведСвидетТипПовтСви3DB3431F { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведСвидетТипПовтСви_D61F4D18
 		/// </summary>
 		[Association(ThisKey="ПовтСвидетCollection", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведСвидетТипПовтСви_D61F4D18")]
-		public fatalzp_d_СведСвидетТип dСведСвидетТипПовтСвиD61F4D { get; set; }
+		public fatalzp_fatalzp_d_СведСвидетТип dСведСвидетТипПовтСвиD61F4D { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_СведУмер")]
-	public partial class fatalzp_d_СведУмер
+	public partial class fatalzp_fatalzp_d_СведУмер
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id                     { get; set; } // uuid
 		[Column,        Nullable] public Guid?     Гражданство            { get; set; } // uuid
@@ -679,49 +5559,49 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_СведУмер_Гражданство_A7D4E55E
 		/// </summary>
 		[Association(ThisKey="Гражданство", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведУмер_Гражданство_A7D4E55E")]
-		public fatalzp_d_ГражданствоТип dСведУмерГражданствоA7D4E55E { get; set; }
+		public fatalzp_fatalzp_d_ГражданствоТип dСведУмерГражданствоA7D4E55E { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведУмер_ДатаРождДок_6B6D32D2
 		/// </summary>
 		[Association(ThisKey="ДатаРождДок", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведУмер_ДатаРождДок_6B6D32D2")]
-		public fatalzp_d_ДатаДокТип dСведУмерДатаРождДок6B6D32D { get; set; }
+		public fatalzp_fatalzp_d_ДатаДокТип dСведУмерДатаРождДок6B6D32D { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведУмер_ДатаСмертДок_FC51E710
 		/// </summary>
 		[Association(ThisKey="ДатаСмертДок", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведУмер_ДатаСмертДок_FC51E710")]
-		public fatalzp_d_ДатаДокТип dСведУмерДатаСмертДокFC51E { get; set; }
+		public fatalzp_fatalzp_d_ДатаДокТип dСведУмерДатаСмертДокFC51E { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведУмер_МестоРожден_68C14DA7
 		/// </summary>
 		[Association(ThisKey="МестоРожден", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведУмер_МестоРожден_68C14DA7")]
-		public fatalzp_d_МестоТип dСведУмерМестоРожден68C14DA { get; set; }
+		public fatalzp_fatalzp_d_МестоТип dСведУмерМестоРожден68C14DA { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведУмер_МестоСмерт_249178E4
 		/// </summary>
 		[Association(ThisKey="МестоСмерт", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведУмер_МестоСмерт_249178E4")]
-		public fatalzp_d_МестоТип dСведУмерМестоСмерт249178E { get; set; }
+		public fatalzp_fatalzp_d_МестоТип dСведУмерМестоСмерт249178E { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведУмер_МЖПосл_1A3EF5F2
 		/// </summary>
 		[Association(ThisKey="МЖПосл", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведУмер_МЖПосл_1A3EF5F2")]
-		public fatalzp_d_МЖПослТип dСведУмерМЖПосл1A3EF5F { get; set; }
+		public fatalzp_fatalzp_d_МЖПослТип dСведУмерМЖПосл1A3EF5F { get; set; }
 
 		/// <summary>
 		/// FK_fatalzp_d_СведУмер_УдЛичнФЛ_DDC198B4
 		/// </summary>
 		[Association(ThisKey="УдЛичнФЛ", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_СведУмер_УдЛичнФЛ_DDC198B4")]
-		public fatalzp_d_УдЛичнФЛТип dСведУмерУдЛичнФЛDDC198B { get; set; }
+		public fatalzp_fatalzp_d_УдЛичнФЛТип dСведУмерУдЛичнФЛDDC198B { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_СтатусЗаписи")]
-	public partial class fatalzp_d_СтатусЗаписи
+	public partial class fatalzp_fatalzp_d_СтатусЗаписи
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id            { get; set; } // uuid
 		[Column,        Nullable] public DateTime? ДатаНачСтатус { get; set; } // timestamp (6) without time zone
@@ -730,7 +5610,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="d_ТипНаимТип")]
-	public partial class fatalzp_d_ТипНаимТип
+	public partial class fatalzp_fatalzp_d_ТипНаимТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id   { get; set; } // uuid
 		[Column,        Nullable] public string Тип  { get; set; } // character varying(50)
@@ -738,7 +5618,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="d_УдЛичнФЛТип")]
-	public partial class fatalzp_d_УдЛичнФЛТип
+	public partial class fatalzp_fatalzp_d_УдЛичнФЛТип
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id               { get; set; } // uuid
 		[Column,        Nullable] public string    КодВидДок        { get; set; } // character varying(2)
@@ -755,13 +5635,13 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_fatalzp_d_УдЛичнФЛТип_ВидДок_ABF3354E
 		/// </summary>
 		[Association(ThisKey="ВидДок", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_fatalzp_d_УдЛичнФЛТип_ВидДок_ABF3354E")]
-		public zags_СПДУЛ dУдЛичнФЛТипВидДокABF3354E { get; set; }
+		public zags_zags_СПДУЛ dУдЛичнФЛТипВидДокABF3354E { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="fatalzp", Name="d_ФИОПрТип")]
-	public partial class fatalzp_d_ФИОПрТип
+	public partial class fatalzp_fatalzp_d_ФИОПрТип
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id         { get; set; } // uuid
 		[Column,        Nullable] public string Фамилия    { get; set; } // character varying(60)
@@ -773,7 +5653,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="sv_cd_umer", IsView=true)]
-	public partial class fatalzp_sv_cd_umer
+	public partial class fatalzp_fatalzp_sv_cd_umer
 	{
 		[Column(SkipOnUpdate=true), Nullable] public long?     row_number      { get; set; } // bigint
 		[Column(SkipOnUpdate=true), Nullable] public long?     rn              { get; set; } // bigint
@@ -812,7 +5692,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="sv_cd_umer_all", IsView=true)]
-	public partial class fatalzp_sv_cd_umer_all
+	public partial class fatalzp_fatalzp_sv_cd_umer_all
 	{
 		[Column(SkipOnUpdate=true), Nullable] public long?     row_number     { get; set; } // bigint
 		[Column(SkipOnUpdate=true), Nullable] public Guid?     svedumer       { get; set; } // uuid
@@ -848,7 +5728,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="sv_cd_umer_cut", IsView=true)]
-	public partial class fatalzp_sv_cd_umer_cut
+	public partial class fatalzp_fatalzp_sv_cd_umer_cut
 	{
 		[Column(SkipOnUpdate=true), Nullable] public long?     row_number     { get; set; } // bigint
 		[Column(SkipOnUpdate=true), Nullable] public long?     rn             { get; set; } // bigint
@@ -885,7 +5765,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="sv_cd_umer_pension", IsView=true)]
-	public partial class fatalzp_sv_cd_umer_pension
+	public partial class fatalzp_fatalzp_sv_cd_umer_pension
 	{
 		[Column(SkipOnUpdate=true), Nullable] public long?       row_number      { get; set; } // bigint
 		[Column(SkipOnUpdate=true), Nullable] public string      c_surname       { get; set; } // character varying(64)
@@ -901,7 +5781,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="sv_cd_umer_poor", IsView=true)]
-	public partial class fatalzp_sv_cd_umer_poor
+	public partial class fatalzp_fatalzp_sv_cd_umer_poor
 	{
 		[Column(SkipOnUpdate=true), Nullable] public long?       row_number             { get; set; } // bigint
 		[Column(SkipOnUpdate=true), Nullable] public string      c_surname              { get; set; } // character varying(64)
@@ -922,7 +5802,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="fatalzp", Name="sv_cd_umer_subsidy", IsView=true)]
-	public partial class fatalzp_sv_cd_umer_subsidy
+	public partial class fatalzp_fatalzp_sv_cd_umer_subsidy
 	{
 		[Column(SkipOnUpdate=true), Nullable] public long?       row_number      { get; set; } // bigint
 		[Column(SkipOnUpdate=true), Nullable] public string      c_surname       { get; set; } // character varying(64)
@@ -943,8 +5823,9362 @@ namespace SocialTargetHelpAPIServer.Models
 		[Column(SkipOnUpdate=true), Nullable] public int?        f_org           { get; set; } // integer
 	}
 
+	/// <summary>
+	/// [XMeta.DisplayName=Реестр адресообразующих элементов]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cd_address_objects")]
+	public partial class fias_fias_cd_address_objects
+	{
+		/// <summary>
+		/// Уникальный идентификатор записи. Ключевое поле
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        aoid                 { get; set; } // uuid
+		/// <summary>
+		/// Глобальный уникальный идентификатор адресного объекта
+		/// </summary>
+		[Column,     NotNull    ] public Guid        aoguid               { get; set; } // uuid
+		/// <summary>
+		/// Формализованное наименование
+		/// </summary>
+		[Column,        Nullable] public string      formalname           { get; set; } // character varying(120)
+		/// <summary>
+		/// Код региона
+		/// </summary>
+		[Column,        Nullable] public string      regioncode           { get; set; } // character varying(2)
+		/// <summary>
+		/// Код автономии
+		/// </summary>
+		[Column,        Nullable] public char?       autocode             { get; set; } // character varying(1)
+		/// <summary>
+		/// Код района
+		/// </summary>
+		[Column,        Nullable] public string      areacode             { get; set; } // character varying(3)
+		/// <summary>
+		/// Код города
+		/// </summary>
+		[Column,        Nullable] public string      citycode             { get; set; } // character varying(3)
+		/// <summary>
+		/// Код внутригородского района
+		/// </summary>
+		[Column,        Nullable] public string      ctarcode             { get; set; } // character varying(3)
+		/// <summary>
+		/// Код населенного пункта
+		/// </summary>
+		[Column,        Nullable] public string      placecode            { get; set; } // character varying(3)
+		/// <summary>
+		/// Код элемента планировочной структуры
+		/// </summary>
+		[Column,        Nullable] public string      plancode             { get; set; } // character varying(4)
+		/// <summary>
+		/// Код улицы
+		/// </summary>
+		[Column,        Nullable] public string      streetcode           { get; set; } // character varying(4)
+		/// <summary>
+		/// Код дополнительного адресообразующего элемента
+		/// </summary>
+		[Column,        Nullable] public string      extrcode             { get; set; } // character varying(4)
+		/// <summary>
+		/// Код подчиненного дополнительного адресообразующего элемента
+		/// </summary>
+		[Column,        Nullable] public string      sextcode             { get; set; } // character varying(3)
+		/// <summary>
+		/// Официальное наименование
+		/// </summary>
+		[Column,        Nullable] public string      offname              { get; set; } // character varying(120)
+		/// <summary>
+		/// Почтовый индекс
+		/// </summary>
+		[Column,        Nullable] public string      postalcode           { get; set; } // character varying(6)
+		/// <summary>
+		/// Код ИФНС ФЛ
+		/// </summary>
+		[Column,        Nullable] public string      ifnsfl               { get; set; } // character varying(4)
+		/// <summary>
+		/// Код территориального участка ИФНС ФЛ
+		/// </summary>
+		[Column,        Nullable] public string      terrifnsfl           { get; set; } // character varying(4)
+		/// <summary>
+		/// Код ИФНС ЮЛ
+		/// </summary>
+		[Column,        Nullable] public string      ifnsul               { get; set; } // character varying(4)
+		/// <summary>
+		/// Код территориального участка ИФНС ЮЛ
+		/// </summary>
+		[Column,        Nullable] public string      terrifnsul           { get; set; } // character varying(4)
+		/// <summary>
+		/// OKATO
+		/// </summary>
+		[Column,        Nullable] public string      okato                { get; set; } // character varying(11)
+		/// <summary>
+		/// ОКТМО
+		/// </summary>
+		[Column,        Nullable] public string      oktmo                { get; set; } // character varying(11)
+		/// <summary>
+		/// Дата  внесения (обновления) записи
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? updatedate           { get; set; } // date
+		/// <summary>
+		/// Краткое наименование типа объекта
+		/// </summary>
+		[Column,        Nullable] public string      shortname            { get; set; } // character varying(10)
+		/// <summary>
+		/// Уровень адресного объекта
+		/// </summary>
+		[Column,     NotNull    ] public short       aolevel              { get; set; } // smallint
+		/// <summary>
+		/// Идентификатор объекта родительского объекта
+		/// </summary>
+		[Column,        Nullable] public Guid?       parentguid           { get; set; } // uuid
+		/// <summary>
+		/// Идентификатор записи связывания с предыдушей исторической записью
+		/// </summary>
+		[Column,        Nullable] public Guid?       previd               { get; set; } // uuid
+		/// <summary>
+		/// Идентификатор записи  связывания с последующей исторической записью
+		/// </summary>
+		[Column,        Nullable] public Guid?       nextid               { get; set; } // uuid
+		/// <summary>
+		/// Код адресного элемента одной строкой с признаком актуальности из классификационного кода
+		/// </summary>
+		[Column,        Nullable] public string      code                 { get; set; } // character varying(17)
+		/// <summary>
+		/// Код адресного элемента одной строкой без признака актуальности (последних двух цифр)
+		/// </summary>
+		[Column,        Nullable] public string      plaincode            { get; set; } // character varying(15)
+		/// <summary>
+		/// Статус последней исторической записи в жизненном цикле адресного объекта:
+		/// 0 – Не последняя
+		/// 1 - Последняя
+		/// </summary>
+		[Column,     NotNull    ] public bool        actstatus            { get; set; } // boolean
+		/// <summary>
+		/// Статус актуальности адресного объекта ФИАС на текущую дату:
+		/// 0 – Не актуальный
+		/// 1 - Актуальный
+		/// </summary>
+		[Column,     NotNull    ] public bool        livestatus           { get; set; } // boolean
+		/// <summary>
+		/// Статус центра
+		/// </summary>
+		[Column,     NotNull    ] public short       centstatus           { get; set; } // smallint
+		/// <summary>
+		/// Статус действия над записью – причина появления записи (см. OperationStatuses )
+		/// </summary>
+		[Column,     NotNull    ] public short       operstatus           { get; set; } // smallint
+		/// <summary>
+		/// Статус актуальности КЛАДР 4 (последние две цифры в коде)
+		/// </summary>
+		[Column,     NotNull    ] public short       currstatus           { get; set; } // smallint
+		/// <summary>
+		/// Начало действия записи
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  startdate            { get; set; } // date
+		/// <summary>
+		/// Окончание действия записи
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  enddate              { get; set; } // date
+		/// <summary>
+		/// Внешний ключ на нормативный документ
+		/// </summary>
+		[Column,        Nullable] public Guid?       normdoc              { get; set; } // uuid
+		/// <summary>
+		/// Кадастровый номер
+		/// </summary>
+		[Column,        Nullable] public string      cadnum               { get; set; } // character varying(100)
+		/// <summary>
+		/// Тип деления:
+		/// 0 – не определено
+		/// 1 – муниципальное
+		/// 2 – административное
+		/// </summary>
+		[Column,     NotNull    ] public short       divtype              { get; set; } // smallint
+		/// <summary>
+		/// Формализованное наименование в нижнем регистре
+		/// </summary>
+		[Column,        Nullable] public string      formalname_lowercase { get; set; } // character varying(120)
+		[Column,        Nullable] public string      fullname             { get; set; } // character varying(256)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Реестр образующих элементов]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="fias", Name="cd_addrobj")]
+	public partial class fias_fias_cd_addrobj
+	{
+		/// <summary>
+		/// Глобальный уникальный идентификатор адресного объекта
+		/// </summary>
+		[Column,     NotNull    ] public Guid        aoguid               { get; set; } // uuid
+		/// <summary>
+		/// Формализованное наименование
+		/// </summary>
+		[Column,        Nullable] public string      formalname           { get; set; } // character varying(120)
+		/// <summary>
+		/// Код региона
+		/// </summary>
+		[Column,        Nullable] public string      regioncode           { get; set; } // character varying(2)
+		/// <summary>
+		/// Официальное наименование
+		/// </summary>
+		[Column,        Nullable] public string      offname              { get; set; } // character varying(120)
+		/// <summary>
+		/// Почтовый индекс
+		/// </summary>
+		[Column,        Nullable] public string      postalcode           { get; set; } // character varying(6)
+		/// <summary>
+		/// OKATO
+		/// </summary>
+		[Column,        Nullable] public string      okato                { get; set; } // character varying(11)
+		/// <summary>
+		/// ОКТМО
+		/// </summary>
+		[Column,        Nullable] public string      oktmo                { get; set; } // character varying(11)
+		/// <summary>
+		/// Дата  внесения (обновления) записи
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? updatedate           { get; set; } // date
+		/// <summary>
+		/// Краткое наименование типа объекта
+		/// </summary>
+		[Column,        Nullable] public string      shortname            { get; set; } // character varying(10)
+		/// <summary>
+		/// Уровень адресного объекта
+		/// </summary>
+		[Column,     NotNull    ] public short       aolevel              { get; set; } // smallint
+		/// <summary>
+		/// Идентификатор объекта родительского объекта
+		/// </summary>
+		[Column,        Nullable] public Guid?       parentguid           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Raw=System.ComponentModel.DataAnnotations.Key]
+		/// 
+		/// 
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        aoid                 { get; set; } // uuid
+		/// <summary>
+		/// Код адресного элемента одной строкой без признака актуальности (последних двух цифр)
+		/// </summary>
+		[Column,        Nullable] public string      plaincode            { get; set; } // character varying(15)
+		/// <summary>
+		/// Код адресного элемента одной строкой с признаком актуальности из классификационного кода
+		/// </summary>
+		[Column,        Nullable] public string      code                 { get; set; } // character varying(17)
+		/// <summary>
+		/// Статус последней исторической записи в жизненном цикле адресного объекта:
+		/// 0 – Не последняя
+		/// 1 - Последняя
+		/// 
+		/// </summary>
+		[Column,     NotNull    ] public bool        actstatus            { get; set; } // boolean
+		/// <summary>
+		/// Статус актуальности адресного объекта ФИАС на текущую дату:
+		/// 0 – Не актуальный
+		/// 1 - Актуальный
+		/// 
+		/// </summary>
+		[Column,     NotNull    ] public bool        livestatus           { get; set; } // boolean
+		/// <summary>
+		/// Статус центра
+		/// </summary>
+		[Column,     NotNull    ] public short       centstatus           { get; set; } // smallint
+		/// <summary>
+		/// Статус действия над записью – причина появления записи (см. OperationStatuses )
+		/// </summary>
+		[Column,     NotNull    ] public short       operstatus           { get; set; } // smallint
+		/// <summary>
+		/// Начало действия записи
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  startdate            { get; set; } // date
+		/// <summary>
+		/// Окончание действия записи
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  enddate              { get; set; } // date
+		/// <summary>
+		/// Кадастровый номер
+		/// </summary>
+		[Column,        Nullable] public string      cadnum               { get; set; } // character varying(100)
+		/// <summary>
+		/// Тип деления:
+		/// 0 – не определено
+		/// 1 – муниципальное
+		/// 2 – административное
+		/// 
+		/// </summary>
+		[Column,     NotNull    ] public short       divtype              { get; set; } // smallint
+		/// <summary>
+		/// Полный аддрес
+		/// Республика, район, город/деревня/село, улица
+		/// </summary>
+		[Column,        Nullable] public string      c_fulladdress        { get; set; } // character varying(1000)
+		/// <summary>
+		/// Формализованное наименование в верхнем регистре
+		/// </summary>
+		[Column,        Nullable] public string      formalname_uppercase { get; set; } // character varying(120)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public Guid?       previd               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public Guid?       nextid               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public short?      currstatus           { get; set; } // smallint
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Сведения по отдельным зданиям, сооружениям]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="fias", Name="cd_house")]
+	public partial class fias_fias_cd_house
+	{
+		/// <summary>
+		/// Номер дома
+		/// </summary>
+		[Column,        Nullable] public string      housenum    { get; set; } // character varying(20)
+		/// <summary>
+		/// Дата время внесения (обновления) записи
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? update_date { get; set; } // date
+		/// <summary>
+		/// Признак владения
+		/// </summary>
+		[Column,     NotNull    ] public short       est_status  { get; set; } // smallint
+		/// <summary>
+		/// Номер корпуса
+		/// </summary>
+		[Column,        Nullable] public string      build_num   { get; set; } // character varying(10)
+		/// <summary>
+		/// Номер строения
+		/// </summary>
+		[Column,        Nullable] public string      strucnum    { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.Raw=System.ComponentModel.DataAnnotations.Key]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        houseid     { get; set; } // uuid
+		/// <summary>
+		/// Глобальный уникальный идентификатор дома
+		/// </summary>
+		[Column,     NotNull    ] public Guid        houseguid   { get; set; } // uuid
+		/// <summary>
+		/// Guid записи родительского объекта (улицы, города, населенного пункта и т.п.)
+		/// </summary>
+		[Column,     NotNull    ] public Guid        aoguid      { get; set; } // uuid
+		/// <summary>
+		/// Начало действия записи
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  startdate   { get; set; } // date
+		/// <summary>
+		/// Окончание действия записи
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  enddate     { get; set; } // date
+		/// <summary>
+		/// Состояние дома
+		/// </summary>
+		[Column,        Nullable] public short?      statstatus  { get; set; } // smallint
+		/// <summary>
+		/// Кадастровый номер
+		/// </summary>
+		[Column,        Nullable] public string      cadnum      { get; set; } // character varying(100)
+		/// <summary>
+		/// Тип деления:
+		/// 0 – не определено
+		/// 1 – муниципальное
+		/// 2 – административное
+		/// 
+		/// </summary>
+		[Column,     NotNull    ] public short       divtype     { get; set; } // smallint
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public string      regioncode  { get; set; } // character(2)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public string      postalcode  { get; set; } // character(6)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public string      okato       { get; set; } // character varying(11)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public string      oktmo       { get; set; } // character varying(11)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Интервалы домов]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cd_houseint")]
+	public partial class fias_fias_cd_houseint
+	{
+		/// <summary>
+		/// Дата  внесения (обновления) записи
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? update_date { get; set; } // date
+		/// <summary>
+		/// Значение начала интервала
+		/// </summary>
+		[Column,        Nullable] public int?        intstart    { get; set; } // integer
+		/// <summary>
+		/// Значение окончания интервала
+		/// </summary>
+		[Column,        Nullable] public int?        intend      { get; set; } // integer
+		/// <summary>
+		/// Идентификатор записи интервала домов
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        houseintid  { get; set; } // uuid
+		/// <summary>
+		/// Глобальный уникальный идентификатор интервала домов
+		/// </summary>
+		[Column,        Nullable] public Guid?       intguid     { get; set; } // uuid
+		/// <summary>
+		/// Идентификатор объекта родительского объекта (улицы, города, населенного пункта и т.п.)
+		/// </summary>
+		[Column,        Nullable] public Guid?       auguid      { get; set; } // uuid
+		/// <summary>
+		/// Начало действия записи
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? startdate   { get; set; } // date
+		/// <summary>
+		/// Окончание действия записи
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? enddate     { get; set; } // date
+		/// <summary>
+		/// Статус интервала (обычный, четный, нечетный)
+		/// </summary>
+		[Column,        Nullable] public short?      intstatus   { get; set; } // smallint
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Сведения по помещениям]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cd_room")]
+	public partial class fias_fias_cd_room
+	{
+		/// <summary>
+		/// Уникальный идентификатор записи помещения
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        roomid      { get; set; } // uuid
+		/// <summary>
+		/// Глобальный уникальный идентификатор помещения
+		/// </summary>
+		[Column,     NotNull    ] public Guid        roomguid    { get; set; } // uuid
+		/// <summary>
+		/// Глобальный уникальный идентификатор родительского объекта (дома)
+		/// </summary>
+		[Column,     NotNull    ] public Guid        houseguid   { get; set; } // uuid
+		/// <summary>
+		/// Код региона
+		/// </summary>
+		[Column,        Nullable] public string      regioncode  { get; set; } // character varying(2)
+		/// <summary>
+		/// Тип квартиры
+		/// </summary>
+		[Column,        Nullable] public int?        flattype    { get; set; } // integer
+		/// <summary>
+		/// Номер комнаты или помещения
+		/// </summary>
+		[Column,        Nullable] public string      roomnumber  { get; set; } // character varying(50)
+		/// <summary>
+		/// Тип комнаты
+		/// </summary>
+		[Column,        Nullable] public int?        roomtypeid  { get; set; } // integer
+		/// <summary>
+		/// Дата время внесения (обновления) записи
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? update_date { get; set; } // date
+		/// <summary>
+		/// Идентификатор записи связывания с предыдущей исторической записью
+		/// </summary>
+		[Column,        Nullable] public Guid?       previd      { get; set; } // uuid
+		/// <summary>
+		/// Идентификатор записи  связывания с последующей исторической записью
+		/// </summary>
+		[Column,        Nullable] public Guid?       nextid      { get; set; } // uuid
+		/// <summary>
+		/// Начало действия записи
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  startdate   { get; set; } // date
+		/// <summary>
+		/// Окончание действия записи
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  enddate     { get; set; } // date
+		/// <summary>
+		/// Статус актуальности адресного объекта ФИАС на текущую дату:
+		/// 0 – Не актуальный
+		/// 1 - Актуальный
+		/// 
+		/// </summary>
+		[Column,     NotNull    ] public bool        livestatus  { get; set; } // boolean
+		/// <summary>
+		/// Кадастровый номер
+		/// 
+		/// </summary>
+		[Column,        Nullable] public string      cadnum      { get; set; } // character varying(100)
+		/// <summary>
+		/// Номер квартиры, офиса и прочего
+		/// </summary>
+		[Column,        Nullable] public string      flatnumber  { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статус актуальности ФИАС]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cs_actstat")]
+	public partial class fias_fias_cs_actstat
+	{
+		/// <summary>
+		/// Идентификатор статуса (ключ)
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    actstatid { get; set; } // integer
+		/// <summary>
+		/// Наименование
+		/// 0 – Не актуальный
+		/// 1 – Актуальный (последняя запись по адресному объекту)
+		/// 
+		/// </summary>
+		[Column,        Nullable] public string name      { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статус центра]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cs_centerst")]
+	public partial class fias_fias_cs_centerst
+	{
+		/// <summary>
+		/// Идентификатор статуса
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    centerstid { get; set; } // integer
+		/// <summary>
+		/// Наименование
+		/// </summary>
+		[Column,        Nullable] public string name       { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статус актуальности выгрузки ФИАС формата КЛАДР]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cs_curentst")]
+	public partial class fias_fias_cs_curentst
+	{
+		/// <summary>
+		/// Идентификатор статуса (ключ)
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    curentstid { get; set; } // integer
+		/// <summary>
+		/// Наименование (0 - актуальный, 1-50, 2-98 – исторический (кроме 51), 51 - переподчиненный, 99 - несуществующий)
+		/// </summary>
+		[Column,        Nullable] public string name       { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Признак владения]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cs_eststat")]
+	public partial class fias_fias_cs_eststat
+	{
+		/// <summary>
+		/// Признак владения
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    eststatid { get; set; } // integer
+		/// <summary>
+		/// Наименование
+		/// </summary>
+		[Column,        Nullable] public string name      { get; set; } // character varying(50)
+		/// <summary>
+		/// Краткое наименование
+		/// </summary>
+		[Column,        Nullable] public string shortname { get; set; } // character varying(20)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статус состояния объектов недвижимости]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cs_hststat")]
+	public partial class fias_fias_cs_hststat
+	{
+		/// <summary>
+		/// Идентификатор статуса
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    housestid { get; set; } // integer
+		/// <summary>
+		/// Наименование
+		/// </summary>
+		[Column,        Nullable] public string name      { get; set; } // character varying(60)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статус интервала домов]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cs_intvstat")]
+	public partial class fias_fias_cs_intvstat
+	{
+		/// <summary>
+		/// Идентификатор статуса (обычный, четный, нечетный)
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    housestid { get; set; } // integer
+		/// <summary>
+		/// Наименование
+		/// </summary>
+		[Column,        Nullable] public string name      { get; set; } // character varying(60)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статус действия]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cs_operstat")]
+	public partial class fias_fias_cs_operstat
+	{
+		/// <summary>
+		/// Идентификатор статуса (ключ)
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    operstatid { get; set; } // integer
+		/// <summary>
+		/// Наименование
+		/// (см. таблицу OperationStatuses)
+		/// 
+		/// </summary>
+		[Column,        Nullable] public string name       { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы адресных объектов]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cs_socrbase")]
+	public partial class fias_fias_cs_socrbase
+	{
+		/// <summary>
+		/// Уровень адресного объекта
+		/// </summary>
+		[Column,        Nullable] public int?   level     { get; set; } // integer
+		/// <summary>
+		/// Краткое наименование типа объекта
+		/// </summary>
+		[Column,        Nullable] public string socr      { get; set; } // character varying(10)
+		/// <summary>
+		/// Полное наименование типа объекта
+		/// </summary>
+		[Column,        Nullable] public string socrname  { get; set; } // character varying(50)
+		/// <summary>
+		/// Ключевое поле
+		/// </summary>
+		[PrimaryKey, NotNull    ] public string kod_t_st  { get; set; } // character varying(4)
+		/// <summary>
+		/// Сокращение в сервисах РосРеестра
+		/// </summary>
+		[Column,        Nullable] public string rosreestr { get; set; } // text
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Признак строения]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="cs_strstat")]
+	public partial class fias_fias_cs_strstat
+	{
+		/// <summary>
+		/// Признак строения
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    strstatid { get; set; } // integer
+		/// <summary>
+		/// Наименование
+		/// </summary>
+		[Column,        Nullable] public string name      { get; set; } // character varying(20)
+		/// <summary>
+		/// Краткое наименование
+		/// </summary>
+		[Column,        Nullable] public string shortname { get; set; } // character varying(20)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Версии обновлений наборов данных внешних систем]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="fias", Name="ms_version")]
+	public partial class fias_fias_ms_version
+	{
+		/// <summary>
+		/// Имя набора данных
+		/// </summary>
+		[PrimaryKey, NotNull    ] public string      id             { get; set; } // character varying(10)
+		/// <summary>
+		/// Версия
+		/// 1000 = 1.0
+		/// </summary>
+		[Column,        Nullable] public int?        n_version      { get; set; } // integer
+		[Column,        Nullable] public DateTime?   d_prev_update  { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public DateTime?   d_update       { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public NpgsqlDate? d_next_update  { get; set; } // date
+		[Column,        Nullable] public long?       n_period       { get; set; } // bigint
+		[Column,        Nullable] public string      c_data_version { get; set; } // character varying(100)
+		[Column,        Nullable] public string      c_name         { get; set; } // character varying(100)
+		/// <summary>
+		/// Время запуска обновления
+		/// </summary>
+		[Column,        Nullable] public TimeSpan?   d_time_update  { get; set; } // time (6) without time zone
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Факты назначения]
+	/// </summary>
+	[Table(Schema="msz", Name="cd_case")]
+	public partial class msz_msz_cd_case
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int       id                   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=ОНМСЗ]
+		/// </summary>
+		[Column,     Nullable] public int?      f_supplier           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Пакет]
+		/// </summary>
+		[Column,     Nullable] public int?      f_file               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     Nullable] public int?      f_local_msz          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Категория локальной МСЗ]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("f_local_msz_category_msz_cs_link_msz_category_mszCollection[f_local_msz == '@This.f_local_msz']")]
+		/// </summary>
+		[Column,     Nullable] public int?      f_local_msz_category { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала действия назначения]
+		/// </summary>
+		[Column,     Nullable] public DateTime? d_date_start         { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания действия назначения]
+		/// </summary>
+		[Column,     Nullable] public DateTime? d_date_finish        { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Признак использования критериев нуждаемости при назначении МСЗ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public bool?     b_usingsign          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Перечень использованных критериев нуждаемости]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public string    c_criteria           { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Форма предоставления]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     Nullable] public int?      f_fed_form           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// [XMeta.VisibleInListView=true]
+		/// </summary>
+		[Column,     Nullable] public decimal?  n_summa              { get; set; } // numeric(28,8)
+		/// <summary>
+		/// [XMeta.DisplayName=Единица измерения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     Nullable] public int?      f_fed_edizm          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Признак монетизации]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public bool?     b_monetization       { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Содержание]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public string    c_content            { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Комментарий]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public string    c_comment            { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Количество (размер)]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public decimal?  n_amaunt             { get; set; } // numeric(28,8)
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор факта назначения]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public Guid?     uuid                 { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата принятия решения о назначении]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public DateTime? d_decision_date      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Поставщик информации]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public int?      f_parent_supplier    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор предыдущей модифицированной записи]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public Guid?     uuid_previos         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// </summary>
+		[Column,     Nullable] public int?      f_status             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма-эквивалент]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public decimal?  n_equivalentamount   { get; set; } // numeric(28,8)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата последней модификации]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public DateTime? d_last_changing      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     Nullable] public int?      f_org                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор факта назначения в РС ЕГИССО]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     Nullable] public int?      n_id_rs_egisso       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Ошибки обработки факта назначения]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     Nullable] public string    c_errors             { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Код муниципалитета]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     Nullable] public string    c_municipality_code  { get; set; } // character(2)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_case_fkey_f_org")]
+		public public_cs_organizations cdcasefkeyforg { get; set; }
+
+		/// <summary>
+		/// fk_cd_case_f_fed_edizm
+		/// </summary>
+		[Association(ThisKey="f_fed_edizm", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_case_f_fed_edizm")]
+		public msz_msz_cs_fed_edizm fkcdcaseffededizm { get; set; }
+
+		/// <summary>
+		/// fk_cd_case_f_fed_form
+		/// </summary>
+		[Association(ThisKey="f_fed_form", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_case_f_fed_form")]
+		public msz_msz_cs_fed_form fkcdcaseffedform { get; set; }
+
+		/// <summary>
+		/// fk_cd_case_f_file
+		/// </summary>
+		[Association(ThisKey="f_file", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_case_f_file")]
+		public msz_msz_cd_file fkcdcaseffile { get; set; }
+
+		/// <summary>
+		/// fk_cd_case_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_case_f_local_msz")]
+		public msz_msz_cs_local_msz fkcdcaseflocal { get; set; }
+
+		/// <summary>
+		/// fk_cd_case_f_local_msz_category
+		/// </summary>
+		[Association(ThisKey="f_local_msz_category", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_case_f_local_msz_category")]
+		public msz_msz_cs_local_msz_category fkcdcaseflocalcategory { get; set; }
+
+		/// <summary>
+		/// fk_cd_case_f_parent_supplier
+		/// </summary>
+		[Association(ThisKey="f_parent_supplier", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_case_f_parent_supplier")]
+		public msz_msz_cd_parent_suppliers fkcdcasefparentsupplier { get; set; }
+
+		/// <summary>
+		/// fk_cd_case_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_case_f_status")]
+		public msz_msz_cs_status fkcdcasefstatu { get; set; }
+
+		/// <summary>
+		/// fk_cd_case_f_supplier
+		/// </summary>
+		[Association(ThisKey="f_supplier", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_case_f_supplier")]
+		public msz_msz_cs_suppliers fkcdcasefsupplier { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Изменение факта назначения]
+	/// </summary>
+	[Table(Schema="msz", Name="cd_changed_case")]
+	public partial class msz_msz_cd_changed_case
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Факт назначения]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_case                    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Тип]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_type                    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Размер назначения]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_amount                  { get; set; } // numeric(28,8)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_finish             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime    d_created                 { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время отправки в РС ЕГИССО]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public DateTime?   d_sent_to_egisso          { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время следуюшей попытки отправки в РС ЕГИССО]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public DateTime?   d_next_try_send_to_egisso { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Ошибки отправки в РС ЕГИССО]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public string      c_send_errors             { get; set; } // text
+
+		#region Associations
+
+		/// <summary>
+		/// cd_changed_case_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_changed_case_fkey_f_case")]
+		public msz_msz_cd_case cdchangedcasefkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_changed_case_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_changed_case_fkey_f_type")]
+		public msz_msz_cs_changed_case_types cdchangedcasefkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Органы назначающие МСЗ]
+	/// [XMeta.DefaultProperty=c_title]
+	/// </summary>
+	[Table(Schema="msz", Name="cd_contract_suppliers")]
+	public partial class msz_msz_cd_contract_suppliers
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int       id                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     Nullable] public string    c_title           { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,     Nullable] public string    c_number          { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Поставщик информации]
+		/// </summary>
+		[Column,     Nullable] public int?      f_parent_supplier { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала действия]
+		/// </summary>
+		[Column,     Nullable] public DateTime? d_enact           { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания действия]
+		/// </summary>
+		[Column,     Nullable] public DateTime? d_expiration      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор документа]
+		/// </summary>
+		[Column,     Nullable] public string    c_contract_id     { get; set; } // character varying(50)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_contract_suppliers_fkey_f_parent_supplier
+		/// </summary>
+		[Association(ThisKey="f_parent_supplier", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_contract_suppliers_fkey_f_parent_supplier")]
+		public msz_msz_cd_parent_suppliers cdcontractsuppliersfkeyfparentsupplier { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Выгрузка данных]
+	/// [XMeta.DefaultProperty=c_filename]
+	/// </summary>
+	[Table(Schema="msz", Name="cd_file")]
+	public partial class msz_msz_cd_file
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int       id                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Имя файла]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_filename        { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// </summary>
+		[Column,        Nullable] public int?      f_supplier        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Период с]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_date1           { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Период по]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_date2           { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// </summary>
+		[Column,        Nullable] public int?      f_status          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор пакета]
+		/// </summary>
+		[Column,     NotNull    ] public string    c_package_id      { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Поставщик информации]
+		/// </summary>
+		[Column,        Nullable] public int?      f_parent_supplier { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Файл]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?     f_filedata        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Тип пакета]
+		/// </summary>
+		[Column,        Nullable] public int?      f_package_type    { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// fk_cd_file_f_filedata
+		/// </summary>
+		[Association(ThisKey="f_filedata", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_file_f_filedata")]
+		public public_FileData fkcdfileffiledata { get; set; }
+
+		/// <summary>
+		/// fk_cd_file_f_package_type
+		/// </summary>
+		[Association(ThisKey="f_package_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_file_f_package_type")]
+		public msz_msz_cs_package_type fkcdfilefpackagetype { get; set; }
+
+		/// <summary>
+		/// fk_cd_file_f_parent_supplier
+		/// </summary>
+		[Association(ThisKey="f_parent_supplier", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_file_f_parent_supplier")]
+		public msz_msz_cd_parent_suppliers fkcdfilefparentsupplier { get; set; }
+
+		/// <summary>
+		/// fk_cd_file_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_file_f_status")]
+		public msz_msz_cs_status fkcdfilefstatu { get; set; }
+
+		/// <summary>
+		/// fk_cd_file_f_supplier
+		/// </summary>
+		[Association(ThisKey="f_supplier", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_file_f_supplier")]
+		public msz_msz_cs_suppliers fkcdfilefsupplier { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Личные данные в сведениях о назначении]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="msz", Name="cd_link_person_case")]
+	public partial class msz_msz_cd_link_person_case
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int   id       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Личные данные]
+		/// </summary>
+		[Column,     Nullable] public int?  f_person { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Факт назначения]
+		/// </summary>
+		[Column,     Nullable] public int?  f_case   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Получатель]
+		/// </summary>
+		[Column,     Nullable] public bool? b_recipe { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Правообладатель]
+		/// </summary>
+		[Column,     Nullable] public bool? b_reason { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// fk_cd_linkpersoncase_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_linkpersoncase_f_case")]
+		public msz_msz_cd_case fkcdlinkpersoncasefcase { get; set; }
+
+		/// <summary>
+		/// fk_cd_linkpersoncase_f_persons
+		/// </summary>
+		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="fk_cd_linkpersoncase_f_persons")]
+		public public_cd_persons fkcdlinkpersoncasefperson { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Локальные МСЗ организаций]
+	/// 
+	/// </summary>
+	[Table(Schema="msz", Name="cd_local_msz_orgs_subsystems_links")]
+	public partial class msz_msz_cd_local_msz_orgs_subsystems_links
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity] public int id              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// </summary>
+		[Column,     NotNull ] public int f_local_msz     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// </summary>
+		[Column,     NotNull ] public int f_org_subsystem { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_local_msz_orgs_subsystems_links_fkey_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_local_msz_orgs_subsystems_links_fkey_f_local_msz")]
+		public msz_msz_cs_local_msz cdlocalorgssubsystemslinksfkeyflocal { get; set; }
+
+		/// <summary>
+		/// cd_local_msz_orgs_subsystems_links_fkey_f_org_subsystem
+		/// </summary>
+		[Association(ThisKey="f_org_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_local_msz_orgs_subsystems_links_fkey_f_org_subsystem")]
+		public public_cd_orgs_subsystems cdlocalorgssubsystemslinksfkeyforgsubsystem { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Поставщики информации]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="msz", Name="cd_parent_suppliers")]
+	public partial class msz_msz_cd_parent_suppliers
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     Nullable] public string c_name   { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Код региона]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public string c_region { get; set; } // character varying(3)
+		/// <summary>
+		/// [XMeta.DisplayName=Код поставщика информации]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public string c_code   { get; set; } // character varying(11)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы изменения фактов назначения]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_changed_case_types")]
+	public partial class msz_msz_cs_changed_case_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public string c_code { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Единицы измерения]
+	/// [XMeta.DefaultProperty=c_nameshort]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_fed_edizm")]
+	public partial class msz_msz_cs_fed_edizm
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    id          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public string c_code      { get; set; } // character varying(2)
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,        Nullable] public string c_name      { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Код ОКЕИ]
+		/// </summary>
+		[Column,        Nullable] public string c_okei      { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Короткое наименование]
+		/// </summary>
+		[Column,        Nullable] public string c_nameshort { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Формы предоставления]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_fed_form")]
+	public partial class msz_msz_cs_fed_form
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public string c_code { get; set; } // character varying(2)
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,        Nullable] public string c_name { get; set; } // character varying(200)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Уровни регулирования]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_fed_level")]
+	public partial class msz_msz_cs_fed_level
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Формы предоставления]
+		/// </summary>
+		[Column,        Nullable] public string c_code { get; set; } // character varying(2)
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,        Nullable] public string c_name { get; set; } // character varying(500)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Классификатор МСЗ]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_fed_msz")]
+	public partial class msz_msz_cs_fed_msz
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование МСЗ]
+		/// </summary>
+		[Column,     Nullable] public string c_name { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Код МСЗ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     Nullable] public string c_code { get; set; } // character varying(6)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Категории получателей МСЗ]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_fed_msz_category")]
+	public partial class msz_msz_cs_fed_msz_category
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код категории МСЗ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public string c_code        { get; set; } // character varying(15)
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование категории]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name        { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Примечание]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_comment     { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Код родительской категории]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_code_parent { get; set; } // character varying(8)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Категории получателей субсидии ЖКУ]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_link_msz_category_living_min")]
+	public partial class msz_msz_cs_link_msz_category_living_min
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int  id                   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// </summary>
+		[Column,     NotNull ] public int  f_local_msz          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная категория МСЗ]
+		/// </summary>
+		[Column,     NotNull ] public int  f_local_msz_category { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Доход превышает прожиточный минимум]
+		/// </summary>
+		[Column,     NotNull ] public bool b_greater            { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// cs_link_msz_category_living_min_fkey_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_link_msz_category_living_min_fkey_f_local_msz")]
+		public msz_msz_cs_local_msz cslinkcategorylivingminfkeyflocal { get; set; }
+
+		/// <summary>
+		/// cs_link_msz_category_living_min_fkey_f_local_msz_category
+		/// </summary>
+		[Association(ThisKey="f_local_msz_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_link_msz_category_living_min_fkey_f_local_msz_category")]
+		public msz_msz_cs_local_msz_category cslinkcategorylivingminfkeyflocalcategory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Категории получателей для МСЗ]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_link_msz_category_msz")]
+	public partial class msz_msz_cs_link_msz_category_msz
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity] public int id                   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// </summary>
+		[Column,     NotNull ] public int f_local_msz          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная категория получателя МСЗ]
+		/// </summary>
+		[Column,     NotNull ] public int f_local_msz_category { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_link_msz_category_msz_fkey_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_link_msz_category_msz_fkey_f_local_msz")]
+		public msz_msz_cs_local_msz cslinkcategoryfkeyflocal { get; set; }
+
+		/// <summary>
+		/// cs_link_msz_category_msz_fkey_f_local_msz_category
+		/// </summary>
+		[Association(ThisKey="f_local_msz_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_link_msz_category_msz_fkey_f_local_msz_category")]
+		public msz_msz_cs_local_msz_category cslinkcategoryfkeyflocalcategory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Локальные МСЗ]
+	/// [XMeta.DefaultProperty=c_title]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_local_msz")]
+	public partial class msz_msz_cs_local_msz
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int       id                 { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Федеральная мера социальной защиты]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_fed_msz          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальный идентификатор МСЗ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public string    c_id_msz_local     { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Поставщик информации]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_parent_supplier  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код МСЗ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_code             { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=КБК]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_kbk              { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Расчётная сумма (Правила расчёта)]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_estimation       { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Локальное наименование]
+		/// </summary>
+		[Column,        Nullable] public string    c_title            { get; set; } // character varying(2000)
+		/// <summary>
+		/// [XMeta.DisplayName=Начало действия]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_enact            { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Окончание действия]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_expiration       { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Код периодичности предоставления]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_periodicity_code { get; set; } // character varying(2)
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_subsystem        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,        Nullable] public string    c_alias            { get; set; } // character varying(50)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_local_msz_fkey_f_fed_msz
+		/// </summary>
+		[Association(ThisKey="f_fed_msz", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_local_msz_fkey_f_fed_msz")]
+		public msz_msz_cs_fed_msz cslocalfkeyffed { get; set; }
+
+		/// <summary>
+		/// cs_local_msz_fkey_f_parent_supplier
+		/// </summary>
+		[Association(ThisKey="f_parent_supplier", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_local_msz_fkey_f_parent_supplier")]
+		public msz_msz_cd_parent_suppliers cslocalfkeyfparentsupplier { get; set; }
+
+		/// <summary>
+		/// cs_local_msz_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_local_msz_fkey_f_subsystem")]
+		public public_cs_subsystems cslocalfkeyfsubsystem { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Категории локальных МСЗ]
+	/// [XMeta.DefaultProperty=c_title]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_local_msz_category")]
+	public partial class msz_msz_cs_local_msz_category
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id                      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Категория получателя МСЗ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?   f_fed_msz_category      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальный идентификатор категории МСЗ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public string c_id_msz_category_local { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Поставщик]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?   f_parent_supplier       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код локальной категории]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_code                  { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Локальное наименование]
+		/// </summary>
+		[Column,        Nullable] public string c_title                 { get; set; } // character varying(2000)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_local_msz_category_fkey_f_fed_msz_category
+		/// </summary>
+		[Association(ThisKey="f_fed_msz_category", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_local_msz_category_fkey_f_fed_msz_category")]
+		public msz_msz_cs_fed_msz_category cslocalcategoryfkeyffedcategory { get; set; }
+
+		/// <summary>
+		/// cs_local_msz_category_fkey_f_parent_supplier
+		/// </summary>
+		[Association(ThisKey="f_parent_supplier", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_local_msz_category_fkey_f_parent_supplier")]
+		public msz_msz_cd_parent_suppliers cslocalcategoryfkeyfparentsupplier { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Тип пакета]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_package_type")]
+	public partial class msz_msz_cs_package_type
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,        Nullable] public string c_name { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_status")]
+	public partial class msz_msz_cs_status
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,        Nullable] public string c_name  { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public string c_code  { get; set; } // character varying(30)
+		/// <summary>
+		/// [XMeta.DisplayName=Таблица]
+		/// </summary>
+		[Column,        Nullable] public string c_table { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Организации предоставляющие МСЗ]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="msz", Name="cs_suppliers")]
+	public partial class msz_msz_cs_suppliers
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id                    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,        Nullable] public string c_name                { get; set; } // character varying(1000)
+		/// <summary>
+		/// [XMeta.DisplayName=URL сайта организации]
+		/// </summary>
+		[Column,        Nullable] public string c_site_url            { get; set; } // character varying(1000)
+		/// <summary>
+		/// [XMeta.DisplayName=Документ-обоснование]
+		/// </summary>
+		[Column,        Nullable] public string c_license             { get; set; } // character varying(1000)
+		/// <summary>
+		/// [XMeta.DisplayName=Фактический адрес]
+		/// </summary>
+		[Column,        Nullable] public string c_address             { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Электронная почта]
+		/// </summary>
+		[Column,        Nullable] public string c_email               { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН юридического лица]
+		/// </summary>
+		[Column,        Nullable] public string c_legal_person_inn    { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=КПП]
+		/// </summary>
+		[Column,        Nullable] public string c_kpp                 { get; set; } // character varying(9)
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН физическая лица]
+		/// </summary>
+		[Column,        Nullable] public string c_physical_person_inn { get; set; } // character varying(12)
+		/// <summary>
+		/// [XMeta.DisplayName=Договор с поставщиком информации]
+		/// </summary>
+		[Column,        Nullable] public int?   f_contract_supplier   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код участка ЕГИССО]
+		/// </summary>
+		[Column,     NotNull    ] public string c_ONMSZ_code          { get; set; } // character varying(11)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_suppliers_fkey_f_contract_supplier
+		/// </summary>
+		[Association(ThisKey="f_contract_supplier", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_suppliers_fkey_f_contract_supplier")]
+		public msz_msz_cd_contract_suppliers cssuppliersfkeyfcontractsupplier { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="msz", Name="import_CD_ParentSupplers")]
+	public partial class msz_msz_import_CD_ParentSupplers
+	{
+		[PrimaryKey, Identity] public int       LINK          { get; set; } // integer
+		[Column,     Nullable] public DateTime? S_Create_Date { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public DateTime? S_Modif_Date  { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public string    C_Creator     { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Creator_IP  { get; set; } // character varying(50)
+		[Column,     Nullable] public string    C_Owner       { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Owner_IP    { get; set; } // character varying(50)
+		[Column,     Nullable] public string    C_Name        { get; set; } // character varying(500)
+		[Column,     Nullable] public string    C_Region      { get; set; } // character varying(3)
+		[Column,     Nullable] public string    C_Code        { get; set; } // character varying(11)
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="msz", Name="import_CS_Fed_MSZ")]
+	public partial class msz_msz_import_CS_Fed_MSZ
+	{
+		[PrimaryKey, Identity] public int       LINK          { get; set; } // integer
+		[Column,     Nullable] public DateTime? S_Create_Date { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public DateTime? S_Modif_Date  { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public string    C_Creator     { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Creator_IP  { get; set; } // character varying(50)
+		[Column,     Nullable] public string    C_Owner       { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Owner_IP    { get; set; } // character varying(50)
+		[Column,     Nullable] public string    C_Code        { get; set; } // character varying(6)
+		[Column,     Nullable] public string    C_Name        { get; set; } // character varying(500)
+		[Column,     Nullable] public int?      F_ClsVersion  { get; set; } // integer
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="msz", Name="import_CS_Fed_MSZ_Category")]
+	public partial class msz_msz_import_CS_Fed_MSZ_Category
+	{
+		[PrimaryKey, Identity] public int       LINK          { get; set; } // integer
+		[Column,     Nullable] public DateTime? S_Create_Date { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public DateTime? S_Modif_Date  { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public string    C_Creator     { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Creator_IP  { get; set; } // character varying(50)
+		[Column,     Nullable] public string    C_Owner       { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Owner_IP    { get; set; } // character varying(50)
+		[Column,     Nullable] public string    C_Code        { get; set; } // character varying(15)
+		[Column,     Nullable] public string    C_Name        { get; set; } // text
+		[Column,     Nullable] public string    C_Comment     { get; set; } // text
+		[Column,     Nullable] public int?      F_ClsVersion  { get; set; } // integer
+		[Column,     Nullable] public string    C_CodeParent  { get; set; } // character varying(8)
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="msz", Name="import_CS_LinkMSZCategoryMSZ")]
+	public partial class msz_msz_import_CS_LinkMSZCategoryMSZ
+	{
+		[PrimaryKey, Identity] public int       LINK                 { get; set; } // integer
+		[Column,     Nullable] public DateTime? S_Create_Date        { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public DateTime? S_Modif_Date         { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public string    C_Creator            { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Creator_IP         { get; set; } // character varying(50)
+		[Column,     Nullable] public string    C_Owner              { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Owner_IP           { get; set; } // character varying(50)
+		[Column,     Nullable] public int?      F_Local_MSZ          { get; set; } // integer
+		[Column,     Nullable] public int?      F_Local_MSZ_Category { get; set; } // integer
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="msz", Name="import_CS_Local_MSZ")]
+	public partial class msz_msz_import_CS_Local_MSZ
+	{
+		[PrimaryKey, Identity] public int       LINK              { get; set; } // integer
+		[Column,     Nullable] public DateTime? S_Create_Date     { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public DateTime? S_Modif_Date      { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public string    C_Creator         { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Creator_IP      { get; set; } // character varying(50)
+		[Column,     Nullable] public string    C_Owner           { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Owner_IP        { get; set; } // character varying(50)
+		[Column,     Nullable] public int?      F_Fed_MSZ         { get; set; } // integer
+		[Column,     Nullable] public int?      F_Fed_Level       { get; set; } // integer
+		[Column,     Nullable] public int?      F_Fed_Form        { get; set; } // integer
+		[Column,     Nullable] public int?      F_Fed_Rubricator  { get; set; } // integer
+		[Column,     Nullable] public string    C_ID_MSZ_Local    { get; set; } // character varying(50)
+		[Column,     Nullable] public int?      F_ParentSupplers  { get; set; } // integer
+		[Column,     Nullable] public string    C_Code            { get; set; } // character varying(20)
+		[Column,     Nullable] public string    C_KBK             { get; set; } // character varying(20)
+		[Column,     Nullable] public string    C_Estimation      { get; set; } // character varying(500)
+		[Column,     Nullable] public string    C_Title           { get; set; } // character varying(2000)
+		[Column,     Nullable] public DateTime? D_DateEnact       { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public DateTime? D_DateExpiration  { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public string    C_PeriodicityCode { get; set; } // character varying(2)
+		[Column,     Nullable] public int?      F_File            { get; set; } // integer
+		[Column,     Nullable] public string    C_PreviosID       { get; set; } // character varying(50)
+		[Column,     Nullable] public int?      F_Status          { get; set; } // integer
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="msz", Name="import_CS_Local_MSZ_Category")]
+	public partial class msz_msz_import_CS_Local_MSZ_Category
+	{
+		[PrimaryKey, Identity] public int       LINK                    { get; set; } // integer
+		[Column,     Nullable] public DateTime? S_Create_Date           { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public DateTime? S_Modif_Date            { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public string    C_Creator               { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Creator_IP            { get; set; } // character varying(50)
+		[Column,     Nullable] public string    C_Owner                 { get; set; } // character varying(100)
+		[Column,     Nullable] public string    C_Owner_IP              { get; set; } // character varying(50)
+		[Column,     Nullable] public int?      F_Fed_MSZ_Category      { get; set; } // integer
+		[Column,     Nullable] public string    C_ID_MSZ_Category_Local { get; set; } // character varying(50)
+		[Column,     Nullable] public int?      F_ParentSupplers        { get; set; } // integer
+		[Column,     Nullable] public string    C_Code                  { get; set; } // character varying(20)
+		[Column,     Nullable] public string    C_Title                 { get; set; } // character varying(2000)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Дополнительные выплаты к должностному окладу]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="pension", Name="cd_additional_payments")]
+	public partial class pension_pension_cd_additional_payments
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid       id                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull] public Guid       f_case               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=За выслугу лет]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal    n_long_service       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=За особые условия государственной гражданской службы]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal    n_special_conditions { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=За работу со сведениями, составляющими государственную тайну]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal    n_state_secret       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Ежемесячное денежное поощрение]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal    n_month_reward       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Премии за выполнение особо важных и сложных заданий]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal    n_important_task     { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Единовременная выплата при предоставлении ежегодного оплачиваемого отпуска и материальная помощь]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal    n_vacation           { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Итого]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal    n_total              { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Оклад за должность]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal    n_payment_post       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Оклад за классный чин]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal    n_payment_rank       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Начало периода]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public NpgsqlDate d_begin              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Окончание периода]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public NpgsqlDate d_end                { get; set; } // date
+
+		#region Associations
+
+		/// <summary>
+		/// cd_additional_payments_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_additional_payments_fkey_f_case")]
+		public pension_pension_cd_case cdadditionalpaymentsfkeyfcase { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Расчёт]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.BaseType=common_cd_calculation_base]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// </summary>
+	[Table(Schema="pension", Name="cd_calculation")]
+	public partial class pension_pension_cd_calculation
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_status               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата расчёта]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime    d_date                 { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Срок с]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_start           { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Срок по]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_end             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_summ                 { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма за предыдущее время]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_summ_past            { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Протокол]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_protocol             { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Уведомление]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_notification         { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Решение]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_decision             { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_case                 { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_executed             { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Перерасчитанный]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_recalculated         { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Перерасчёт]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_recalculation        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Процента стажа]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_experience_percent   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Стаж лет]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_experience_year      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Оклад месячного содержания]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_salary               { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата заявления]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_statement            { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Размер пенсии]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_pension_size         { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Факт назначения]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_egisso_case          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Доплата с]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_start_past      { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Доплата по]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_end_past        { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Выплатной месяц доплаты]
+		/// </summary>
+		[Column,        Nullable] public string      c_payment_month        { get; set; } // character varying(7)
+		/// <summary>
+		/// [XMeta.DisplayName=Основание для изменения размера пенсии]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_reason               { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Факт назначения по доплате]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_egisso_case_addition { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_calculation_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_calculation_fkey_id")]
+		public common_common_cd_calculation_base cd_calculation_base { get; set; }
+
+		/// <summary>
+		/// cd_calculation_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_fkey_f_case")]
+		public pension_pension_cd_case cdcalculationfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_calculation_fkey_f_egisso_case
+		/// </summary>
+		[Association(ThisKey="f_egisso_case", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_fkey_f_egisso_case")]
+		public msz_msz_cd_case cdcalculationfkeyfegissocase { get; set; }
+
+		/// <summary>
+		/// cd_calculation_fkey_f_egisso_case_addition
+		/// </summary>
+		[Association(ThisKey="f_egisso_case_addition", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_fkey_f_egisso_case_addition")]
+		public msz_msz_cd_case cdcalculationfkeyfegissocaseaddition { get; set; }
+
+		/// <summary>
+		/// cd_calculation_fkey_f_recalculation
+		/// </summary>
+		[Association(ThisKey="f_recalculation", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_fkey_f_recalculation")]
+		public pension_pension_cd_recalculation cdcalculationfkeyfrecalculation { get; set; }
+
+		/// <summary>
+		/// cd_calculation_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_fkey_f_status")]
+		public subsidy_subsidy_cs_calculation_statuses cdcalculationfkeyfstatu { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Назначение]
+	/// [XMeta.BaseType=common_cd_case_base]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// </summary>
+	[Table(Schema="pension", Name="cd_case")]
+	public partial class pension_pension_cd_case
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата первичного обращения]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_date                   { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_status                 { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Причина постановки на контроль]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_control_reason         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Категория локальной МСЗ]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("f_local_msz_category_msz_cs_link_msz_category_mszCollection[f_local_msz == '@This.f_local_msz']")]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_local_msz_category     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (код ФИАС)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_address_fias_code      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (дом)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_house          { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (корпус)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_corpus         { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (квартира)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_flat           { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (регион)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_region         { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (район)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_district       { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (город)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_city           { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (населённый пункт)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_settlement     { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (улица)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_street         { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Признак постановки на контроль]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_controlled             { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_address                { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания госслужбы]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_retirement             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("c_alias == 'long_service' or c_alias == 'surcharge'")]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_local_msz              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Причина возврата на доработку]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_rework_reason          { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Причина прекращения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?        f_cancel_reason          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата прекращения]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public DateTime?   d_end                    { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=С учётом прежних норм]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_previous_norma         { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Вид пенсии]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_type                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата назначения пенсии]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_appointment            { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата решения комиссии]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_decision_commision     { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Номер решения комиссии]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_number_commision       { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата решения министерства]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_decision_ministry      { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Номер решения министерства]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_number_ministry        { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Работает]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_worked                 { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Причина увольнения]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_quit_reason            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор дома ФИАС]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_house_fias_code        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выхода на пенсию]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_pension_start          { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Использовать дату выхода на пенсию]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_use_pension_start_date { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Срок с]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_start             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Срок по]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_end               { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма к выплате]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_summ                   { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_fkey_id")]
+		public common_common_cd_case_base cd_case_base { get; set; }
+
+		/// <summary>
+		/// cd_case_fkey_f_cancel_reason
+		/// </summary>
+		[Association(ThisKey="f_cancel_reason", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_case_fkey_f_cancel_reason")]
+		public pension_pension_cs_cancel_reasons cdcasefkeyfcancelreason { get; set; }
+
+		/// <summary>
+		/// cd_case_fkey_f_control_reason
+		/// </summary>
+		[Association(ThisKey="f_control_reason", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_case_fkey_f_control_reason")]
+		public subsidy_subsidy_cs_control_reasons cdcasefkeyfcontrolreason { get; set; }
+
+		/// <summary>
+		/// cd_case_fkey_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_fkey_f_local_msz")]
+		public msz_msz_cs_local_msz cdcasefkeyflocalmsz { get; set; }
+
+		/// <summary>
+		/// cd_case_fkey_f_local_msz_category
+		/// </summary>
+		[Association(ThisKey="f_local_msz_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_fkey_f_local_msz_category")]
+		public msz_msz_cs_local_msz_category cdcasefkeyflocalmszcategory { get; set; }
+
+		/// <summary>
+		/// cd_case_fkey_f_quit_reason
+		/// </summary>
+		[Association(ThisKey="f_quit_reason", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_case_fkey_f_quit_reason")]
+		public pension_pension_cs_quit_reasons cdcasefkeyfquitreason { get; set; }
+
+		/// <summary>
+		/// cd_case_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_fkey_f_status")]
+		public subsidy_subsidy_cs_case_statuses cdcasefkeyfstatu { get; set; }
+
+		/// <summary>
+		/// cd_case_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_case_fkey_f_type")]
+		public pension_pension_cs_pension_type cdcasefkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Стаж]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="pension", Name="cd_experience")]
+	public partial class pension_pension_cd_experience
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid       id                       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Начало периода]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_date_start             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Окончание периода]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_date_end               { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Должность государственного гражданского служащего]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("('@This.b_archive_org' == false or f_post_pension_cs_salaryCollection[f_salary_pension_cs_salary_archive_postCollection[f_archive == '@This.f_archive_post']]) and f_post_list == '@This.f_company.f_post_list'")]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_post_ggs               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Классный чин]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_rank                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_case                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Государственная должность]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("IsNull('@This.f_past_post') or f_summary_post_list_pension_cs_past_postCollection[id == '@This.f_past_post.id']")]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_summary_post_list      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Место работы]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=DataSourceCriteria("b_archive = '@This.b_archive_org'")]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_company                { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Ввести вручную место работы]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool       b_custom_input           { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Место работы]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_org_company            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Оклад по должности]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_post_money             { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Оклад за чин]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_rank_money             { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Должность]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_position               { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Выбрать архивную должность]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool       b_past_position          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Архивная должность]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_past_post              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Должность]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_displayed_post         { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Место работы]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_displayed_workingplace { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Архивная организация]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool       b_archive_org            { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Архивная должность]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_archive_post           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Коэффициент]
+		/// [XMeta.DisplayFormat=N2]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 100)]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_coefficient            { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Условие работы]
+		/// </summary>
+		[Column,        Nullable] public int?       f_work_condition         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Величина стажа]
+		/// </summary>
+		[Column,        Nullable] public string     c_total                  { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Использовать в расчёте]
+		/// </summary>
+		[Column,     NotNull    ] public bool       b_used                   { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// cd_experience_fkey_f_archive_post
+		/// </summary>
+		[Association(ThisKey="f_archive_post", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_experience_fkey_f_archive_post")]
+		public pension_pension_cs_archive_post cdexperiencefkeyfarchivepost { get; set; }
+
+		/// <summary>
+		/// cd_experience_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_experience_fkey_f_case")]
+		public pension_pension_cd_case cdexperiencefkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_experience_fkey_f_company
+		/// </summary>
+		[Association(ThisKey="f_company", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_experience_fkey_f_company")]
+		public pension_pension_cs_companies cdexperiencefkeyfcompany { get; set; }
+
+		/// <summary>
+		/// cd_experience_fkey_f_org_company
+		/// </summary>
+		[Association(ThisKey="f_org_company", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_experience_fkey_f_org_company")]
+		public pension_pension_cs_organization cdexperiencefkeyforgcompany { get; set; }
+
+		/// <summary>
+		/// cd_experience_fkey_f_past_post
+		/// </summary>
+		[Association(ThisKey="f_past_post", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_experience_fkey_f_past_post")]
+		public pension_pension_cs_past_post cdexperiencefkeyfpastpost { get; set; }
+
+		/// <summary>
+		/// cd_experience_fkey_f_post_ggs
+		/// </summary>
+		[Association(ThisKey="f_post_ggs", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_experience_fkey_f_post_ggs")]
+		public pension_pension_cs_post cdexperiencefkeyfpostgg { get; set; }
+
+		/// <summary>
+		/// cd_experience_fkey_f_rank
+		/// </summary>
+		[Association(ThisKey="f_rank", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_experience_fkey_f_rank")]
+		public pension_pension_cs_rank cdexperiencefkeyfrank { get; set; }
+
+		/// <summary>
+		/// cd_experience_fkey_f_summary_post_list
+		/// </summary>
+		[Association(ThisKey="f_summary_post_list", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_experience_fkey_f_summary_post_list")]
+		public pension_pension_cs_summary_post_list cdexperiencefkeyfsummarypostlist { get; set; }
+
+		/// <summary>
+		/// cd_experience_fkey_f_work_condition
+		/// </summary>
+		[Association(ThisKey="f_work_condition", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_experience_fkey_f_work_condition")]
+		public pension_pension_cs_work_condition cdexperiencefkeyfworkcondition { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=что то]
+	/// </summary>
+	[Table(Schema="pension", Name="cd_export_msp")]
+	public partial class pension_pension_cd_export_msp
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id             { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Имя файла]
+		/// </summary>
+		[Column,        Nullable] public string      c_file_name    { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_loading_date { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Файл ответа]
+		/// </summary>
+		[Column,        Nullable] public string      c_package_path { get; set; } // character varying(2000)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Страховая пенсия]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="pension", Name="cd_insurance_pension")]
+	public partial class pension_pension_cd_insurance_pension
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid       id                  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_date              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Размер]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_summ              { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_case              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Общий размер страховой пенсии]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_total             { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма валаризации]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_valarization      { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма на иждивенцев]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_dependent         { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма с примением коэффициента повышения страховой пенсии]
+		/// </summary>
+		[Column,        Nullable] public decimal?   n_summ_with_coeff   { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Доля страховой пенсии]
+		/// </summary>
+		[Column,        Nullable] public decimal?   n_share             { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма для достигших возраста 80 лет или инвалидов 1 гр]
+		/// </summary>
+		[Column,        Nullable] public decimal?   n_80year_or_invalid { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма на уход]
+		/// </summary>
+		[Column,        Nullable] public decimal?   n_care              { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_insurance_pension_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_insurance_pension_fkey_f_case")]
+		public pension_pension_cd_case cdinsurancefkeyfcase { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Перерасчёты]
+	/// </summary>
+	[Table(Schema="pension", Name="cd_recalculation")]
+	public partial class pension_pension_cd_recalculation
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid       id         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата перерасчёта]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_created  { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,     NotNull    ] public string     c_number   { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата нового перерасчёта]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_date     { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Утверждён]
+		/// </summary>
+		[Column,     NotNull    ] public bool       b_approved { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_org      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Статистика]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_info     { get; set; } // text
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_bigger   { get; set; } // text
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_less     { get; set; } // text
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_equal    { get; set; } // text
+
+		#region Associations
+
+		/// <summary>
+		/// cd_recalculation_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_recalculation_fkey_f_org")]
+		public public_cs_organizations cdrecalculationfkeyforg { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Обмен данными для назначения ФСД]
+	/// </summary>
+	[Table(Schema="pension", Name="cd_request_response_files")]
+	public partial class pension_pension_cd_request_response_files
+	{
+		[PrimaryKey, Identity] public int         id                      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Файл запроса]
+		/// </summary>
+		[Column,     Nullable] public string      c_xml_request_file      { get; set; } // character varying(2000)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя файла запроса]
+		/// </summary>
+		[Column,     Nullable] public string      c_request_file_name     { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки запроса]
+		/// </summary>
+		[Column,     Nullable] public NpgsqlDate? d_request_loading_date  { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Файл ответа]
+		/// </summary>
+		[Column,     Nullable] public string      c_xml_response_file     { get; set; } // character varying(2000)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя файла ответа]
+		/// </summary>
+		[Column,     Nullable] public string      c_response_file_name    { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Сообщение об ошибке]
+		/// </summary>
+		[Column,     Nullable] public string      c_error                 { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Тип]
+		/// </summary>
+		[Column,     Nullable] public int?        f_pfr_file_type         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Номер запроса]
+		/// </summary>
+		[Column,     Nullable] public int?        n_number                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки ответа]
+		/// </summary>
+		[Column,     Nullable] public NpgsqlDate? d_response_loading_date { get; set; } // date
+
+		#region Associations
+
+		/// <summary>
+		/// cd_request_response_files_f_pfr_file_type_fkey
+		/// </summary>
+		[Association(ThisKey="f_pfr_file_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_request_response_files_f_pfr_file_type_fkey")]
+		public pension_pension_cs_pfr_files_type cdrequestresponsefilesfpfrfiletypefkey { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="pension", Name="cd_test_persons")]
+	public partial class pension_pension_cd_test_persons
+	{
+		[PrimaryKey, Identity   ] public int        id             { get; set; } // integer
+		[Column,        Nullable] public string     c_snils        { get; set; } // character varying(14)
+		[Column,        Nullable] public string     c_firstname    { get; set; } // character varying(40)
+		[Column,        Nullable] public string     c_lastname     { get; set; } // character varying(40)
+		[Column,        Nullable] public string     c_middlename   { get; set; } // character varying(40)
+		[Column,     NotNull    ] public NpgsqlDate d_birthday     { get; set; } // date
+		[Column,        Nullable] public string     c_cod          { get; set; } // character varying(2)
+		[Column,     NotNull    ] public NpgsqlDate d_request_date { get; set; } // date
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Ветераны]
+	/// </summary>
+	[Table(Schema="pension", Name="cd_veteran_persons")]
+	public partial class pension_pension_cd_veteran_persons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=СНИЛС]
+		/// </summary>
+		[Column,        Nullable] public string      c_snils                     { get; set; } // character varying(14)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя]
+		/// </summary>
+		[Column,        Nullable] public string      c_firstname                 { get; set; } // character varying(40)
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия]
+		/// </summary>
+		[Column,        Nullable] public string      c_lastname                  { get; set; } // character varying(40)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество]
+		/// </summary>
+		[Column,        Nullable] public string      c_middlename                { get; set; } // character varying(40)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата рождения]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_birthday                  { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Код района ОСЗН]
+		/// </summary>
+		[Column,        Nullable] public string      c_cod                       { get; set; } // character varying(2)
+		/// <summary>
+		/// [XMeta.DisplayName=Запрашиваемая дата]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_request_date              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Признак работы]
+		/// </summary>
+		[Column,        Nullable] public int?        f_work_mark                 { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата конца последнего имеющегося периода работы]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end_last_work_period_date { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Источник сведений]
+		/// </summary>
+		[Column,        Nullable] public string      c_source_info               { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Системный номер ответа]
+		/// </summary>
+		[Column,        Nullable] public string      c_system_response_number    { get; set; } // character varying(12)
+		[Column,        Nullable] public int?        f_package                   { get; set; } // integer
+		[Column,        Nullable] public DateTime?   d_copy_date                 { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// cd_veteran_persons_f_cd_request_response_files
+		/// </summary>
+		[Association(ThisKey="f_package", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_veteran_persons_f_cd_request_response_files")]
+		public pension_pension_cd_request_response_files cdveteranpersonsfcdrequestresponsefile { get; set; }
+
+		/// <summary>
+		/// cd_veteran_persons_f_cs_work_marks
+		/// </summary>
+		[Association(ThisKey="f_work_mark", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_veteran_persons_f_cs_work_marks")]
+		public pension_pension_cs_work_marks cdveteranpersonsfcsworkmark { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Архивные должности]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_archive_post")]
+	public partial class pension_pension_cs_archive_post
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,        Nullable] public string c_name { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull    ] public int    n_code { get; set; } // integer
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Причины прекращения]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_cancel_reasons")]
+	public partial class pension_pension_cs_cancel_reasons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(200)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Справочник организаций]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_companies")]
+	public partial class pension_pension_cs_companies
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,        Nullable] public string c_name      { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Раздел]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_post_list { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Архивная]
+		/// </summary>
+		[Column,     NotNull    ] public bool   b_archive   { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public int?   n_code      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Процент надбавки]
+		/// </summary>
+		[Column,     NotNull    ] public int    n_percent   { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_companies_fkey_f_post_list
+		/// </summary>
+		[Association(ThisKey="f_post_list", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_companies_fkey_f_post_list")]
+		public pension_pension_cs_post_list cscompaniesfkeyfpostlist { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Стаж государственной гражданской службы, стаж муниципальной службы для назначения пенсии за выслугу лет]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_experience_ggs")]
+	public partial class pension_pension_cs_experience_ggs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid           id           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Год назначения пенсии за выслугу лет]
+		/// </summary>
+		[Column,     NotNull] public int            n_year       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Стаж]
+		/// </summary>
+		[Column,     NotNull] public NpgsqlTimeSpan i_experience { get; set; } // interval(6)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Место работы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_organization")]
+	public partial class pension_pension_cs_organization
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Справочник соответствия государственных должностей]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_past_post")]
+	public partial class pension_pension_cs_past_post
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id                  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name              { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Сводный перечень государственных должностей]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_summary_post_list { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Архивная должность]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_archive_post      { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_past_post_fkey_f_archive_post
+		/// </summary>
+		[Association(ThisKey="f_archive_post", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_past_post_fkey_f_archive_post")]
+		public pension_pension_cs_archive_post cspastpostfkeyfarchivepost { get; set; }
+
+		/// <summary>
+		/// cs_past_post_fkey_f_summary_post_list
+		/// </summary>
+		[Association(ThisKey="f_summary_post_list", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_past_post_fkey_f_summary_post_list")]
+		public pension_pension_cs_summary_post_list cspastpostfkeyfsummarypostlist { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Основания для изменения размера пенсии]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_pension_change_reasons")]
+	public partial class pension_pension_cs_pension_change_reasons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Вид пенсии]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_pension_type")]
+	public partial class pension_pension_cs_pension_type
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(200)
+	}
+
+	/// <summary>
+	/// [XMeta.DefaultProperty=c_type]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_pfr_files_type")]
+	public partial class pension_pension_cs_pfr_files_type
+	{
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		[Column,     Nullable] public string c_type { get; set; } // character varying(20)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Реестр должностей государственной гражданской службы Чувашской Республики]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_post")]
+	public partial class pension_pension_cs_post
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name      { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Регистрационный код]
+		/// </summary>
+		[Column,     NotNull] public string c_code      { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Раздел]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public Guid   f_post_list { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Категория]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public Guid   f_category  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Группа]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public Guid   f_group     { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_post_fkey_f_category
+		/// </summary>
+		[Association(ThisKey="f_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_post_fkey_f_category")]
+		public pension_pension_cs_post_category cspostfkeyfcategory { get; set; }
+
+		/// <summary>
+		/// cs_post_fkey_f_group
+		/// </summary>
+		[Association(ThisKey="f_group", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_post_fkey_f_group")]
+		public pension_pension_cs_post_group cspostfkeyfgroup { get; set; }
+
+		/// <summary>
+		/// cs_post_fkey_f_list
+		/// </summary>
+		[Association(ThisKey="f_post_list", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_post_fkey_f_list")]
+		public pension_pension_cs_post_list cspostfkeyflist { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Категории должностей]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_post_category")]
+	public partial class pension_pension_cs_post_category
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Регистрационный код]
+		/// </summary>
+		[Column,     NotNull] public string c_code { get; set; } // character varying(20)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Группы должностей]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_post_group")]
+	public partial class pension_pension_cs_post_group
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Регистрационный код]
+		/// </summary>
+		[Column,     NotNull] public string c_code { get; set; } // character varying(20)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Раздел]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_post_list")]
+	public partial class pension_pension_cs_post_list
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Регистрационный код]
+		/// </summary>
+		[Column,        Nullable] public string c_code { get; set; } // character varying(20)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Причины увольнения]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_quit_reasons")]
+	public partial class pension_pension_cs_quit_reasons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,        Nullable] public string c_name     { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Полное наименование]
+		/// </summary>
+		[Column,        Nullable] public string c_fullname { get; set; } // character varying(500)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Размеры окладов за классный чин государственных гражданских служащих Чувашской Республики]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_rank")]
+	public partial class pension_pension_cs_rank
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid    id           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string  c_name       { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Оклад]
+		/// </summary>
+		[Column,     NotNull    ] public decimal n_sum        { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Группа]
+		/// </summary>
+		[Column,        Nullable] public Guid?   f_post_group { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_rank_fkey_f_post_group
+		/// </summary>
+		[Association(ThisKey="f_post_group", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_rank_fkey_f_post_group")]
+		public pension_pension_cs_post_group csrankfkeyfpostgroup { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Размеры должностных окладов государственных гражданских служащих Чувашской Республики]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_salary")]
+	public partial class pension_pension_cs_salary
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid    id          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Должностной оклад]
+		/// </summary>
+		[Column,     NotNull] public decimal n_sum       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Раздел]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public Guid    f_post_list { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Должность]
+		/// [XMeta.Raw=DataSourceCriteria("f_post_list == '@This.f_post_list'")]
+		/// </summary>
+		[Column,     NotNull] public Guid    f_post      { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_salary_fkey_f_post
+		/// </summary>
+		[Association(ThisKey="f_post", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_salary_fkey_f_post")]
+		public pension_pension_cs_post cssalaryfkeyfpost { get; set; }
+
+		/// <summary>
+		/// cs_salary_fkey_f_post_list
+		/// </summary>
+		[Association(ThisKey="f_post_list", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_salary_fkey_f_post_list")]
+		public pension_pension_cs_post_list cssalaryfkeyfpostlist { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь архивных и новых должностей]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_salary_archive_post")]
+	public partial class pension_pension_cs_salary_archive_post
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Должность]
+		/// </summary>
+		[Column,     NotNull] public Guid f_salary  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Архивная должность]
+		/// </summary>
+		[Column,     NotNull] public Guid f_archive { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_salary_archive_post_fkey_f_archive
+		/// </summary>
+		[Association(ThisKey="f_archive", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_salary_archive_post_fkey_f_archive")]
+		public pension_pension_cs_archive_post cssalaryarchivepostfkeyfarchive { get; set; }
+
+		/// <summary>
+		/// cs_salary_archive_post_fkey_f_salary
+		/// </summary>
+		[Association(ThisKey="f_salary", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_salary_archive_post_fkey_f_salary")]
+		public pension_pension_cs_salary cssalaryarchivepostfkeyfsalary { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Размеры денежного вознаграждения государственных должностей Чувашской Республики]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_summary_post_list")]
+	public partial class pension_pension_cs_summary_post_list
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid    id              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string  c_name          { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Оклад]
+		/// </summary>
+		[Column,     NotNull] public decimal n_sum           { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Фиксированная доплата]
+		/// </summary>
+		[Column,     NotNull] public decimal n_fixed_payment { get; set; } // numeric(10,2)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Условия работы]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_work_condition")]
+	public partial class pension_pension_cs_work_condition
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(200)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Признак работы]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_title]
+	/// </summary>
+	[Table(Schema="pension", Name="cs_work_marks")]
+	public partial class pension_pension_cs_work_marks
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Алиас]
+		/// </summary>
+		[Column,     Nullable] public string c_alias { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     Nullable] public string c_title { get; set; } // character varying(255)
+	}
+
+	[Table(Schema="pension", Name="cv_veteran_persons", IsView=true)]
+	public partial class pension_pension_cv_veteran_persons
+	{
+		[Column, Nullable] public int?        id             { get; set; } // integer
+		[Column, Nullable] public string      c_snils        { get; set; } // character varying(14)
+		[Column, Nullable] public string      c_firstname    { get; set; } // character varying(40)
+		[Column, Nullable] public string      c_lastname     { get; set; } // character varying(40)
+		[Column, Nullable] public string      c_middlename   { get; set; } // character varying(40)
+		[Column, Nullable] public NpgsqlDate? d_birthday     { get; set; } // date
+		[Column, Nullable] public string      c_cod          { get; set; } // character varying(2)
+		[Column, Nullable] public NpgsqlDate? d_request_date { get; set; } // date
+	}
+
+	[Table(Schema="pension", Name="pension_changes", IsView=true)]
+	public partial class pension_pension_pension_changes
+	{
+		[Column(SkipOnUpdate=true), Nullable] public long?       row_number { get; set; } // bigint
+		[Column(SkipOnUpdate=true), Nullable] public string      c_number   { get; set; } // character varying(8)
+		[Column(SkipOnUpdate=true), Nullable] public NpgsqlDate? min_date   { get; set; } // date
+		[Column(SkipOnUpdate=true), Nullable] public decimal?    min_sum    { get; set; } // numeric(10,2)
+		[Column(SkipOnUpdate=true), Nullable] public NpgsqlDate? max_date   { get; set; } // date
+		[Column(SkipOnUpdate=true), Nullable] public decimal?    max_sum    { get; set; } // numeric(10,2)
+	}
+
+	[Table(Schema="pension", Name="statistic_long_service", IsView=true)]
+	public partial class pension_pension_statistic_long_service
+	{
+		[Column(SkipOnUpdate=true), Nullable] public long?    row_number          { get; set; } // bigint
+		[Column(SkipOnUpdate=true), Nullable] public string   _number             { get; set; } // character varying(8)
+		[Column(SkipOnUpdate=true), Nullable] public string   fio                 { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public string   working_place       { get; set; } // character varying(300)
+		[Column(SkipOnUpdate=true), Nullable] public string   post                { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public string   code                { get; set; } // character varying(20)
+		[Column(SkipOnUpdate=true), Nullable] public string   archive_post        { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public int?     experience          { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public string   sum_sal             { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public string   sum_rank            { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public string   pension_pay         { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public string   pension             { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public decimal? insurance_pension   { get; set; } // numeric(10,2)
+		[Column(SkipOnUpdate=true), Nullable] public decimal? n_total             { get; set; } // numeric(10,2)
+		[Column(SkipOnUpdate=true), Nullable] public decimal? n_valarization      { get; set; } // numeric(10,2)
+		[Column(SkipOnUpdate=true), Nullable] public decimal? n_dependent         { get; set; } // numeric(10,2)
+		[Column(SkipOnUpdate=true), Nullable] public decimal? n_summ_with_coeff   { get; set; } // numeric(10,2)
+		[Column(SkipOnUpdate=true), Nullable] public decimal? n_share             { get; set; } // numeric(10,2)
+		[Column(SkipOnUpdate=true), Nullable] public decimal? n_80year_or_invalid { get; set; } // numeric(10,2)
+		[Column(SkipOnUpdate=true), Nullable] public decimal? n_care              { get; set; } // numeric(10,2)
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="AuditDataItemPersistent")]
+	public partial class public_AuditDataItemPersistent
+	{
+		[PrimaryKey, NotNull    ] public Guid      Oid                 { get; set; } // uuid
+		[Column,        Nullable] public string    UserName            { get; set; } // character varying(100)
+		[Column,        Nullable] public DateTime? ModifiedOn          { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public string    OperationType       { get; set; } // character varying(100)
+		[Column,        Nullable] public string    Description         { get; set; } // character varying(2048)
+		[Column,        Nullable] public Guid?     AuditedObject       { get; set; } // uuid
+		[Column,        Nullable] public Guid?     OldObject           { get; set; } // uuid
+		[Column,        Nullable] public Guid?     NewObject           { get; set; } // uuid
+		[Column,        Nullable] public string    OldValue            { get; set; } // character varying(1024)
+		[Column,        Nullable] public string    NewValue            { get; set; } // character varying(1024)
+		[Column,        Nullable] public string    PropertyName        { get; set; } // character varying(100)
+		[Column,        Nullable] public int?      OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?      GCRecord            { get; set; } // integer
+		[Column,        Nullable] public int?      ObjectType          { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_AuditDataItemPersistent_AuditedObject
+		/// </summary>
+		[Association(ThisKey="AuditedObject", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_AuditDataItemPersistent_AuditedObject")]
+		public public_AuditedObjectWeakReference FK_AuditDataItemPersistent_AuditedObject { get; set; }
+
+		/// <summary>
+		/// FK_AuditDataItemPersistent_NewObject
+		/// </summary>
+		[Association(ThisKey="NewObject", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_AuditDataItemPersistent_NewObject")]
+		public public_XPWeakReference FK_AuditDataItemPersistent_NewObject { get; set; }
+
+		/// <summary>
+		/// FK_AuditDataItemPersistent_ObjectType
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_AuditDataItemPersistent_ObjectType")]
+		public public_XPObjectType FK_AuditDataItemPersistent_ObjectType { get; set; }
+
+		/// <summary>
+		/// FK_AuditDataItemPersistent_OldObject
+		/// </summary>
+		[Association(ThisKey="OldObject", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_AuditDataItemPersistent_OldObject")]
+		public public_XPWeakReference FK_AuditDataItemPersistent_OldObject { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="AuditedObjectWeakReference")]
+	public partial class public_AuditedObjectWeakReference
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid         { get; set; } // uuid
+		[Column,        Nullable] public Guid?  GuidId      { get; set; } // uuid
+		[Column,        Nullable] public int?   IntId       { get; set; } // integer
+		[Column,        Nullable] public string DisplayName { get; set; } // character varying(250)
+
+		#region Associations
+
+		/// <summary>
+		/// FK_AuditedObjectWeakReference_Oid
+		/// </summary>
+		[Association(ThisKey="Oid", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="FK_AuditedObjectWeakReference_Oid")]
+		public public_XPWeakReference O { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="BaseTreeNode")]
+	public partial class public_BaseTreeNode
+	{
+		[PrimaryKey, NotNull    ] public Guid   id                  { get; set; } // uuid
+		[Column,        Nullable] public string Name                { get; set; } // character varying(100)
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+		[Column,        Nullable] public int?   ObjectType          { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_BaseTreeNode_ObjectType
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_BaseTreeNode_ObjectType")]
+		public public_XPObjectType FK_BaseTreeNode_ObjectType { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="CalculationReportParams")]
+	public partial class public_CalculationReportParams
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+		[Column,        Nullable] public Guid?  ReportType          { get; set; } // uuid
+		[Column,        Nullable] public string Type                { get; set; } // character varying(200)
+		[Column,        Nullable] public Guid?  CalcId              { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// FK_CalculationReportParams_ReportType
+		/// </summary>
+		[Association(ThisKey="ReportType", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_CalculationReportParams_ReportType")]
+		public common_common_cs_calculation_report_types FK_CalculationReportParams_ReportType { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Вложения]
+	/// </summary>
+	[Table(Schema="public", Name="cd_attachments")]
+	public partial class public_cd_attachments
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid       id               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Имя вложения]
+		/// </summary>
+		[Column,        Nullable] public string     c_name           { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Тип содержимого]
+		/// </summary>
+		[Column,        Nullable] public string     c_content_type   { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Хэш]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_digest         { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Описание]
+		/// </summary>
+		[Column,        Nullable] public string     c_description    { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Размер вложения]
+		/// </summary>
+		[Column,        Nullable] public long?      n_size           { get; set; } // bigint
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_case           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата добавления]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_date           { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Виды документов]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_document_group { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_attachments_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_attachments_fkey_f_case")]
+		public common_common_cd_case_base cdattachmentsfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_attachments_fkey_f_document_group
+		/// </summary>
+		[Association(ThisKey="f_document_group", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_attachments_fkey_f_document_group")]
+		public public_cs_document_type_groups cdattachmentsfkeyfdocumentgroup { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Изменения]
+	/// </summary>
+	[Table(Schema="public", Name="cd_changes")]
+	public partial class public_cd_changes
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Релиз]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_release     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_subsystem   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Описание]
+		/// </summary>
+		[Column,     NotNull    ] public string c_description { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Основание]
+		/// </summary>
+		[Column,        Nullable] public string c_reason      { get; set; } // character varying(300)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_changes_fkey_f_release
+		/// </summary>
+		[Association(ThisKey="f_release", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_changes_fkey_f_release")]
+		public public_cd_releases cdchangesfkeyfrelease { get; set; }
+
+		/// <summary>
+		/// cd_changes_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_changes_fkey_f_subsystem")]
+		public public_cs_subsystems cdchangesfkeyfsubsystem { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Закрытие месяца]
+	/// </summary>
+	[Table(Schema="public", Name="cd_close_open_month")]
+	public partial class public_cd_close_open_month
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid     id          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Месяц]
+		/// </summary>
+		[Column,     NotNull] public int      n_month     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Год]
+		/// </summary>
+		[Column,     NotNull] public int      n_year      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Действие]
+		/// </summary>
+		[Column,     NotNull] public string   c_action    { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=ОСЗН]
+		/// </summary>
+		[Column,     NotNull] public int      f_org       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Пользователь]
+		/// [XMeta.IgnoreForGenerate]
+		/// Игнорировать генерацию свойства для этой колонки, т.к. свойство добавлено в модели
+		/// </summary>
+		[Column,     NotNull] public Guid     f_user      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата]
+		/// </summary>
+		[Column,     NotNull] public DateTime d_date      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public int      f_subsystem { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_close_open_month_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_close_open_month_fkey_f_org")]
+		public public_cs_organizations cdcloseopenmonthfkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_close_open_month_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_close_open_month_fkey_f_subsystem")]
+		public public_cs_subsystems cdcloseopenmonthfkeyfsubsystem { get; set; }
+
+		/// <summary>
+		/// cd_close_open_month_fkey_f_user
+		/// </summary>
+		[Association(ThisKey="f_user", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_close_open_month_fkey_f_user")]
+		public public_UserPolicyModel cdcloseopenmonthfkeyfuser { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Привязка доменов к организациям]
+	/// </summary>
+	[Table(Schema="public", Name="cd_org_domains")]
+	public partial class public_cd_org_domains
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// </summary>
+		[Column,     NotNull] public int  f_org    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Домен]
+		/// </summary>
+		[Column,     NotNull] public Guid f_domain { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_org_domains_fkey_f_domain
+		/// </summary>
+		[Association(ThisKey="f_domain", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_org_domains_fkey_f_domain")]
+		public public_cs_domains cdorgdomainsfkeyfdomain { get; set; }
+
+		/// <summary>
+		/// cd_org_domains_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_org_domains_fkey_f_org")]
+		public public_cs_organizations cdorgdomainsfkeyforg { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Территории обслуживания организаций]
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="cd_org_territories")]
+	public partial class public_cd_org_territories
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int  id             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// </summary>
+		[Column,     NotNull    ] public int  f_org          { get; set; } // integer
+		[Column,        Nullable] public int? f_rsmv_org_id  { get; set; } // integer
+		[Column,        Nullable] public int? f_rsmv_terr_id { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_org_territories_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_org_territories_fkey_f_org")]
+		public public_cs_organizations cdorgterritoriesfkeyforg { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связи упол. органов с районами]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="public", Name="cd_orgs_districts")]
+	public partial class public_cd_orgs_districts
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity] public int id         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Уполномоченный орган, по выплате субсидий]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull ] public int f_org      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Район]
+		/// </summary>
+		[Column,     NotNull ] public int f_district { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_orgs_districts_fkey_f_districts
+		/// </summary>
+		[Association(ThisKey="f_district", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_orgs_districts_fkey_f_districts")]
+		public public_cs_districts cdorgsdistrictsfkeyfdistrict { get; set; }
+
+		/// <summary>
+		/// cd_orgs_districts_fkey_f_orgs
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_orgs_districts_fkey_f_orgs")]
+		public public_cs_organizations cdorgsdistrictsfkeyforg { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь организаций с подсистемами]
+	/// </summary>
+	[Table(Schema="public", Name="cd_orgs_subsystems")]
+	public partial class public_cd_orgs_subsystems
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity] public int id          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// </summary>
+		[Column,     NotNull ] public int f_org       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// </summary>
+		[Column,     NotNull ] public int f_subsystem { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Последний номер дела]
+		/// </summary>
+		[Column,     NotNull ] public int n_number    { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_orgs_subsystem_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_orgs_subsystem_fkey_f_subsystem")]
+		public public_cs_subsystems cdorgssubsystemfkeyfsubsystem { get; set; }
+
+		/// <summary>
+		/// cd_orgs_subsystems_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_orgs_subsystems_fkey_f_org")]
+		public public_cs_organizations cdorgssubsystemsfkeyforg { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Запрос на корректировку]
+	/// </summary>
+	[Table(Schema="public", Name="cd_person_corrections")]
+	public partial class public_cd_person_corrections
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid       id                        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRegularExpression("SurnameCorrectionRegex", DefaultContexts.Save, @"^[а-яА-ЯЁё]+([- ][а-яА-ЯЁё])*$", "В поле \"Фамилия\" можно вводить только кириллические символы")]
+		/// </summary>
+		[Column,     NotNull    ] public string     c_surname                 { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRegularExpression("FirstNameCorrectionRegex", DefaultContexts.Save, @"^[а-яА-ЯЁё]+([- ][а-яА-ЯЁё])*$", "В поле \"Имя\" можно вводить только кириллические символы")]
+		/// </summary>
+		[Column,     NotNull    ] public string     c_first_name              { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRegularExpression("PatronymicCorrectionRegex", DefaultContexts.Save, @"^[а-яА-ЯЁё]+([- ][а-яА-ЯЁё])*$", "В поле \"Отчество\" можно вводить только кириллические символы")]
+		/// </summary>
+		[Column,        Nullable] public string     c_patronymic              { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата рождения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRange("DateRangePersonCorrection", DefaultContexts.Save, "GetDate(MinDate)", "Today()", "Значение \"Дата рождения\" должно быть в пределах диапазона от 01.01.1900 до текущей даты, включая границы.", ParametersMode.Expression)]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_birthday                { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Документ, удостоверяющий личность]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_document_type           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Серия документа, удостоверяющего личность]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public string     c_document_seria          { get; set; } // character varying(5)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер документа, удостоверяющего личность]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public string     c_document_number         { get; set; } // character varying(7)
+		/// <summary>
+		/// [XMeta.DisplayName=Контактный телефон]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_phone                   { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_inn                     { get; set; } // character varying(12)
+		/// <summary>
+		/// [XMeta.DisplayName=СНИЛС]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public string     c_snils                   { get; set; } // character varying(14)
+		/// <summary>
+		/// [XMeta.DisplayName=Место рождения]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_birth_place             { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выдачи документа]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRange("DateRangePersonCorrectionIssue", DefaultContexts.Save, "GetDate(d_birthday)", "Today()", "Значение \"Дата выдачи документа\" должно быть в пределах диапазона от 01.01.1900 до текущей даты, включая границы.", ParametersMode.Expression)]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_date_issue              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Организация, выдавшая документ]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_issued_by               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Согласен на обработку персональных данных]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool       b_agreed                  { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Ведомство]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_department              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Уполномоченный орган по АСП]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_org                     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Пол]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_sex                     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (код ФИАС)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_address_reg_fias_code   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (дом)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_reg_house       { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (корпус)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_reg_corpus      { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (квартира)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_reg_flat        { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_reg_plain       { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (регион)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_reg_region      { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (район)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_reg_district    { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (город)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_reg_city        { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (населённый пункт)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_reg_settlement  { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (улица)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_reg_street      { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (код ФИАС)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_address_live_fias_code  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (дом)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_live_house      { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (корпус)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_live_corpus     { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (квартира)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_live_flat       { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_live_plain      { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (регион)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_live_region     { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (район)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_live_district   { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (город)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_live_city       { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (населённый пункт)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_live_settlement { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (улица)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string     c_address_live_street     { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации и адрес фактического проживания совпадают]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool       b_addresses_match         { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Почтовый адрес]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public int?       f_post_address            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Физическое лицо]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_person                  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Статус запроса]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_status                  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Тип запроса]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_type                    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Адресат]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_main_org                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Основание запроса]
+		/// </summary>
+		[Column,        Nullable] public string     c_reason                  { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Результат]
+		/// </summary>
+		[Column,        Nullable] public string     c_result                  { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор дома ФИАС по месту регистрации]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_house_fias_reg_code     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор дома ФИАС по месту проживания]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_house_fias_live_code    { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_person_corrections_fkey_f_department
+		/// </summary>
+		[Association(ThisKey="f_department", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_corrections_fkey_f_department")]
+		public public_cs_departments cdpersoncorrectionsfkeyfdepartment { get; set; }
+
+		/// <summary>
+		/// cd_person_corrections_fkey_f_document_type
+		/// </summary>
+		[Association(ThisKey="f_document_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_corrections_fkey_f_document_type")]
+		public public_cs_document_types cdpersoncorrectionsfkeyfdocumenttype { get; set; }
+
+		/// <summary>
+		/// cd_person_corrections_fkey_f_issued_by
+		/// </summary>
+		[Association(ThisKey="f_issued_by", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_corrections_fkey_f_issued_by")]
+		public public_cs_document_issues_orgs cdpersoncorrectionsfkeyfissuedby { get; set; }
+
+		/// <summary>
+		/// cd_person_corrections_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_corrections_fkey_f_org")]
+		public public_cs_organizations cdpersoncorrectionsfkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_person_corrections_fkey_f_org_main
+		/// </summary>
+		[Association(ThisKey="f_main_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_corrections_fkey_f_org_main")]
+		public public_cs_organizations cdpersoncorrectionsfkeyforgmain { get; set; }
+
+		/// <summary>
+		/// cd_person_corrections_fkey_f_person
+		/// </summary>
+		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_corrections_fkey_f_person")]
+		public public_cd_persons cdpersoncorrectionsfkeyfperson { get; set; }
+
+		/// <summary>
+		/// cd_person_corrections_fkey_f_post_address
+		/// </summary>
+		[Association(ThisKey="f_post_address", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_person_corrections_fkey_f_post_address")]
+		public public_cd_post_addresses cdpersoncorrectionsfkeyfpostaddress { get; set; }
+
+		/// <summary>
+		/// cd_person_corrections_fkey_f_sex
+		/// </summary>
+		[Association(ThisKey="f_sex", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_corrections_fkey_f_sex")]
+		public public_cs_sex cdpersoncorrectionsfkeyfsex { get; set; }
+
+		/// <summary>
+		/// cd_person_corrections_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_corrections_fkey_f_status")]
+		public public_cs_info_sharing_statuses cdpersoncorrectionsfkeyfstatu { get; set; }
+
+		/// <summary>
+		/// cd_person_corrections_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_corrections_fkey_f_type")]
+		public public_cs_info_sharing_types cdpersoncorrectionsfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Физические лица]
+	/// </summary>
+	[Table(Schema="public", Name="cd_persons")]
+	public partial class public_cd_persons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRegularExpression("SurnameRegex", DefaultContexts.Save, @"^[а-яА-ЯЁё]+([- ][а-яА-ЯЁё])*$", "В поле \"Фамилия\" можно вводить только кириллические символы")]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_surname                 { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRegularExpression("FirstNameRegex", DefaultContexts.Save, @"^[а-яА-ЯЁё]+([- ][а-яА-ЯЁё]+)*$", "В поле \"Имя\" можно вводить только кириллические символы")]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_first_name              { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRegularExpression("PatronymicRegex", DefaultContexts.Save, @"^[а-яА-ЯЁё]+([- ][а-яА-ЯЁё]+)*$", "В поле \"Отчество\" можно вводить только кириллические символы")]
+		/// </summary>
+		[Column,        Nullable] public string      c_patronymic              { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата рождения]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRange("DateRange", DefaultContexts.Save, "GetDate(MinDate)", "Today()", "Значение \"Дата рождения\" должно быть в пределах диапазона от 01.01.1900 до текущей даты, включая границы.", ParametersMode.Expression)]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_birthday                { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Серия документа, удостоверяющего личность]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_document_seria          { get; set; } // character varying(6)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер документа, удостоверяющего личность]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_document_number         { get; set; } // character varying(7)
+		/// <summary>
+		/// [XMeta.DisplayName=Контактный телефон]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_phone                   { get; set; } // character varying(32)
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int         id                        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_inn                     { get; set; } // character varying(12)
+		/// <summary>
+		/// [XMeta.DisplayName=СНИЛС]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_snils                   { get; set; } // character varying(14)
+		/// <summary>
+		/// [XMeta.DisplayName=Документ, удостоверяющий личность]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("f_group.c_alias = 'identified'")]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_document_type           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Место рождения]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_birth_place             { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выдачи документа]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=RuleRequiredField("", DefaultContexts.Save)]
+		/// [XMeta.Raw=RuleRange("DateRange2", DefaultContexts.Save, "GetDate(d_birthday)", "Today()", "Значение \"Дата выдачи документа\" должна быть позже \"Даты рождения\".", ParametersMode.Expression)]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_issue              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Организация выдавшая документ]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=RuleRequiredField("", DefaultContexts.Save)]
+		/// [XMeta.Raw=DataSourceCriteria("f_group.c_alias = 'identified'")]
+		/// 
+		/// </summary>
+		[Column,        Nullable] public int?        f_issued_by               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Согласен на обработку персональных данных]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_agreed                  { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Ведомство]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_department              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Уполномоченный орган по АСП]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.Raw=RuleRequiredField("", DefaultContexts.Save)]
+		/// </summary>
+		[Column,        Nullable] public int?        f_org                     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (код ФИАС)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_address_reg_fias_code   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (дом)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg_house       { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации(корпус)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg_corpus      { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (квартира)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg_flat        { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg_plain       { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (регион)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg_region      { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (район)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg_district    { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (город)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg_city        { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (населённый пункт)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg_settlement  { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации (улица)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg_street      { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (код ФИАС)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_address_live_fias_code  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (дом)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live_house      { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (корпус)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live_corpus     { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (квартира)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live_flat       { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live_plain      { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (регион)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live_region     { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (район)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live_district   { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (город)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live_city       { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (населённый пункт)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live_settlement { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания (улица)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live_street     { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации и адрес фактического проживания совпадают]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_addresses_match         { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Почтовый адрес]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_post_address            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Пол]
+		/// [XMeta.Raw=RuleRequiredField("", DefaultContexts.Save)]
+		/// </summary>
+		[Column,        Nullable] public int?        f_sex                     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код страны по ОКСМ]
+		/// </summary>
+		[Column,        Nullable] public string      c_citizenship             { get; set; } // character varying(3)
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия при рождении]
+		/// </summary>
+		[Column,        Nullable] public string      c_maidenfamilyname        { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Данные документа-основания пребывания или проживания в Российской Федерации]
+		/// </summary>
+		[Column,        Nullable] public string      c_residencepermitinfo     { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Предыдущий ОСЗН]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_prev_org                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public int?        imp_id                    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg_kladr       { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live_kladr      { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор дома ФИАС по месту регистрации]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_house_fias_reg_code     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор дома ФИАС по месту проживания]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_house_fias_live_code    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Статус валидации СНИЛСа]
+		/// </summary>
+		[Column,        Nullable] public int?        f_snils_validation_status { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=СНИЛС]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_snils11                 { get; set; } // character(11)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_persons_fkey_f_department
+		/// </summary>
+		[Association(ThisKey="f_department", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_department")]
+		public public_cs_departments cdpersonsfkeyfdepartment { get; set; }
+
+		/// <summary>
+		/// cd_persons_fkey_f_document_type
+		/// </summary>
+		[Association(ThisKey="f_document_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_document_type")]
+		public public_cs_document_types cdpersonsfkeyfdocumenttype { get; set; }
+
+		/// <summary>
+		/// cd_persons_fkey_f_issued_by
+		/// </summary>
+		[Association(ThisKey="f_issued_by", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_issued_by")]
+		public public_cs_document_issues_orgs cdpersonsfkeyfissuedby { get; set; }
+
+		/// <summary>
+		/// cd_persons_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_org")]
+		public public_cs_organizations cdpersonsfkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_persons_fkey_f_post_address
+		/// </summary>
+		[Association(ThisKey="f_post_address", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_post_address")]
+		public public_cd_post_addresses cdpersonsfkeyfpostaddress { get; set; }
+
+		/// <summary>
+		/// cd_persons_fkey_f_prev_org
+		/// </summary>
+		[Association(ThisKey="f_prev_org", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_prev_org")]
+		public public_cs_organizations cdpersonsfkeyfprevorg { get; set; }
+
+		/// <summary>
+		/// cd_persons_fkey_f_sex
+		/// </summary>
+		[Association(ThisKey="f_sex", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_sex")]
+		public public_cs_sex cdpersonsfkeyfsex { get; set; }
+
+		/// <summary>
+		/// cd_persons_fkey_f_snils_validation_status
+		/// </summary>
+		[Association(ThisKey="f_snils_validation_status", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_snils_validation_status")]
+		public common_common_cs_snils_validation_statuses cdpersonsfkeyfsnilsvalidationstatu { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=График доставки почтовых отделений]
+	/// </summary>
+	[Table(Schema="public", Name="cd_post_addresses")]
+	public partial class public_cd_post_addresses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор ФИАС]
+		/// </summary>
+		[Column,     Nullable] public Guid?  uuid_fias         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Код КЛАДР]
+		/// </summary>
+		[Column,     Nullable] public string c_kladr           { get; set; } // character varying(17)
+		/// <summary>
+		/// [XMeta.DisplayName=Начальный дом]
+		/// </summary>
+		[Column,     Nullable] public string c_house_begin     { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Конечный дом]
+		/// </summary>
+		[Column,     Nullable] public string c_house_end       { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Чётность]
+		/// </summary>
+		[Column,     Nullable] public bool?  b_even            { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Корпус]
+		/// </summary>
+		[Column,     Nullable] public string c_korp            { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Начальная квартира]
+		/// </summary>
+		[Column,     Nullable] public int?   n_apartment_begin { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Конечная квартира]
+		/// </summary>
+		[Column,     Nullable] public int?   n_apartment_end   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Почтовый индекс]
+		/// </summary>
+		[Column,     Nullable] public string c_index           { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Доставочная организация]
+		/// [XMeta.Raw=DataSourceCriteria("f_bank.f_type.c_alias == 'post'")]
+		/// </summary>
+		[Column,     Nullable] public int?   f_filial          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Доставочный участок]
+		/// </summary>
+		[Column,     Nullable] public int?   n_uch             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата доставки]
+		/// </summary>
+		[Column,     Nullable] public int?   n_day             { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_post_addresses_fkey_f_filial
+		/// </summary>
+		[Association(ThisKey="f_filial", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_post_addresses_fkey_f_filial")]
+		public public_cs_bank_filials cdpostaddressesfkeyffilial { get; set; }
+
+		/// <summary>
+		/// cd_post_addresses_fkey_f_uuid_fias
+		/// </summary>
+		[Association(ThisKey="uuid_fias", OtherKey="aoid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_post_addresses_fkey_f_uuid_fias")]
+		public fias_fias_cd_address_objects cdpostaddressesfkeyfuuidfia { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Релизы]
+	/// </summary>
+	[Table(Schema="public", Name="cd_releases")]
+	public partial class public_cd_releases
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата установки]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_date   { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,     NotNull    ] public string    c_number { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// </summary>
+		[Column,     NotNull    ] public Guid      f_status { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_releases_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_releases_fkey_f_status")]
+		public public_cs_realeses_statuses cdreleasesfkeyfstatu { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь пользователей с подсистемами]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="public", Name="cd_users_subsystems")]
+	public partial class public_cd_users_subsystems
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int  id          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Пользователь]
+		/// [XMeta.IgnoreForGenerate]
+		/// Игнорировать генерацию свойства для этой колонки, т.к. свойство добавлено в модели
+		/// </summary>
+		[Column,     NotNull ] public Guid f_user      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// </summary>
+		[Column,     NotNull ] public int  f_subsystem { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_users_subsystems_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_users_subsystems_fkey_f_subsystem")]
+		public public_cs_subsystems cduserssubsystemsfkeyfsubsystem { get; set; }
+
+		/// <summary>
+		/// cd_users_subsystems_fkey_f_user
+		/// </summary>
+		[Association(ThisKey="f_user", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_users_subsystems_fkey_f_user")]
+		public public_UserPolicyModel cduserssubsystemsfkeyfuser { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="ConfirmationWindowParameters")]
+	public partial class public_ConfirmationWindowParameters
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+		[Column,        Nullable] public string ConfirmationMessage { get; set; } // character varying(500)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Филиалы доставочных организаций]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_bank_filials")]
+	public partial class public_cs_bank_filials
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Доставляющая организация]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_bank           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Полное наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name           { get; set; } // character varying(250)
+		/// <summary>
+		/// [XMeta.DisplayName=Должность руководителя]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_boss_post      { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=ФИО руководителя]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_boss_fio       { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Способ выплаты]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_payment_method { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Ведомство]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_department     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Почтовый участок]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public int?   n_post_site      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=День почтовой доставки]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public int?   n_post_day       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public int?   imp_id           { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_bank_filial_fkey_cs_banks
+		/// </summary>
+		[Association(ThisKey="f_bank", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_bank_filial_fkey_cs_banks")]
+		public public_cs_banks csbankfilialfkeycsbank { get; set; }
+
+		/// <summary>
+		/// cs_banks_filial_fkey_f_department
+		/// </summary>
+		[Association(ThisKey="f_department", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_banks_filial_fkey_f_department")]
+		public public_cs_departments csbanksfilialfkeyfdepartment { get; set; }
+
+		/// <summary>
+		/// cs_banks_filial_fkey_f_payment_method
+		/// </summary>
+		[Association(ThisKey="f_payment_method", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_banks_filial_fkey_f_payment_method")]
+		public subsidy_subsidy_cs_payment_methods csbanksfilialfkeyfpaymentmethod { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы доставочных организаций]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_bank_types")]
+	public partial class public_cs_bank_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(128)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Доставочные организации]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_banks")]
+	public partial class public_cs_banks
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id                 { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Тип доставочной организации]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_type             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Полное наименование доставочной организации]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name             { get; set; } // character varying(250)
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_inn              { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=КПП]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_kpp              { get; set; } // character varying(9)
+		/// <summary>
+		/// [XMeta.DisplayName=БИК]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_bik              { get; set; } // character varying(9)
+		/// <summary>
+		/// [XMeta.DisplayName=ОГРН]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_ogrn             { get; set; } // character varying(13)
+		/// <summary>
+		/// [XMeta.DisplayName=Расчётный счёт]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_checking_account { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Кор. счёт]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_kor_account      { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public int?   imp_id             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public string c_code             { get; set; } // character varying(2)
+		/// <summary>
+		/// [XMeta.DisplayName=Ведомство]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_department       { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_banks_fkey_f_department
+		/// </summary>
+		[Association(ThisKey="f_department", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_banks_fkey_f_department")]
+		public public_cs_departments csbanksfkeyfdepartment { get; set; }
+
+		/// <summary>
+		/// cs_banks_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_banks_fkey_f_type")]
+		public public_cs_bank_types csbanksfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Настройки формирования сводных описей]
+	/// </summary>
+	[Table(Schema="public", Name="cs_banks_inventory_settings")]
+	public partial class public_cs_banks_inventory_settings
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid    id                  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// </summary>
+		[Column,     NotNull] public int     f_subsystem         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Делить/не делить на резидентов]
+		/// </summary>
+		[Column,     NotNull] public bool    b_resident          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Делить/не делить по типам счетов]
+		/// </summary>
+		[Column,     NotNull] public bool    b_account           { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Доставочная организация]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public int     f_bank              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Комиссия общая]
+		/// </summary>
+		[Column,     NotNull] public decimal n_total_comission   { get; set; } // numeric(6,4)
+		/// <summary>
+		/// [XMeta.DisplayName=Комиссия по вкладам]
+		/// </summary>
+		[Column,     NotNull] public decimal n_deposit_comission { get; set; } // numeric(6,4)
+		/// <summary>
+		/// [XMeta.DisplayName=Комиссия по картам]
+		/// </summary>
+		[Column,     NotNull] public decimal n_card_comission    { get; set; } // numeric(6,4)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_banks_inventory_settings_fkey_f_bank
+		/// </summary>
+		[Association(ThisKey="f_bank", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_banks_inventory_settings_fkey_f_bank")]
+		public public_cs_banks csbanksinventorysettingsfkeyfbank { get; set; }
+
+		/// <summary>
+		/// cs_banks_inventory_settings_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_banks_inventory_settings_fkey_f_subsystem")]
+		public public_cs_subsystems csbanksinventorysettingsfkeyfsubsystem { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Должности руководителей]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_boss_posts")]
+	public partial class public_cs_boss_posts
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(128)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Степени родства]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_cognation_types")]
+	public partial class public_cs_cognation_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public string c_code { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Конфигурация]
+	/// </summary>
+	[Table(Schema="public", Name="cs_config")]
+	public partial class public_cs_config
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int        id                       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата последнего запуска ежедневной задачи]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull ] public NpgsqlDate d_everyday_task_last_run { get; set; } // date
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы представительства]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_delegate_categories")]
+	public partial class public_cs_delegate_categories
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public string c_code { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Ведомство]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_departments")]
+	public partial class public_cs_departments
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name        { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Ф.И.О. руководителя]
+		/// </summary>
+		[Column,        Nullable] public string c_boss_fio    { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Ф.И.О. главного бухгалтера]
+		/// </summary>
+		[Column,        Nullable] public string c_glavbuh_fio { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias       { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Районы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_districts")]
+	public partial class public_cs_districts
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id                  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Регион]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_region            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование района]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name              { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Тип выплаты в банк]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?   n_type_bank         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Спецсимволы для имени файла, передаваемого в банк]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_kp                { get; set; } // character varying(2)
+		/// <summary>
+		/// [XMeta.DisplayName=Разбиение на поселения]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?   n_type_mo           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Признак города регионального значения]
+		/// </summary>
+		[Column,     NotNull    ] public bool   b_city              { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull    ] public int    n_code              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код ФИАС]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   uuid_fias           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Видимость]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool   b_visible           { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Код муниципалитета]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public string c_code_mun          { get; set; } // character varying(2)
+		[Column,        Nullable] public int?   n_code_for_veterans { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_districts_fkey_f_region
+		/// </summary>
+		[Association(ThisKey="f_region", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_districts_fkey_f_region")]
+		public public_cs_regions csdistrictsfkeyfregion { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Организации, выдающие документы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_document_issues_orgs")]
+	public partial class public_cs_document_issues_orgs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код подразделения]
+		/// </summary>
+		[Column,        Nullable] public string c_code  { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Группа]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_group { get; set; } // integer
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public int?   imp_id  { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_document_issues_orgs_fkey_f_group
+		/// </summary>
+		[Association(ThisKey="f_group", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_document_issues_orgs_fkey_f_group")]
+		public public_cs_document_type_groups csdocumentissuesorgsfkeyfgroup { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Группа документов]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_document_type_groups")]
+	public partial class public_cs_document_type_groups
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(128)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды документов]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_document_types")]
+	public partial class public_cs_document_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name      { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Группа]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_group     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование в СМЭВ]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_code      { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public string c_code_rsmv { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_code_ru   { get; set; } // character varying(2000)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_document_types_fkey_f_group
+		/// </summary>
+		[Association(ThisKey="f_group", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_document_types_fkey_f_group")]
+		public public_cs_document_type_groups cddocumenttypesfkeyfgroup { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы документов, подтверждающих степень родства]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_document_types_cognation_proof")]
+	public partial class public_cs_document_types_cognation_proof
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull ] public string c_code { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы документов, подтверждающих полномочия законного представителя]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_document_types_delegation_proof")]
+	public partial class public_cs_document_types_delegation_proof
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull ] public string c_code { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Домены]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_domains")]
+	public partial class public_cs_domains
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(200)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Справочник типа недвижимости]
+	/// [XMeta.DefaultProperty=c_type]
+	/// </summary>
+	[Table(Schema="public", Name="cs_house_type")]
+	public partial class public_cs_house_type
+	{
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Тип]
+		/// 
+		/// </summary>
+		[Column,     Nullable] public string c_type { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы для обмена информацией]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_info_sharing_statuses")]
+	public partial class public_cs_info_sharing_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Тип запроса]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_info_sharing_types")]
+	public partial class public_cs_info_sharing_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DefaultProperty=c_status]
+	/// </summary>
+	[Table(Schema="public", Name="cs_martial_status")]
+	public partial class public_cs_martial_status
+	{
+		[PrimaryKey, Identity] public int    id       { get; set; } // integer
+		[Column,     Nullable] public string c_status { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды нормативных документов]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_normative_doc_types")]
+	public partial class public_cs_normative_doc_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(256)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Нормативные документы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_normative_documents")]
+	public partial class public_cs_normative_documents
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int      id          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string   c_name      { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата вступления в силу]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime d_init      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Полное наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string   c_full_name { get; set; } // character varying(1000)
+		/// <summary>
+		/// [XMeta.DisplayName=Вид документа]
+		/// </summary>
+		[Column,        Nullable] public int?     f_type      { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_normative_document_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_normative_document_fkey_f_type")]
+		public public_cs_normative_doc_types csnormativedocumentfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь организаций с филиалами доставочных организаций]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="public", Name="cs_org_bank_filial_links")]
+	public partial class public_cs_org_bank_filial_links
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// </summary>
+		[Column,     NotNull] public int  f_org         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Филиал доставочной организации]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public int  f_bank_filial { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_org_bank_filial_links_fkey_f_bank_filial
+		/// </summary>
+		[Association(ThisKey="f_bank_filial", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_org_bank_filial_links_fkey_f_bank_filial")]
+		public public_cs_bank_filials csorgbankfiliallinksfkeyfbankfilial { get; set; }
+
+		/// <summary>
+		/// cs_org_bank_filial_links_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_org_bank_filial_links_fkey_f_org")]
+		public public_cs_organizations csorgbankfiliallinksfkeyforg { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Уполномоченные органы по назначению адресной социальной помощи]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_organizations")]
+	public partial class public_cs_organizations
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id                    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name                { get; set; } // character varying(250)
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование в родительском падеже]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_name_rp             { get; set; } // character varying(250)
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование краткое]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_name_short          { get; set; } // character varying(250)
+		/// <summary>
+		/// [XMeta.DisplayName=Код поселения]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_kpos                { get; set; } // character varying(6)
+		/// <summary>
+		/// [XMeta.DisplayName=Ф.И.О. руководителя]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_boss_fio            { get; set; } // character varying(250)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчётный год]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?   n_year                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Отчётный месяц]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=RuleRange("OrgMonth", DefaultContexts.Save, 1, 12)]
+		/// </summary>
+		[Column,        Nullable] public int?   n_month               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Начальный номер ведомости перечислений через почту]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?   n_num_ved             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Год начала истории]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?   n_year_begin          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Месяц начала истории]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=RuleRange("OrgMonthBegin", DefaultContexts.Save, 1, 12)]
+		/// </summary>
+		[Column,        Nullable] public int?   n_month_begin         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Должность руководителя]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_boss_post           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Ведомство]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_department          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код ЕГИССО]
+		/// </summary>
+		[Column,        Nullable] public string c_code_egiso          { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Код ЕГИССО поставщика]
+		/// </summary>
+		[Column,        Nullable] public string c_code_provider_egiso { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Ф.И.О. главного бухгалтера]
+		/// </summary>
+		[Column,        Nullable] public string c_glavbuh_fio         { get; set; } // character varying(250)
+		/// <summary>
+		/// [XMeta.DisplayName=Регистрационный номер]
+		/// </summary>
+		[Column,        Nullable] public string c_registry_number     { get; set; } // character varying(14)
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.DisplayFormat=0000000000]
+		/// </summary>
+		[Column,        Nullable] public string c_inn                 { get; set; } // character(10)
+		/// <summary>
+		/// [XMeta.DisplayName=КПП]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.DisplayFormat=000000000]
+		/// </summary>
+		[Column,        Nullable] public string c_kpp                 { get; set; } // character(9)
+		/// <summary>
+		/// [XMeta.DisplayName=ОГРН]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.DisplayFormat=0000000000000]
+		/// </summary>
+		[Column,        Nullable] public string c_ogrn                { get; set; } // character(13)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_organizations_fkey_f_boss_posts
+		/// </summary>
+		[Association(ThisKey="f_boss_post", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_organizations_fkey_f_boss_posts")]
+		public public_cs_boss_posts csorganizationsfkeyfbosspost { get; set; }
+
+		/// <summary>
+		/// cs_organizations_fkey_f_department
+		/// </summary>
+		[Association(ThisKey="f_department", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_organizations_fkey_f_department")]
+		public public_cs_departments csorganizationsfkeyfdepartment { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы релизов]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="public", Name="cs_realeses_statuses")]
+	public partial class public_cs_realeses_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Регионы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_regions")]
+	public partial class public_cs_regions
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Код региона]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование региона]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды регистрации]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_registration_types")]
+	public partial class public_cs_registration_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид регистрации]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(32)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Поселения]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="public", Name="cs_settlements")]
+	public partial class public_cs_settlements
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name     { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Район]
+		/// </summary>
+		[Column,     NotNull ] public int    f_district { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код ФИАС]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull ] public Guid   uuid_fias  { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_settlements_f_district_fkey
+		/// </summary>
+		[Association(ThisKey="f_district", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_settlements_f_district_fkey")]
+		public public_cs_districts cssettlementsfdistrictfkey { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.DisplayName=Пол]
+	/// </summary>
+	[Table(Schema="public", Name="cs_sex")]
+	public partial class public_cs_sex
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     Nullable] public string c_name  { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Значение СМЭВ]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     Nullable] public string c_const { get; set; } // character varying(10)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Подсистема]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="public", Name="cs_subsystems")]
+	public partial class public_cs_subsystems
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name       { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Ведомство]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_department { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias      { get; set; } // character varying(64)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_subsystem_fkey_f_department
+		/// </summary>
+		[Association(ThisKey="f_department", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_subsystem_fkey_f_department")]
+		public public_cs_departments cssubsystemfkeyfdepartment { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="public", Name="deal_id")]
+	public partial class public_deal_id
+	{
+		[Column, Nullable] public int? id { get; set; } // integer
+	}
+
+	[Table(Schema="public", Name="deal_oktmo")]
+	public partial class public_deal_oktmo
+	{
+		[Column, Nullable] public int?   id              { get; set; } // integer
+		[Column, Nullable] public string c_address_oktmo { get; set; } // character varying(11)
+		[Column, Nullable] public string substring       { get; set; } // text
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="public", Name="Event")]
+	public partial class public_Event
+	{
+		[PrimaryKey, NotNull    ] public Guid      Oid                 { get; set; } // uuid
+		[Column,        Nullable] public string    ResourceIds         { get; set; } // text
+		[Column,        Nullable] public Guid?     RecurrencePattern   { get; set; } // uuid
+		[Column,        Nullable] public string    Subject             { get; set; } // character varying(250)
+		[Column,        Nullable] public string    Description         { get; set; } // text
+		[Column,        Nullable] public DateTime? StartOn             { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public DateTime? EndOn               { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public bool?     AllDay              { get; set; } // boolean
+		[Column,        Nullable] public string    Location            { get; set; } // character varying(100)
+		[Column,        Nullable] public int?      Label               { get; set; } // integer
+		[Column,        Nullable] public int?      Status              { get; set; } // integer
+		[Column,        Nullable] public int?      Type                { get; set; } // integer
+		[Column,        Nullable] public double?   RemindIn            { get; set; } // double precision
+		[Column,        Nullable] public string    ReminderInfoXml     { get; set; } // character varying(200)
+		[Column,        Nullable] public DateTime? AlarmTime           { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public bool?     IsPostponed         { get; set; } // boolean
+		[Column,        Nullable] public string    RecurrenceInfoXml   { get; set; } // text
+		[Column,        Nullable] public int?      OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?      GCRecord            { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_Event_RecurrencePattern
+		/// </summary>
+		[Association(ThisKey="RecurrencePattern", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_Event_RecurrencePattern")]
+		public public_Event FK_Event_RecurrencePattern { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="FileAttachment")]
+	public partial class public_FileAttachment
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public Guid?  File                { get; set; } // uuid
+		[Column,        Nullable] public string Description         { get; set; } // character varying(100)
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+		[Column,        Nullable] public int?   DocumentGroup       { get; set; } // integer
+		[Column,        Nullable] public string MyProperty          { get; set; } // character varying(100)
+
+		#region Associations
+
+		/// <summary>
+		/// FK_FileAttachment_DocumentGroup
+		/// </summary>
+		[Association(ThisKey="DocumentGroup", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_FileAttachment_DocumentGroup")]
+		public public_cs_document_type_groups FK_FileAttachment_DocumentGroup { get; set; }
+
+		/// <summary>
+		/// FK_FileAttachment_File
+		/// </summary>
+		[Association(ThisKey="File", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_FileAttachment_File")]
+		public public_FileData FK_FileAttachment_File { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="FileData")]
+	public partial class public_FileData
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int?   size                { get; set; } // integer
+		[Column,        Nullable] public string FileName            { get; set; } // character varying(260)
+		[Column,        Nullable] public byte[] Content             { get; set; } // bytea
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+	}
+
+	[Table(Schema="public", Name="k")]
+	public partial class public_k
+	{
+		[Column, Nullable] public long? count { get; set; } // bigint
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="ManagementCompanies_Requests")]
+	public partial class public_ManagementCompanies_Requests
+	{
+		[PrimaryKey, NotNull    ] public Guid        Oid                 { get; set; } // uuid
+		[Column,        Nullable] public Guid?       File                { get; set; } // uuid
+		[Column,        Nullable] public int?        OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?        GCRecord            { get; set; } // integer
+		[Column,        Nullable] public string      Path                { get; set; } // text
+		[Column,        Nullable] public NpgsqlDate? DateFrom            { get; set; } // date
+		[Column,        Nullable] public NpgsqlDate? DateTill            { get; set; } // date
+
+		#region Associations
+
+		/// <summary>
+		/// FK_ManagementCompanies_Requests_File
+		/// </summary>
+		[Association(ThisKey="File", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_ManagementCompanies_Requests_File")]
+		public public_FileData ManagementCompaniesRequestsFile { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="ManagementCompanies_Responses")]
+	public partial class public_ManagementCompanies_Responses
+	{
+		[PrimaryKey, NotNull    ] public Guid Oid                 { get; set; } // uuid
+		[Column,     NotNull    ] public Guid Request             { get; set; } // uuid
+		[Column,     NotNull    ] public Guid File                { get; set; } // uuid
+		[Column,        Nullable] public int? OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int? GCRecord            { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_ManagementCompanies_Responses_File
+		/// </summary>
+		[Association(ThisKey="File", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_ManagementCompanies_Responses_File")]
+		public public_FileData ManagementCompaniesResponsesFile { get; set; }
+
+		/// <summary>
+		/// FK_ManagementCompanies_Responses_Request
+		/// </summary>
+		[Association(ThisKey="Request", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_ManagementCompanies_Responses_Request")]
+		public public_ManagementCompanies_Requests ManagementCompaniesResponsesRequest { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="ModelDifference")]
+	public partial class public_ModelDifference
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public string UserId              { get; set; } // character varying(100)
+		[Column,        Nullable] public string ContextId           { get; set; } // character varying(100)
+		[Column,        Nullable] public int?   Version             { get; set; } // integer
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="ModelDifferenceAspect")]
+	public partial class public_ModelDifferenceAspect
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public string Name                { get; set; } // character varying(100)
+		[Column,        Nullable] public string Xml                 { get; set; } // text
+		[Column,        Nullable] public Guid?  Owner               { get; set; } // uuid
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_ModelDifferenceAspect_Owner
+		/// </summary>
+		[Association(ThisKey="Owner", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_ModelDifferenceAspect_Owner")]
+		public public_ModelDifference FK_ModelDifferenceAspect_Owner { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PaymentCore")]
+	public partial class public_PaymentCore
+	{
+		[PrimaryKey, NotNull    ] public Guid     Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int?     Year                { get; set; } // integer
+		[Column,        Nullable] public int?     Month               { get; set; } // integer
+		[Column,        Nullable] public int?     PaymentMethod       { get; set; } // integer
+		[Column,        Nullable] public int?     BankFilial          { get; set; } // integer
+		[Column,        Nullable] public string   CheckingAccount     { get; set; } // character varying(300)
+		[Column,        Nullable] public int?     PostSite            { get; set; } // integer
+		[Column,        Nullable] public int?     PostDay             { get; set; } // integer
+		[Column,        Nullable] public decimal? PaymentSum          { get; set; } // numeric(10,2)
+		[Column,        Nullable] public int?     Org                 { get; set; } // integer
+		[Column,        Nullable] public Guid?    user                { get; set; } // uuid
+		[Column,        Nullable] public int?     ObjectType          { get; set; } // integer
+		[Column,        Nullable] public int?     OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?     GCRecord            { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PaymentCore_BankFilial
+		/// </summary>
+		[Association(ThisKey="BankFilial", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentCore_BankFilial")]
+		public public_cs_bank_filials FK_PaymentCore_BankFilial { get; set; }
+
+		/// <summary>
+		/// FK_PaymentCore_PaymentMethod
+		/// </summary>
+		[Association(ThisKey="PaymentMethod", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentCore_PaymentMethod")]
+		public subsidy_subsidy_cs_payment_methods FK_PaymentCore_PaymentMethod { get; set; }
+
+		/// <summary>
+		/// FK_PaymentCore_user
+		/// </summary>
+		[Association(ThisKey="user", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentCore_user")]
+		public public_UserPolicyModel FK_PaymentCore_user { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PaymentDocPensionParams")]
+	public partial class public_PaymentDocPensionParams
+	{
+		[Column,        Nullable] public Guid? ArrayType           { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid  Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int?  OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?  GCRecord            { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PaymentDocPensionParams_ArrayType
+		/// </summary>
+		[Association(ThisKey="ArrayType", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentDocPensionParams_ArrayType")]
+		public common_common_cs_payment_array_types FK_PaymentDocPensionParams_ArrayType { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PaymentDocSubsidyParams")]
+	public partial class public_PaymentDocSubsidyParams
+	{
+		[Column,        Nullable] public Guid? ArrayType           { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid  Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int?  OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?  GCRecord            { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PaymentDocSubsidyParams_ArrayType
+		/// </summary>
+		[Association(ThisKey="ArrayType", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentDocSubsidyParams_ArrayType")]
+		public common_common_cs_payment_array_types FK_PaymentDocSubsidyParams_ArrayType { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PaymentOneTime")]
+	public partial class public_PaymentOneTime
+	{
+		[PrimaryKey, NotNull    ] public Guid     Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int?     OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?     GCRecord            { get; set; } // integer
+		[Column,        Nullable] public int?     Year                { get; set; } // integer
+		[Column,        Nullable] public int?     Month               { get; set; } // integer
+		[Column,        Nullable] public int?     BankFilial          { get; set; } // integer
+		[Column,        Nullable] public string   CheckingAccount     { get; set; } // character varying(200)
+		[Column,        Nullable] public int?     PostSite            { get; set; } // integer
+		[Column,        Nullable] public int?     PostDay             { get; set; } // integer
+		[Column,        Nullable] public decimal? PaymentSum          { get; set; } // numeric
+		[Column,        Nullable] public int?     Org                 { get; set; } // integer
+		[Column,        Nullable] public Guid?    Case                { get; set; } // uuid
+		[Column,        Nullable] public int?     Person              { get; set; } // integer
+		[Column,        Nullable] public int?     PaymentMethod       { get; set; } // integer
+		[Column,        Nullable] public int?     LocalMsz            { get; set; } // integer
+		[Column,        Nullable] public int?     LocalMszCategory    { get; set; } // integer
+		[Column,        Nullable] public Guid?    user                { get; set; } // uuid
+		[Column,        Nullable] public int?     ObjectType          { get; set; } // integer
+		[Column,        Nullable] public string   Comment             { get; set; } // character varying(300)
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PaymentOneTime_BankFilial
+		/// </summary>
+		[Association(ThisKey="BankFilial", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTime_BankFilial")]
+		public public_cs_bank_filials FK_PaymentOneTime_BankFilial { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTime_ObjectType
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTime_ObjectType")]
+		public public_XPObjectType FK_PaymentOneTime_ObjectType { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PaymentOneTimePension")]
+	public partial class public_PaymentOneTimePension
+	{
+		[PrimaryKey, NotNull    ] public Guid        Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int?        OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?        GCRecord            { get; set; } // integer
+		[Column,        Nullable] public int?        Year                { get; set; } // integer
+		[Column,        Nullable] public int?        Month               { get; set; } // integer
+		[Column,        Nullable] public int?        BankFilial          { get; set; } // integer
+		[Column,        Nullable] public string      CheckingAccount     { get; set; } // character varying(200)
+		[Column,        Nullable] public int?        PostSite            { get; set; } // integer
+		[Column,        Nullable] public int?        PostDay             { get; set; } // integer
+		[Column,        Nullable] public decimal?    PaymentSum          { get; set; } // numeric
+		[Column,        Nullable] public int?        Org                 { get; set; } // integer
+		[Column,        Nullable] public Guid?       Case                { get; set; } // uuid
+		[Column,        Nullable] public int?        Person              { get; set; } // integer
+		[Column,        Nullable] public int?        PaymentMethod       { get; set; } // integer
+		[Column,        Nullable] public int?        LocalMsz            { get; set; } // integer
+		[Column,        Nullable] public int?        LocalMszCategory    { get; set; } // integer
+		[Column,        Nullable] public Guid?       user                { get; set; } // uuid
+		[Column,        Nullable] public NpgsqlDate? DateStart           { get; set; } // date
+		[Column,        Nullable] public NpgsqlDate? DateEnd             { get; set; } // date
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PaymentOneTimePension_Case
+		/// </summary>
+		[Association(ThisKey="Case", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimePension_Case")]
+		public pension_pension_cd_case FK_PaymentOneTimePension_Case { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimePension_LocalMsz
+		/// </summary>
+		[Association(ThisKey="LocalMsz", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimePension_LocalMsz")]
+		public msz_msz_cs_local_msz FK_PaymentOneTimePension_LocalMsz { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimePension_LocalMszCategory
+		/// </summary>
+		[Association(ThisKey="LocalMszCategory", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimePension_LocalMszCategory")]
+		public msz_msz_cs_local_msz_category FK_PaymentOneTimePension_LocalMszCategory { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimePension_PaymentMethod
+		/// </summary>
+		[Association(ThisKey="PaymentMethod", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimePension_PaymentMethod")]
+		public subsidy_subsidy_cs_payment_methods FK_PaymentOneTimePension_PaymentMethod { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimePension_Person
+		/// </summary>
+		[Association(ThisKey="Person", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimePension_Person")]
+		public public_cd_persons FK_PaymentOneTimePension_Person { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimePension_Oid
+		/// </summary>
+		[Association(ThisKey="Oid", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="FK_PaymentOneTimePension_Oid")]
+		public public_PaymentOneTime O { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PaymentOneTimeSubsidy")]
+	public partial class public_PaymentOneTimeSubsidy
+	{
+		[PrimaryKey, NotNull    ] public Guid        Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int?        OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?        GCRecord            { get; set; } // integer
+		[Column,        Nullable] public int?        Year                { get; set; } // integer
+		[Column,        Nullable] public int?        Month               { get; set; } // integer
+		[Column,        Nullable] public int?        BankFilial          { get; set; } // integer
+		[Column,        Nullable] public string      CheckingAccount     { get; set; } // character varying(200)
+		[Column,        Nullable] public int?        PostSite            { get; set; } // integer
+		[Column,        Nullable] public int?        PostDay             { get; set; } // integer
+		[Column,        Nullable] public decimal?    PaymentSum          { get; set; } // numeric
+		[Column,        Nullable] public int?        Org                 { get; set; } // integer
+		[Column,        Nullable] public Guid?       Case                { get; set; } // uuid
+		[Column,        Nullable] public int?        Person              { get; set; } // integer
+		[Column,        Nullable] public int?        PaymentMethod       { get; set; } // integer
+		[Column,        Nullable] public int?        LocalMsz            { get; set; } // integer
+		[Column,        Nullable] public int?        LocalMszCategory    { get; set; } // integer
+		[Column,        Nullable] public Guid?       user                { get; set; } // uuid
+		[Column,        Nullable] public NpgsqlDate? DateStart           { get; set; } // date
+		[Column,        Nullable] public NpgsqlDate? DateEnd             { get; set; } // date
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PaymentOneTimeSubsidy_Case
+		/// </summary>
+		[Association(ThisKey="Case", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimeSubsidy_Case")]
+		public subsidy_subsidy_cd_cases FK_PaymentOneTimeSubsidy_Case { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimeSubsidy_LocalMsz
+		/// </summary>
+		[Association(ThisKey="LocalMsz", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimeSubsidy_LocalMsz")]
+		public msz_msz_cs_local_msz FK_PaymentOneTimeSubsidy_LocalMsz { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimeSubsidy_LocalMszCategory
+		/// </summary>
+		[Association(ThisKey="LocalMszCategory", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimeSubsidy_LocalMszCategory")]
+		public msz_msz_cs_local_msz_category FK_PaymentOneTimeSubsidy_LocalMszCategory { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimeSubsidy_PaymentMethod
+		/// </summary>
+		[Association(ThisKey="PaymentMethod", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimeSubsidy_PaymentMethod")]
+		public subsidy_subsidy_cs_payment_methods FK_PaymentOneTimeSubsidy_PaymentMethod { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimeSubsidy_Person
+		/// </summary>
+		[Association(ThisKey="Person", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimeSubsidy_Person")]
+		public public_cd_persons FK_PaymentOneTimeSubsidy_Person { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimeSubsidy_Oid
+		/// </summary>
+		[Association(ThisKey="Oid", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="FK_PaymentOneTimeSubsidy_Oid")]
+		public public_PaymentOneTime O { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="public", Name="pens_paymentlist", IsView=true)]
+	public partial class public_pens_paymentlist
+	{
+		[Column, Nullable] public int?   id      { get; set; } // integer
+		[Column, Nullable] public string c_title { get; set; } // character varying(2000)
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PensionPaymentStatParams")]
+	public partial class public_PensionPaymentStatParams
+	{
+		[PrimaryKey, NotNull    ] public Guid      Oid                 { get; set; } // uuid
+		[Column,        Nullable] public DateTime? Begin               { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public DateTime? End                 { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public int?      OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?      GCRecord            { get; set; } // integer
+		[Column,        Nullable] public Guid?     Case                { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PensionPaymentStatParams_Case
+		/// </summary>
+		[Association(ThisKey="Case", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PensionPaymentStatParams_Case")]
+		public pension_pension_cd_case FK_PensionPaymentStatParams_Case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PermissionPolicyMemberPermissionsObject")]
+	public partial class public_PermissionPolicyMemberPermissionsObject
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                  { get; set; } // uuid
+		[Column,        Nullable] public string Members              { get; set; } // text
+		[Column,        Nullable] public int?   ReadState            { get; set; } // integer
+		[Column,        Nullable] public int?   WriteState           { get; set; } // integer
+		[Column,        Nullable] public string Criteria             { get; set; } // text
+		[Column,        Nullable] public Guid?  TypePermissionObject { get; set; } // uuid
+		[Column,        Nullable] public int?   OptimisticLockField  { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord             { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PermissionPolicyMemberPermissionsObject_TypePermissionObject
+		/// </summary>
+		[Association(ThisKey="TypePermissionObject", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PermissionPolicyMemberPermissionsObject_TypePermissionObject")]
+		public public_PermissionPolicyTypePermissionsObject FK_PermissionPolicyMemberPermissionsObject_TypePermissionObject { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PermissionPolicyNavigationPermissionsObject")]
+	public partial class public_PermissionPolicyNavigationPermissionsObject
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public string ItemPath            { get; set; } // text
+		[Column,        Nullable] public int?   NavigateState       { get; set; } // integer
+		[Column,        Nullable] public Guid?  Role                { get; set; } // uuid
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PermissionPolicyNavigationPermissionsObject_Role
+		/// </summary>
+		[Association(ThisKey="Role", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PermissionPolicyNavigationPermissionsObject_Role")]
+		public public_PermissionPolicyRole FK_PermissionPolicyNavigationPermissionsObject_Role { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PermissionPolicyObjectPermissionsObject")]
+	public partial class public_PermissionPolicyObjectPermissionsObject
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                  { get; set; } // uuid
+		[Column,        Nullable] public string Criteria             { get; set; } // text
+		[Column,        Nullable] public int?   ReadState            { get; set; } // integer
+		[Column,        Nullable] public int?   WriteState           { get; set; } // integer
+		[Column,        Nullable] public int?   DeleteState          { get; set; } // integer
+		[Column,        Nullable] public int?   NavigateState        { get; set; } // integer
+		[Column,        Nullable] public Guid?  TypePermissionObject { get; set; } // uuid
+		[Column,        Nullable] public int?   OptimisticLockField  { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord             { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PermissionPolicyObjectPermissionsObject_TypePermissionObject
+		/// </summary>
+		[Association(ThisKey="TypePermissionObject", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PermissionPolicyObjectPermissionsObject_TypePermissionObject")]
+		public public_PermissionPolicyTypePermissionsObject FK_PermissionPolicyObjectPermissionsObject_TypePermissionObject { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PermissionPolicyRole")]
+	public partial class public_PermissionPolicyRole
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public string Name                { get; set; } // character varying(100)
+		[Column,        Nullable] public bool?  IsAdministrative    { get; set; } // boolean
+		[Column,        Nullable] public bool?  CanEditModel        { get; set; } // boolean
+		[Column,        Nullable] public int?   PermissionPolicy    { get; set; } // integer
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+		[Column,        Nullable] public int?   ObjectType          { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PermissionPolicyRole_ObjectType
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PermissionPolicyRole_ObjectType")]
+		public public_XPObjectType FK_PermissionPolicyRole_ObjectType { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PermissionPolicyTypePermissionsObject")]
+	public partial class public_PermissionPolicyTypePermissionsObject
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public Guid?  Role                { get; set; } // uuid
+		[Column,        Nullable] public string TargetType          { get; set; } // text
+		[Column,        Nullable] public int?   ReadState           { get; set; } // integer
+		[Column,        Nullable] public int?   WriteState          { get; set; } // integer
+		[Column,        Nullable] public int?   CreateState         { get; set; } // integer
+		[Column,        Nullable] public int?   DeleteState         { get; set; } // integer
+		[Column,        Nullable] public int?   NavigateState       { get; set; } // integer
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PermissionPolicyTypePermissionsObject_Role
+		/// </summary>
+		[Association(ThisKey="Role", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PermissionPolicyTypePermissionsObject_Role")]
+		public public_PermissionPolicyRole FK_PermissionPolicyTypePermissionsObject_Role { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PermissionPolicyUser")]
+	public partial class public_PermissionPolicyUser
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                        { get; set; } // uuid
+		[Column,        Nullable] public string StoredPassword             { get; set; } // text
+		[Column,        Nullable] public bool?  ChangePasswordOnFirstLogon { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Логин]
+		/// </summary>
+		[Column,        Nullable] public string UserName                   { get; set; } // character varying(100)
+		[Column,        Nullable] public bool?  IsActive                   { get; set; } // boolean
+		[Column,        Nullable] public int?   OptimisticLockField        { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord                   { get; set; } // integer
+		[Column,        Nullable] public int?   ObjectType                 { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PermissionPolicyUser_ObjectType
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PermissionPolicyUser_ObjectType")]
+		public public_XPObjectType FK_PermissionPolicyUser_ObjectType { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PermissionPolicyUserUsers_PermissionPolicyRoleRoles")]
+	public partial class public_PermissionPolicyUserUsers_PermissionPolicyRoleRoles
+	{
+		[Column,        Nullable] public Guid? Roles               { get; set; } // uuid
+		[Column,        Nullable] public Guid? Users               { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid  OID                 { get; set; } // uuid
+		[Column,        Nullable] public int?  OptimisticLockField { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PermissionPolicyUserUsers_PermissionPolicyRoleRoles_Roles
+		/// </summary>
+		[Association(ThisKey="Roles", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PermissionPolicyUserUsers_PermissionPolicyRoleRoles_Roles")]
+		public public_PermissionPolicyRole PermissionPolicyUserUsersPermissionPolicyRoleRolesRole { get; set; }
+
+		/// <summary>
+		/// FK_PermissionPolicyUserUsers_PermissionPolicyRoleRoles_Users
+		/// </summary>
+		[Association(ThisKey="Users", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PermissionPolicyUserUsers_PermissionPolicyRoleRoles_Users")]
+		public public_PermissionPolicyUser PermissionPolicyUserUsersPermissionPolicyRoleRolesUser { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PFR_FileAttachment")]
+	public partial class public_PFR_FileAttachment
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public Guid?  File                { get; set; } // uuid
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+		[Column,        Nullable] public string Path                { get; set; } // text
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PFR_FileAttachment_File
+		/// </summary>
+		[Association(ThisKey="File", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PFR_FileAttachment_File")]
+		public public_FileData PFRFileAttachmentFile { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PfrParams")]
+	public partial class public_PfrParams
+	{
+		[PrimaryKey, NotNull    ] public Guid      Oid                 { get; set; } // uuid
+		[Column,        Nullable] public DateTime? Begin               { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public DateTime? End                 { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public int?      OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?      GCRecord            { get; set; } // integer
+		[Column,        Nullable] public bool?     ChangePeriods       { get; set; } // boolean
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="RecalculationSubsidyParams")]
+	public partial class public_RecalculationSubsidyParams
+	{
+		[PrimaryKey, NotNull    ] public Guid        Oid                  { get; set; } // uuid
+		[Column,        Nullable] public NpgsqlDate? Start                { get; set; } // date
+		[Column,        Nullable] public NpgsqlDate? End                  { get; set; } // date
+		[Column,        Nullable] public bool?       Decrease             { get; set; } // boolean
+		[Column,        Nullable] public int?        OptimisticLockField  { get; set; } // integer
+		[Column,        Nullable] public int?        GCRecord             { get; set; } // integer
+		[Column,        Nullable] public int?        Type                 { get; set; } // integer
+		[Column,        Nullable] public NpgsqlDate? Reason               { get; set; } // date
+		[Column,        Nullable] public int?        Org                  { get; set; } // integer
+		[Column,        Nullable] public int?        MonthWithoutDecrease { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_RecalculationSubsidyParams_MonthWithoutDecrease
+		/// </summary>
+		[Association(ThisKey="MonthWithoutDecrease", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_RecalculationSubsidyParams_MonthWithoutDecrease")]
+		public common_common_cs_months FK_RecalculationSubsidyParams_MonthWithoutDecrease { get; set; }
+
+		/// <summary>
+		/// FK_RecalculationSubsidyParams_Type
+		/// </summary>
+		[Association(ThisKey="Type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_RecalculationSubsidyParams_Type")]
+		public subsidy_subsidy_cs_calculation_types FK_RecalculationSubsidyParams_Type { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="ReportDataV2")]
+	public partial class public_ReportDataV2
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                      { get; set; } // uuid
+		[Column,        Nullable] public string ObjectTypeName           { get; set; } // character varying(512)
+		[Column,        Nullable] public byte[] Content                  { get; set; } // bytea
+		[Column,        Nullable] public string Name                     { get; set; } // character varying(100)
+		[Column,        Nullable] public string ParametersObjectTypeName { get; set; } // character varying(512)
+		[Column,        Nullable] public bool?  IsInplaceReport          { get; set; } // boolean
+		[Column,        Nullable] public string PredefinedReportType     { get; set; } // character varying(512)
+		[Column,        Nullable] public int?   OptimisticLockField      { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord                 { get; set; } // integer
+	}
+
+	[Table(Schema="public", Name="res")]
+	public partial class public_res
+	{
+		[Column, Nullable] public string string_agg { get; set; } // text
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="public", Name="Resource")]
+	public partial class public_Resource
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public string Caption             { get; set; } // character varying(100)
+		[Column,        Nullable] public int?   Color               { get; set; } // integer
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="public", Name="ResourceResources_EventEvents")]
+	public partial class public_ResourceResources_EventEvents
+	{
+		[Column,        Nullable] public Guid? Events              { get; set; } // uuid
+		[Column,        Nullable] public Guid? Resources           { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid  OID                 { get; set; } // uuid
+		[Column,        Nullable] public int?  OptimisticLockField { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_ResourceResources_EventEvents_Events
+		/// </summary>
+		[Association(ThisKey="Events", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_ResourceResources_EventEvents_Events")]
+		public public_Event ResourceResourcesEventEventsEvent { get; set; }
+
+		/// <summary>
+		/// FK_ResourceResources_EventEvents_Resources
+		/// </summary>
+		[Association(ThisKey="Resources", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_ResourceResources_EventEvents_Resources")]
+		public public_Resource ResourceResourcesEventEventsResource { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="public", Name="result")]
+	public partial class public_result
+	{
+		[Column, Nullable] public DateTime? max { get; set; } // timestamp (6) without time zone
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="SmevTypes")]
+	public partial class public_SmevTypes
+	{
+		[PrimaryKey, NotNull    ] public Guid Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int? OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int? GCRecord            { get; set; } // integer
+		[Column,        Nullable] public int? Type                { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_SmevTypes_Type
+		/// </summary>
+		[Association(ThisKey="Type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_SmevTypes_Type")]
+		public smev_smev_cs_inquiry_types FK_SmevTypes_Type { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="public", Name="sv_releases", IsView=true)]
+	public partial class public_sv_releases
+	{
+		[Column(SkipOnUpdate=true), Nullable] public long?  row_number { get; set; } // bigint
+		[Column(SkipOnUpdate=true), Nullable] public string string_agg { get; set; } // text
+	}
+
+	[Table(Schema="public", Name="sys_columns", IsView=true)]
+	public partial class public_sys_columns
+	{
+		[Column(SkipOnUpdate=true), Nullable] public int?   table_oid       { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public string table_schema    { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string table_name      { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public short? col_ordinal     { get; set; } // smallint
+		[Column(SkipOnUpdate=true), Nullable] public string col_name        { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string col_data_type   { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public int?   col_length      { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public bool?  is_primary_key  { get; set; } // boolean
+		[Column(SkipOnUpdate=true), Nullable] public bool?  is_nullable     { get; set; } // boolean
+		[Column(SkipOnUpdate=true), Nullable] public string col_description { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public string col_def_value   { get; set; } // text
+	}
+
+	[Table(Schema="public", Name="sys_entities", IsView=true)]
+	public partial class public_sys_entities
+	{
+		[Column(SkipOnUpdate=true), Nullable] public int?   table_oid         { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public string table_schema      { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string table_name        { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string table_description { get; set; } // text
+	}
+
+	[Table(Schema="public", Name="sys_foreign_keys", IsView=true)]
+	public partial class public_sys_foreign_keys
+	{
+		[Column(SkipOnUpdate=true), Nullable] public int?   f_key_oid         { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public string f_key_schema      { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string f_key_name        { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string f_key_description { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public int?   table_oid         { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public string table_schema      { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string table_name        { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string table_column      { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public int?   f_table_oid       { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public string f_table_schema    { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string f_table_name      { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string f_table_column    { get; set; } // character varying
+	}
+
+	[Table(Schema="public", Name="total")]
+	public partial class public_total
+	{
+		[Column, Nullable] public long? count { get; set; } // bigint
+	}
+
+	[Table(Schema="public", Name="total_bad")]
+	public partial class public_total_bad
+	{
+		[Column, Nullable] public long? count { get; set; } // bigint
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// [XMeta.DefaultProperty=f_org]
+	/// </summary>
+	[Table(Schema="public", Name="UserPolicyModel")]
+	public partial class public_UserPolicyModel
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid          { get; set; } // uuid
+		[Column,        Nullable] public string Surname      { get; set; } // character varying(100)
+		[Column,        Nullable] public string Name         { get; set; } // character varying(100)
+		[Column,        Nullable] public string Patronymic   { get; set; } // character varying(100)
+		[Column,        Nullable] public string Post         { get; set; } // character varying(100)
+		[Column,        Nullable] public int?   TamilyNumber { get; set; } // integer
+		[Column,     NotNull    ] public int    f_org        { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_UserPolicyModel_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_UserPolicyModel_f_org")]
+		public public_cs_organizations forg { get; set; }
+
+		/// <summary>
+		/// FK_UserPolicyModel_Oid
+		/// </summary>
+		[Association(ThisKey="Oid", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="FK_UserPolicyModel_Oid")]
+		public public_PermissionPolicyUser O { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="XPObjectType")]
+	public partial class public_XPObjectType
+	{
+		[PrimaryKey, Identity] public int    OID          { get; set; } // integer
+		[Column,     Nullable] public string TypeName     { get; set; } // character varying(254)
+		[Column,     Nullable] public string AssemblyName { get; set; } // character varying(254)
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="XPWeakReference")]
+	public partial class public_XPWeakReference
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public int?   TargetType          { get; set; } // integer
+		[Column,        Nullable] public string TargetKey           { get; set; } // character varying(100)
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+		[Column,        Nullable] public int?   ObjectType          { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_XPWeakReference_ObjectType
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_XPWeakReference_ObjectType")]
+		public public_XPObjectType FK_XPWeakReference_ObjectType { get; set; }
+
+		/// <summary>
+		/// FK_XPWeakReference_TargetType
+		/// </summary>
+		[Association(ThisKey="TargetType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_XPWeakReference_TargetType")]
+		public public_XPObjectType FK_XPWeakReference_TargetType { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Логи чтения входящих запросов]
+	/// </summary>
+	[Table(Schema="smev", Name="cd_get_request_logs")]
+	public partial class smev_smev_cd_get_request_logs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id                                     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Версия СМЭВ]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_smev_version                         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Промышленный/тестовый]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=промышленный]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=тестовый]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_productive                           { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Фильтр запроса GetRequest]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,     NotNull    ] public string    c_get_request_req_msg_type_selector    { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подпись запроса GetRequest]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_get_request_req_caller_sys_signature { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время запроса GetRequest]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_get_request_req_timestamp            { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время ответа на GetRequest]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_get_request_resp_timestamp           { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Сообщение, полученное от GetRequest]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_get_request_resp_request_msg         { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подпись сообщения, полученного от GetRequest]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_get_request_resp_smev_signature      { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Ошибка, полученная от GetRequest]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_get_request_resp_error               { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Исключение, полученное от GetRequest]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_get_request_resp_exception           { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Отсутствуют подходящие запросы]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_no_requests                          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Запрос успешно принят]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_request_saved                        { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор сообщения запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_request_message_id                   { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Входящий СМЭВ-запрос]
+		/// </summary>
+		[Column,        Nullable] public Guid?     f_incoming_request                     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Сообщение запроса Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_ack_req_target_msg                   { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подпись запроса Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_ack_req_caller_sys_signature         { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время запроса Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_ack_req_timestamp                    { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время ответа от Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_ack_resp_timestamp                   { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Ошибка, полученная от Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_ack_resp_error                       { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Исключение, полученное от Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_ack_resp_exception                   { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подтверждение успешно отправлено]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_ack_sent                             { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания записи]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_create_timestamp                     { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// cd_get_request_logs_fkey_f_incoming_request
+		/// </summary>
+		[Association(ThisKey="f_incoming_request", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_get_request_logs_fkey_f_incoming_request")]
+		public smev_smev_cd_incoming_requests cdgetrequestlogsfkeyfincomingrequest { get; set; }
+
+		/// <summary>
+		/// cd_get_request_logs_fkey_f_smev_version
+		/// </summary>
+		[Association(ThisKey="f_smev_version", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_get_request_logs_fkey_f_smev_version")]
+		public smev_smev_cs_smev_versions cdgetrequestlogsfkeyfversion { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Логи чтения ответов на запросы]
+	/// </summary>
+	[Table(Schema="smev", Name="cd_get_response_logs")]
+	public partial class smev_smev_cd_get_response_logs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id                                      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Версия СМЭВ]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_smev_version                          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Промышленный/тестовый]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=промышленный]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=тестовый]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_productive                            { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Фильтр запроса GetResponse]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,     NotNull    ] public string    c_get_response_req_msg_type_selector    { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подпись запроса GetResponse]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_get_response_req_caller_sys_signature { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время запроса GetResponse]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_get_response_req_timestamp            { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время ответа на GetResponse]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_get_response_resp_timestamp           { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Сообщение, полученное от GetResponse]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_get_response_resp_response_msg        { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подпись сообщения, полученного от GetResponse]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_get_response_resp_smev_signature      { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Ошибка, полученная от GetResponse]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_get_response_resp_error               { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Исключение, полученное от GetResponse]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_get_response_resp_exception           { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Отсутствуют подходящие ответы]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_no_responses                          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Ответ успешно принят]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_response_saved                        { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор сообщения ответа]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_response_message_id                   { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Лог отправки исходящего СМЭВ-запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?     f_send_request_log                      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Лог отправки ответа на запрос]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?     f_send_response_log                     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Сообщение запроса Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_ack_req_target_msg                    { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подпись запроса Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_ack_req_caller_sys_signature          { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время запроса Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_ack_req_timestamp                     { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время ответа от Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_ack_resp_timestamp                    { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Ошибка, полученная от Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_ack_resp_error                        { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Исключение, полученное от Ack]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_ack_resp_exception                    { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подтверждение успешно отправлено]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_ack_sent                              { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания записи]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_create_timestamp                      { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// cd_get_response_logs_fkey_f_send_request_log
+		/// </summary>
+		[Association(ThisKey="f_send_request_log", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_get_response_logs_fkey_f_send_request_log")]
+		public smev_smev_cd_send_request_logs cdgetresponselogsfkeyfsendrequestlog { get; set; }
+
+		/// <summary>
+		/// cd_get_response_logs_fkey_f_send_response_log
+		/// </summary>
+		[Association(ThisKey="f_send_response_log", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_get_response_logs_fkey_f_send_response_log")]
+		public smev_smev_cd_send_response_logs cdgetresponselogsfkeyfsendresponselog { get; set; }
+
+		/// <summary>
+		/// cd_get_response_logs_fkey_f_smev_version
+		/// </summary>
+		[Association(ThisKey="f_smev_version", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_get_response_logs_fkey_f_smev_version")]
+		public smev_smev_cs_smev_versions cdgetresponselogsfkeyfversion { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Вложения входящих СМЭВ-запросов]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="smev", Name="cd_incoming_request_attachments")]
+	public partial class smev_smev_cd_incoming_request_attachments
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id                 { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Входяший СМЭВ-запрос]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_incoming_request { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Способ получения]
+		/// [XMeta.DisplayFormat.BooleanTrueText=FTP]
+		/// [XMeta.DisplayFormat.BooleanFalseText=MTOM]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool   b_via_ftp          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Имя вложения]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string c_name             { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Тип содержимого]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string c_content_type     { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Размер вложения]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public long?  n_size             { get; set; } // bigint
+
+		#region Associations
+
+		/// <summary>
+		/// cd_incoming_request_attachments_fkey_f_incoming_request
+		/// </summary>
+		[Association(ThisKey="f_incoming_request", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_incoming_request_attachments_fkey_f_incoming_request")]
+		public smev_smev_cd_incoming_requests cdincomingrequestattachmentsfkeyfincomingrequest { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Вложения ответов на входящие СМЭВ-запросы]
+	/// 
+	/// 
+	/// 
+	/// [XMeta.DefaultProperty=c_name]
+	/// 
+	/// 
+	/// 
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="smev", Name="cd_incoming_request_attachments_out")]
+	public partial class smev_smev_cd_incoming_request_attachments_out
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id                 { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Входяший СМЭВ-запрос]
+		/// 
+		/// 
+		/// 
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_incoming_request { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Способ отправки]
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=FTP]
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=MTOM]
+		/// 
+		/// 
+		/// 
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool   b_via_ftp          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Имя вложения]
+		/// 
+		/// 
+		/// 
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string c_name             { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Тип содержимого]
+		/// 
+		/// 
+		/// 
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string c_content_type     { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Размер вложения]
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Browsable=false]
+		/// 
+		/// 
+		/// 
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public long?  n_size             { get; set; } // bigint
+
+		#region Associations
+
+		/// <summary>
+		/// cd_incoming_request_attachments_out_fkey_f_incoming_request
+		/// </summary>
+		[Association(ThisKey="f_incoming_request", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_incoming_request_attachments_out_fkey_f_incoming_request")]
+		public smev_smev_cd_incoming_requests cdincomingrequestattachmentsoutfkeyfincomingrequest { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Ошибки обработки запросов]
+	/// </summary>
+	[Table(Schema="smev", Name="cd_incoming_request_handle_errors")]
+	public partial class smev_smev_cd_incoming_request_handle_errors
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid     id                 { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Входящий СМЭВ-запрос]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid     f_incoming_request { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время возникновения ошибки]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime d_timestamp        { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Текст ошибки]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Delayed]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string   c_error            { get; set; } // character varying(2000)
+		/// <summary>
+		/// [XMeta.DisplayName=Текст исключения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Delayed]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string   c_exception        { get; set; } // text
+
+		#region Associations
+
+		/// <summary>
+		/// cd_incoming_request_handle_errors_fkey_f_incoming_request
+		/// </summary>
+		[Association(ThisKey="f_incoming_request", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_incoming_request_handle_errors_fkey_f_incoming_request")]
+		public smev_smev_cd_incoming_requests cdincomingrequesthandleerrorsfkeyfincomingrequest { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Входящие СМЭВ-запросы]
+	/// </summary>
+	[Table(Schema="smev", Name="cd_incoming_requests")]
+	public partial class smev_smev_cd_incoming_requests
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id                          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Версия вида сведений]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?      f_inquiry_type_version      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Контур СМЭВ]
+		/// [XMeta.DisplayFormat.BooleanTrueText=промышленный]
+		/// [XMeta.DisplayFormat.BooleanFalseText=тестовый]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_productive                { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время получения запроса]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_request_created_timestamp { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=XML с запросом]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Delayed]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    c_request_data              { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Запрос обработан]
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_request_handled           { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время обработки запроса]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_request_handled_timestamp { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=XML с ответом]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Delayed]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    c_response_data             { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время следующей попытки обработки запроса]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_next_handle_try           { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Ответ отправлен]
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_response_sent             { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время отправки ответа]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_response_sent_timestamp   { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время следующей попытки отправки ответа]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_next_send_response_try    { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Версия СМЭВ]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_smev_version              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Пропускать обработку запроса]
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_skip_handling             { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// cd_incoming_requests_fkey_f_inquiry_type_version
+		/// </summary>
+		[Association(ThisKey="f_inquiry_type_version", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_incoming_requests_fkey_f_inquiry_type_version")]
+		public smev_smev_cs_inquiry_type_versions cdincomingrequestsfkeyfinquirytypeversion { get; set; }
+
+		/// <summary>
+		/// cd_incoming_requests_fkey_f_smev_version
+		/// </summary>
+		[Association(ThisKey="f_smev_version", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_incoming_requests_fkey_f_smev_version")]
+		public smev_smev_cs_smev_versions cdincomingrequestsfkeyfversion { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Вложения исходящих СМЭВ-запросов]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="smev", Name="cd_outgoing_request_attachments")]
+	public partial class smev_smev_cd_outgoing_request_attachments
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id                 { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Исходяший СМЭВ-запрос]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_outgoing_request { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Способ получения]
+		/// [XMeta.DisplayFormat.BooleanTrueText=FTP]
+		/// [XMeta.DisplayFormat.BooleanFalseText=MTOM]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool   b_via_ftp          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Имя вложения]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string c_name             { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Тип содержимого]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string c_content_type     { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Размер вложения]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public long?  n_size             { get; set; } // bigint
+
+		#region Associations
+
+		/// <summary>
+		/// cd_outgoing_request_attachments_fkey_f_outgoing_request
+		/// </summary>
+		[Association(ThisKey="f_outgoing_request", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_outgoing_request_attachments_fkey_f_outgoing_request")]
+		public smev_smev_cd_outgoing_requests cdoutgoingrequestattachmentsfkeyfoutgoingrequest { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Исходящие СМЭВ-запросы]
+	/// </summary>
+	[Table(Schema="smev", Name="cd_outgoing_requests")]
+	public partial class smev_smev_cd_outgoing_requests
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id                            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Заявление]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public Guid?     f_application                 { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Статус отправки]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_status                      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид сведений]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_inquiry_type                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Версия вида сведений]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public int?      f_inquiry_type_version        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Контур СМЭВ]
+		/// [XMeta.DisplayFormat.BooleanTrueText=промышленный]
+		/// [XMeta.DisplayFormat.BooleanFalseText=тестовый]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_productive                  { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Признак 'Тестовый']
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_test_flag                   { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Содержимое пользовательского запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_user_request_data           { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=XML с запросом]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    c_request_data                { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время создания запроса]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_request_created_timestamp   { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Запрос отправлен]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_request_sent                { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время отправки запроса]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_request_sent_timestamp      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время следующей попытки отправки запроса]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_next_send_request_try       { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Ответ получен]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_response_received           { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время получения ответа]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_response_received_timestamp { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=XML с ответом]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    c_response_data               { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Содержимое пользовательского ответа]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_user_response_data          { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Ответ обработан]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_response_handled            { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?      f_org                         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата и время создания записи]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.SetDefaultValueStage=BeforeSaving]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  s_time_created                { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Логин пользователя, создавшего запись]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    s_user_created                { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата и время последнего изменения записи]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime? s_time_last_updated           { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Логин пользователя, последним изменившего запись]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string    s_user_last_updated           { get; set; } // character varying(100)
+		[Column,        Nullable] public int?      ObjectType                    { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_outgoing_requests_fkey_f_inquiry_type
+		/// </summary>
+		[Association(ThisKey="f_inquiry_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_outgoing_requests_fkey_f_inquiry_type")]
+		public smev_smev_cs_inquiry_types cdoutgoingrequestsfkeyfinquirytype { get; set; }
+
+		/// <summary>
+		/// cd_outgoing_requests_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_outgoing_requests_fkey_f_org")]
+		public public_cs_organizations cdoutgoingrequestsfkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_outgoing_requests_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_outgoing_requests_fkey_f_status")]
+		public smev_smev_cs_send_statuses cdoutgoingrequestsfkeyfstatu { get; set; }
+
+		/// <summary>
+		/// FK_smev_cd_outgoing_requests_ObjectType_7C0D227F
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_smev_cd_outgoing_requests_ObjectType_7C0D227F")]
+		public public_XPObjectType cdoutgoingrequestsObjectType7C0D227F { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Логи отправки исходящих запросов]
+	/// </summary>
+	[Table(Schema="smev", Name="cd_send_request_logs")]
+	public partial class smev_smev_cd_send_request_logs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id                                      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Исходящий СМЭВ-запрос]
+		/// </summary>
+		[Column,     NotNull    ] public Guid      f_outgoing_request                      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Версия СМЭВ]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_smev_version                          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Промышленный/тестовый]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=промышленный]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=тестовый]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_productive                            { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор сообщения запроса]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_request_message_id                    { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Содержимое отправляемого запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,     NotNull    ] public string    c_send_request_req_request_data         { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подпись отправляемого запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_send_request_req_caller_sys_signature { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время отправки запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_send_request_req_timestamp            { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время ответа на отправку запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_send_request_resp_timestamp           { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Метаданные ответа на отправку запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_send_request_resp_msg_metadata        { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подпись ответа на отправку запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_send_request_resp_smev_signature      { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Ошибка при отправке запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_send_request_resp_error               { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Исключение при отправке запроса]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_send_request_resp_exception           { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Запрос успешно отправлен]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_request_sent                          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Ответ успешно получен]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_response_received                     { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания записи]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_create_timestamp                      { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// cd_send_request_logs_fkey_f_outgoing_request
+		/// </summary>
+		[Association(ThisKey="f_outgoing_request", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_send_request_logs_fkey_f_outgoing_request")]
+		public smev_smev_cd_outgoing_requests cdsendrequestlogsfkeyfoutgoingrequest { get; set; }
+
+		/// <summary>
+		/// cd_send_request_logs_fkey_f_smev_version
+		/// </summary>
+		[Association(ThisKey="f_smev_version", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_send_request_logs_fkey_f_smev_version")]
+		public smev_smev_cs_smev_versions cdsendrequestlogsfkeyfversion { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Логи отправки ответов на запросы]
+	/// </summary>
+	[Table(Schema="smev", Name="cd_send_response_logs")]
+	public partial class smev_smev_cd_send_response_logs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id                                       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Входящий СМЭВ-запрос]
+		/// </summary>
+		[Column,     NotNull    ] public Guid      f_incoming_request                       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Версия СМЭВ]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_smev_version                           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Промышленный/тестовый]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=промышленный]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=тестовый]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_productive                             { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор сообщения ответа]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_response_message_id                    { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Содержимое отправляемого ответа]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,     NotNull    ] public string    c_send_response_req_response_data        { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подпись отправляемого ответа]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_send_response_req_caller_sys_signature { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время отправки ответа]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_send_response_req_timestamp            { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата/время ответа на отправку ответа]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_send_response_resp_timestamp           { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Метаданные ответа на отправку ответа]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_send_response_resp_msg_metadata        { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Подпись ответа на отправку ответа]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_send_response_resp_smev_signature      { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Ошибка при отправке ответа]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_send_response_resp_error               { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Исключение при отправке ответа]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.VisibleInLookupListView=false]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string    c_send_response_resp_exception           { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Ответ успешно отправлен]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanTrueText=да]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.DisplayFormat.BooleanFalseText=нет]
+		/// </summary>
+		[Column,     NotNull    ] public bool      b_response_sent                          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания записи]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("DisplayFormat", "{0:G}")]
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// 
+		/// [XMeta.Raw=ModelDefault("EditMask", "G")]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_create_timestamp                       { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// cd_send_response_logs_fkey_f_incoming_request
+		/// </summary>
+		[Association(ThisKey="f_incoming_request", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_send_response_logs_fkey_f_incoming_request")]
+		public smev_smev_cd_incoming_requests cdsendresponselogsfkeyfincomingrequest { get; set; }
+
+		/// <summary>
+		/// cd_send_response_logs_fkey_f_smev_version
+		/// </summary>
+		[Association(ThisKey="f_smev_version", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_send_response_logs_fkey_f_smev_version")]
+		public smev_smev_cs_smev_versions cdsendresponselogsfkeyfversion { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Версии видов сведений]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="smev", Name="cs_inquiry_type_versions")]
+	public partial class smev_smev_cs_inquiry_type_versions
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид сведений]
+		/// </summary>
+		[Column,     NotNull ] public int    f_inquiry_type  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Версия]
+		/// </summary>
+		[Column,     NotNull ] public string c_version       { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Namespace вида сведений]
+		/// </summary>
+		[Column,     NotNull ] public string c_namespace_uri { get; set; } // character varying(100)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_inquiry_type_versions_fkey_f_inquiry_type
+		/// </summary>
+		[Association(ThisKey="f_inquiry_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_inquiry_type_versions_fkey_f_inquiry_type")]
+		public smev_smev_cs_inquiry_types csinquirytypeversionsfkeyfinquirytype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды сведений]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="smev", Name="cs_inquiry_types")]
+	public partial class smev_smev_cs_inquiry_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id                   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull ] public string c_name               { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull ] public string c_code               { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Роль]
+		/// [XMeta.DisplayFormat.BooleanTrueText=поставщик]
+		/// [XMeta.DisplayFormat.BooleanFalseText=потребитель]
+		/// </summary>
+		[Column,     NotNull ] public bool   b_as_provider        { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Доступно пользователям]
+		/// </summary>
+		[Column,     NotNull ] public bool   b_accessible_to_user { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Отключено]
+		/// </summary>
+		[Column,     NotNull ] public bool   b_disabled           { get; set; } // boolean
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы отправки СМЭВ-запросов]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="smev", Name="cs_send_statuses")]
+	public partial class smev_smev_cs_send_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull ] public string c_code { get; set; } // character varying(20)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Версии СМЭВ]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="smev", Name="cs_smev_versions")]
+	public partial class smev_smev_cs_smev_versions
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull ] public string c_code { get; set; } // character varying(20)
+	}
+
 	[Table(Schema="sozags", Name="СОЗАГС_1")]
-	public partial class sozags_СОЗАГС_1
+	public partial class sozags_sozags_СОЗАГС_1
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id                                     { get; set; } // uuid
 		[Column,        Nullable] public string    Код_органа_ЗАГС                        { get; set; } // text
@@ -983,21 +15217,6161 @@ namespace SocialTargetHelpAPIServer.Models
 		/// FK_sozags_СОЗАГС_1_Вид_органа_01289DF2
 		/// </summary>
 		[Association(ThisKey="Вид_органа", OtherKey="Id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_sozags_СОЗАГС_1_Вид_органа_01289DF2")]
-		public sozags_СОЗАГС_1В СОЗАГС1Видоргана01289DF { get; set; }
+		public sozags_sozags_СОЗАГС_1В СОЗАГС1Видоргана01289DF { get; set; }
 
 		#endregion
 	}
 
 	[Table(Schema="sozags", Name="СОЗАГС_1В")]
-	public partial class sozags_СОЗАГС_1В
+	public partial class sozags_sozags_СОЗАГС_1В
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id                       { get; set; } // uuid
 		[Column,        Nullable] public string Код_вида_органа          { get; set; } // text
 		[Column,        Nullable] public string Наименование_вида_органа { get; set; } // text
 	}
 
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_calculation_living_communal_payment")]
+	public partial class subsidy_subsidy_cd_calculation_living_communal_payment
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id            { get; set; } // uuid
+		[Column,        Nullable] public NpgsqlDate? d_begin       { get; set; } // date
+		[Column,        Nullable] public NpgsqlDate? d_end         { get; set; } // date
+		[Column,     NotNull    ] public decimal     n_summ        { get; set; } // numeric(10,2)
+		[Column,     NotNull    ] public Guid        f_calculation { get; set; } // uuid
+		[Column,        Nullable] public string      f_type        { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Периоды расчётов]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_calculation_periods")]
+	public partial class subsidy_subsidy_cd_calculation_periods
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid     id                         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёт]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid     f_calculation              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=С]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime d_begin                    { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=По]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime d_end                      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма к начисл.]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_subsidy                  { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=ПМ семьи]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_family_living_minimum    { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Попр. коэф.]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_adjustment_coeff         { get; set; } // numeric(10,4)
+		/// <summary>
+		/// [XMeta.DisplayName=Рассч. ССЖКУ]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_ssghku                   { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Размер регионального стандарта нормативной площади]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_republic_area            { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Максимально допустимая доля расходов]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_maximum_share_cost       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Стандарт стоимости ЖКУ(формула)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_ssghku_formula           { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Поправочный коэффициент(формула)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_adjustment_coeff_formula { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёт субсидии(формула)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_subsidy_formula          { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма к выплате]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_payout                   { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Выплачено]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_payout                   { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=За ТТ]
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_solid_fuel               { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Выплата]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?    f_payment                  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=История выплат]
+		/// </summary>
+		[Column,        Nullable] public Guid?    f_payment_history          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=ФН ЕГИССО]
+		/// </summary>
+		[Column,        Nullable] public int?     f_msz_case                 { get; set; } // integer
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_calculated_subsidy       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Удержание]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_retention                { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Удержано]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_retention                { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_additional               { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Прекращено]
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_stoped                   { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Причина прекращение]
+		/// </summary>
+		[Column,        Nullable] public string   c_stoped_reason            { get; set; } // character varying(300)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_calculation_periods_fkey_f_calculation
+		/// </summary>
+		[Association(ThisKey="f_calculation", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_periods_fkey_f_calculation")]
+		public subsidy_subsidy_cd_calculations cdcalculationperiodsfkeyfcalculation { get; set; }
+
+		/// <summary>
+		/// cd_calculation_periods_fkey_f_msz_case
+		/// </summary>
+		[Association(ThisKey="f_msz_case", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_periods_fkey_f_msz_case")]
+		public msz_msz_cd_case cdcalculationperiodsfkeyfmszcase { get; set; }
+
+		/// <summary>
+		/// cd_calculation_periods_fkey_f_payment
+		/// </summary>
+		[Association(ThisKey="f_payment", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_periods_fkey_f_payment")]
+		public subsidy_subsidy_cd_payments cdcalculationperiodsfkeyfpayment { get; set; }
+
+		/// <summary>
+		/// cd_calculation_periods_fkey_f_payment_history
+		/// </summary>
+		[Association(ThisKey="f_payment_history", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_periods_fkey_f_payment_history")]
+		public subsidy_subsidy_cd_payments_history cdcalculationperiodsfkeyfpaymenthistory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь расчётов с ФЛ]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_calculation_persons")]
+	public partial class subsidy_subsidy_cd_calculation_persons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid     id                           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёт]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid     f_calculation                { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Физ. лицо]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("f_department.c_alias == 'soc'")]
+		/// </summary>
+		[Column,     NotNull    ] public int      f_person                     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Соц-дем. группа]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int      f_sdg                        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Признак ответственного плательщика]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_declarant                  { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Родств. отношение]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int      f_family_relation            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид регистрации]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int      f_registration_type          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Имя (инициализация)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string   c_first_name_init            { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество (инициализация)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string   c_patronymic_init            { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия (инициализация)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string   c_surname_init               { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Тип документа (инициализация)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?     f_document_type_init         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Серия документа (инициализация)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string   c_document_seria_init        { get; set; } // character varying(6)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер документа (инициализация)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string   c_document_number_init       { get; set; } // character varying(7)
+		/// <summary>
+		/// [XMeta.DisplayName=ФИАС (инициализация)]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public Guid?    f_address_init_fias_code     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Среднемес. доход]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_monthly_income             { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Прож. мин.]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public decimal? n_living_minimum             { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (дом)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_address_init_house         { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (корпус)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_address_init_corpus        { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (квартира)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_address_init_flat          { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string   c_address_init_plain         { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (регион)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_address_init_region        { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (район)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_address_init_district      { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (город)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_address_init_city          { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (населённый пункт)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_address_init_settlement    { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (улица)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string   c_address_init_street        { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Среднемес. учит. доход]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_monthly_accountable_income { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Собственник]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_owner                      { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Числитель]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 1000)]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int      n_numerator                  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Знаменатель]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 1, 1000)]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int      n_denominator                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Семья]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 1, 100)]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int      n_family                     { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_calculation_persons_fkey_f_calculation
+		/// </summary>
+		[Association(ThisKey="f_calculation", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_persons_fkey_f_calculation")]
+		public subsidy_subsidy_cd_calculations cdcalculationpersonsfkeyfcalculation { get; set; }
+
+		/// <summary>
+		/// cd_calculation_persons_fkey_f_document_type_init
+		/// </summary>
+		[Association(ThisKey="f_document_type_init", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_persons_fkey_f_document_type_init")]
+		public public_cs_document_types cdcalculationpersonsfkeyfdocumenttypeinit { get; set; }
+
+		/// <summary>
+		/// cd_calculation_persons_fkey_f_family_relation
+		/// </summary>
+		[Association(ThisKey="f_family_relation", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_persons_fkey_f_family_relation")]
+		public subsidy_subsidy_cs_family_relations cdcalculationpersonsfkeyffamilyrelation { get; set; }
+
+		/// <summary>
+		/// cd_calculation_persons_fkey_f_person
+		/// </summary>
+		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_persons_fkey_f_person")]
+		public public_cd_persons cdcalculationpersonsfkeyfperson { get; set; }
+
+		/// <summary>
+		/// cd_calculation_persons_fkey_f_registration_type
+		/// </summary>
+		[Association(ThisKey="f_registration_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_persons_fkey_f_registration_type")]
+		public public_cs_registration_types cdcalculationpersonsfkeyfregistrationtype { get; set; }
+
+		/// <summary>
+		/// cd_calculation_persons_fkey_f_sdg
+		/// </summary>
+		[Association(ThisKey="f_sdg", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_persons_fkey_f_sdg")]
+		public subsidy_subsidy_cs_socio_demographic_groups cdcalculationpersonsfkeyfsdg { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Расчёты]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.BaseType=common_cd_calculation_base]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_calculations")]
+	public partial class subsidy_subsidy_cd_calculations
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата заявления]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime    d_date                       { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Прожиточный минимум семьи]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_family_living_minimum      { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Поправочный коэффициент]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_adjustment_coeff           { get; set; } // numeric(10,4)
+		/// <summary>
+		/// [XMeta.DisplayName=Коэффициент с учётом скидки]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_coeff_with_discount        { get; set; } // numeric(10,4)
+		/// <summary>
+		/// [XMeta.DisplayName=Среднемесячный совокупный доход семьи]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_average_month_income_total { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Среднедушевой доход семьи]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_percapita_income           { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во трудоспособных членов семьи]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_employable_count           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во пенсионеров членов семьи]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_pensioner_count            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во детей членов семьи]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_child_count                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInDetailView=false]
+		/// 
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_case                       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Последнее расчётное число месяца]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_last_calculation_day       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Признак проведения]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_executed                   { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во зарегистрированных по месту жительства]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 100)]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_count_location             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во зарегистрированных по месту пребывания]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 100)]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_count_place_stay           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Из них кол-во временно отсутствующих]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 100)]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_count_temp_absent          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Всего проживающих]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 1, 100)]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_all                        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_status                     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёт с]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime    d_begin                      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёт по]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime?   d_end                        { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Вид субсидии]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_subsidy_type               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Размер регионального стандарта нормативной площади]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_republic_area              { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Максимально допустимая доля расходов]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_maximum_share_cost         { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_number                     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Протокол расчёта]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_result                     { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дата расчёта]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public DateTime?   d_recalculation              { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Уведомление]
+		/// </summary>
+		[Column,        Nullable] public string      c_notification               { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Решение]
+		/// </summary>
+		[Column,        Nullable] public string      c_decision                   { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Категория локальных МСЗ]
+		/// [XMeta.Raw=DataSourceCriteria("f_local_msz_category_msz_cs_link_msz_category_mszCollection[f_local_msz == '@This.f_case.f_local_msz']")]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?        f_local_msz_category         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Возможность использовать для перерасчёта]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_enabled                    { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Признак уменьшения размера субсидии]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_decrease                   { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во собственников]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 100)]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_owner_count                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Тип пользования жилого помещения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_dwelling_user              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид жил. фонда]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_housing_stock_type         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид домовладения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_ownership_type             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Тип дома]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?        f_house_type                 { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Признак платы за кап. ремонт]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_capital_repair             { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Общая (расчётная) площадь жилого помещения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_area                       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Фактические расходы]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_communal_payment           { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Вид]
+		/// </summary>
+		[Column,        Nullable] public int?        f_type                       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_annual_volume_solid_fuel   { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_months_solid_fuel          { get; set; } // numeric(10,4)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_fact_payment_year_sf       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_fact_payment_month_sf      { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_rest_volume_sf             { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_normative_costs            { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=ЖКУ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_ghku_text                  { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Перерасчёт]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_recalculation              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата вступления в силу]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_sampled_recalculated       { get; set; } // date
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_message                    { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_income_recalculated        { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=ЖКУ]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=DataSourceCriteria("f_case == '@This.f_case' and GetYear(AddMonths(IsNull('@This.d_date', Today()), -1)) * 100 + GetMonth(AddMonths(IsNull('@This.d_date', Today()), -1)) == n_year * 100 + f_month.id")]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_ghku                       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public int?        n_month_without_decrease     { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_calculations_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_calculations_fkey_id")]
+		public common_common_cd_calculation_base cd_calculation_base { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_subsidy_type
+		/// </summary>
+		[Association(ThisKey="f_subsidy_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_subsidy_type")]
+		public subsidy_subsidy_cs_subsidy_types cd_calculations_fkey_f_subsidy_type { get; set; }
+
+		/// <summary>
+		/// cd_calculation_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_fkey_f_case")]
+		public subsidy_subsidy_cd_cases cdcalculationfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_calculation_fkey_f_last_calculation_day
+		/// </summary>
+		[Association(ThisKey="f_last_calculation_day", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculation_fkey_f_last_calculation_day")]
+		public subsidy_subsidy_cs_last_calculation_day cdcalculationfkeyflastcalculationday { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_dwelling_user
+		/// </summary>
+		[Association(ThisKey="f_dwelling_user", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_dwelling_user")]
+		public subsidy_subsidy_cs_dwelling_users cdcalculationsfkeyfdwellinguser { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_ghku
+		/// </summary>
+		[Association(ThisKey="f_ghku", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_ghku")]
+		public subsidy_subsidy_cd_cases_ghku cdcalculationsfkeyfghku { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_house_type
+		/// </summary>
+		[Association(ThisKey="f_house_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_house_type")]
+		public subsidy_subsidy_cs_house_types cdcalculationsfkeyfhousetype { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_housing_stock_type
+		/// </summary>
+		[Association(ThisKey="f_housing_stock_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_housing_stock_type")]
+		public subsidy_subsidy_cs_housing_stock_types cdcalculationsfkeyfhousingstocktype { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_local_msz_category
+		/// </summary>
+		[Association(ThisKey="f_local_msz_category", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_local_msz_category")]
+		public msz_msz_cs_local_msz_category cdcalculationsfkeyflocalmszcategory { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_ownership_type
+		/// </summary>
+		[Association(ThisKey="f_ownership_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_ownership_type")]
+		public subsidy_subsidy_cs_house_ownership_types cdcalculationsfkeyfownershiptype { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_recalculation
+		/// </summary>
+		[Association(ThisKey="f_recalculation", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_recalculation")]
+		public subsidy_subsidy_cd_recalculations cdcalculationsfkeyfrecalculation { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_status")]
+		public subsidy_subsidy_cs_calculation_statuses cdcalculationsfkeyfstatu { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_type")]
+		public subsidy_subsidy_cs_calculation_types cdcalculationsfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=История дела]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_case_history")]
+	public partial class subsidy_subsidy_cd_case_history
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid     id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата изменения]
+		/// </summary>
+		[Column,     NotNull] public DateTime d_updated { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Действие]
+		/// </summary>
+		[Column,     NotNull] public string   c_action  { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Значение]
+		/// </summary>
+		[Column,     NotNull] public string   c_value   { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull] public Guid     f_case    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Пользователь]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,     NotNull] public Guid     f_user    { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_history_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_history_fkey_f_case")]
+		public subsidy_subsidy_cd_cases cdcasehistoryfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_case_history_fkey_f_user
+		/// </summary>
+		[Association(ThisKey="f_user", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_history_fkey_f_user")]
+		public public_UserPolicyModel cdcasehistoryfkeyfuser { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Назначение]
+	/// [XMeta.BaseType=common_cd_case_base]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_cases")]
+	public partial class subsidy_subsidy_cd_cases
+	{
+		/// <summary>
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата первичного обращения]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRange("DateRange3", DefaultContexts.Save, "GetDate(MinDate)", "AddDays(Today(), 1)", "Значение \"Дата первичного обращения\" должно быть в пределах диапазона от 01.01.1900 до текущей даты, включая границы.", ParametersMode.Expression)]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime    d_begin                  { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_status                 { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата прекращения]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public DateTime?   d_end                    { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Признак постановки на контроль]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_controled              { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Причина постановки на контроль]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_control_reason         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Район]
+		/// [XMeta.Raw=DataSourceCriteria("f_district_cd_orgs_districtsCollection[f_org == '@This.f_org'] and b_visible")]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_district               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Причина остановки выплаты]
+		/// </summary>
+		[Column,        Nullable] public string      c_payment_method_reason  { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Поселение]
+		/// [XMeta.Raw=DataSourceCriteria("f_district == '@This.f_district'")]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?        f_settlement             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Максимально допустимая доля расходов]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_maximum_share_cost     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_address                { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Законный представитель]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_representer            { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Тип представителя]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_representer            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Серия документа]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_representer_doc_seria  { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер документа]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_representer_doc_number { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выдачи]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=RuleRange("DateRange4", DefaultContexts.Save, "GetDate(MinDate)", "Today()", "Значение \"Дата выдачи\" должно быть в пределах диапазона от 01.01.1900 до текущей даты, включая границы.", ParametersMode.Expression)]
+		/// </summary>
+		[Column,        Nullable] public DateTime?   d_representer_doc_extrad { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Вид документа]
+		/// [XMeta.Raw=DataSourceCriteria("f_group.c_alias = 'representer'")]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_document_type          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Причина возврата на доработку]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_rework_reason          { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Причина прекращения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?        f_cancel_reason          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Кем выдан]
+		/// [XMeta.Raw=DataSourceCriteria("f_group.c_alias = 'representer'")]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_representer_doc_who    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (код ФИАС)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_address_fias_code      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (дом)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_house          { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (корпус)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_corpus         { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (квартира)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_flat           { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (регион)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_region         { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (район)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_district       { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (город)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_city           { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (населённый пункт)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_settlement     { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (улица)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_street         { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("c_alias == 'subsidy_ghku'")]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_local_msz              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Баланс]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_balance                { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_kladr          { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор дома ФИАС]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_house_fias_code        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата заявления]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_calc_date              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Срок с]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_calc_start             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Срок по]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_calc_end               { get; set; } // date
+
+		#region Associations
+
+		/// <summary>
+		/// cd_cases_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_cases_fkey_id")]
+		public common_common_cd_case_base cd_case_base { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_cancel_reason
+		/// </summary>
+		[Association(ThisKey="f_cancel_reason", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_cancel_reason")]
+		public subsidy_subsidy_cs_cancel_reasons cdcasesfkeyfcancelreason { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_district
+		/// </summary>
+		[Association(ThisKey="f_district", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_district")]
+		public public_cs_districts cdcasesfkeyfdistrict { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_document_type
+		/// </summary>
+		[Association(ThisKey="f_document_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_document_type")]
+		public public_cs_document_types cdcasesfkeyfdocumenttype { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_maximum_share_cost
+		/// </summary>
+		[Association(ThisKey="f_maximum_share_cost", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_maximum_share_cost")]
+		public subsidy_subsidy_cs_maximum_share_costs cdcasesfkeyfmaximumsharecost { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_representer_doc_who
+		/// </summary>
+		[Association(ThisKey="f_representer_doc_who", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_representer_doc_who")]
+		public public_cs_document_issues_orgs cdcasesfkeyfrepresenterdocwho { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_settlement
+		/// </summary>
+		[Association(ThisKey="f_settlement", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_settlement")]
+		public public_cs_settlements cdcasesfkeyfsettlement { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_status")]
+		public subsidy_subsidy_cs_case_statuses cdcasesfkeyfstatu { get; set; }
+
+		/// <summary>
+		/// cs_cases_fkey_f_control_reason
+		/// </summary>
+		[Association(ThisKey="f_control_reason", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_cases_fkey_f_control_reason")]
+		public subsidy_subsidy_cs_control_reasons cscasesfkeyfcontrolreason { get; set; }
+
+		/// <summary>
+		/// cs_cases_fkey_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_cases_fkey_f_local_msz")]
+		public msz_msz_cs_local_msz cscasesfkeyflocalmsz { get; set; }
+
+		/// <summary>
+		/// cs_cases_fkey_f_representer
+		/// </summary>
+		[Association(ThisKey="f_representer", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_cases_fkey_f_representer")]
+		public subsidy_subsidy_cs_representers cscasesfkeyfrepresenter { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Периоды ЖКУ]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_cases_ghku")]
+	public partial class subsidy_subsidy_cd_cases_ghku
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid     id         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid     f_case     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Месяц]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public int      f_month    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Год]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public int      n_year     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Итого]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal  n_total    { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Общая льгота]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public decimal  n_discount { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,     NotNull] public DateTime d_updated  { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Последний]
+		/// </summary>
+		[Column,     NotNull] public bool     b_last     { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// cd_cases_ghku_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_ghku_fkey_f_case")]
+		public subsidy_subsidy_cd_cases cdcasesghkufkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_cases_ghku_fkey_f_month
+		/// </summary>
+		[Association(ThisKey="f_month", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_ghku_fkey_f_month")]
+		public common_common_cs_months cdcasesghkufkeyfmonth { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Услуги]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_cases_ghku_periods")]
+	public partial class subsidy_subsidy_cd_cases_ghku_periods
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid     id             { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Период ЖКУ]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid     f_case_ghku    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("b_archive = false")]
+		/// </summary>
+		[Column,     NotNull    ] public Guid     f_type         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Начислено]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_sum          { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Ед.изм.]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?     f_measure_unit { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Тариф]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public decimal? n_tarif        { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Норматив потребления]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.DisplayFormat=N6]
+		/// </summary>
+		[Column,        Nullable] public decimal? n_normative    { get; set; } // numeric(10,6)
+		/// <summary>
+		/// [XMeta.DisplayName=Объём]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.DisplayFormat=N4]
+		/// </summary>
+		[Column,        Nullable] public decimal? n_scope        { get; set; } // numeric(10,4)
+		/// <summary>
+		/// [XMeta.DisplayName=Льгота]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_discount     { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_cases_ghku_periods_fkey_f_case_ghku
+		/// </summary>
+		[Association(ThisKey="f_case_ghku", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_ghku_periods_fkey_f_case_ghku")]
+		public subsidy_subsidy_cd_cases_ghku cdcasesghkuperiodsfkeyfcaseghku { get; set; }
+
+		/// <summary>
+		/// cd_cases_ghku_periods_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_ghku_periods_fkey_f_type")]
+		public subsidy_subsidy_cs_ghku_types cdcasesghkuperiodsfkeyftype { get; set; }
+
+		/// <summary>
+		/// cs_cases_ghku_periods_fkey_f_measure_unit
+		/// </summary>
+		[Association(ThisKey="f_measure_unit", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_cases_ghku_periods_fkey_f_measure_unit")]
+		public subsidy_subsidy_cs_measure_units cscasesghkuperiodsfkeyfmeasureunit { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Организации, предоставляющие ЖКУ]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_cases_management_companies")]
+	public partial class subsidy_subsidy_cd_cases_management_companies
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull] public Guid   f_case               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Организации, предоставляющие ЖКУ]
+		/// [XMeta.Raw=DataSourceCriteria("IsNull(f_district) or f_district == '@This.f_case.f_district'")]
+		/// </summary>
+		[Column,     NotNull] public int    f_management_company { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Лицевой счёт]
+		/// </summary>
+		[Column,     NotNull] public string c_account            { get; set; } // character varying(32)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_cases_management_companies_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_management_companies_fkey_f_case")]
+		public subsidy_subsidy_cd_cases cdcasesmanagementcompaniesfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_cases_management_companies_fkey_f_mancomp
+		/// </summary>
+		[Association(ThisKey="f_management_company", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_management_companies_fkey_f_mancomp")]
+		public subsidy_subsidy_cs_management_companies cdcasesmanagementcompaniesfkeyfmancomp { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Выгрузка данных]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_export_ghkh")]
+	public partial class subsidy_subsidy_cd_export_ghkh
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid           id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания]
+		/// </summary>
+		[Column,     NotNull] public DateTimeOffset d_created { get; set; } // timestamp (6) with time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Месяц]
+		/// </summary>
+		[Column,     NotNull] public int            f_month   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Год]
+		/// </summary>
+		[Column,     NotNull] public int            n_year    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public int            f_org     { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_export_ghkh_fkey_f_month
+		/// </summary>
+		[Association(ThisKey="f_month", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_export_ghkh_fkey_f_month")]
+		public common_common_cs_months cdexportghkhfkeyfmonth { get; set; }
+
+		/// <summary>
+		/// cd_export_ghkh_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_export_ghkh_fkey_f_org")]
+		public public_cs_organizations cdexportghkhfkeyforg { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Файлы выгрузки для ЖКХ]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_export_ghkh_docs")]
+	public partial class subsidy_subsidy_cd_export_ghkh_docs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name   { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Ссылка]
+		/// </summary>
+		[Column,     NotNull] public string c_url    { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Выгрузка]
+		/// </summary>
+		[Column,     NotNull] public Guid   f_export { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_export_ghkh_docs_fkey_f_export
+		/// </summary>
+		[Association(ThisKey="f_export", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_export_ghkh_docs_fkey_f_export")]
+		public subsidy_subsidy_cd_export_ghkh cdexportghkhdocsfkeyfexport { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Количество ЛПХ]
+	/// [XMeta.DefaultProperty=f_calculation_person]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_farm_counts")]
+	public partial class subsidy_subsidy_cd_farm_counts
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid    id                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Значение]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.DisplayFormat=N2]
+		/// </summary>
+		[Column,     NotNull] public decimal n_value              { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Норматив]
+		/// [XMeta.Raw=DataSourceCriteria("f_income_type.b_farm and (GetYear(IsNull(d_end, AddYears(Now(), 1))) * 100 + GetMonth(IsNull(d_end, AddYears(Now(), 1))) >= GetYear(AddMonths('@This.f_calculation_person.f_calculation.d_date', -1)) * 100 + GetMonth(AddMonths('@This.f_calculation_person.f_calculation.d_date', -1))) and (GetYear(d_begin) * 100 + GetMonth(d_begin) <= GetYear(AddMonths('@This.f_calculation_person.f_calculation.d_date', -1)) * 100 + GetMonth(AddMonths('@This.f_calculation_person.f_calculation.d_date', -1)))")]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public int     f_normative          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Связь расчётов с ФЛ]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public Guid    f_calculation_person { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма за месяц]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull] public decimal Value                { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма за 6 месяцев]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull] public decimal n_sum                { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во месяцев]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public int     n_month              { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_farm_counts_fkey_f_calculation_person
+		/// </summary>
+		[Association(ThisKey="f_calculation_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_farm_counts_fkey_f_calculation_person")]
+		public subsidy_subsidy_cd_calculation_persons cdfarmcountsfkeyfcalculationperson { get; set; }
+
+		/// <summary>
+		/// cd_farm_counts_fkey_f_normative
+		/// </summary>
+		[Association(ThisKey="f_normative", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_farm_counts_fkey_f_normative")]
+		public subsidy_subsidy_cs_farm_normatives cdfarmcountsfkeyfnormative { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Выплатные документы]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_payment_docs")]
+	public partial class subsidy_subsidy_cd_payment_docs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,        Nullable] public string c_name          { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Выплатной массив]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_payment_array { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Ссылка]
+		/// [XMeta.VisibleInListView=true]
+		/// </summary>
+		[Column,        Nullable] public string c_url           { get; set; } // character varying(256)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_payment_docs_fkey_f_payment_array
+		/// </summary>
+		[Association(ThisKey="f_payment_array", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payment_docs_fkey_f_payment_array")]
+		public subsidy_subsidy_cd_payments_array cdpaymentdocsfkeyfpaymentarray { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Выплата]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_payments")]
+	public partial class subsidy_subsidy_cd_payments
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Расчётный счёт]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_checking_account       { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Способ выплаты]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_payment_method         { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата первичного обращения]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_case              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата заявления]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_state             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата расчёта]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_calculation       { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала периода]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_begin                  { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания периода]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end                    { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Начисленная сумма]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_additional_sum         { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма к выплате]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_payment_sum            { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_first_name             { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_last_name              { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_middle_name            { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_local_msz              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная категория МСЗ]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_local_msz_category     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата рождения]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_birth_day              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Филиал доставочной организации]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_bank_filial            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_case                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=СНИЛС]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_snils                  { get; set; } // character varying(32)
+		/// <summary>
+		/// [XMeta.DisplayName=Доплата за прошлое время]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_past_payment           { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg            { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live           { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма к выплате за текущий период]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_additional_sum         { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Начисленная сумма]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_payment_sum            { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=КБК]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_kbk                    { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Код МСЗ]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_code_msz               { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Код родительской категории]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_code_parent_fed_msz    { get; set; } // character varying(8)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчётный месяц]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_current_month          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Отчётный год]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_current_year           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Выплатной массив]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_payment_array          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.DisplayName=Заявитель]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_person                 { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Доставочный участок]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        n_post_site              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=День доставки]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        n_post_day               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес жилого помещения]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_address                { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Причина неоплаты]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_failure_payment_reason { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид выплаты]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_payment_type           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Доплата за прошлое время]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_past_payment           { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Способ выплаты]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_payment_method         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Неоплата]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_failure_payment        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёт]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_calculation            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Возврат]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_refund                 { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма удержания]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_retention_summ         { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_payments_f_bank_filial_fkey
+		/// </summary>
+		[Association(ThisKey="f_bank_filial", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_f_bank_filial_fkey")]
+		public public_cs_bank_filials cdpaymentsfbankfilialfkey { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_calculation
+		/// </summary>
+		[Association(ThisKey="f_calculation", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_calculation")]
+		public common_common_cd_calculation_base cdpaymentsfkeyfcalculation { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_case")]
+		public common_common_cd_case_base cdpaymentsfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_failure_payment
+		/// </summary>
+		[Association(ThisKey="f_failure_payment", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_failure_payment")]
+		public subsidy_subsidy_cd_payments cdpaymentsfkeyffailurepayment { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_failure_payment_reason
+		/// </summary>
+		[Association(ThisKey="f_failure_payment_reason", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_failure_payment_reason")]
+		public subsidy_subsidy_cs_failure_payment_reasons cdpaymentsfkeyffailurepaymentreason { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_local_msz")]
+		public msz_msz_cs_local_msz cdpaymentsfkeyflocalmsz { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_local_msz_category
+		/// </summary>
+		[Association(ThisKey="f_local_msz_category", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_local_msz_category")]
+		public msz_msz_cs_local_msz_category cdpaymentsfkeyflocalmszcategory { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_payment_method
+		/// </summary>
+		[Association(ThisKey="f_payment_method", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_payment_method")]
+		public subsidy_subsidy_cs_payment_methods cdpaymentsfkeyfpaymentmethod { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_payments_array
+		/// </summary>
+		[Association(ThisKey="f_payment_array", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_payments_array")]
+		public subsidy_subsidy_cd_payments_array cdpaymentsfkeyfpaymentsarray { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_payment_type
+		/// </summary>
+		[Association(ThisKey="f_payment_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_payment_type")]
+		public subsidy_subsidy_cs_payment_types cdpaymentsfkeyfpaymenttype { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_person
+		/// </summary>
+		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_person")]
+		public public_cd_persons cdpaymentsfkeyfperson { get; set; }
+
+		/// <summary>
+		/// cd_payments_fkey_f_refund
+		/// </summary>
+		[Association(ThisKey="f_refund", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_fkey_f_refund")]
+		public subsidy_subsidy_cd_refunds cdpaymentsfkeyfrefund { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Выплатной массив]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_payments_array")]
+	public partial class subsidy_subsidy_cd_payments_array
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int        id               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Филиал доставочной организации]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_bank_filial    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Месяц]
+		/// </summary>
+		[Column,     NotNull    ] public int        n_current_month  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Год]
+		/// </summary>
+		[Column,     NotNull    ] public int        n_current_year   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,     NotNull    ] public string     c_number         { get; set; } // character varying(5)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выгрузки]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_date_generate  { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Вид выплаты]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_payment_type   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_status         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=ОСЗН]
+		/// XMeta.VisibleInListView=false]
+		/// XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_org            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Сводная ведомость]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_inventory_main { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public int?       f_subsystem      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Отменён]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool       b_canceled       { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// cd_payments_array_fkey_f_bank_filial
+		/// </summary>
+		[Association(ThisKey="f_bank_filial", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_fkey_f_bank_filial")]
+		public public_cs_bank_filials cdpaymentsarrayfkeyfbankfilial { get; set; }
+
+		/// <summary>
+		/// cd_payments_array_fkey_f_inventory_main
+		/// </summary>
+		[Association(ThisKey="f_inventory_main", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_fkey_f_inventory_main")]
+		public subsidy_subsidy_cd_payments_array_inventory_main cdpaymentsarrayfkeyfinventorymain { get; set; }
+
+		/// <summary>
+		/// cd_payments_array_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_fkey_f_org")]
+		public public_cs_organizations cdpaymentsarrayfkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_payments_array_fkey_f_payment_type
+		/// </summary>
+		[Association(ThisKey="f_payment_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_fkey_f_payment_type")]
+		public subsidy_subsidy_cs_payment_types cdpaymentsarrayfkeyfpaymenttype { get; set; }
+
+		/// <summary>
+		/// cd_payments_array_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_fkey_f_status")]
+		public subsidy_subsidy_cs_payments_array_statuses cdpaymentsarrayfkeyfstatu { get; set; }
+
+		/// <summary>
+		/// cd_payments_array_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_fkey_f_subsystem")]
+		public public_cs_subsystems cdpaymentsarrayfkeyfsubsystem { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Опись]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_payments_array_inventory")]
+	public partial class subsidy_subsidy_cd_payments_array_inventory
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int     id          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=ОСЗН]
+		/// </summary>
+		[Column,     NotNull ] public int     f_org       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Доставочная организация]
+		/// </summary>
+		[Column,     NotNull ] public int     f_bank      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во выплат по ОСЗН]
+		/// </summary>
+		[Column,     NotNull ] public int     n_count_org { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма по ОСЗН]
+		/// </summary>
+		[Column,     NotNull ] public decimal n_summ_org  { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сводная опись]
+		/// </summary>
+		[Column,     NotNull ] public Guid    f_inventory { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_payments_array_inventory_fkey_f_bank
+		/// </summary>
+		[Association(ThisKey="f_bank", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_inventory_fkey_f_bank")]
+		public public_cs_banks cdpaymentsarrayinventoryfkeyfbank { get; set; }
+
+		/// <summary>
+		/// cd_payments_array_inventory_fkey_f_inventory
+		/// </summary>
+		[Association(ThisKey="f_inventory", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_inventory_fkey_f_inventory")]
+		public subsidy_subsidy_cd_payments_array_inventory_main cdpaymentsarrayinventoryfkeyfinventory { get; set; }
+
+		/// <summary>
+		/// cd_payments_array_inventory_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_inventory_fkey_f_org")]
+		public public_cs_organizations cdpaymentsarrayinventoryfkeyforg { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Сводная опись]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_payments_array_inventory_main")]
+	public partial class subsidy_subsidy_cd_payments_array_inventory_main
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_created   { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid       id          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,        Nullable] public string     c_number    { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_subsystem { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_payments_array_inventory_main_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_inventory_main_fkey_f_subsystem")]
+		public public_cs_subsystems cdpaymentsarrayinventorymainfkeyfsubsystem { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_payments_array_inventory_main_docs")]
+	public partial class subsidy_subsidy_cd_payments_array_inventory_main_docs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,        Nullable] public string c_name           { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Сводная опись]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_inventory_main { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Ссылка]
+		/// </summary>
+		[Column,        Nullable] public string c_url            { get; set; } // character varying(300)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_payments_array_inventory_main_docs_fkey_f_inventory
+		/// </summary>
+		[Association(ThisKey="f_inventory_main", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_array_inventory_main_docs_fkey_f_inventory")]
+		public subsidy_subsidy_cd_payments_array_inventory_main cdpaymentsarrayinventorymaindocsfkeyfinventory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=История выплат]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_payments_history")]
+	public partial class subsidy_subsidy_cd_payments_history
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Расчётный счёт]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_checking_account       { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Способ выплаты]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_payment_method         { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата первичного обращения]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_case              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата заявления]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_state             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата расчёта]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_calculation       { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала периода]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_begin                  { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания периода]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end                    { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Начисленная сумма]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_additional_sum         { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма к выплате]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_payment_sum            { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_first_name             { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_last_name              { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_middle_name            { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_local_msz              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная категория МСЗ]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_local_msz_category     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата рождения]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_birth_day              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёт]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_calculation            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Филиал доставочной организации]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_bank_filial            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_case                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=СНИЛС]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_snils                  { get; set; } // character varying(32)
+		/// <summary>
+		/// [XMeta.DisplayName=Доплата за прошлое время]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_past_payment           { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg            { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live           { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма к выплате]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_additional_sum         { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Начисленная сумма]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_payment_sum            { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=КБК]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_kbk                    { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Код МСЗ]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_code_msz               { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Код родительской категории]
+		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_code_parent_fed_msz    { get; set; } // character varying(8)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчётный год]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        n_payment_year           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Отчётный месяц]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        n_payment_month          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Выплатной массив]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_payment_array          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Доставочный участок]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        n_post_site              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=День доставки]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        n_post_day               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес жилого помещения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_address                { get; set; } // character varying(512)
+		/// <summary>
+		/// [XMeta.DisplayName=Причина неоплаты]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_failure_payment_reason { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Способ выплаты]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_payment_type           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Доплата за прошлое время]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_past_payment           { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Способ выплаты]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_payment_method         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Возврат]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_refund                 { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public int?        imp_id                   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма удержания]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_retention_summ         { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=СНИЛС]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_snils11                { get; set; } // character(11)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_payments_history_fkey_f_bank_filial
+		/// </summary>
+		[Association(ThisKey="f_bank_filial", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_history_fkey_f_bank_filial")]
+		public public_cs_bank_filials cdpaymentshistoryfkeyfbankfilial { get; set; }
+
+		/// <summary>
+		/// cd_payments_history_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_payments_history_fkey_f_case")]
+		public common_common_cd_case_base cdpaymentshistoryfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_payments_history_fkey_f_failure_payment_reason
+		/// </summary>
+		[Association(ThisKey="f_failure_payment_reason", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_history_fkey_f_failure_payment_reason")]
+		public subsidy_subsidy_cs_failure_payment_reasons cdpaymentshistoryfkeyffailurepaymentreason { get; set; }
+
+		/// <summary>
+		/// cd_payments_history_fkey_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_history_fkey_f_local_msz")]
+		public msz_msz_cs_local_msz cdpaymentshistoryfkeyflocalmsz { get; set; }
+
+		/// <summary>
+		/// cd_payments_history_fkey_f_local_msz_category
+		/// </summary>
+		[Association(ThisKey="f_local_msz_category", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_history_fkey_f_local_msz_category")]
+		public msz_msz_cs_local_msz_category cdpaymentshistoryfkeyflocalmszcategory { get; set; }
+
+		/// <summary>
+		/// cd_payments_history_fkey_f_payment_array
+		/// </summary>
+		[Association(ThisKey="f_payment_array", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_history_fkey_f_payment_array")]
+		public subsidy_subsidy_cd_payments_array cdpaymentshistoryfkeyfpaymentarray { get; set; }
+
+		/// <summary>
+		/// cd_payments_history_fkey_f_payment_method
+		/// </summary>
+		[Association(ThisKey="f_payment_method", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_history_fkey_f_payment_method")]
+		public subsidy_subsidy_cs_payment_methods cdpaymentshistoryfkeyfpaymentmethod { get; set; }
+
+		/// <summary>
+		/// cd_payments_history_fkey_f_payment_type
+		/// </summary>
+		[Association(ThisKey="f_payment_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_history_fkey_f_payment_type")]
+		public subsidy_subsidy_cs_payment_types cdpaymentshistoryfkeyfpaymenttype { get; set; }
+
+		/// <summary>
+		/// cd_payments_history_fkey_f_refund
+		/// </summary>
+		[Association(ThisKey="f_refund", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_history_fkey_f_refund")]
+		public subsidy_subsidy_cd_refunds cdpaymentshistoryfkeyfrefund { get; set; }
+
+		/// <summary>
+		/// cd_payments_histroy_fkey_f_calculation
+		/// </summary>
+		[Association(ThisKey="f_calculation", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_payments_histroy_fkey_f_calculation")]
+		public common_common_cd_calculation_base cdpaymentshistroyfkeyfcalculation { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Доходы]
+	/// [XMeta.DefaultProperty=f_calculation_person]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_person_incomes")]
+	public partial class subsidy_subsidy_cd_person_incomes
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Вид]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_type               { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public decimal   n_value              { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во доходных месяцев]
+		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 1, 6)]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int       n_months             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Связь расчётов и ФЛ]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.ReadOnly]
+		/// 
+		/// </summary>
+		[Column,     NotNull    ] public Guid      f_calculation_person { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Источник дохода]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?      f_source             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=С]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_begin              { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=По]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_end                { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// cd_person_incomes_fkey_f_source
+		/// </summary>
+		[Association(ThisKey="f_source", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_person_incomes_fkey_f_source")]
+		public subsidy_subsidy_cs_companies cdpersonincomesfkeyfsource { get; set; }
+
+		/// <summary>
+		/// cd_person_incomes_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_incomes_fkey_f_type")]
+		public subsidy_subsidy_cs_income_types cdpersonincomesfkeyftype { get; set; }
+
+		/// <summary>
+		/// cd_peson_incomes_fkey_f_calculation_person
+		/// </summary>
+		[Association(ThisKey="f_calculation_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_peson_incomes_fkey_f_calculation_person")]
+		public subsidy_subsidy_cd_calculation_persons cdpesonincomesfkeyfcalculationperson { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_progress")]
+	public partial class subsidy_subsidy_cd_progress
+	{
+		[PrimaryKey, NotNull    ] public Guid   id      { get; set; } // uuid
+		[Column,        Nullable] public string c_value { get; set; } // character varying(100)
+		[Column,        Nullable] public string c_type  { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Перерасчёты]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_recalculations")]
+	public partial class subsidy_subsidy_cd_recalculations
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime    d_created      { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_number       { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Начало]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_period       { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дела с увеличившимся размером субсидии]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_bigger       { get; set; } // text
+		/// <summary>
+		/// [XMeta.DispayName=Дела с уменьшившимся размером субсидии]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_less         { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дела с неизменившимся размером субсидии]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_equal        { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Дела, исключённые из перерасчёта]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_excluded     { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Информация]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_info         { get; set; } // text
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// [XMeta.DisplayName=ОСЗН]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_org          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Утверждён]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_approved     { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_subsystem    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Окончание]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_period_end   { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Признак мега-перерасчёта]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_mega         { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Без удержания]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_decrease     { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Вид]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_type         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата основания]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_reason       { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Прогресс]
+		/// [XMeta.Raw=EditorAlias(ProgressBarPropertyEditor)]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public float       n_progress     { get; set; } // real
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id             { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        imp_id         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дела, не вошедшие в перерасчёт]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_uncalculated { get; set; } // text
+
+		#region Associations
+
+		/// <summary>
+		/// cd_recalculations_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_recalculations_fkey_f_org")]
+		public public_cs_organizations cdrecalculationsfkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_recalculations_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_recalculations_fkey_f_subsystem")]
+		public public_cs_subsystems cdrecalculationsfkeyfsubsystem { get; set; }
+
+		/// <summary>
+		/// cd_recalculations_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_recalculations_fkey_f_type")]
+		public subsidy_subsidy_cs_calculation_types cdrecalculationsfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Возвраты]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cd_refunds")]
+	public partial class subsidy_subsidy_cd_refunds
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Расчётный счёт]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_checking_account    { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата первичного обращения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_case           { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата заявления]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_state          { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата расчёта]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_date_calculation    { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала периода]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_begin               { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания периода]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end                 { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Начисленная сумма]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_additional_sum      { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма к выплате]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_payment_sum         { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_first_name          { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_last_name           { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_middle_name         { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=СНИЛС]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_snils               { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_reg         { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес фактического проживания]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_live        { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=КБК]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_kbk                 { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Код МСЗ]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_code_msz            { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Код родительской категории]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_code_parent_fed_msz { get; set; } // character varying(8)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчётный месяц]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_current_month       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Отчётный год]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_current_year        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_case                { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёт]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_calculation         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_local_msz           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная категория МСЗ]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_local_msz_category  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата рождения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_birth_day           { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Филиал доставочной организации]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("f_bank.f_type.c_alias == '@This.f_payment_method.c_alias'")]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_bank_filial         { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Способ выплаты]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?        f_payment_method      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид выплаты]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_payment_type        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес жилого помещения]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_address             { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_status              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Причина]
+		/// </summary>
+		[Column,        Nullable] public string      c_reason              { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Заявитель]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_person              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Доставочный участок]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        n_post_site           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=День доставки]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        n_post_day            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime    d_created             { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_payment             { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_payment_history     { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_refunds_fkey_f_bank_filial
+		/// </summary>
+		[Association(ThisKey="f_bank_filial", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_fkey_f_bank_filial")]
+		public public_cs_bank_filials cdrefundsfkeyfbankfilial { get; set; }
+
+		/// <summary>
+		/// cd_refunds_fkey_f_calculation
+		/// </summary>
+		[Association(ThisKey="f_calculation", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_fkey_f_calculation")]
+		public common_common_cd_calculation_base cdrefundsfkeyfcalculation { get; set; }
+
+		/// <summary>
+		/// cd_refunds_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_fkey_f_case")]
+		public common_common_cd_case_base cdrefundsfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_refunds_fkey_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_fkey_f_local_msz")]
+		public msz_msz_cs_local_msz cdrefundsfkeyflocalmsz { get; set; }
+
+		/// <summary>
+		/// cd_refunds_fkey_f_payment
+		/// </summary>
+		[Association(ThisKey="f_payment", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_fkey_f_payment")]
+		public subsidy_subsidy_cd_payments cdrefundsfkeyfpayment { get; set; }
+
+		/// <summary>
+		/// cd_refunds_fkey_f_payment_method
+		/// </summary>
+		[Association(ThisKey="f_payment_method", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_fkey_f_payment_method")]
+		public subsidy_subsidy_cs_payment_methods cdrefundsfkeyfpaymentmethod { get; set; }
+
+		/// <summary>
+		/// cd_refunds_fkey_f_payments_history
+		/// </summary>
+		[Association(ThisKey="f_payment_history", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_fkey_f_payments_history")]
+		public subsidy_subsidy_cd_payments_history cdrefundsfkeyfpaymentshistory { get; set; }
+
+		/// <summary>
+		/// cd_refunds_fkey_f_payment_type
+		/// </summary>
+		[Association(ThisKey="f_payment_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_fkey_f_payment_type")]
+		public subsidy_subsidy_cs_payment_types cdrefundsfkeyfpaymenttype { get; set; }
+
+		/// <summary>
+		/// cd_refunds_fkey_f_person
+		/// </summary>
+		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_fkey_f_person")]
+		public public_cd_persons cdrefundsfkeyfperson { get; set; }
+
+		/// <summary>
+		/// cd_refunds_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_fkey_f_status")]
+		public subsidy_subsidy_cs_refund_statuses cdrefundsfkeyfstatu { get; set; }
+
+		/// <summary>
+		/// cd_refunds_f_local_msz_category
+		/// </summary>
+		[Association(ThisKey="f_local_msz_category", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_refunds_f_local_msz_category")]
+		public msz_msz_cs_local_msz_category cdrefundsflocalmszcategory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы расчётов]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_calculation_statuses")]
+	public partial class subsidy_subsidy_cs_calculation_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(32)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды расчёта]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_calculation_types")]
+	public partial class subsidy_subsidy_cs_calculation_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(50)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Причины прекращения]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_cancel_reasons")]
+	public partial class subsidy_subsidy_cs_cancel_reasons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(256)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы дел]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_case_statuses")]
+	public partial class subsidy_subsidy_cs_case_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(64)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Организации-работодатели]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_companies")]
+	public partial class subsidy_subsidy_cs_companies
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН]
+		/// </summary>
+		[Column,        Nullable] public string c_inn       { get; set; } // character varying(14)
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name      { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// </summary>
+		[Column,        Nullable] public int?   f_subsystem { get; set; } // integer
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public int?   imp_id      { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_companies_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_companies_fkey_f_subsystem")]
+		public public_cs_subsystems cscompaniesfkeyfsubsystem { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Причины постановки на контроль]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_control_reasons")]
+	public partial class subsidy_subsidy_cs_control_reasons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(128)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Пользователи жилых помещений]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_dwelling_users")]
+	public partial class subsidy_subsidy_cs_dwelling_users
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(128)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Причины неоплаты]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_failure_payment_reasons")]
+	public partial class subsidy_subsidy_cs_failure_payment_reasons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(128)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Родственные отношения]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_family_relations")]
+	public partial class subsidy_subsidy_cs_family_relations
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(64)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Нормативы доходов от ЛПХ]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_farm_normatives")]
+	public partial class subsidy_subsidy_cs_farm_normatives
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int         id                   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_name               { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Значение]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_value              { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Начало периода]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_begin              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Окончание периода]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end                { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Нормативный документ]
+		/// </summary>
+		[Column,        Nullable] public int?        f_normative_document { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид дохода]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_income_type        { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_farm_normatives_fkey_f_income_type
+		/// </summary>
+		[Association(ThisKey="f_income_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_farm_normatives_fkey_f_income_type")]
+		public subsidy_subsidy_cs_income_types csfarmnormativesfkeyfincometype { get; set; }
+
+		/// <summary>
+		/// cs_farm_normatives_fkey_f_normative_document
+		/// </summary>
+		[Association(ThisKey="f_normative_document", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_farm_normatives_fkey_f_normative_document")]
+		public public_cs_normative_documents csfarmnormativesfkeyfnormativedocument { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы ЖКУ]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_ghku_types")]
+	public partial class subsidy_subsidy_cs_ghku_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull] public string c_code      { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name      { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Учитывать собственников]
+		/// </summary>
+		[Column,     NotNull] public bool   b_owner     { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Вычитать]
+		/// </summary>
+		[Column,     NotNull] public bool   b_substract { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Архивная]
+		/// </summary>
+		[Column,     NotNull] public bool   b_archive   { get; set; } // boolean
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды домовладений]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_house_ownership_types")]
+	public partial class subsidy_subsidy_cs_house_ownership_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Код вида домовладения]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(1024)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(64)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Тип дома]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_house_types")]
+	public partial class subsidy_subsidy_cs_house_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(32)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды жилищного фонда]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_housing_stock_types")]
+	public partial class subsidy_subsidy_cs_housing_stock_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Код вида жилищного фонда]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(64)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Периоды учёта доходов]
+	/// 
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_income_accounting")]
+	public partial class subsidy_subsidy_cs_income_accounting
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Значение]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_value     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_begin     { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end       { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Подсистема]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_subsystem { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_income_accounting_fkey_f_subsystem
+		/// </summary>
+		[Association(ThisKey="f_subsystem", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_income_accounting_fkey_f_subsystem")]
+		public public_cs_subsystems csincomeaccountingfkeyfsubsystem { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды доходов]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_income_types")]
+	public partial class subsidy_subsidy_cs_income_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Код вида дохода]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name         { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias        { get; set; } // character varying(32)
+		/// <summary>
+		/// [XMeta.DisplayName=Вычитать из дохода]
+		/// </summary>
+		[Column,     NotNull    ] public bool   b_substraction { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Для ЛПХ]
+		/// </summary>
+		[Column,     NotNull    ] public bool   b_farm         { get; set; } // boolean
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Последнее расчётное число месяца]
+	/// [XMeta.DefaultProperty=n_day]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_last_calculation_day")]
+	public partial class subsidy_subsidy_cs_last_calculation_day
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int       id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Расчётное число]
+		/// </summary>
+		[Column,     NotNull    ] public int       n_day   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime  d_begin { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_end   { get; set; } // timestamp (6) without time zone
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Размеры прожиточных минимумов]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_living_minimums")]
+	public partial class subsidy_subsidy_cs_living_minimums
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int         id              { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Начало периода действия]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_begin         { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Окончание периода действия]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end           { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Среднедушевой]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_average       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Для пенсионера]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_pensioner     { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Для трудоспособного]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_employable    { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Для ребёнка]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_child         { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Признак уменьшения по сравнению с предыдущим периодом]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public bool?       b_minimize      { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Нормативный документ]
+		/// </summary>
+		[Column,        Nullable] public int?        f_normative_doc { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_living_minimums_fkey_f_normative_doc
+		/// </summary>
+		[Association(ThisKey="f_normative_doc", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_living_minimums_fkey_f_normative_doc")]
+		public public_cs_normative_documents cslivingminimumsfkeyfnormativedoc { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Организации, предоставляющие ЖКУ]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_management_companies")]
+	public partial class subsidy_subsidy_cs_management_companies
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name            { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Регион]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_region          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Район]
+		/// [XMeta.Raw=DataSourceProperty("f_region.f_region_cs_districtsCollection")]
+		/// </summary>
+		[Column,        Nullable] public int?   f_district        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН]
+		/// </summary>
+		[Column,        Nullable] public string c_inn             { get; set; } // character varying(15)
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public int?   imp_id            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Разрешено формирование запроса]
+		/// </summary>
+		[Column,     NotNull    ] public bool   b_request_enabled { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// cs_management_companies_fkey_f_region
+		/// </summary>
+		[Association(ThisKey="f_region", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_management_companies_fkey_f_region")]
+		public public_cs_regions csmanagementcompaniesfkeyfregion { get; set; }
+
+		/// <summary>
+		/// cs_management_companies
+		/// </summary>
+		[Association(ThisKey="f_district", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_management_companies")]
+		public public_cs_districts csmanagementcompany { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Максимально допустимая доля расходов]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_maximum_share_costs")]
+	public partial class subsidy_subsidy_cs_maximum_share_costs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int      id        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Процент]
+		/// </summary>
+		[Column,     NotNull ] public decimal  n_percent { get; set; } // numeric(4,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала]
+		/// </summary>
+		[Column,     NotNull ] public DateTime d_begin   { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// </summary>
+		[Column,     NotNull ] public DateTime d_end     { get; set; } // timestamp (6) without time zone
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Единицы измерения]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_measure_units")]
+	public partial class subsidy_subsidy_cs_measure_units
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(32)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Нормативы и тарифы на ЖКУ]
+	/// [XMeta.DefaultProperty=f_type]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_normatives_and_tarifs_ghku")]
+	public partial class subsidy_subsidy_cs_normatives_and_tarifs_ghku
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int         id                  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Начало периода]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_begin             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Конец периода]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end               { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_type              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Норматив потребления на 1 месяц]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_normative_month   { get; set; } // numeric(20,7)
+		/// <summary>
+		/// [XMeta.DisplayName=Тариф]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_tarif             { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Единица измерения норматива]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_normative_measure { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Единица измерения тарифа]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_tarif_measure     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Район]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_district          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Поселение]
+		/// [XMeta.Raw=DataSourceCriteria("f_district == '@This.f_district'")]
+		/// </summary>
+		[Column,        Nullable] public int?        f_settlement        { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_normatives_and_tarifs_fkey_f_district
+		/// </summary>
+		[Association(ThisKey="f_district", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_normatives_and_tarifs_fkey_f_district")]
+		public public_cs_districts csnormativesandtarifsfkeyfdistrict { get; set; }
+
+		/// <summary>
+		/// cs_normatives_and_tarifs_fkey_f_normative_measure
+		/// </summary>
+		[Association(ThisKey="f_normative_measure", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_normatives_and_tarifs_fkey_f_normative_measure")]
+		public subsidy_subsidy_cs_measure_units csnormativesandtarifsfkeyfnormativemeasure { get; set; }
+
+		/// <summary>
+		/// cs_normatives_and_tarifs_fkey_f_tarif_measure
+		/// </summary>
+		[Association(ThisKey="f_tarif_measure", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_normatives_and_tarifs_fkey_f_tarif_measure")]
+		public subsidy_subsidy_cs_measure_units csnormativesandtarifsfkeyftarifmeasure { get; set; }
+
+		/// <summary>
+		/// cs_normatives_and_tarifs_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_normatives_and_tarifs_fkey_f_type")]
+		public subsidy_subsidy_cs_ghku_types csnormativesandtarifsfkeyftype { get; set; }
+
+		/// <summary>
+		/// cs_normatives_and_tarifs_ghku_fkey_f_settlement
+		/// </summary>
+		[Association(ThisKey="f_settlement", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_normatives_and_tarifs_ghku_fkey_f_settlement")]
+		public public_cs_settlements csnormativesandtarifsghkufkeyfsettlement { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Способы выплаты]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_payment_methods")]
+	public partial class subsidy_subsidy_cs_payment_methods
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(64)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Способы выплаты]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_payment_types")]
+	public partial class subsidy_subsidy_cs_payment_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(128)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(64)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы выплатных массивов]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_payments_array_statuses")]
+	public partial class subsidy_subsidy_cs_payments_array_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name  { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull ] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь фл с льготами]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_priveleges_persons")]
+	public partial class subsidy_subsidy_cs_priveleges_persons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int       id            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=ФЛ]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_person      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Льгота]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_privelege   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата назначения]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_appointment { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала действия]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_begin       { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания действия]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_end         { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// </summary>
+		[Column,        Nullable] public decimal?  n_sum         { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_priveleges_persons_fkey_f_person
+		/// </summary>
+		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_priveleges_persons_fkey_f_person")]
+		public public_cd_persons csprivelegespersonsfkeyfperson { get; set; }
+
+		/// <summary>
+		/// cs_priveleges_persons_fkey_f_privelege
+		/// </summary>
+		[Association(ThisKey="f_privelege", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_priveleges_persons_fkey_f_privelege")]
+		public subsidy_subsidy_cs_privileges csprivelegespersonsfkeyfprivelege { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Категории льгот]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_privileges")]
+	public partial class subsidy_subsidy_cs_privileges
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(64)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Причины перерасчёта]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_recalculation_reasons")]
+	public partial class subsidy_subsidy_cs_recalculation_reasons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Статусы возврата]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_refund_statuses")]
+	public partial class subsidy_subsidy_cs_refund_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name  { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Законные представители]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_representers")]
+	public partial class subsidy_subsidy_cs_representers
+	{
+		/// <summary>
+		/// [XMeta.DisplayNama=Идентификатор]
+		/// 
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(64)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Республиканский стандарт нормативной площади жилого помещения]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_republic_area_standarts")]
+	public partial class subsidy_subsidy_cs_republic_area_standarts
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int         id           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=На одиноко проживающего гражданина]
+		/// 
+		/// </summary>
+		[Column,     NotNull    ] public int         n_one        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=На одного члена семьи из двух человек]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_two        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=На одного члена семьи из трёх и более человек]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_three      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Стандарт дополнительной площади]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_additional { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_begin      { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end        { get; set; } // date
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Типы поселений]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_settlement_types")]
+	public partial class subsidy_subsidy_cs_settlement_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull ] public string c_name { get; set; } // character varying(128)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Социально-демографические группы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_socio_demographic_groups")]
+	public partial class subsidy_subsidy_cs_socio_demographic_groups
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Наименование]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(32)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Нормативы потребления твёрдых видов топлива]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_solid_fuel_normatives")]
+	public partial class subsidy_subsidy_cs_solid_fuel_normatives
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int         id                   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=DataSourceCriteria("StartsWith([c_code], '37')")]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_type               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Начало периода]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_begin              { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Окончание периода]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end                { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Единица измерения на 1 год]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?        f_measure_unit_year  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Норматив потребления на 1 год]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.DisplayFormat=N3]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_year               { get; set; } // numeric(10,3)
+		/// <summary>
+		/// [XMeta.DisplayName=Норматив потребления на 1 месяц]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.DisplayFormat=N7]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_month              { get; set; } // numeric(10,7)
+		/// <summary>
+		/// [XMeta.DisplayName=Единица измерения на 1 месяц]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_measure_unit_month { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_solid_fuel_normatives_fkey_f_measure_unit
+		/// </summary>
+		[Association(ThisKey="f_measure_unit_year", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_solid_fuel_normatives_fkey_f_measure_unit")]
+		public subsidy_subsidy_cs_measure_units cssolidfuelnormativesfkeyfmeasureunit { get; set; }
+
+		/// <summary>
+		/// cs_solid_fuel_normatives_fkey_f_measure_unit_month
+		/// </summary>
+		[Association(ThisKey="f_measure_unit_month", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_solid_fuel_normatives_fkey_f_measure_unit_month")]
+		public subsidy_subsidy_cs_measure_units cssolidfuelnormativesfkeyfmeasureunitmonth { get; set; }
+
+		/// <summary>
+		/// cs_solid_fuel_normatives_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_solid_fuel_normatives_fkey_f_type")]
+		public subsidy_subsidy_cs_ghku_types cssolidfuelnormativesfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Размеры ССЖКУ]
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_standart_payment_living_communal_service_averages")]
+	public partial class subsidy_subsidy_cs_standart_payment_living_communal_service_averages
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int      id                     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид дома]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int      f_house_ownership_type { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Район / Город республиканского значения]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int      f_district             { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Кап. ремонт]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_capital_repair       { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=1 из 1]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public decimal? n_one                  { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=1 из 2]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public decimal? n_two                  { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=1 из 3>]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public decimal? n_three                { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime d_begin                { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.Raw=RuleRange("DateRange77", DefaultContexts.Save, "GetDate(d_begin)", "GetDate(MaxDate)", "Значение должно быть позже \"Даты начала\".", ParametersMode.Expression)]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime d_end                  { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Поселение]
+		/// [XMeta.Raw=DataSourceCriteria("f_district == '@This.f_district'")]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?     f_settlement           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Вид пользователя]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int      f_dwelling_user        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Тип дома]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?     f_house_type           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Номер стандарта]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string   c_standart_number      { get; set; } // character varying(32)
+		/// <summary>
+		/// [XMeta.DisplayName=Нормативный документ]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public int?     f_normative_document   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Признак скопированности]
+		/// [XMeta.VisibleInListView=false]
+		/// 
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_copied               { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Утратил силу]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_expired              { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// cs_ssghku_fkey_f_dwelling_user
+		/// </summary>
+		[Association(ThisKey="f_dwelling_user", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_ssghku_fkey_f_dwelling_user")]
+		public subsidy_subsidy_cs_dwelling_users csssghkufkeyfdwellinguser { get; set; }
+
+		/// <summary>
+		/// cs_ssghku_fkey_f_house_type
+		/// </summary>
+		[Association(ThisKey="f_house_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_ssghku_fkey_f_house_type")]
+		public subsidy_subsidy_cs_house_types csssghkufkeyfhousetype { get; set; }
+
+		/// <summary>
+		/// cs_ssghku_fkey_f_normative_document
+		/// </summary>
+		[Association(ThisKey="f_normative_document", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_ssghku_fkey_f_normative_document")]
+		public public_cs_normative_documents csssghkufkeyfnormativedocument { get; set; }
+
+		/// <summary>
+		/// cs_ssghku_f_settement_fkey
+		/// </summary>
+		[Association(ThisKey="f_settlement", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_ssghku_f_settement_fkey")]
+		public public_cs_settlements csssghkufsettementfkey { get; set; }
+
+		/// <summary>
+		/// cs_standart_payment_living_communal_service_averages_fkey_f_dis
+		/// </summary>
+		[Association(ThisKey="f_district", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_standart_payment_living_communal_service_averages_fkey_f_dis")]
+		public public_cs_districts csstandartpaymentlivingcommunalserviceaveragesfkeyfdi { get; set; }
+
+		/// <summary>
+		/// cs_standart_payment_living_communal_service_averages_fkey_f_own
+		/// </summary>
+		[Association(ThisKey="f_house_ownership_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_standart_payment_living_communal_service_averages_fkey_f_own")]
+		public subsidy_subsidy_cs_house_ownership_types csstandartpaymentlivingcommunalserviceaveragesfkeyfown { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Вид субсидии]
+	/// [XMeta.DefaultProperty=c_name]
+	/// 
+	/// </summary>
+	[Table(Schema="subsidy", Name="cs_subsidy_types")]
+	public partial class subsidy_subsidy_cs_subsidy_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, Identity   ] public int    id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name  { get; set; } // character varying(64)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string c_alias { get; set; } // character varying(64)
+	}
+
+	[Table(Schema="subsidy", Name="sv_case_orgs")]
+	public partial class subsidy_subsidy_sv_case_orgs
+	{
+		[Column,     Nullable] public string    numb           { get; set; } // text
+		[Column,     Nullable] public DateTime? d_begin        { get; set; } // timestamp (6) without time zone
+		[Column,     Nullable] public string    fullname       { get; set; } // text
+		[Column,     Nullable] public string    status         { get; set; } // character varying(64)
+		[Column,     Nullable] public string    local_msz      { get; set; } // character varying(2000)
+		[PrimaryKey, Identity] public int       id             { get; set; } // integer
+		[Column,     Nullable] public int?      f_organization { get; set; } // integer
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="test_calculation_periods")]
+	public partial class subsidy_subsidy_test_calculation_periods
+	{
+		[Column, Nullable] public int?      f_calculation              { get; set; } // integer
+		[Column, Nullable] public DateTime? d_begin                    { get; set; } // timestamp (6) without time zone
+		[Column, Nullable] public DateTime? d_end                      { get; set; } // timestamp (6) without time zone
+		[Column, Nullable] public decimal?  n_subsidy                  { get; set; } // numeric(10,2)
+		[Column, Nullable] public decimal?  n_family_living_minimum    { get; set; } // numeric(10,2)
+		[Column, Nullable] public decimal?  n_adjustment_coeff         { get; set; } // numeric(10,4)
+		[Column, Nullable] public decimal?  n_ssghku                   { get; set; } // numeric(10,2)
+		[Column, Nullable] public decimal?  n_republic_area            { get; set; } // numeric(10,2)
+		[Column, Nullable] public decimal?  n_maximum_share_cost       { get; set; } // numeric(10,2)
+		[Column, Nullable] public string    c_ssghku_formula           { get; set; } // character varying(256)
+		[Column, Nullable] public string    c_adjustment_coeff_formula { get; set; } // character varying(256)
+		[Column, Nullable] public string    c_subsidy_formula          { get; set; } // character varying(256)
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="test_liv_m")]
+	public partial class subsidy_subsidy_test_liv_m
+	{
+		[Column, Nullable] public NpgsqlDate? d_begin { get; set; } // date
+		[Column, Nullable] public NpgsqlDate? d_end   { get; set; } // date
+		[Column, Nullable] public decimal?    liv_min { get; set; } // numeric(10,2)
+		[Column, Nullable] public decimal?    ssghku  { get; set; } // numeric(10,2)
+		[Column, Nullable] public int?        all_m   { get; set; } // integer
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="test_value")]
+	public partial class subsidy_subsidy_test_value
+	{
+		[PrimaryKey, NotNull    ] public Guid      id      { get; set; } // uuid
+		[Column,        Nullable] public DateTime? d_time  { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public string    c_value { get; set; } // text
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="tmp_calculation_periods")]
+	public partial class subsidy_subsidy_tmp_calculation_periods
+	{
+		[Column, Nullable] public NpgsqlDate? d_begin       { get; set; } // date
+		[Column, Nullable] public NpgsqlDate? d_end         { get; set; } // date
+		[Column, Nullable] public Guid?       f_calculation { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// tmp_calculation_periods_f_calculation
+		/// </summary>
+		[Association(ThisKey="f_calculation", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="tmp_calculation_periods_f_calculation")]
+		public subsidy_subsidy_cd_calculations tmpcalculationperiodsfcalculation { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="subsidy", Name="tmp_ssghku")]
+	public partial class subsidy_subsidy_tmp_ssghku
+	{
+		[Column, Nullable] public decimal?    n_one          { get; set; } // numeric(10,2)
+		[Column, Nullable] public decimal?    n_two          { get; set; } // numeric(10,2)
+		[Column, Nullable] public decimal?    n_three        { get; set; } // numeric(10,2)
+		[Column, Nullable] public NpgsqlDate? d_begin        { get; set; } // date
+		[Column, Nullable] public NpgsqlDate? d_end          { get; set; } // date
+		[Column, Nullable] public NpgsqlDate? d_begin_period { get; set; } // date
+		[Column, Nullable] public NpgsqlDate? d_end_period   { get; set; } // date
+		[Column, Nullable] public Guid?       f_calculation  { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// tmp_ssghku_f_calculation
+		/// </summary>
+		[Association(ThisKey="f_calculation", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="tmp_ssghku_f_calculation")]
+		public subsidy_subsidy_cd_calculations tmpssghkufcalculation { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Расчёты]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_calculations")]
+	public partial class veterans_veterans_cd_calculations
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_case      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата расчёта]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_calculate { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_number    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Начало периода]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_begin     { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Окончание периода]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end       { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public decimal?    n_summ      { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Протокол]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string      c_protocol  { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Рассчитан]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_executed  { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата заявления]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_state     { get; set; } // date
+
+		#region Associations
+
+		/// <summary>
+		/// cd_calculations_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_case")]
+		public veterans_veterans_cd_cases cdcalculationsfkeyfcase { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Назначение ежемесячной денежной компенсации, установленной частями 9, 10 и 13 статьи 3 Федерального закона « денежном довольствии военнослужащих и предоставлении им отдельных выплат», военнослужащим и гражданам, призванным на военные сборы, пенсионное обеспечение которых осуществляется Пенсионным фондом Российской Федерации, и членам их семей]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_army_payment")]
+	public partial class veterans_veterans_cd_case_army_payment
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_army_payment_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_army_payment_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Обеспечение проведение ремонта индивидуальных жилых домов, принадлежащих членам семей военнослужащих, сотрудников органов внутренних дел Российской Федерации, учреждений и органов уголовно-исполнительной системы, федеральной противопожарной службы Государственной противопожарной службы, органов по контролю за оборотом наркотических средств и психотропных веществ, таможенных органов Российской Федерации, потерявшим кормильца]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_army_repair")]
+	public partial class veterans_veterans_cd_case_army_repair
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_army_repair_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_army_repair_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Назначение и выплата дополнительной выплаты инвалидам боевых действий]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_battle")]
+	public partial class veterans_veterans_cd_case_battle
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_battle_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_battle_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Предоставление компенсации расходов на уплату взноса на капитальный ремонт общего имущества в многоквартирном доме отдельным категориям граждан в Чувашской Республике]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_capital_repair")]
+	public partial class veterans_veterans_cd_case_capital_repair
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid    id               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Площадь жилого помещения]
+		/// [XMeta.DisplayFormat=N2]
+		/// </summary>
+		[Column,     NotNull] public decimal n_area           { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Размер платы за капремонт]
+		/// </summary>
+		[Column,     NotNull] public decimal n_repair_payment { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_capital_repair_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_capital_repair_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Предоставление гражданам, проживающим в Чувашской Республике, страдающим хронической почечной недостаточностью, денежной компенсации стоимости проезда к месту проведения процедуры программного гемодиализа и обратно]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_chron_travel")]
+	public partial class veterans_veterans_cd_case_chron_travel
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_chron_travel_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_chron_travel_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Предоставление ежемесячной компенсации расходов на оплату жилого помещения, коммунальных услуг, в том числе на уплату взноса на капитальный ремонт общего имущества в многоквартирном доме отдельным категориям граждан, имеющих на это право в соответствии с законом Чувашской Республики «О социальной поддержке отдельных категорий граждан по оплате жилищно-коммунальных услуг»]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_communal")]
+	public partial class veterans_veterans_cd_case_communal
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_communal_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_communal_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Назначение и выплата денежной компенсации части затрат на проезд отдельным категориям граждан в Чувашской Республике]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_comp_movement")]
+	public partial class veterans_veterans_cd_case_comp_movement
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_comp_movement_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_comp_movement_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Ответ от поставщиков услуг связи]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_comp_res")]
+	public partial class veterans_veterans_cd_case_comp_res
+	{
+		[PrimaryKey, NotNull    ] public Guid   id                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=КР]
+		/// </summary>
+		[Column,     NotNull    ] public int    c_district_code      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=N ЛД]
+		/// </summary>
+		[Column,     NotNull    ] public string c_deal_number        { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия]
+		/// </summary>
+		[Column,     NotNull    ] public string c_last_name          { get; set; } // character varying(255)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя]
+		/// </summary>
+		[Column,     NotNull    ] public string c_first_name         { get; set; } // character varying(255)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество]
+		/// </summary>
+		[Column,        Nullable] public string c_middle_name        { get; set; } // character varying(255)
+		/// <summary>
+		/// [XMeta.DisplayName=Код адреса]
+		/// </summary>
+		[Column,        Nullable] public string c_address_code       { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Нас.пункт]
+		/// </summary>
+		[Column,        Nullable] public string c_locality_name      { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Улица]
+		/// </summary>
+		[Column,        Nullable] public string c_street             { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Дом]
+		/// </summary>
+		[Column,        Nullable] public string c_house              { get; set; } // character varying(5)
+		/// <summary>
+		/// [XMeta.DisplayName=Корп.]
+		/// </summary>
+		[Column,        Nullable] public string c_corps              { get; set; } // character varying(5)
+		/// <summary>
+		/// [XMeta.DisplayName=Кв]
+		/// </summary>
+		[Column,        Nullable] public string c_flat               { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Телефон]
+		/// </summary>
+		[Column,        Nullable] public string c_phone_number       { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Лиц. счет]
+		/// </summary>
+		[Column,        Nullable] public string c_account_number     { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Усл.тел]
+		/// </summary>
+		[Column,        Nullable] public short? c_phone_compensation { get; set; } // smallint
+		/// <summary>
+		/// [XMeta.DisplayName=Усл.радио]
+		/// </summary>
+		[Column,        Nullable] public short? c_radio_compensation { get; set; } // smallint
+		/// <summary>
+		/// [XMeta.DisplayName=Усл.КТВ]
+		/// </summary>
+		[Column,        Nullable] public short? c_tv_compensation    { get; set; } // smallint
+		/// <summary>
+		/// [XMeta.DisplayName=Пакет]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_package            { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string inn                  { get; set; } // character varying
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_case               { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_comp_res_f_cd_cases
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_comp_res_f_cd_cases")]
+		public veterans_veterans_cd_cases cdcasecompresfcdcas { get; set; }
+
+		/// <summary>
+		/// cd_case_comp_res_f_cd_request_response_files
+		/// </summary>
+		[Association(ThisKey="f_package", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_comp_res_f_cd_request_response_files")]
+		public veterans_veterans_cd_request_response_files cdcasecompresfcdrequestresponsefile { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Предоставление ветеранам труда и ветеранам труда Чувашской Республики денежной компенсации в размере 50-процентной стоимости предоставления абоненту в пользование абонентской линии (проводной линии) сети местной телефонной связи]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_comp_trud")]
+	public partial class veterans_veterans_cd_case_comp_trud
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_comp_trud_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_comp_trud_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Предоставление социального пособия на погребение умерших граждан, не подлежавших обязательному социальному страхованию на случай временной нетрудоспособности и в связи с материнством на день смерти и не являвшихся пенсионерами, а также в случае рождения мертвого ребенка по истечении 154 дней беременности, а также возмещение стоимости гарантированного перечня услуг по погребению специализированной службе по вопросам похоронного дела]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_death")]
+	public partial class veterans_veterans_cd_case_death
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_death_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_death_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Осуществление ежегодной денежной выплаты лицам, награжденным нагрудным знаком «Почетный донор России»]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_donor")]
+	public partial class veterans_veterans_cd_case_donor
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_donor_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_donor_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Назначение и выплата ежемесячных денежных выплат реабилитированным лицам и лицам, признанным пострадавшими от политических репрессий]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_edv_rehab")]
+	public partial class veterans_veterans_cd_case_edv_rehab
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_edv_rehab_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_edv_rehab_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Назначение и выплата ежемесячных денежных выплат ветеранам труда, ветеранам труда Чувашской Республики, труженикам тыла военных лет]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_edv_trud")]
+	public partial class veterans_veterans_cd_case_edv_trud
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Достиг пенсионного возраста]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_pensioner  { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Работает]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_worked     { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=На дату]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_work_start { get; set; } // date
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_edv_trud_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_edv_trud_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Назначение и выплата инвалидам (в том числе детям-инвалидам), имеющим транспортные средства в соответствии с медицинскими показаниями, или их законным представителям компенсации уплаченной ими страховой премии по договору]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_inv_transport")]
+	public partial class veterans_veterans_cd_case_inv_transport
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_inv_transport_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_inv_transport_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Оказание бесплатной юридической помощи в казенном учреждении Чувашской Республики «Центр предоставления мер социальной поддержки» Министерства труда и социальной защиты Чувашской Республики]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_jur_help")]
+	public partial class veterans_veterans_cd_case_jur_help
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_jur_help_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_jur_help_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Назначение денежной компенсации в возмещение вреда, причиненного здоровью граждан в связи с радиационным воздействием вследствие чернобыльской катастрофы и аварии в 1957 году на производственном объединении «Маяк»]
+	/// [XMeta.BaseType=veterans_cd_cases]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_rad_health")]
+	public partial class veterans_veterans_cd_case_rad_health
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_rad_health_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_rad_health_fkey_id")]
+		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Все назначения]
+	/// [XMeta.BaseType=common_cd_case_base]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_cases")]
+	public partial class veterans_veterans_cd_cases
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_number_addition   { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Район]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_district          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_address           { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (код ФИАС)]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_address_fias_code { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор дома ФИАС]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_house_fias_code   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=МСП]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_service           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Категория]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_category          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_status            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата обращения]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_appeal            { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Основание прекращения]
+		/// [XMeta.Raw=DataSourceCriteria("f_type.c_alias == 'stop'")]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_reason_stop       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Основание отказа]
+		/// [XMeta.Raw=DataSourceCriteria("f_type.c_alias == 'refuse'")]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_reason_refuse     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Расходы]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_cost              { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (квартира)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_flat      { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес (корпус)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,        Nullable] public string      c_address_corpus    { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Физлицо]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_representer_pers  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Уполномоченный представитель]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_representer       { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Вид документа]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_rep_doc           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Кем выдан]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_rep_doc_issuer    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выдачи]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_rep_doc_issued    { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Серия]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_rep_doc_series    { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_rep_doc_number    { get; set; } // character varying(10)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_cases_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_cases_fkey_id")]
+		public common_common_cd_case_base cd_case_base { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_category
+		/// </summary>
+		[Association(ThisKey="f_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_category")]
+		public veterans_veterans_cs_citizen_categories cdcasesfkeyfcategory { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_district
+		/// </summary>
+		[Association(ThisKey="f_district", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_district")]
+		public public_cs_districts cdcasesfkeyfdistrict { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_reason_refuse
+		/// </summary>
+		[Association(ThisKey="f_reason_refuse", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_reason_refuse")]
+		public veterans_veterans_cs_reasons cdcasesfkeyfreasonrefuse { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_reason_stop
+		/// </summary>
+		[Association(ThisKey="f_reason_stop", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_reason_stop")]
+		public veterans_veterans_cs_reasons cdcasesfkeyfreasonstop { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_rep_doc
+		/// </summary>
+		[Association(ThisKey="f_rep_doc", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_rep_doc")]
+		public public_cs_document_types cdcasesfkeyfrepdoc { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_rep_doc_issuer
+		/// </summary>
+		[Association(ThisKey="f_rep_doc_issuer", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_rep_doc_issuer")]
+		public public_cs_document_issues_orgs cdcasesfkeyfrepdocissuer { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_representer_pers
+		/// </summary>
+		[Association(ThisKey="f_representer_pers", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_representer_pers")]
+		public public_cd_persons cdcasesfkeyfrepresenterper { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_service")]
+		public veterans_veterans_cs_services cdcasesfkeyfservice { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_status")]
+		public common_common_cs_statuses cdcasesfkeyfstatu { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь дел с управляющими компаниями]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_cases_management_companies")]
+	public partial class veterans_veterans_cd_cases_management_companies
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid    id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid    f_case    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Управляющая компания]
+		/// </summary>
+		[Column,     NotNull    ] public int     f_company { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Лицевой счёт]
+		/// </summary>
+		[Column,        Nullable] public string  c_account { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public decimal n_summ    { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_cases_management_companies_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_management_companies_fkey_f_case")]
+		public veterans_veterans_cd_cases cdcasesmanagementcompaniesfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_cases_management_companies_fkey_f_company
+		/// </summary>
+		[Association(ThisKey="f_company", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_management_companies_fkey_f_company")]
+		public subsidy_subsidy_cs_management_companies cdcasesmanagementcompaniesfkeyfcompany { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Умершие]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_death_persons")]
+	public partial class veterans_veterans_cd_death_persons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id             { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_case         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_lastname     { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя]
+		/// </summary>
+		[Column,     NotNull    ] public string      c_firstname    { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество]
+		/// </summary>
+		[Column,        Nullable] public string      c_middlename   { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата рождения]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_birthday     { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Место рождения]
+		/// </summary>
+		[Column,        Nullable] public string      c_birth_place  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата смерти]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_death        { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Тип документа]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_doc_identity { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Серия]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_series       { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_number       { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выдачи]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_issue        { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Организация, выдавшая документ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_issuer       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Тип документа]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_death_doc    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Серия]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_death_series { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_death_number { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выдачи]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_death_issue  { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Организация, выдавшая документ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_death_issuer { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_death_persons_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_death_persons_fkey_f_case")]
+		public veterans_veterans_cd_cases cddeathpersonsfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_death_persons_fkey_f_death_doc
+		/// </summary>
+		[Association(ThisKey="f_death_doc", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_death_persons_fkey_f_death_doc")]
+		public public_cs_document_types cddeathpersonsfkeyfdeathdoc { get; set; }
+
+		/// <summary>
+		/// cd_death_persons_fkey_f_death_issuer
+		/// </summary>
+		[Association(ThisKey="f_death_issuer", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_death_persons_fkey_f_death_issuer")]
+		public public_cs_document_issues_orgs cddeathpersonsfkeyfdeathissuer { get; set; }
+
+		/// <summary>
+		/// cd_death_persons_fkey_f_doc_identity
+		/// </summary>
+		[Association(ThisKey="f_doc_identity", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_death_persons_fkey_f_doc_identity")]
+		public public_cs_document_types cddeathpersonsfkeyfdocidentity { get; set; }
+
+		/// <summary>
+		/// cd_death_persons_fkey_f_issuer
+		/// </summary>
+		[Association(ThisKey="f_issuer", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_death_persons_fkey_f_issuer")]
+		public public_cs_document_issues_orgs cddeathpersonsfkeyfissuer { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Состав семьи]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_family")]
+	public partial class veterans_veterans_cd_family
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid f_case        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Физлицо]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull] public int  f_person      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Числитель]
+		/// </summary>
+		[Column,     NotNull] public int  n_numerator   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Знаменатель]
+		/// </summary>
+		[Column,     NotNull] public int  n_denominator { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Достиг пенсионного возраста]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull] public bool b_pensioner   { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// cd_family_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_family_fkey_f_case")]
+		public veterans_veterans_cd_case_capital_repair cdfamilyfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_family_fkey_f_person
+		/// </summary>
+		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_family_fkey_f_person")]
+		public public_cd_persons cdfamilyfkeyfperson { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Награды ФЛ]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_person_awards")]
+	public partial class veterans_veterans_cd_person_awards
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=ФЛ]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_pers_category { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Награда]
+		/// [XMeta.Raw=DataSourceCriteria("f_award_veterans_cs_service_category_awardsCollection[f_service_category.f_category == '@This.f_pers_category.f_category']")]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_award         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,        Nullable] public string      c_number        { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выдачи]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_issue         { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Кем выдана]
+		/// </summary>
+		[Column,        Nullable] public string      c_issuer        { get; set; } // character varying(300)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_person_awards_fkey_f_award
+		/// </summary>
+		[Association(ThisKey="f_award", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_awards_fkey_f_award")]
+		public veterans_veterans_cs_awards cdpersonawardsfkeyfaward { get; set; }
+
+		/// <summary>
+		/// cd_person_awards_fkey_f_pers_category
+		/// </summary>
+		[Association(ThisKey="f_pers_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_awards_fkey_f_pers_category")]
+		public veterans_veterans_cd_person_citizen_categories cdpersonawardsfkeyfperscategory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Документы для категорий ФЛ]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_person_category_docs")]
+	public partial class veterans_veterans_cd_person_category_docs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Категория ФЛ]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_pers_category { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Документ]
+		/// [XMeta.Raw=DataSourceCriteria("f_base_doc_veterans_cs_service_category_base_docsCollection[f_service_citizen_category.f_category == '@This.f_pers_category.f_category']")]
+		/// </summary>
+		[Column,     NotNull    ] public int         f_doc           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Серия]
+		/// </summary>
+		[Column,        Nullable] public string      c_series        { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,        Nullable] public string      c_number        { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выдачи]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_issue         { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Кем выдан]
+		/// </summary>
+		[Column,        Nullable] public string      c_issuer        { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=С]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_doc_start     { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=По]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_doc_end       { get; set; } // date
+
+		#region Associations
+
+		/// <summary>
+		/// cd_person_category_docs_fkey_f_doc
+		/// </summary>
+		[Association(ThisKey="f_doc", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_category_docs_fkey_f_doc")]
+		public public_cs_document_types cdpersoncategorydocsfkeyfdoc { get; set; }
+
+		/// <summary>
+		/// cd_person_category_docs_fkey_f_per_category
+		/// </summary>
+		[Association(ThisKey="f_pers_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_category_docs_fkey_f_per_category")]
+		public veterans_veterans_cd_person_citizen_categories cdpersoncategorydocsfkeyfpercategory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Категории ФЛ]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_person_citizen_categories")]
+	public partial class veterans_veterans_cd_person_citizen_categories
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid      id         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Физ.лицо]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int       f_person   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Категория]
+		/// </summary>
+		[Column,     NotNull    ] public Guid      f_category { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public int?      f_doc      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_series   { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_number   { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_issue    { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_issuer   { get; set; } // character varying(300)
+
+		#region Associations
+
+		/// <summary>
+		/// FK_veterans_cd_person_citizen_categories_f_doc_9EB8AD89
+		/// </summary>
+		[Association(ThisKey="f_doc", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_veterans_cd_person_citizen_categories_f_doc_9EB8AD89")]
+		public public_cs_document_types cdpersoncitizencategoriesfdoc9EB8AD { get; set; }
+
+		/// <summary>
+		/// cd_person_citizen_categories_fkey_f_category
+		/// </summary>
+		[Association(ThisKey="f_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_citizen_categories_fkey_f_category")]
+		public veterans_veterans_cs_citizen_categories cdpersoncitizencategoriesfkeyfcategory { get; set; }
+
+		/// <summary>
+		/// cd_person_citizen_categories_fkey_f_person
+		/// </summary>
+		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_citizen_categories_fkey_f_person")]
+		public public_cd_persons cdpersoncitizencategoriesfkeyfperson { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Файл запроса]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_req_res_files_jkh")]
+	public partial class veterans_veterans_cd_req_res_files_jkh
+	{
+		[PrimaryKey, Identity] public int         id                      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Файл запроса]
+		/// </summary>
+		[Column,     Nullable] public string      c_xml_request_file      { get; set; } // character varying(2000)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя файла запроса]
+		/// </summary>
+		[Column,     Nullable] public string      c_request_file_name     { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки запроса]
+		/// </summary>
+		[Column,     Nullable] public NpgsqlDate? d_request_loading_date  { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Файл ответа]
+		/// </summary>
+		[Column,     Nullable] public string      c_xml_response_file     { get; set; } // character varying(2000)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя файла ответа]
+		/// </summary>
+		[Column,     Nullable] public string      c_response_file_name    { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки ответа]
+		/// </summary>
+		[Column,     Nullable] public NpgsqlDate? d_response_loading_date { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Сообщение об ошибке]
+		/// </summary>
+		[Column,     Nullable] public string      c_error                 { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Номер запроса]
+		/// </summary>
+		[Column,     Nullable] public int?        n_number                { get; set; } // integer
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Обмен данными для назначения ФСД]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_request_response_files")]
+	public partial class veterans_veterans_cd_request_response_files
+	{
+		[PrimaryKey, Identity] public int         id                      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Файл запроса]
+		/// </summary>
+		[Column,     Nullable] public string      c_xml_request_file      { get; set; } // character varying(2000)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя файла запроса]
+		/// </summary>
+		[Column,     Nullable] public string      c_request_file_name     { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки запроса]
+		/// </summary>
+		[Column,     Nullable] public NpgsqlDate? d_request_loading_date  { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Файл ответа]
+		/// </summary>
+		[Column,     Nullable] public string      c_xml_response_file     { get; set; } // character varying(2000)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя файла ответа]
+		/// </summary>
+		[Column,     Nullable] public string      c_response_file_name    { get; set; } // character varying(256)
+		/// <summary>
+		/// [XMeta.DisplayName=Сообщение об ошибке]
+		/// </summary>
+		[Column,     Nullable] public string      c_error                 { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Номер запроса]
+		/// </summary>
+		[Column,     Nullable] public int?        n_number                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки ответа]
+		/// </summary>
+		[Column,     Nullable] public NpgsqlDate? d_response_loading_date { get; set; } // date
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Факты осуществления трудовой деятельности]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_work_facts")]
+	public partial class veterans_veterans_cd_work_facts
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid       id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата сведения]
+		/// </summary>
+		[Column,     NotNull] public NpgsqlDate d_info  { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Начало периода]
+		/// </summary>
+		[Column,     NotNull] public NpgsqlDate d_begin { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Конец периода]
+		/// </summary>
+		[Column,     NotNull] public NpgsqlDate d_end   { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Основание]
+		/// </summary>
+		[Column,     NotNull] public int        f_doc   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid       f_case  { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_work_facts_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_work_facts_fkey_f_case")]
+		public veterans_veterans_cd_cases cdworkfactsfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_work_facts_fkey_f_doc
+		/// </summary>
+		[Association(ThisKey="f_doc", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_work_facts_fkey_f_doc")]
+		public public_cs_document_types cdworkfactsfkeyfdoc { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды наград]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_award_types")]
+	public partial class veterans_veterans_cs_award_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Награды]
+	/// [XMeta.DefaultProperty=c_name_short]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_awards")]
+	public partial class veterans_veterans_cs_awards
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Вид]
+		/// </summary>
+		[Column,     NotNull] public Guid   f_type       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Полное наименование]
+		/// </summary>
+		[Column,     NotNull] public string c_name       { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Краткое наименование]
+		/// </summary>
+		[Column,     NotNull] public string c_name_short { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull] public string c_code       { get; set; } // character varying(4)
+		/// <summary>
+		/// [XMeta.DisplayName=Архивная]
+		/// </summary>
+		[Column,     NotNull] public bool   b_archive    { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Награда ЧР]
+		/// </summary>
+		[Column,     NotNull] public bool   b_chr        { get; set; } // boolean
+
+		#region Associations
+
+		/// <summary>
+		/// cs_awards_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_awards_fkey_f_type")]
+		public veterans_veterans_cs_award_types csawardsfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Категории граждан]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_citizen_categories")]
+	public partial class veterans_veterans_cs_citizen_categories
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name               { get; set; } // character varying(1000)
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная категория МСЗ]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_local_msz_category { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public string c_alias              { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Описание]
+		/// </summary>
+		[Column,        Nullable] public string c_desc               { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Код ПФ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_code_pf            { get; set; } // character varying(3)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_citizen_categories_fkey_f_local_msz_category
+		/// </summary>
+		[Association(ThisKey="f_local_msz_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_citizen_categories_fkey_f_local_msz_category")]
+		public msz_msz_cs_local_msz_category cscitizencategoriesfkeyflocalmszcategory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Периоды выплаты]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_payment_periods")]
+	public partial class veterans_veterans_cs_payment_periods
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Источники финансирования]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_payment_sources")]
+	public partial class veterans_veterans_cs_payment_sources
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull] public string c_code { get; set; } // character varying(4)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды причин]
+	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_reason_types")]
+	public partial class veterans_veterans_cs_reason_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Основания]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_reasons")]
+	public partial class veterans_veterans_cs_reasons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Вид]
+		/// </summary>
+		[Column,     NotNull] public Guid   f_type { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_reasons_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_reasons_fkey_f_type")]
+		public veterans_veterans_cs_reason_types csreasonsfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Услуги-категории-награды]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_service_category_awards")]
+	public partial class veterans_veterans_cs_service_category_awards
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id                 { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга-категория]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid f_service_category { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Награда]
+		/// </summary>
+		[Column,     NotNull] public Guid f_award            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Приоритет]
+		/// </summary>
+		[Column,     NotNull] public int  n_priority         { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_service_category_awards_fkey_f_award
+		/// </summary>
+		[Association(ThisKey="f_award", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_category_awards_fkey_f_award")]
+		public veterans_veterans_cs_awards csservicecategoryawardsfkeyfaward { get; set; }
+
+		/// <summary>
+		/// cs_service_category_awards_fkey_f_service_category
+		/// </summary>
+		[Association(ThisKey="f_service_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_category_awards_fkey_f_service_category")]
+		public veterans_veterans_cs_service_citizen_categories csservicecategoryawardsfkeyfservicecategory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Услуга-категория-НПА]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_service_category_base_docs")]
+	public partial class veterans_veterans_cs_service_category_base_docs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id                         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга-категория]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid f_service_citizen_category { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Документ-основание]
+		/// [XMeta.Raw=DataSourceCriteria("f_group.c_alias == 'base'")]
+		/// </summary>
+		[Column,     NotNull] public int  f_base_doc                 { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Приоритет]
+		/// </summary>
+		[Column,     NotNull] public int  n_priority                 { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_service_category_base_docs_fkey_f_base_doc
+		/// </summary>
+		[Association(ThisKey="f_base_doc", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_category_base_docs_fkey_f_base_doc")]
+		public public_cs_document_types csservicecategorybasedocsfkeyfbasedoc { get; set; }
+
+		/// <summary>
+		/// cs_service_category_base_docs_fkey_f_service_citizen_category
+		/// </summary>
+		[Association(ThisKey="f_service_citizen_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_category_base_docs_fkey_f_service_citizen_category")]
+		public veterans_veterans_cs_service_citizen_categories csservicecategorybasedocsfkeyfservicecitizencategory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Категории-услуги]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_service_citizen_categories")]
+	public partial class veterans_veterans_cs_service_citizen_categories
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id             { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_service      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Категория граждан]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_category     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Вид выплаты]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_payment_type { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Методика расчёта]
+		/// </summary>
+		[Column,        Nullable] public string c_methodic     { get; set; } // text
+
+		#region Associations
+
+		/// <summary>
+		/// cs_service_citizen_categories_fkey_f_category
+		/// </summary>
+		[Association(ThisKey="f_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_citizen_categories_fkey_f_category")]
+		public veterans_veterans_cs_citizen_categories csservicecitizencategoriesfkeyfcategory { get; set; }
+
+		/// <summary>
+		/// cs_service_citizen_categories_fkey_f_payment_type
+		/// </summary>
+		[Association(ThisKey="f_payment_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_service_citizen_categories_fkey_f_payment_type")]
+		public common_common_cs_payment_type csservicecitizencategoriesfkeyfpaymenttype { get; set; }
+
+		/// <summary>
+		/// cs_service_citizen_categories_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_citizen_categories_fkey_f_service")]
+		public veterans_veterans_cs_services csservicecitizencategoriesfkeyfservice { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Размеры услуг-категорий]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_service_citizen_category_sizes")]
+	public partial class veterans_veterans_cs_service_citizen_category_sizes
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id                         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга-категория]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_service_citizen_category { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_begin                    { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end                      { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_summ                     { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Процент расходов]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_percentage               { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_service_citizen_category_sizes_fkey_f_service_category
+		/// </summary>
+		[Association(ThisKey="f_service_citizen_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_citizen_category_sizes_fkey_f_service_category")]
+		public veterans_veterans_cs_service_citizen_categories csservicecitizencategorysizesfkeyfservicecategory { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Группа МСП]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_service_group")]
+	public partial class veterans_veterans_cs_service_group
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Описание]
+		/// </summary>
+		[Column,        Nullable] public string c_desc { get; set; } // character varying(500)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=МСП]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_services")]
+	public partial class veterans_veterans_cs_services
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name           { get; set; } // character varying(1000)
+		/// <summary>
+		/// [XMeta.DisplayName=Группа]
+		/// </summary>
+		[Column,     NotNull    ] public int    n_group          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Индивидуальный НПА]
+		/// </summary>
+		[Column,     NotNull    ] public bool   b_individual_npa { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_local_msz      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,     NotNull    ] public string c_code           { get; set; } // character varying(2)
+		/// <summary>
+		/// [XMeta.DisplayName=Срок выплаты]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_payment_period { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_payment_type   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Описание]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_desc           { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Условия предоставления]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_provisions     { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Форма предоставления]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?   f_fed_form       { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Источник финансирования]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_payment_source { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_services_fkey_f_fed_form
+		/// </summary>
+		[Association(ThisKey="f_fed_form", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_services_fkey_f_fed_form")]
+		public msz_msz_cs_fed_form csservicesfkeyffedform { get; set; }
+
+		/// <summary>
+		/// cs_services_fkey_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_services_fkey_f_local_msz")]
+		public msz_msz_cs_local_msz csservicesfkeyflocalmsz { get; set; }
+
+		/// <summary>
+		/// cs_services_fkey_f_payment_period
+		/// </summary>
+		[Association(ThisKey="f_payment_period", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_services_fkey_f_payment_period")]
+		public veterans_veterans_cs_payment_periods csservicesfkeyfpaymentperiod { get; set; }
+
+		/// <summary>
+		/// cs_services_fkey_f_payment_source
+		/// </summary>
+		[Association(ThisKey="f_payment_source", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_services_fkey_f_payment_source")]
+		public veterans_veterans_cs_payment_sources csservicesfkeyfpaymentsource { get; set; }
+
+		/// <summary>
+		/// FK_veterans_cs_services_f_payment_type_83E65F88
+		/// </summary>
+		[Association(ThisKey="f_payment_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_veterans_cs_services_f_payment_type_83E65F88")]
+		public common_common_cs_payment_type csservicesfpaymenttype83E65F { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь МСП с группой]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_services_groups")]
+	public partial class veterans_veterans_cs_services_groups
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=МСП]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid f_service { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Вид]
+		/// </summary>
+		[Column,     NotNull] public Guid f_group   { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_services_groups_fkey_f_group
+		/// </summary>
+		[Association(ThisKey="f_group", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_services_groups_fkey_f_group")]
+		public veterans_veterans_cs_service_group csservicesgroupsfkeyfgroup { get; set; }
+
+		/// <summary>
+		/// cs_services_groups_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_services_groups_fkey_f_service")]
+		public veterans_veterans_cs_services csservicesgroupsfkeyfservice { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь МСП с НПА]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_services_normative_docs")]
+	public partial class veterans_veterans_cs_services_normative_docs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=МСП]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid f_service       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=НПА]
+		/// </summary>
+		[Column,     NotNull] public int  f_normative_doc { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_services_normative_docs_fkey_f_normative_doc
+		/// </summary>
+		[Association(ThisKey="f_normative_doc", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_services_normative_docs_fkey_f_normative_doc")]
+		public public_cs_normative_documents csservicesnormativedocsfkeyfnormativedoc { get; set; }
+
+		/// <summary>
+		/// cs_services_normative_docs_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_services_normative_docs_fkey_f_service")]
+		public veterans_veterans_cs_services csservicesnormativedocsfkeyfservice { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь МСП с организациями]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_services_orgs")]
+	public partial class veterans_veterans_cs_services_orgs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=МСП]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid f_service { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Организация]
+		/// </summary>
+		[Column,     NotNull] public Guid f_org     { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_services_orgs_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_services_orgs_fkey_f_org")]
+		public common_common_cs_orgs csservicesorgsfkeyforg { get; set; }
+
+		/// <summary>
+		/// cs_services_orgs_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_services_orgs_fkey_f_service")]
+		public veterans_veterans_cs_services csservicesorgsfkeyfservice { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="veterans", Name="import_awards")]
+	public partial class veterans_veterans_import_awards
+	{
+		[Column, Nullable] public string gos_nagr { get; set; } // character varying(10)
+		[Column, Nullable] public string vt_chr   { get; set; } // character varying(10)
+		[Column, Nullable] public string code     { get; set; } // character varying(10)
+		[Column, Nullable] public string _new     { get; set; } // character varying(10)
+		[Column, Nullable] public string name     { get; set; } // character varying(500)
+		[Column, Nullable] public string prmark   { get; set; } // character varying(500)
+		[Column, Nullable] public string _type    { get; set; } // character varying(100)
+		[Column, Nullable] public string aa       { get; set; } // character varying(10)
+	}
+
+	[Table(Schema="veterans", Name="sv_veterans_comm_services", IsView=true)]
+	public partial class veterans_veterans_sv_veterans_comm_services
+	{
+		[Column(SkipOnUpdate=true), Nullable] public long?  row_number            { get; set; } // bigint
+		[Column(SkipOnUpdate=true), Nullable] public string n_code_for_veterans   { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string c_number_addition     { get; set; } // character varying(10)
+		[Column(SkipOnUpdate=true), Nullable] public string c_surname             { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string c_first_name          { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string c_patronymic          { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string c_address_code        { get; set; } // character varying(17)
+		[Column(SkipOnUpdate=true), Nullable] public string c_locality_name       { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string c_street              { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string c_house               { get; set; } // character varying(20)
+		[Column(SkipOnUpdate=true), Nullable] public string c_corps               { get; set; } // character varying(20)
+		[Column(SkipOnUpdate=true), Nullable] public string c_flat                { get; set; } // character varying(20)
+		[Column(SkipOnUpdate=true), Nullable] public string c_phone               { get; set; } // character varying(32)
+		[Column(SkipOnUpdate=true), Nullable] public string c_account_number      { get; set; } // character varying(300)
+		[Column(SkipOnUpdate=true), Nullable] public string c_inn                 { get; set; } // character varying(15)
+		[Column(SkipOnUpdate=true), Nullable] public string c_locality_short_name { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string c_street_short        { get; set; } // character varying
+	}
+
+	[Table(Schema="veterans", Name="sv_veterans_communal", IsView=true)]
+	public partial class veterans_veterans_sv_veterans_communal
+	{
+		[Column(SkipOnUpdate=true), Nullable] public long?       row_number        { get; set; } // bigint
+		[Column(SkipOnUpdate=true), Nullable] public int?        f_person          { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public char?       c_entry_type      { get; set; } // character varying(1)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_snils           { get; set; } // character varying(14)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_region_code     { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string      c_district_code   { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public char?       c_source_info     { get; set; } // character varying(1)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_last_name       { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_first_name      { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_middle_name     { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_sex             { get; set; } // character varying(10)
+		[Column(SkipOnUpdate=true), Nullable] public NpgsqlDate? d_birthday        { get; set; } // date
+		[Column(SkipOnUpdate=true), Nullable] public string      c_document_name   { get; set; } // character varying(128)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_document_seria  { get; set; } // character varying(6)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_document_number { get; set; } // character varying(7)
+		[Column(SkipOnUpdate=true), Nullable] public NpgsqlDate? d_date_issue      { get; set; } // date
+		[Column(SkipOnUpdate=true), Nullable] public string      c_doc_issued_org  { get; set; } // character varying(256)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_address         { get; set; } // character varying(300)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_reseipt_form    { get; set; } // character varying(200)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_entry_count     { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string      c_size_of_space   { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string      c_count_of_space  { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string      c_count_of_jkh    { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public string      c_comment         { get; set; } // character varying
+	}
+
+	[Table(Schema="veterans", Name="sv_veterans_for_request")]
+	public partial class veterans_veterans_sv_veterans_for_request
+	{
+		[PrimaryKey, Identity] public long   row_number            { get; set; } // bigint
+		[Column,     Nullable] public string n_code_for_veterans   { get; set; } // text
+		[Column,     Nullable] public string c_number_addition     { get; set; } // character varying(10)
+		[Column,     Nullable] public string c_surname             { get; set; } // character varying(64)
+		[Column,     Nullable] public string c_first_name          { get; set; } // character varying(64)
+		[Column,     Nullable] public string c_patronymic          { get; set; } // character varying(64)
+		[Column,     Nullable] public string c_address_code        { get; set; } // character varying(17)
+		[Column,     Nullable] public string c_locality_name       { get; set; } // text
+		[Column,     Nullable] public string c_street              { get; set; } // text
+		[Column,     Nullable] public string c_house               { get; set; } // character varying(20)
+		[Column,     Nullable] public string c_corps               { get; set; } // character varying(20)
+		[Column,     Nullable] public string c_flat                { get; set; } // character varying(20)
+		[Column,     Nullable] public string c_phone               { get; set; } // character varying(32)
+		[Column,     Nullable] public string c_account_number      { get; set; } // character varying(300)
+		[Column,     Nullable] public string c_inn                 { get; set; } // character varying(15)
+		[Column,     Nullable] public string c_locality_short_name { get; set; } // text
+		[Column,     Nullable] public string c_street_short        { get; set; } // text
+	}
+
 	[Table(Schema="zags", Name="ОКСМ")]
-	public partial class zags_ОКСМ
+	public partial class zags_zags_ОКСМ
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id                         { get; set; } // uuid
 		[Column,        Nullable] public string    Цифровой_код               { get; set; } // character varying(3)
@@ -1013,7 +21387,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="zags", Name="СВЗАГС")]
-	public partial class zags_СВЗАГС
+	public partial class zags_zags_СВЗАГС
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id           { get; set; } // uuid
 		[Column,        Nullable] public string    Код          { get; set; } // text
@@ -1023,7 +21397,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="zags", Name="СДРАГС")]
-	public partial class zags_СДРАГС
+	public partial class zags_zags_СДРАГС
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id                                   { get; set; } // uuid
 		[Column,        Nullable] public string    Код                                  { get; set; } // text
@@ -1033,7 +21407,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="zags", Name="СПДУЛ")]
-	public partial class zags_СПДУЛ
+	public partial class zags_zags_СПДУЛ
 	{
 		[PrimaryKey, NotNull    ] public Guid   Id                     { get; set; } // uuid
 		[Column,        Nullable] public string Код_документа          { get; set; } // character varying(2)
@@ -1044,7 +21418,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	[Table(Schema="zags", Name="СТАГС")]
-	public partial class zags_СТАГС
+	public partial class zags_zags_СТАГС
 	{
 		[PrimaryKey, NotNull    ] public Guid      Id                      { get; set; } // uuid
 		[Column,        Nullable] public string    Код                     { get; set; } // text
@@ -1052,6 +21426,1639 @@ namespace SocialTargetHelpAPIServer.Models
 		[Column,        Nullable] public DateTime? Дата_начала_действия    { get; set; } // timestamp (6) without time zone
 		[Column,        Nullable] public DateTime? Дата_окончания_действия { get; set; } // timestamp (6) without time zone
 		[Column,        Nullable] public string    Примечание              { get; set; } // text
+	}
+
+	public static partial class SqlFunctions
+	{
+		#region dblink_close
+
+		[Sql.Function(Name="public.dblink_close", ServerSideOnly=true)]
+		public static string dblink_close(string par2919, string par2920, bool? par2921)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gtrgm_union
+
+		[Sql.Function(Name="public.gtrgm_union", ServerSideOnly=true)]
+		public static object gtrgm_union(byte[] par25, object par26)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region calculation
+
+		[Sql.Function(Name="subsidy.calculation", ServerSideOnly=true)]
+		public static string calculation(Guid? n_calc, Guid? f_user)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region update_retention
+
+		[Sql.Function(Name="subsidy.update_retention", ServerSideOnly=true)]
+		public static string update_retention(Guid? period)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region calculation_notification
+
+		[Sql.Function(Name="subsidy.calculation_notification", ServerSideOnly=true)]
+		public static string calculation_notification(Guid? n_calc, Guid? f_user)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_count_payment
+
+		[Sql.Function(Name="common.get_count_payment", ServerSideOnly=true)]
+		public static int? get_count_payment(int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region mega_calculation_protocol
+
+		[Sql.Function(Name="subsidy.mega_calculation_protocol", ServerSideOnly=true)]
+		public static string mega_calculation_protocol(Guid? n_calc, NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region calculation2
+
+		[Sql.Function(Name="subsidy.calculation2", ServerSideOnly=true)]
+		public static string calculation2(Guid? n_calc, Guid? f_user)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region test_sleep
+
+		[Sql.Function(Name="common.test_sleep", ServerSideOnly=true)]
+		public static object test_sleep(Guid? rec)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_latest_calcnumber
+
+		[Sql.Function(Name="veterans.get_latest_calcnumber", ServerSideOnly=true)]
+		public static int? get_latest_calcnumber(Guid? _case)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region show_limit
+
+		[Sql.Function(Name="public.show_limit", ServerSideOnly=true)]
+		public static float? show_limit()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gin_trgm_consistent
+
+		[Sql.Function(Name="public.gin_trgm_consistent", ServerSideOnly=true)]
+		public static bool? gin_trgm_consistent(object par473, short? par474, string par475, int? par476, object par477, object par478, object par479, object par480)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_build_sql_delete
+
+		[Sql.Function(Name="public.dblink_build_sql_delete", ServerSideOnly=true)]
+		public static string dblink_build_sql_delete(string par510, object par511, int? par512, object par513)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region payments_count
+
+		[Sql.Function(Name="common.payments_count", ServerSideOnly=true)]
+		public static string payments_count(int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_disconnect
+
+		[Sql.Function(Name="public.dblink_disconnect", ServerSideOnly=true)]
+		public static string dblink_disconnect()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region mass_import_calculation_test_by_case
+
+		[Sql.Function(Name="subsidy.mass_import_calculation_test_by_case", ServerSideOnly=true)]
+		public static string mass_import_calculation_test_by_case(Guid? _case)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_send_query
+
+		[Sql.Function(Name="public.dblink_send_query", ServerSideOnly=true)]
+		public static int? dblink_send_query(string par733, string par734)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dt_or_null
+
+		[Sql.Function(Name="public.dt_or_null", ServerSideOnly=true)]
+		public static NpgsqlDate? dt_or_null(string s, string fmt)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_subsidy_report_data
+
+		[Sql.Function(Name="subsidy.get_subsidy_report_data", ServerSideOnly=true)]
+		public static NpgsqlDate? get_subsidy_report_data(NpgsqlDate? _d_end)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_interval
+
+		[Sql.Function(Name="public.get_interval", ServerSideOnly=true)]
+		public static NpgsqlTimeSpan? get_interval(NpgsqlDate? _date)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region send_to_egisso
+
+		[Sql.Function(Name="subsidy.send_to_egisso", ServerSideOnly=true)]
+		public static object send_to_egisso(int? _payment_array)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_cases_for_recalculation
+
+		[Sql.Function(Name="subsidy.get_cases_for_recalculation", ServerSideOnly=true)]
+		public static object get_cases_for_recalculation(int? _recalculation_id, NpgsqlDate? _org_date)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region egisso_send_payment
+
+		[Sql.Function(Name="subsidy.egisso_send_payment", ServerSideOnly=true)]
+		public static object egisso_send_payment0(Guid? payment, string _periods_ids)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_max_poor_case_number
+
+		[Sql.Function(Name="common.get_max_poor_case_number", ServerSideOnly=true)]
+		public static int? get_max_poor_case_number(int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region update_case_and_calc_statuses
+
+		[Sql.Function(Name="subsidy.update_case_and_calc_statuses", ServerSideOnly=true)]
+		public static object update_case_and_calc_statuses0(Guid? _case, string _status, Guid? _calc, string _cal_status)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_cancel_query
+
+		[Sql.Function(Name="public.dblink_cancel_query", ServerSideOnly=true)]
+		public static string dblink_cancel_query(string par1158)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region somewhere_payment_creating
+
+		[Sql.Function(Name="common.somewhere_payment_creating", ServerSideOnly=true)]
+		public static string somewhere_payment_creating()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_egisso_info
+
+		[Sql.Function(Name="common.get_egisso_info", ServerSideOnly=true)]
+		public static object get_egisso_info(DateTime? _begin, DateTime? _end, string _snils, Guid? _user)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_new_recalculation
+
+		[Sql.Function(Name="subsidy.create_new_recalculation", ServerSideOnly=true)]
+		public static object create_new_recalculation(Guid? new_calc, Guid? old_calc, int? recalculation_id, Guid? _user, NpgsqlDate? _date, bool? decrease)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gtrgm_distance
+
+		[Sql.Function(Name="public.gtrgm_distance", ServerSideOnly=true)]
+		public static double? gtrgm_distance(object par1299, string par1300, int? par1301, int? par1302)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region next_case_number
+
+		[Sql.Function(Name="common.next_case_number", ServerSideOnly=true)]
+		public static int? next_case_number0(int? subsystem_id, int? organization_id)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gtrgm_picksplit
+
+		[Sql.Function(Name="public.gtrgm_picksplit", ServerSideOnly=true)]
+		public static object gtrgm_picksplit(object par1484, object par1485)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region test_value
+
+		[Sql.Function(Name="common.test_value", ServerSideOnly=true)]
+		public static string test_value()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region send_calculation_on_payment
+
+		[Sql.Function(Name="pension.send_calculation_on_payment", ServerSideOnly=true)]
+		public static object send_calculation_on_payment0(Guid? n_calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region payment_to_history_by_retention
+
+		[Sql.Function(Name="subsidy.payment_to_history_by_retention", ServerSideOnly=true)]
+		public static object payment_to_history_by_retention(int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region set_limit
+
+		[Sql.Function(Name="public.set_limit", ServerSideOnly=true)]
+		public static float? set_limit(float? par1734)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region drop_unused_calculations_from_recalculation
+
+		[Sql.Function(Name="subsidy.drop_unused_calculations_from_recalculation", ServerSideOnly=true)]
+		public static object drop_unused_calculations_from_recalculation0(string calcs)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_open
+
+		[Sql.Function(Name="public.dblink_open", ServerSideOnly=true)]
+		public static string dblink_open(string par7687, string par7688, bool? par7689)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_current_year
+
+		[Sql.Function(Name="common.get_current_year", ServerSideOnly=true)]
+		public static string get_current_year(int? _org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_russian_date
+
+		[Sql.Function(Name="public.get_russian_date", ServerSideOnly=true)]
+		public static string get_russian_date(NpgsqlDate? d)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region next_case_number
+
+		[Sql.Function(Name="pension.next_case_number", ServerSideOnly=true)]
+		public static int? next_case_number1(int? local_msz, int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gtrgm_consistent
+
+		[Sql.Function(Name="public.gtrgm_consistent", ServerSideOnly=true)]
+		public static bool? gtrgm_consistent(object par2021, string par2022, int? par2023, int? par2024, object par2025)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region save_facts_statuses
+
+		[Sql.Function(Name="msz.save_facts_statuses", ServerSideOnly=true)]
+		public static object save_facts_statuses(string xml_data)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region send_to_provide_arrays
+
+		[Sql.Function(Name="subsidy.send_to_provide_arrays", ServerSideOnly=true)]
+		public static object send_to_provide_arrays(Guid? _progress_id, string _payment_arrays)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_error_message
+
+		[Sql.Function(Name="public.dblink_error_message", ServerSideOnly=true)]
+		public static string dblink_error_message(string par2295)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gtrgm_out
+
+		[Sql.Function(Name="public.gtrgm_out", ServerSideOnly=true)]
+		public static object gtrgm_out(object par2300)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region send_calculation_on_payment
+
+		[Sql.Function(Name="subsidy.send_calculation_on_payment", ServerSideOnly=true)]
+		public static object send_calculation_on_payment1(Guid? n_calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region import_response_uk
+
+		[Sql.Function(Name="subsidy.import_response_uk", ServerSideOnly=true)]
+		public static object import_response_uk(string csv_content)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region log_recalculation
+
+		[Sql.Function(Name="subsidy.log_recalculation", ServerSideOnly=true)]
+		public static int? log_recalculation(string _count, string _total, Guid? _rec_id, string type_name)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_not_approved_recalculations
+
+		[Sql.Function(Name="common.get_not_approved_recalculations", ServerSideOnly=true)]
+		public static string get_not_approved_recalculations(int? _org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region cancel_payment_arrays
+
+		[Sql.Function(Name="common.cancel_payment_arrays", ServerSideOnly=true)]
+		public static object cancel_payment_arrays(string ids)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region update_from_import
+
+		[Sql.Function(Name="subsidy.update_from_import", ServerSideOnly=true)]
+		public static object update_from_import(int? _org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_russian_month
+
+		[Sql.Function(Name="public.get_russian_month", ServerSideOnly=true)]
+		public static string get_russian_month(NpgsqlDate? _date)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region new_guid
+
+		[Sql.Function(Name="public.new_guid", ServerSideOnly=true)]
+		public static Guid? new_guid0()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region can_create_one_time_payment
+
+		[Sql.Function(Name="common.can_create_one_time_payment", ServerSideOnly=true)]
+		public static bool? can_create_one_time_payment(int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region can_calculate_subsidy
+
+		[Sql.Function(Name="subsidy.can_calculate_subsidy", ServerSideOnly=true)]
+		public static string can_calculate_subsidy(Guid? calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region to_left
+
+		[Sql.Function(Name="common.to_left", ServerSideOnly=true)]
+		public static string to_left(string prefix, string str, int? max_length)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_is_busy
+
+		[Sql.Function(Name="public.dblink_is_busy", ServerSideOnly=true)]
+		public static int? dblink_is_busy(string par2699)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region mass_import_calculation
+
+		[Sql.Function(Name="subsidy.mass_import_calculation", ServerSideOnly=true)]
+		public static string mass_import_calculation(int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region similarity
+
+		[Sql.Function(Name="public.similarity", ServerSideOnly=true)]
+		public static float? similarity(string par2855, string par2856)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gtrgm_same
+
+		[Sql.Function(Name="public.gtrgm_same", ServerSideOnly=true)]
+		public static object gtrgm_same(object par2858, object par2859, object par2860)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region mass_import_calculation_test
+
+		[Sql.Function(Name="subsidy.mass_import_calculation_test", ServerSideOnly=true)]
+		public static string mass_import_calculation_test(int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region ora_padej
+
+		[Sql.Function(Name="public.ora_padej", ServerSideOnly=true)]
+		public static string ora_padej(string p_word, string p_wtype, int? p_pol, string p_padout)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region egisso_send_payment_from_calculation
+
+		[Sql.Function(Name="pension.egisso_send_payment_from_calculation", ServerSideOnly=true)]
+		public static object egisso_send_payment_from_calculation(Guid? calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region clone_subsidy_calculation
+
+		[Sql.Function(Name="common.clone_subsidy_calculation", ServerSideOnly=true)]
+		public static object clone_subsidy_calculation(Guid? _old, Guid? _new, string _type)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region copy_veterans
+
+		[Sql.Function(Name="veterans.copy_veterans", ServerSideOnly=true)]
+		public static object copy_veterans(string inn, int? f_package)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region num_to_text
+
+		[Sql.Function(Name="public.num_to_text", ServerSideOnly=true)]
+		public static string num_to_text(decimal? par3083)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region test_link
+
+		[Sql.Function(Name="common.test_link", ServerSideOnly=true)]
+		public static string test_link()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region work_experience
+
+		[Sql.Function(Name="common.work_experience", ServerSideOnly=true)]
+		public static NpgsqlTimeSpan? work_experience(NpgsqlDate? p_date_till, NpgsqlDate? p_date_from)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_month_name
+
+		[Sql.Function(Name="public.get_month_name", ServerSideOnly=true)]
+		public static string get_month_name(int? m)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region generate_tmp_snils
+
+		[Sql.Function(Name="common.generate_tmp_snils", ServerSideOnly=true)]
+		public static string generate_tmp_snils()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_exec
+
+		[Sql.Function(Name="public.dblink_exec", ServerSideOnly=true)]
+		public static string dblink_exec(string par7006, bool? par7007)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_experience_interval
+
+		[Sql.Function(Name="pension.get_experience_interval", ServerSideOnly=true)]
+		public static NpgsqlTimeSpan? get_experience_interval(NpgsqlDate? date_start, NpgsqlDate? date_end)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region import_pfr_file
+
+		[Sql.Function(Name="pension.import_pfr_file", ServerSideOnly=true)]
+		public static object import_pfr_file(NpgsqlDate? _d_date, decimal? _n_summ1, decimal? _n_summ2, decimal? _n_total, decimal? _n_valarization, decimal? _n_dependent, string _c_snils, bool? _b_replace)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region calculation_result
+
+		[Sql.Function(Name="subsidy.calculation_result", ServerSideOnly=true)]
+		public static string calculation_result(Guid? n_calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region rpt_spravka_poor_person
+
+		[Sql.Function(Name="public.rpt_spravka_poor_person", ServerSideOnly=true)]
+		public static string rpt_spravka_poor_person(int? person)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_response_family_xml
+
+		[Sql.Function(Name="pension.create_response_family_xml", ServerSideOnly=true)]
+		public static string create_response_family_xml(string xml_data)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region calculation_solid_fuel
+
+		[Sql.Function(Name="subsidy.calculation_solid_fuel", ServerSideOnly=true)]
+		public static string calculation_solid_fuel(Guid? n_calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_connect
+
+		[Sql.Function(Name="public.dblink_connect", ServerSideOnly=true)]
+		public static string dblink_connect(string par4255)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region calculation_overlaps_periods
+
+		[Sql.Function(Name="common.calculation_overlaps_periods", ServerSideOnly=true)]
+		public static string calculation_overlaps_periods(Guid? _case, NpgsqlDate? _date, Guid? _calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_payments_array_inventory
+
+		[Sql.Function(Name="subsidy.get_payments_array_inventory", ServerSideOnly=true)]
+		public static string get_payments_array_inventory()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region update_case_ghku
+
+		[Sql.Function(Name="subsidy.update_case_ghku", ServerSideOnly=true)]
+		public static object update_case_ghku()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region count_new_refunds
+
+		[Sql.Function(Name="common.count_new_refunds", ServerSideOnly=true)]
+		public static string count_new_refunds(int? _org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region new_guid
+
+		[Sql.Function(Name="common.new_guid", ServerSideOnly=true)]
+		public static Guid? new_guid1()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_fdw_validator
+
+		[Sql.Function(Name="public.dblink_fdw_validator", ServerSideOnly=true)]
+		public static object dblink_fdw_validator(object options, int? catalog)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region recalculation_protocol
+
+		[Sql.Function(Name="subsidy.recalculation_protocol", ServerSideOnly=true)]
+		public static string recalculation_protocol(Guid? n_calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_recalculation2
+
+		[Sql.Function(Name="subsidy.create_recalculation2", ServerSideOnly=true)]
+		public static string create_recalculation2(int? org, NpgsqlDate? _date, NpgsqlDate? _date_end, Guid? _user, bool? decrease, bool? mega, int? _type)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gtrgm_compress
+
+		[Sql.Function(Name="public.gtrgm_compress", ServerSideOnly=true)]
+		public static object gtrgm_compress(object par4271)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_recalculation
+
+		[Sql.Function(Name="pension.create_recalculation", ServerSideOnly=true)]
+		public static string create_recalculation0(int? org, NpgsqlDate? _date)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region egisso_send_payment_one_time
+
+		[Sql.Function(Name="subsidy.egisso_send_payment_one_time", ServerSideOnly=true)]
+		public static object egisso_send_payment_one_time(Guid? payment)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region calculation_for_recalculation
+
+		[Sql.Function(Name="subsidy.calculation_for_recalculation", ServerSideOnly=true)]
+		public static string calculation_for_recalculation(Guid? n_calc, Guid? f_user, NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region can_create_recalculation
+
+		[Sql.Function(Name="common.can_create_recalculation", ServerSideOnly=true)]
+		public static bool? can_create_recalculation(int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region delete_calculation_base
+
+		[Sql.Function(Name="subsidy.delete_calculation_base", ServerSideOnly=true)]
+		public static object delete_calculation_base()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region trigger_add_case_numbers
+
+		[Sql.Function(Name="common.trigger_add_case_numbers", ServerSideOnly=true)]
+		public static object trigger_add_case_numbers0()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region to_center
+
+		[Sql.Function(Name="common.to_center", ServerSideOnly=true)]
+		public static string to_center(string str, int? max_length)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region stop_calculations
+
+		[Sql.Function(Name="subsidy.stop_calculations", ServerSideOnly=true)]
+		public static object stop_calculations(Guid? case_id, Guid? user_id)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region import_post_addresses
+
+		[Sql.Function(Name="public.import_post_addresses", ServerSideOnly=true)]
+		public static string import_post_addresses(string _path)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gtrgm_decompress
+
+		[Sql.Function(Name="public.gtrgm_decompress", ServerSideOnly=true)]
+		public static object gtrgm_decompress(object par4911)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_current_org_code
+
+		[Sql.Function(Name="common.get_current_org_code", ServerSideOnly=true)]
+		public static string get_current_org_code(int? organization_id)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_management_companies
+
+		[Sql.Function(Name="common.get_management_companies", ServerSideOnly=true)]
+		public static string get_management_companies(int? _org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region rpt_poor_appeal_protocol
+
+		[Sql.Function(Name="public.rpt_poor_appeal_protocol", ServerSideOnly=true)]
+		public static string rpt_poor_appeal_protocol(Guid? appeal)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region update_cases_ghku
+
+		[Sql.Function(Name="subsidy.update_cases_ghku", ServerSideOnly=true)]
+		public static object update_cases_ghku(Guid? _ghku, decimal? _total, decimal? _discount)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region export_facts
+
+		[Sql.Function(Name="msz.export_facts", ServerSideOnly=true)]
+		public static string export_facts(int? max_count)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_latest_casenumber
+
+		[Sql.Function(Name="veterans.get_latest_casenumber", ServerSideOnly=true)]
+		public static string get_latest_casenumber0(int? org, int? code, Guid? service)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region drop_unused_calculations_from_recalculation
+
+		[Sql.Function(Name="pension.drop_unused_calculations_from_recalculation", ServerSideOnly=true)]
+		public static object drop_unused_calculations_from_recalculation1(string calcs)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gtrgm_in
+
+		[Sql.Function(Name="public.gtrgm_in", ServerSideOnly=true)]
+		public static object gtrgm_in(object par5241)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_retention
+
+		[Sql.Function(Name="common.create_retention", ServerSideOnly=true)]
+		public static object create_retention(string _cases)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gtrgm_penalty
+
+		[Sql.Function(Name="public.gtrgm_penalty", ServerSideOnly=true)]
+		public static object gtrgm_penalty(object par5293, object par5294, object par5295)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region update_case_status
+
+		[Sql.Function(Name="subsidy.update_case_status", ServerSideOnly=true)]
+		public static object update_case_status(Guid? _case)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_build_sql_update
+
+		[Sql.Function(Name="public.dblink_build_sql_update", ServerSideOnly=true)]
+		public static string dblink_build_sql_update(string par5319, object par5320, int? par5321, object par5322, object par5323)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region delete_case_base
+
+		[Sql.Function(Name="subsidy.delete_case_base", ServerSideOnly=true)]
+		public static object delete_case_base()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region check_person_can_create_veteran_case
+
+		[Sql.Function(Name="veterans.check_person_can_create_veteran_case", ServerSideOnly=true)]
+		public static string check_person_can_create_veteran_case(int? person, int? service_group)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_calculation_protocol
+
+		[Sql.Function(Name="subsidy.get_calculation_protocol", ServerSideOnly=true)]
+		public static string get_calculation_protocol(Guid? n_calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region export_zapros_text
+
+		[Sql.Function(Name="common.export_zapros_text", ServerSideOnly=true)]
+		public static string export_zapros_text()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region copy_role
+
+		[Sql.Function(Name="public.copy_role", ServerSideOnly=true)]
+		public static object copy_role(Guid? id, string rolename)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region trigger_cd_address_objects
+
+		[Sql.Function(Name="fias.trigger_cd_address_objects", ServerSideOnly=true)]
+		public static object trigger_cd_address_objects()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gin_extract_query_trgm
+
+		[Sql.Function(Name="public.gin_extract_query_trgm", ServerSideOnly=true)]
+		public static object gin_extract_query_trgm(string par5761, object par5762, short? par5763, object par5764, object par5765, object par5766, object par5767)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region calculate_pension
+
+		[Sql.Function(Name="pension.calculate_pension", ServerSideOnly=true)]
+		public static string calculate_pension(Guid? calc_id, Guid? _case, string reason, bool? _b_recl)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_egiso_file
+
+		[Sql.Function(Name="subsidy.create_egiso_file", ServerSideOnly=true)]
+		public static object create_egiso_file(string cases)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_latest_casenumber
+
+		[Sql.Function(Name="common.get_latest_casenumber", ServerSideOnly=true)]
+		public static int? get_latest_casenumber1(int? org, int? code)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region export_zapros_uk
+
+		[Sql.Function(Name="subsidy.export_zapros_uk", ServerSideOnly=true)]
+		public static string export_zapros_uk(int? id_org, NpgsqlDate? date_begin, NpgsqlDate? date_end)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_connect_u
+
+		[Sql.Function(Name="public.dblink_connect_u", ServerSideOnly=true)]
+		public static string dblink_connect_u(string par6749, string par6750)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region can_create_retention_history
+
+		[Sql.Function(Name="common.can_create_retention_history", ServerSideOnly=true)]
+		public static bool? can_create_retention_history(int? org, string subsystem_alias)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region gin_extract_value_trgm
+
+		[Sql.Function(Name="public.gin_extract_value_trgm", ServerSideOnly=true)]
+		public static object gin_extract_value_trgm(string par6059, object par6060)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region drop_filedata
+
+		[Sql.Function(Name="public.drop_filedata", ServerSideOnly=true)]
+		public static string drop_filedata()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_retention_history
+
+		[Sql.Function(Name="common.create_retention_history", ServerSideOnly=true)]
+		public static string create_retention_history(int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_get_connections
+
+		[Sql.Function(Name="public.dblink_get_connections", ServerSideOnly=true)]
+		public static object dblink_get_connections()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region check_death_already_registered
+
+		[Sql.Function(Name="veterans.check_death_already_registered", ServerSideOnly=true)]
+		public static string check_death_already_registered(string json_obj)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region calculation_decision_positive
+
+		[Sql.Function(Name="subsidy.calculation_decision_positive", ServerSideOnly=true)]
+		public static string calculation_decision_positive(Guid? n_calc, Guid? f_user)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region import_old_info
+
+		[Sql.Function(Name="subsidy.import_old_info", ServerSideOnly=true)]
+		public static string import_old_info(string table_name)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region show_trgm
+
+		[Sql.Function(Name="public.show_trgm", ServerSideOnly=true)]
+		public static object show_trgm(string par6235)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region egisso_send_payment
+
+		[Sql.Function(Name="pension.egisso_send_payment", ServerSideOnly=true)]
+		public static object egisso_send_payment1(Guid? payment)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_payments_array_inventory
+
+		[Sql.Function(Name="subsidy.create_payments_array_inventory", ServerSideOnly=true)]
+		public static Guid? create_payments_array_inventory(string arrays, string subsystem)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region update_case_status_on_controll
+
+		[Sql.Function(Name="subsidy.update_case_status_on_controll", ServerSideOnly=true)]
+		public static object update_case_status_on_controll(Guid? _case, string _status, string _cal_status, bool? _rec)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region drop_retention_history
+
+		[Sql.Function(Name="common.drop_retention_history", ServerSideOnly=true)]
+		public static object drop_retention_history(Guid? payment)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region delete_calculation_base_after_delete_case
+
+		[Sql.Function(Name="subsidy.delete_calculation_base_after_delete_case", ServerSideOnly=true)]
+		public static object delete_calculation_base_after_delete_case()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region ora_padej_fio
+
+		[Sql.Function(Name="public.ora_padej_fio", ServerSideOnly=true)]
+		public static string ora_padej_fio(string p_fio, string p_padzh, string p_fio_fmt, string p_sex)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region split_string
+
+		[Sql.Function(Name="common.split_string", ServerSideOnly=true)]
+		public static string split_string(string str, int? _length, bool? tr)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region veterans_copy
+
+		[Sql.Function(Name="pension.veterans_copy", ServerSideOnly=true)]
+		public static object veterans_copy(int? f_pac)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region trigger_update_snils11
+
+		[Sql.Function(Name="public.trigger_update_snils11", ServerSideOnly=true)]
+		public static object trigger_update_snils11()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region can_create_payments
+
+		[Sql.Function(Name="subsidy.can_create_payments", ServerSideOnly=true)]
+		public static string can_create_payments(int? org, Guid? _user)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region trigger_add_case_numbers
+
+		[Sql.Function(Name="pension.trigger_add_case_numbers", ServerSideOnly=true)]
+		public static object trigger_add_case_numbers1()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region update_case_and_calc_statuses
+
+		[Sql.Function(Name="common.update_case_and_calc_statuses", ServerSideOnly=true)]
+		public static object update_case_and_calc_statuses1(Guid? _case)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region parse_csv
+
+		[Sql.Function(Name="public.parse_csv", ServerSideOnly=true)]
+		public static object parse_csv(string s, bool? raise_on_error)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region similarity_op
+
+		[Sql.Function(Name="public.similarity_op", ServerSideOnly=true)]
+		public static bool? similarity_op(string par7049, string par7050)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region calculation_decision
+
+		[Sql.Function(Name="pension.calculation_decision", ServerSideOnly=true)]
+		public static string calculation_decision(Guid? n_calc, string _type)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region update_case_balance
+
+		[Sql.Function(Name="subsidy.update_case_balance", ServerSideOnly=true)]
+		public static object update_case_balance()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region trigger_generate_rsmv_application_number
+
+		[Sql.Function(Name="common.trigger_generate_rsmv_application_number", ServerSideOnly=true)]
+		public static object trigger_generate_rsmv_application_number()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region trigger_capitalize_person_fio
+
+		[Sql.Function(Name="public.trigger_capitalize_person_fio", ServerSideOnly=true)]
+		public static object trigger_capitalize_person_fio()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region uuid_or_null
+
+		[Sql.Function(Name="public.uuid_or_null", ServerSideOnly=true)]
+		public static Guid? uuid_or_null(string s)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region formating_address_text
+
+		[Sql.Function(Name="pension.formating_address_text", ServerSideOnly=true)]
+		public static string formating_address_text(string address)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region similarity_dist
+
+		[Sql.Function(Name="public.similarity_dist", ServerSideOnly=true)]
+		public static float? similarity_dist(string par7527, string par7528)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_services
+
+		[Sql.Function(Name="veterans.get_services", ServerSideOnly=true)]
+		public static string get_services(string categories)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_fias_address
+
+		[Sql.Function(Name="subsidy.get_fias_address", ServerSideOnly=true)]
+		public static Guid? get_fias_address(Guid? uuid_fias, int? n_level)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_new_recalculation2
+
+		[Sql.Function(Name="subsidy.create_new_recalculation2", ServerSideOnly=true)]
+		public static object create_new_recalculation2(Guid? new_calc, Guid? old_calc, int? recalculation_id, Guid? _user, NpgsqlDate? _date_begin, NpgsqlDate? _date_end, bool? decrease)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region count_person_to_correction
+
+		[Sql.Function(Name="common.count_person_to_correction", ServerSideOnly=true)]
+		public static string count_person_to_correction(int? _org, Guid? _status)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region send_calculation_on_payment
+
+		[Sql.Function(Name="public.send_calculation_on_payment", ServerSideOnly=true)]
+		public static string send_calculation_on_payment2(int? n_calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_zero_progress_rec
+
+		[Sql.Function(Name="subsidy.get_zero_progress_rec", ServerSideOnly=true)]
+		public static int? get_zero_progress_rec(int? org)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_current_query
+
+		[Sql.Function(Name="public.dblink_current_query", ServerSideOnly=true)]
+		public static string dblink_current_query()
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region update_calc_status
+
+		[Sql.Function(Name="subsidy.update_calc_status", ServerSideOnly=true)]
+		public static object update_calc_status(Guid? n_calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region dblink_build_sql_insert
+
+		[Sql.Function(Name="public.dblink_build_sql_insert", ServerSideOnly=true)]
+		public static string dblink_build_sql_insert(string par7791, object par7792, int? par7793, object par7794, object par7795)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_recalculation
+
+		[Sql.Function(Name="subsidy.create_recalculation", ServerSideOnly=true)]
+		public static string create_recalculation1(int? org, NpgsqlDate? _date, Guid? _user, bool? decrease)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region get_russian_date_part
+
+		[Sql.Function(Name="public.get_russian_date_part", ServerSideOnly=true)]
+		public static string get_russian_date_part(NpgsqlTimeSpan? i)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
 	}
 }
 

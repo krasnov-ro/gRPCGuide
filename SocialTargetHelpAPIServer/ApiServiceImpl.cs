@@ -28,12 +28,11 @@ namespace SocialTargetHelpAPIServer
         }
 
         #region Формировнаие ответа для УФСИН
+
         public override Task<GetPersonsLifeStatusResponse> GetPersonsLifeStatus(GetPersonsLifeStatusRequest req, ServerCallContext context)
         {
             GetPersonsLifeStatusResponse result = new GetPersonsLifeStatusResponse();
-            String personDocData = null;
-            PersonLifeStatusRequest[] persons;
-            IQueryable<fatalzp_sv_cd_umer> men = null;
+            IQueryable<fatalzp_fatalzp_sv_cd_umer> men = null;
 
             try
             {
@@ -83,12 +82,13 @@ namespace SocialTargetHelpAPIServer
             LogInDB(req.ToString(), result.ToString());
             return Task.FromResult(result);
         }
+
         #endregion
 
         #region Формировнаие ответа для Соц. портала
+
         public override Task<GetPersonPaymentsResponse> GetPersonPayments(GetPersonPaymentsRequest req, ServerCallContext context)
         {
-            string log = req.ToString();
             try
             {
                 var payments = new List<PersonPayment>();
@@ -164,7 +164,107 @@ namespace SocialTargetHelpAPIServer
             var d2 = new DateTime(d.Value.Year, d.Value.Month, d.Value.Day);
             return d2;
         }
+
         #endregion
+
+        public override Task<GetVeteranDictionariesResponse> GetVeteranDictionaries(GetVeteranDictionariesRequest request, ServerCallContext context)
+        {
+            var organizations = dbContext.common_cs_orgs
+                .ToArray()
+                .Select(p => new Organization()
+                {
+                    Id = p.id.ToString(),
+                    Name = p.c_name,
+                    Address = p.c_address,
+                    Latitude = Convert.ToDouble(p.n_latitude),
+                    Longitude = Convert.ToDouble(p.n_longitude),
+                    BossName = p.c_boss,
+                    WorkingSchedule = p.c_graphic,
+                    Phones = { p.c_phone },
+                    Emails = { p.c_email },
+                    Fax = p.c_fax
+                });
+
+            var awardData = dbContext.veterans_cs_awards
+                .Select(p => new
+                {
+                    groupId = p.csawardsfkeyftype.id,
+                    groupName = p.csawardsfkeyftype.c_name,
+                    award = new VeteranAward()
+                    {
+                        Id = p.id.ToString(),
+                        Name = p.c_name,
+                        NameShort = p.c_name_short,
+                        Code = p.c_code,
+                        Archived = p.b_archive,
+                        IsRegional = p.b_chr
+                    }
+                })
+                .ToArray()
+                .GroupBy(p => new { p.groupId, p.groupName })
+                .Select(p => new VeteranAwardGroup()
+                {
+                    Id = p.Key.groupId.ToString(),
+                    Name = p.Key.groupName,
+                    Awards = { p.Select(pp => pp.award) }
+                });
+
+            var docTypes = dbContext.public_cs_document_types
+                .Select(p => new VeteranDocumentType()
+                {
+                    Id = p.id,
+                    Name = p.c_name
+                })
+                .ToArray();
+
+            var citizenCategories = dbContext.veterans_cs_citizen_categories
+                .Select(p => new CitizenCategory()
+                {
+                    Id = p.id.ToString(),
+                    Name = p.c_name,
+                    Code = p.c_alias,
+                    DescriptionValue = p.c_desc ?? "",
+                    DescriptionHasValue = p.c_desc != null
+                })
+                .ToArray();
+
+            var serviceGroups = dbContext.veterans_cs_service_group
+                .Select(p => new SocialServiceGroup()
+                {
+                    Id = p.id.ToString(),
+                    Name = p.c_name,
+                    Description = p.c_desc
+                })
+                .ToArray();
+
+            //var services = dbContext.veterans_cs_services
+            //   .Select(p => new SocialService()
+            //   {
+            //       Id = p.id.ToString(),
+            //       Name = p.c_name,
+            //       Description = p.c_desc,
+            //       PaymentPeriod = null,
+            //       Conditions = p.c_provisions,
+            //       PaymentForm = null,
+            //       PaymentSource = null,
+            //       SocialServiceGroupIds = null,
+            //       SocialServiceOrgIds = null
+            //   })
+            //   .ToArray();
+
+            var result = new GetVeteranDictionariesResponse()
+            {
+                Organizations = { organizations },
+                AwardGroupsWithAwards = { awardData },
+                DocumentTypes = { docTypes },
+                CitizenCategories = { citizenCategories },
+                ServiceGroups = { serviceGroups },
+                Services = { },
+                ServiceCitizenCategories = { }
+            };
+
+            return Task.FromResult(result);
+        }
 
         public object JsonGenerate(string where, string fullName, string serial, string number)
         {
@@ -205,15 +305,14 @@ namespace SocialTargetHelpAPIServer
 
         public void LogInDB(string req, string response)
         {
-            api_req_requests requests = new api_req_requests
+            var apiRequest = new api_req_api_req_requests
             {
                 req_date = DateTime.Now,
                 request = req,
                 response = response,
                 from_whom = this.GetType().ToString()
             };
-            dbContext.Insert(requests);
-            dbContext.Update<api_req_requests>(requests);
+            dbContext.Insert(apiRequest);
         }
     }
 }

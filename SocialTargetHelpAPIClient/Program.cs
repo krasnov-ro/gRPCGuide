@@ -26,6 +26,8 @@ namespace SocialTargetHelpAPIClient
 
             var dbContext = new STH("PostgreSQL.9.5", configuration.GetConnectionString("MyDb"));
 
+            var res = client.GetVeteranDictionaries(new GetVeteranDictionariesRequest() { });
+
             do
             {
                 Console.WriteLine("Type a data person:");
