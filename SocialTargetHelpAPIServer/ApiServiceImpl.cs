@@ -14,6 +14,7 @@ using LinqToDB;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace SocialTargetHelpAPIServer
 {
@@ -30,11 +31,11 @@ namespace SocialTargetHelpAPIServer
         }
 
         #region Формировнаие ответа для УФСИН
-        public override Task<GetPersonsLifeStatusResponse> GetPersonsLifeStatus(GetPersonsLifeStatusRequest req, ServerCallContext context)
+        public override Task<GetPersonsListFromDeathRegistryResponse> GetPersonsListFromDeathRegistry(GetPersonsListFromDeathRegistryRequest req, ServerCallContext context)
         {
-            GetPersonsLifeStatusResponse result = new GetPersonsLifeStatusResponse();
+            GetPersonsListFromDeathRegistryResponse result = new GetPersonsListFromDeathRegistryResponse();
             String personDocData = null;
-            PersonLifeStatusRequest[] persons;
+            PersonFromDeathRegistryRequest[] persons;
             IQueryable<fatalzp_sv_cd_umer> men = null;
             IQueryable<fatalzp_sv_cd_umer> docMen = null;
 
@@ -42,90 +43,130 @@ namespace SocialTargetHelpAPIServer
             {
                 foreach (var dbPerson in req.RequestData)
                 {
+                    var personDoc = Decrypt(dbPerson.DocSeria) + Decrypt(dbPerson.DocNumber);
+                    var test = Regex.Replace(personDoc, @"[^\d]", "");
+
                     // Найдем всех людей подходяжих по ФИО и дате рождения
                     men = dbContext.fatalzp_sv_cd_umer.Where(p =>
                         //p.Id.ToString() == dbPerson.Guid &&
-                        p.Фамилия.ToUpper() == dbPerson.LastName &&
-                        p.Имя.ToUpper() == dbPerson.FirstName &&
-                        p.Отчество.ToUpper() == dbPerson.MiddleName &&
+                        p.Фамилия.ToUpper() == dbPerson.LastName.ToUpper() &&
+                        p.Имя.ToUpper() == dbPerson.FirstName.ToUpper() &&
+                        p.Отчество.ToUpper() == dbPerson.MiddleName.ToUpper() &&
                         p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate)
                         );
 
+                    // Попытаемся найти среди найденых по ФИО и ДР, по паспортным данным
+                    docMen = men.Where(p =>
+                        p.Фамилия.ToUpper() == dbPerson.LastName.ToUpper() &&
+                        p.Имя.ToUpper() == dbPerson.FirstName.ToUpper() &&
+                        p.Отчество.ToUpper() == dbPerson.MiddleName.ToUpper() &&
+                        p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate) &&
+                        p.СерНомДок.Replace(" ", "").Replace("-", "") == Regex.Replace(personDoc, @"[^\d]", "")
+                    );
+
                     // Если такой человек один, то мы отправим инфу по этому челику, персональные данные зашифруем
-                    if (men.Count() == 1)
+                    if (docMen.Count() == 1)
                     {
-                        var tmp = men.SingleOrDefault();
+                        var tmp = docMen.SingleOrDefault();
                         result.ResponseData.Add(
-                            new PersonLifeStatusResponse
+                            new PersonFromDeathRegistryResponse
                             {
+                                Guid = dbPerson.Guid,
                                 LastName = tmp.Фамилия,
                                 FirstName = tmp.Имя,
                                 MiddleName = tmp.Отчество,
-                                BirthDate = Convert.ToDateTime(tmp.BirthDate).ToString("yyyy-MM-dd"),
-                                DocSeria = Encrypt(tmp.СерНомДок.Trim().Substring(0, 4)),
-                                DocNumber = Encrypt(tmp.СерНомДок.Trim().Substring(4, 6)),
-                                Status = PersonLifeStatus.Dead
+                                BirthDate = tmp.BirthDate.Value.ToString("yyyy-MM-dd"),
+                                DocSeria = Encrypt(Regex.Replace(tmp.СерНомДок.Trim(),@"[^\d]","").Substring(0, 4)),
+                                DocNumber = Encrypt(Regex.Replace(tmp.СерНомДок.Trim(), @"[^\d]", "").Substring(4, 6)),
+                                Status = PersonStatus.Found
                             });
                     }
-                    // Если таких несколько то мы попытаемся поискать по паспортным данным
-                    else if (men.Count() > 1)
+
+                    #region То что было до 25.11.2019
+                    //// Если таких несколько то мы попытаемся поискать по паспортным данным
+                    //else if (men.Count() > 1)
+                    //{
+                    //    string docSeriaNumber = null;
+                    //    docMen = men.Where(p =>
+                    //        p.Фамилия.ToUpper() == dbPerson.LastName &&
+                    //        p.Имя.ToUpper() == dbPerson.FirstName &&
+                    //        p.Отчество.ToUpper() == dbPerson.MiddleName &&
+                    //        p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate) &&
+                    //        p.СерНомДок == Decrypt(dbPerson.DocSeria) + Decrypt(dbPerson.DocNumber)
+                    //        );
+                    //    // Если такой челик нашелся то отправим по нему инфу, персональные данные зашифруем
+                    //    if (docMen != null)
+                    //    {
+                    //        var tmp = docMen.SingleOrDefault();
+                    //        result.ResponseData.Add(
+                    //        new PersonLifeStatusResponse
+                    //        {
+                    //            LastName = tmp.Фамилия,
+                    //            FirstName = tmp.Имя,
+                    //            MiddleName = tmp.Отчество,
+                    //            BirthDate = Convert.ToDateTime(tmp.BirthDate).ToString("yyyy-MM-dd"),
+                    //            DocSeria = Encrypt(tmp.СерНомДок.Trim().Substring(0, 4)),
+                    //            DocNumber = Encrypt(tmp.СерНомДок.Trim().Substring(4, 6)),
+                    //            Status = PersonLifeStatus.Dead
+                    //        });
+                    //    }
+                    //    // Если такой челик не нашелся в списке умерших, то все хорошо, он жив, наверное, может быть, маловероятно, но  это не точно
+                    //    else
+                    //    {
+                    //        foreach (var i in men)
+                    //        {
+                    //            result.ResponseData.Add(
+                    //               new PersonLifeStatusResponse
+                    //               {
+                    //                   LastName = i.Фамилия,
+                    //                   FirstName = i.Имя,
+                    //                   MiddleName = i.Отчество,
+                    //                   BirthDate = i.BirthDate.ToString(),
+                    //                   Status = PersonLifeStatus.NotSure
+                    //               });
+                    //        }
+                    //    }
+                    //}
+                    #endregion
+
+                    // Если не удалось найти человека по паспортным данным, то смотрим на список найденных по ФИО и ДР
+                    else if (docMen.Count() == 0)
                     {
-                        string docSeriaNumber = null;
-                        docMen = men.Where(p =>
-                            p.Фамилия.ToUpper() == dbPerson.LastName &&
-                            p.Имя.ToUpper() == dbPerson.FirstName &&
-                            p.Отчество.ToUpper() == dbPerson.MiddleName &&
-                            p.BirthDate == Convert.ToDateTime(dbPerson.BirthDate) &&
-                            p.СерНомДок == Decrypt(dbPerson.DocSeria) + Decrypt(dbPerson.DocNumber)
-                            );
-                        // Если такой челик нашелся то отправим по нему инфу, персональные данные зашифруем
-                        if (docMen != null)
-                        {
-                            var tmp = docMen.SingleOrDefault();
-                            result.ResponseData.Add(
-                            new PersonLifeStatusResponse
-                            {
-                                LastName = tmp.Фамилия,
-                                FirstName = tmp.Имя,
-                                MiddleName = tmp.Отчество,
-                                BirthDate = Convert.ToDateTime(tmp.BirthDate).ToString("yyyy-MM-dd"),
-                                DocSeria = Encrypt(tmp.СерНомДок.Trim().Substring(0, 4)),
-                                DocNumber = Encrypt(tmp.СерНомДок.Trim().Substring(4, 6)),
-                                Status = PersonLifeStatus.Dead
-                            });
-                        }
-                        // Если такой челик не нашелся в списке умерших, то все хорошо, он жив, наверное, может быть, маловероятно, но  это не точно
-                        else
+                        // Если удалось найти людей по ФИО и ДР, то этих людей мы помечаем как "Not sure"
+                        // Ибо не знаем тот ли это человек
+                        if (men.Count() > 0)
                         {
                             foreach (var i in men)
                             {
                                 result.ResponseData.Add(
-                                   new PersonLifeStatusResponse
+                                   new PersonFromDeathRegistryResponse
                                    {
+                                       Guid = dbPerson.Guid,
                                        LastName = i.Фамилия,
                                        FirstName = i.Имя,
                                        MiddleName = i.Отчество,
                                        BirthDate = i.BirthDate.ToString(),
-                                       Status = PersonLifeStatus.NotSure
+                                       Status = PersonStatus.NotSure
                                    });
                             }
                         }
-                    }
 
-                    // Если челика с такими ФИО и датой рождения нет, то скорее всего он жив
-                    else if (men.Count() == 0)
-                    {
-                        result.ResponseData.Add(
-                            new PersonLifeStatusResponse
-                            {
-                                LastName = dbPerson.LastName,
-                                FirstName = dbPerson.FirstName,
-                                MiddleName = dbPerson.MiddleName,
-                                BirthDate = dbPerson.BirthDate.ToString(),
-                                DocSeria = dbPerson.DocSeria,
-                                DocNumber = dbPerson.DocNumber,
-                                Status = PersonLifeStatus.Alive
-                            });
+                        // Если мы не нашли человека, то вернем про него информацию и дадим ему статус "NotFound"
+                        else
+                        {
+                            result.ResponseData.Add(
+                                new PersonFromDeathRegistryResponse
+                                {
+                                    Guid = dbPerson.Guid,
+                                    LastName = dbPerson.LastName,
+                                    FirstName = dbPerson.FirstName,
+                                    MiddleName = dbPerson.MiddleName,
+                                    BirthDate = dbPerson.BirthDate.ToString(),
+                                    DocSeria = dbPerson.DocSeria,
+                                    DocNumber = dbPerson.DocNumber,
+                                    Status = PersonStatus.NotFound
+                                });
+                        }
                     }
                 }
             }
@@ -220,43 +261,6 @@ namespace SocialTargetHelpAPIServer
             return d2;
         }
         #endregion
-
-        public object JsonGenerate(string where, string fullName, string serial, string number)
-        {
-            object result = new
-            {
-                Person = fullName,
-                Passport = new
-                {
-                    Serial = serial,
-                    Number = number
-                }
-            };
-
-            #region Формирование Json в ручную
-            //if (where != null)
-            //{
-            //    where = where.Substring(0, where.Length - 3) +
-            //        ",\n'Person': '" + fullName + "', " +
-            //        "'Passport': " +
-            //            "{ 'Serial': '" + serial + "'," +
-            //            "'Number': '" + number + "' }" +
-            //        "}";
-            //    result = JsonConvert.DeserializeObject(where);
-            //}
-            //else
-            //{
-            //    where = "{ " + "'Person': '" + fullName + "', " +
-            //            "'Passport': " +
-            //                "{ 'Serial': '" + serial + "'," +
-            //                " 'Number': '" + number + "' }," +
-            //            "}";
-            //    result = JsonConvert.DeserializeObject(where);
-            //}
-            #endregion
-
-            return result;
-        }
 
         // Сохранение запроса и ответа в базу данных
         public void LogInDB(string req, string response)

@@ -35,7 +35,7 @@ namespace SocialTargetHelpAPIClient
                 #region Запрос от УФСИН 
 
                 var cd_deals = dbContext.fsin_cd_deals;
-                GetPersonsLifeStatusRequest[] persons = null;
+                GetPersonsListFromDeathRegistryRequest[] persons = null;
                 var cd_persons = dbContext.public_cd_persons;
                 IQueryable<public_cd_persons> dbPersonsFilter = null;
                 foreach (var dbDeal in cd_deals)
@@ -48,7 +48,7 @@ namespace SocialTargetHelpAPIClient
                 }
 
                 // Передадим инфу о наших челиках, персональные данные зашифруем
-                var personsData = dbPersonsFilter.Select(dbPerson => new PersonLifeStatusRequest()
+                var personsData = dbPersonsFilter.Select(dbPerson => new PersonFromDeathRegistryRequest()
                 {
                     LastName = dbPerson.c_surname.ToUpper(),
                     FirstName = dbPerson.c_first_name.ToUpper(),
@@ -75,12 +75,12 @@ namespace SocialTargetHelpAPIClient
                 //// Decode with private key
                 #endregion
 
-                GetPersonsLifeStatusRequest FsinRequest = new GetPersonsLifeStatusRequest()
+                GetPersonsListFromDeathRegistryRequest FsinRequest = new GetPersonsListFromDeathRegistryRequest()
                 {
                     RequestData = { personsData }
                 };
 
-                var FsinResponse = client.GetPersonsLifeStatus(FsinRequest);
+                var FsinResponse = client.GetPersonsListFromDeathRegistry(FsinRequest);
 
                 Console.WriteLine();
                 Console.WriteLine($"Информация о человеке: ");

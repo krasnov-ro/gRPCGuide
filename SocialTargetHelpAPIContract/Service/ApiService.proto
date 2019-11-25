@@ -9,7 +9,7 @@ service ApiService {
 Простой RPC, где клиент отправляет запрос на сервер, используя клиентский объект и ждет ответа,
 чтобы вернуться, так же, как обычный вызов функции
 */
-	rpc GetPersonsLifeStatus(GetPersonsLifeStatusRequest) returns (GetPersonsLifeStatusResponse) {}
+	rpc GetPersonsListFromDeathRegistry(GetPersonsListFromDeathRegistryRequest) returns (GetPersonsListFromDeathRegistryResponse) {}
 }
 
 message GetPersonPaymentsRequest {
@@ -32,16 +32,16 @@ message PersonPayment {
 	double paymentSum = 6;
 }
 
-message GetPersonsLifeStatusRequest {
-	repeated PersonLifeStatusRequest requestData = 1;
+message GetPersonsListFromDeathRegistryRequest {
+	repeated PersonFromDeathRegistryRequest requestData = 1;
 }
 
-message GetPersonsLifeStatusResponse {
-	repeated PersonLifeStatusResponse responseData = 1;
+message GetPersonsListFromDeathRegistryResponse{
+	repeated PersonFromDeathRegistryResponse responseData = 1;
 	repeated Error errors = 2;
 }
 
-message PersonLifeStatusRequest {
+message PersonFromDeathRegistryRequest {
 	string guid = 1;
 	string lastName = 2;
 	string firstName = 3;
@@ -51,7 +51,7 @@ message PersonLifeStatusRequest {
 	string docNumber = 7;
 }
 
-message PersonLifeStatusResponse {
+message PersonFromDeathRegistryResponse {
 	string guid = 1;
 	string lastName = 2;
 	string firstName = 3;
@@ -59,13 +59,13 @@ message PersonLifeStatusResponse {
 	string birthDate = 5; 
 	string docSeria = 6;
 	string docNumber = 7;
-	PersonLifeStatus status = 8;
+	PersonStatus status = 8;
 }
 
-enum PersonLifeStatus {
+enum PersonStatus {
 	NOT_SURE = 0;
-	DEAD = 1;
-	ALIVE = 2;
+	FOUND = 1;
+	NOT_FOUND = 2;
 }
 
 message Error {
