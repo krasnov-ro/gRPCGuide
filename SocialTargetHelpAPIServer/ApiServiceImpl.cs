@@ -35,13 +35,13 @@ namespace SocialTargetHelpAPIServer
         {
             GetPersonsListFromDeathRegistryResponse result = new GetPersonsListFromDeathRegistryResponse();
             String personDocData = null;
-            PersonFromDeathRegistryRequest[] persons;
+            PersonData[] persons;
             IQueryable<fatalzp_sv_cd_umer> men = null;
             IQueryable<fatalzp_sv_cd_umer> docMen = null;
 
             try
             {
-                foreach (var dbPerson in req.RequestData)
+                foreach (var dbPerson in req.PersonsData)
                 {
                     var personDoc = Decrypt(dbPerson.DocSeria) + Decrypt(dbPerson.DocNumber);
                     var test = Regex.Replace(personDoc, @"[^\d]", "");
@@ -68,8 +68,8 @@ namespace SocialTargetHelpAPIServer
                     if (docMen.Count() == 1)
                     {
                         var tmp = docMen.SingleOrDefault();
-                        result.ResponseData.Add(
-                            new PersonFromDeathRegistryResponse
+                        result.PersonsStatusData.Add(
+                            new PersonStatusData
                             {
                                 Guid = dbPerson.Guid,
                                 LastName = tmp.Фамилия,
@@ -78,7 +78,7 @@ namespace SocialTargetHelpAPIServer
                                 BirthDate = tmp.BirthDate.Value.ToString("yyyy-MM-dd"),
                                 DocSeria = Encrypt(Regex.Replace(tmp.СерНомДок.Trim(),@"[^\d]","").Substring(0, 4)),
                                 DocNumber = Encrypt(Regex.Replace(tmp.СерНомДок.Trim(), @"[^\d]", "").Substring(4, 6)),
-                                Status = PersonStatus.Found
+                                Status = PersonStatusData.Types.PersonStatus.Found
                             });
                     }
 
@@ -138,15 +138,15 @@ namespace SocialTargetHelpAPIServer
                         {
                             foreach (var i in men)
                             {
-                                result.ResponseData.Add(
-                                   new PersonFromDeathRegistryResponse
+                                result.PersonsStatusData.Add(
+                                   new PersonStatusData
                                    {
                                        Guid = dbPerson.Guid,
                                        LastName = i.Фамилия,
                                        FirstName = i.Имя,
                                        MiddleName = i.Отчество,
                                        BirthDate = i.BirthDate.ToString(),
-                                       Status = PersonStatus.NotSure
+                                       Status = PersonStatusData.Types.PersonStatus.NotSure
                                    });
                             }
                         }
@@ -154,8 +154,8 @@ namespace SocialTargetHelpAPIServer
                         // Если мы не нашли человека, то вернем про него информацию и дадим ему статус "NotFound"
                         else
                         {
-                            result.ResponseData.Add(
-                                new PersonFromDeathRegistryResponse
+                            result.PersonsStatusData.Add(
+                                new PersonStatusData
                                 {
                                     Guid = dbPerson.Guid,
                                     LastName = dbPerson.LastName,
@@ -164,7 +164,7 @@ namespace SocialTargetHelpAPIServer
                                     BirthDate = dbPerson.BirthDate.ToString(),
                                     DocSeria = dbPerson.DocSeria,
                                     DocNumber = dbPerson.DocNumber,
-                                    Status = PersonStatus.NotFound
+                                    Status = PersonStatusData.Types.PersonStatus.NotFound
                                 });
                         }
                     }

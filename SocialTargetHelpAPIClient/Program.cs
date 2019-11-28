@@ -48,7 +48,7 @@ namespace SocialTargetHelpAPIClient
                 }
 
                 // Передадим инфу о наших челиках, персональные данные зашифруем
-                var personsData = dbPersonsFilter.Select(dbPerson => new PersonFromDeathRegistryRequest()
+                var personsData = dbPersonsFilter.Select(dbPerson => new PersonData()
                 {
                     LastName = dbPerson.c_surname.ToUpper(),
                     FirstName = dbPerson.c_first_name.ToUpper(),
@@ -77,7 +77,7 @@ namespace SocialTargetHelpAPIClient
 
                 GetPersonsListFromDeathRegistryRequest FsinRequest = new GetPersonsListFromDeathRegistryRequest()
                 {
-                    RequestData = { personsData }
+                    PersonsData = { personsData }
                 };
 
                 var FsinResponse = client.GetPersonsListFromDeathRegistry(FsinRequest);

@@ -33,15 +33,15 @@ message PersonPayment {
 }
 
 message GetPersonsListFromDeathRegistryRequest {
-	repeated PersonFromDeathRegistryRequest requestData = 1;
+	repeated PersonData personsData = 1;
 }
 
 message GetPersonsListFromDeathRegistryResponse{
-	repeated PersonFromDeathRegistryResponse responseData = 1;
+	repeated PersonStatusData personsStatusData = 1;
 	repeated Error errors = 2;
 }
 
-message PersonFromDeathRegistryRequest {
+message PersonData {
 	string guid = 1;
 	string lastName = 2;
 	string firstName = 3;
@@ -51,7 +51,14 @@ message PersonFromDeathRegistryRequest {
 	string docNumber = 7;
 }
 
-message PersonFromDeathRegistryResponse {
+message PersonStatusData {
+	
+	enum PersonStatus {
+		NOT_SURE = 0;
+		FOUND = 1;
+		NOT_FOUND = 2;
+	}
+
 	string guid = 1;
 	string lastName = 2;
 	string firstName = 3;
@@ -60,12 +67,6 @@ message PersonFromDeathRegistryResponse {
 	string docSeria = 6;
 	string docNumber = 7;
 	PersonStatus status = 8;
-}
-
-enum PersonStatus {
-	NOT_SURE = 0;
-	FOUND = 1;
-	NOT_FOUND = 2;
 }
 
 message Error {
