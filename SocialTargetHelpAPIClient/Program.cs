@@ -35,7 +35,6 @@ namespace SocialTargetHelpAPIClient
                 #region Запрос от УФСИН 
 
                 var cd_deals = dbContext.fsin_cd_deals;
-                GetPersonsListFromDeathRegistryRequest[] persons = null;
                 var cd_persons = dbContext.public_cd_persons;
                 IQueryable<public_cd_persons> dbPersonsFilter = null;
                 foreach (var dbDeal in cd_deals)
@@ -101,7 +100,7 @@ namespace SocialTargetHelpAPIClient
                 var socPortalRes = client.GetPersonPayments(socPortalReq);
                 #endregion
 
-                foreach(var t in socPortalRes.Payments)
+                foreach (var t in socPortalRes.Payments)
                 {
                     Console.WriteLine("\nCalculationDate: " + t.DateCalculation.ToString(culture) +
                                       "\nBeginDate: " + t.DateBegin.ToString(culture) +
@@ -124,17 +123,19 @@ namespace SocialTargetHelpAPIClient
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
+                using (var pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 }))
                 {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    encryptor.Key = pdb.GetBytes(32);
+                    encryptor.IV = pdb.GetBytes(16);
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        cs.Write(clearBytes, 0, clearBytes.Length);
-                        cs.Close();
+                        using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                        {
+                            cs.Write(clearBytes, 0, clearBytes.Length);
+                            cs.Close();
+                        }
+                        clearText = Convert.ToBase64String(ms.ToArray());
                     }
-                    clearText = Convert.ToBase64String(ms.ToArray());
                 }
             }
             return clearText;

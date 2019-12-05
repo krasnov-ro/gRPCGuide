@@ -1,24 +1,22 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Grpc.Core;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using SocialTargetHelpAPI.Contract;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Serilog;
-using System.Threading;
-using Grpc.Core;
 using Topshelf;
-using SocialTargetHelpAPI.Contract;
 
 namespace SocialTargetHelpAPIServer
 {
     class Program
     {
-        private static IConfigurationRoot ApplicationConfig = null;
+        private static IConfigurationRoot AppConfig = null;
+        internal static IServiceProvider AppServiceProvider = null;
 
         static void Main(string[] args)
         {
@@ -28,15 +26,13 @@ namespace SocialTargetHelpAPIServer
                 Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             }
 
-            ApplicationConfig = GetApplicationConfiguration();
+            AppConfig = GetApplicationConfiguration();
 
             ConfigureLogging();
 
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
-            var serviceProvider = serviceCollection.BuildServiceProvider();
+            ConfigureServices();
 
-            var logger = serviceProvider.GetService<ILogger<Program>>();
+            var logger = AppServiceProvider.GetService<ILogger<Program>>();
 
             var grpcServer = CreateGrpcServer();
 
@@ -73,9 +69,12 @@ namespace SocialTargetHelpAPIServer
             Log.CloseAndFlush();
         }
 
-        private static void ConfigureServices(IServiceCollection services)
+        private static void ConfigureServices()
         {
-            services.AddLogging(configure => configure.AddSerilog());
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddLogging(configure => configure.AddSerilog());
+
+            AppServiceProvider = serviceCollection.BuildServiceProvider();
         }
 
         private static IConfigurationRoot GetApplicationConfiguration()
@@ -93,14 +92,14 @@ namespace SocialTargetHelpAPIServer
         private static void ConfigureLogging()
         {
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(ApplicationConfig)
+                .ReadFrom.Configuration(AppConfig)
                 .CreateLogger();
         }
 
         private static Server CreateGrpcServer()
         {
-            var connectionString = Program.ApplicationConfig.GetConnectionString("MyDb");
-            var listenPorts = Program.ApplicationConfig.GetSection("listenPorts").GetChildren()
+            var connectionString = Program.AppConfig.GetConnectionString("MyDb");
+            var listenPorts = Program.AppConfig.GetSection("listenPorts").GetChildren()
                 .Select(p => new ServerPort(p.GetSection("host").Value, Convert.ToInt32(p.GetSection("port").Value), ServerCredentials.Insecure))
                 .ToArray();
 

@@ -1,41 +1,41 @@
-﻿using System;
-using Grpc.Core;
-using System.Collections.Generic;
-using System.Text;
-using SocialTargetHelpAPI.Contract;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using System.Linq;
-using SocialTargetHelpAPIServer.Models;
-using Npgsql;
-using NLog;
-using NpgsqlTypes;
+﻿using Grpc.Core;
 using LinqToDB;
-using Newtonsoft.Json;
-using System.Security.Cryptography;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Npgsql;
+using NpgsqlTypes;
+using SocialTargetHelpAPI.Contract;
+using SocialTargetHelpAPIServer.Models;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace SocialTargetHelpAPIServer
 {
     class ApiServiceImpl : ApiService.ApiServiceBase
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-        private String _connectionString = null;
-        private STH dbContext = null;
+        private readonly String _connectionString = null;
+        private readonly STH dbContext = null;
+
+        private readonly ILogger<ApiServiceImpl> logger = null;
 
         public ApiServiceImpl(String providerName, String connectionString)
         {
             _connectionString = connectionString;
             dbContext = new STH(providerName, connectionString);
+
+            logger = Program.AppServiceProvider.GetService<ILogger<ApiServiceImpl>>();
         }
 
         #region Формировнаие ответа для УФСИН
         public override Task<GetPersonsListFromDeathRegistryResponse> GetPersonsListFromDeathRegistry(GetPersonsListFromDeathRegistryRequest req, ServerCallContext context)
         {
             GetPersonsListFromDeathRegistryResponse result = new GetPersonsListFromDeathRegistryResponse();
-            String personDocData = null;
-            PersonData[] persons;
             IQueryable<fatalzp_sv_cd_umer> men = null;
             IQueryable<fatalzp_sv_cd_umer> docMen = null;
 
@@ -76,7 +76,7 @@ namespace SocialTargetHelpAPIServer
                                 FirstName = tmp.Имя,
                                 MiddleName = tmp.Отчество,
                                 BirthDate = tmp.BirthDate.Value.ToString("yyyy-MM-dd"),
-                                DocSeria = Encrypt(Regex.Replace(tmp.СерНомДок.Trim(),@"[^\d]","").Substring(0, 4)),
+                                DocSeria = Encrypt(Regex.Replace(tmp.СерНомДок.Trim(), @"[^\d]", "").Substring(0, 4)),
                                 DocNumber = Encrypt(Regex.Replace(tmp.СерНомДок.Trim(), @"[^\d]", "").Substring(4, 6)),
                                 Status = PersonStatusData.Types.PersonStatus.Found
                             });
@@ -172,7 +172,7 @@ namespace SocialTargetHelpAPIServer
             }
             catch (Exception ex)
             {
-                logger.Error(ex);
+                logger.LogError(ex, "GetPersonsListFromDeathRegistry error");
             }
             LogInDB(req.ToString(), result.ToString());
             return Task.FromResult(result);
@@ -183,7 +183,6 @@ namespace SocialTargetHelpAPIServer
         // Ищем выплаты человека с полученным снилс за полученный период 
         public override Task<GetPersonPaymentsResponse> GetPersonPayments(GetPersonPaymentsRequest req, ServerCallContext context)
         {
-            string log = req.ToString();
             try
             {
                 var payments = new List<PersonPayment>();
@@ -245,11 +244,12 @@ namespace SocialTargetHelpAPIServer
             }
             catch (Exception exception)
             {
+                logger.LogError(exception, "GetPersonPayments error");
+
                 var result = new GetPersonPaymentsResponse()
                 {
                     Errors = { new Error() { Code = "unknown_error", Description = "Непредвиденная ошибка" } }
                 };
-                logger.Error(exception);
                 return Task.FromResult(result);
             }
         }
@@ -284,17 +284,19 @@ namespace SocialTargetHelpAPIServer
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
+                using (var pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 }))
                 {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    encryptor.Key = pdb.GetBytes(32);
+                    encryptor.IV = pdb.GetBytes(16);
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        cs.Write(cipherBytes, 0, cipherBytes.Length);
-                        cs.Close();
+                        using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                        {
+                            cs.Write(cipherBytes, 0, cipherBytes.Length);
+                            cs.Close();
+                        }
+                        cipherText = Encoding.Unicode.GetString(ms.ToArray());
                     }
-                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
                 }
             }
             return cipherText;
@@ -307,17 +309,19 @@ namespace SocialTargetHelpAPIServer
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
+                using (var pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 }))
                 {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    encryptor.Key = pdb.GetBytes(32);
+                    encryptor.IV = pdb.GetBytes(16);
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        cs.Write(clearBytes, 0, clearBytes.Length);
-                        cs.Close();
+                        using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                        {
+                            cs.Write(clearBytes, 0, clearBytes.Length);
+                            cs.Close();
+                        }
+                        clearText = Convert.ToBase64String(ms.ToArray());
                     }
-                    clearText = Convert.ToBase64String(ms.ToArray());
                 }
             }
             return clearText;

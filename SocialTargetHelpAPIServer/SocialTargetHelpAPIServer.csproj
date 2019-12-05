@@ -12,11 +12,8 @@
 
   <ItemGroup>
     <PackageReference Include="DCSDK.Cryptography.RSA" Version="1.11.5" />
-    <PackageReference Include="DevExpress.Xpo" Version="18.2.7" />
     <PackageReference Include="linq2db.PostgreSQL" Version="2.9.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
-    <PackageReference Include="NLog" Version="4.6.8" />
-    <PackageReference Include="NLog.Config" Version="4.6.8" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
     <PackageReference Include="Topshelf" Version="4.2.1" />
