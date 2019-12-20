@@ -98,6 +98,11 @@ namespace SocialTargetHelpAPIServer
 
         private static Server CreateGrpcServer()
         {
+            //var certChain = (String)null;
+            //var keyCertPair = new KeyCertificatePair(certChain, );
+            //var rootCerts = (String)null;
+            //var sslCredentials = new SslServerCredentials(new[] { keyCertPair }, rootCerts, SslClientCertificateRequestType.RequestAndRequireAndVerify);
+
             var connectionString = Program.AppConfig.GetConnectionString("MyDb");
             var listenPorts = Program.AppConfig.GetSection("listenPorts").GetChildren()
                 .Select(p => new ServerPort(p.GetSection("host").Value, Convert.ToInt32(p.GetSection("port").Value), ServerCredentials.Insecure))

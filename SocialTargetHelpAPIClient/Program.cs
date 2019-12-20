@@ -15,7 +15,9 @@ namespace SocialTargetHelpAPIClient
     {
         static void Main(string[] args)
         {
-            Channel channel = new Channel("localhost:8088", ChannelCredentials.Insecure);
+            var channelEndpoint = "localhost:8088";
+
+            Channel channel = new Channel(channelEndpoint, ChannelCredentials.Insecure);
             var client = new ApiService.ApiServiceClient(channel);
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
 
