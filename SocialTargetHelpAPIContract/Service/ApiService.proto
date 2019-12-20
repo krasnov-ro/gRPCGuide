@@ -9,6 +9,8 @@ service ApiService {
 	rpc GetPersonsLifeStatus(GetPersonsLifeStatusRequest) returns (GetPersonsLifeStatusResponse) {}
 
 	rpc GetVeteranDictionaries(GetVeteranDictionariesRequest) returns (GetVeteranDictionariesResponse) {}
+
+	rpc GetCitizenCategoriesAndMSPMethod(GetCitizenCategoriesAndMSP) returns (GetCitizenCategoriesArr) {}
 }
 
 
@@ -19,7 +21,31 @@ message Error {
 	string exception = 3;
 }
 
+message GetCitizenCategoriesAndMSP{
+}
 
+message GetCitizenCategoriesArr {
+	repeated GetCitizenCategories citizenCategories = 1;
+}
+
+message GetCitizenCategories {
+	string Id = 1;
+	string Name = 2;
+
+	repeated GetConfirmingDocuments ConfirmingDocs = 3;
+	repeated GetCitizenMSP citizenMSP = 4;
+}
+
+message GetCitizenMSP {
+	string Id = 1; 
+	string Name = 2;
+	string TermsOfProvision = 3;
+}
+
+message GetConfirmingDocuments {
+	string ServiceId = 1;
+	string Name = 3;
+}
 
 message GetPersonPaymentsRequest {
 	string snils = 1;
@@ -40,8 +66,6 @@ message PersonPayment {
 	string name = 5;
 	double paymentSum = 6;
 }
-
-
 
 message GetPersonsLifeStatusRequest {
 	repeated PersonLifeStatusRequest requestData = 1;
@@ -74,8 +98,6 @@ enum PersonLifeStatus {
 	DEAD = 1;
 	ALIVE = 2;
 }
-
-
 
 message GetVeteranDictionariesRequest {
 }

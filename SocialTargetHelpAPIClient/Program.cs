@@ -65,9 +65,8 @@ namespace SocialTargetHelpAPIClient
 
                 Console.WriteLine();
                 Console.WriteLine($"Информация о человеке: ");
-                #endregion
-
                 Console.WriteLine("--------------------------------------------------------");
+                #endregion
 
                 #region Запрос от социального портала
 
@@ -77,11 +76,15 @@ namespace SocialTargetHelpAPIClient
                     PeriodEnd = "2019-10-23",
                     Snils = "024-030-563-89"
                 };
+                GetCitizenCategoriesAndMSP req = new GetCitizenCategoriesAndMSP()
+                {
+
+                };
+                var socportal = client.GetCitizenCategoriesAndMSPMethod(req);
 
                 var socPortalRes = client.GetPersonPayments(socPortalReq);
-                #endregion
 
-                foreach(var t in socPortalRes.Payments)
+                foreach (var t in socPortalRes.Payments)
                 {
                     Console.WriteLine("\nCalculationDate: " + t.DateCalculation.ToString(culture) +
                                       "\nBeginDate: " + t.DateBegin.ToString(culture) +
@@ -91,6 +94,9 @@ namespace SocialTargetHelpAPIClient
                                       "\nPaymentSum: " + t.PaymentSum);
                 }
                 Console.WriteLine("________________________________________________________");
+
+                #endregion
+
                 Console.WriteLine("\nPress <Escape> to exit, press any other key to repeat...\n");
             }
             while (Console.ReadKey().Key != ConsoleKey.Escape);

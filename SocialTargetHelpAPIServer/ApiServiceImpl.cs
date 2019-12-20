@@ -32,7 +32,7 @@ namespace SocialTargetHelpAPIServer
         public override Task<GetPersonsLifeStatusResponse> GetPersonsLifeStatus(GetPersonsLifeStatusRequest req, ServerCallContext context)
         {
 
-            foreach(var d in req.RequestData)
+            foreach (var d in req.RequestData)
             { }
 
             GetPersonsLifeStatusResponse result = new GetPersonsLifeStatusResponse();
@@ -102,8 +102,7 @@ namespace SocialTargetHelpAPIServer
 
         #endregion
 
-        #region Формировнаие ответа для Соц. портала
-
+        #region Формировнаие ответа по выплатам гражданина
         public override Task<GetPersonPaymentsResponse> GetPersonPayments(GetPersonPaymentsRequest req, ServerCallContext context)
         {
             try
@@ -174,14 +173,103 @@ namespace SocialTargetHelpAPIServer
                 return Task.FromResult(result);
             }
         }
-
+        
         private DateTime ReadDate(NpgsqlDataReader reader, String fieldName)
         {
             NpgsqlDate? d = reader.GetDate(reader.GetOrdinal(fieldName));
             var d2 = new DateTime(d.Value.Year, d.Value.Month, d.Value.Day);
             return d2;
         }
+        #endregion
 
+        #region Формирование необходимой информации для соц. портала по ветеранам
+        public override Task<GetCitizenCategoriesArr> GetCitizenCategoriesAndMSPMethod(GetCitizenCategoriesAndMSP request, ServerCallContext context)
+        {
+            var resultMSP = new GetCitizenMSP();
+
+            var dbServices = dbContext.veterans_cv_services.ToArray();
+            var dbCitizenCategories = dbContext.veterans_cv_citizen_categories.ToArray();
+            var dbDocuments = dbContext.veterans_sv_documents.ToArray();
+            var dbCategoryMSP = dbContext.veterans_sv_msp_category.ToArray();
+
+            //var citizenMSP = dbServices.Select(p => new GetCitizenMSP()
+            //{
+            //    Id = p.id.ToString(),
+            //    Name = p.c_name,
+            //    TermsOfProvision = p.c_provisions
+            //});
+
+            //var documents = dbDocuments
+            //    .GroupBy(p => p.f_category)
+
+            //    .Select(p => new
+            //{
+            //    p.f_category,
+            //    doc = new GetConfirmingDocuments()
+            //    {
+            //        ServiceId = p.f_service.Value.ToString(),
+            //        Name = p.c_document
+            //    }
+            //});
+
+            //var categoryMsp = dbCategoryMSP.Select(p => new
+            //{
+            //    f_category = p.f_category.Value,
+            //    Service = citizenMSP.Where(s => s.Id == p.f_service.ToString()).FirstOrDefault(),
+
+            //    msp = new GetCitizenMSP()
+            //    {
+            //        Id = citizenMSP.Where(s => s.Id == p.f_service.ToString()).FirstOrDefault().Id,
+            //        Name = citizenMSP.Where(s => s.Id == p.f_service.ToString()).FirstOrDefault().Name,
+            //        TermsOfProvision = citizenMSP.Where(s => s.Id == p.f_service.ToString()).FirstOrDefault().TermsOfProvision
+            //    }
+            //});
+
+            var citizenCategories = dbCitizenCategories.Select(category => new GetCitizenCategories()
+            {
+                Id = category.id.Value.ToString(),
+                Name = category.c_name,
+                //CitizenMSP = { categoryMsp.Where(c => c.f_category == category.id).Select(c => c.msp).ToArray() },
+                ConfirmingDocs =
+                {
+                    dbDocuments.Where(document => document.f_category == category.id)
+                        .Select(document => new GetConfirmingDocuments()
+                        {
+                            ServiceId = document.f_service.Value.ToString(),
+                            Name = document.c_document
+                        })
+                },
+            });
+
+            var result = new GetCitizenCategoriesArr()
+            {
+                CitizenCategories = { citizenCategories }
+            };
+
+            return Task.FromResult(result);
+            //var citizenCategories = dbContext.veterans_cv_citizen_categories;
+            //foreach (var category in citizenCategories)
+            //{
+            //    var citizenMSP = GetMsp(category.id);
+            //    foreach (var msp in citizenMSP)
+            //    {
+            //        resultMSP.Id = msp.id.ToString();
+            //        resultMSP.Name = msp.c_name;
+            //        resultMSP.TermsOfProvision = msp.c_provisions;
+            //    }
+
+            //    result.CitizenCategories.Add(
+            //        new GetCitizenCategories
+            //        {
+            //            Id = category.id.ToString(),
+            //            Name = category.c_name,
+            //            CitizenMSP = { resultMSP }
+            //        });
+
+            //}
+
+            //return Task.FromResult(result);
+        }
         #endregion
 
         public override Task<GetVeteranDictionariesResponse> GetVeteranDictionaries(GetVeteranDictionariesRequest request, ServerCallContext context)
@@ -283,44 +371,11 @@ namespace SocialTargetHelpAPIServer
             return Task.FromResult(result);
         }
 
-        public object JsonGenerate(string where, string fullName, string serial, string number)
-        {
-            object result = new
-            {
-                Person = fullName,
-                Passport = new
-                {
-                    Serial = serial,
-                    Number = number
-                }
-            };
-
-            #region Формирование Json в ручную
-            //if (where != null)
-            //{
-            //    where = where.Substring(0, where.Length - 3) +
-            //        ",\n'Person': '" + fullName + "', " +
-            //        "'Passport': " +
-            //            "{ 'Serial': '" + serial + "'," +
-            //            "'Number': '" + number + "' }" +
-            //        "}";
-            //    result = JsonConvert.DeserializeObject(where);
-            //}
-            //else
-            //{
-            //    where = "{ " + "'Person': '" + fullName + "', " +
-            //            "'Passport': " +
-            //                "{ 'Serial': '" + serial + "'," +
-            //                " 'Number': '" + number + "' }," +
-            //            "}";
-            //    result = JsonConvert.DeserializeObject(where);
-            //}
-            #endregion
-
-            return result;
-        }
-
-        // Сохранение запроса и ответа в базу данных
+        /// <summary>
+        /// Сохранение запроса и ответа в базу
+        /// </summary>
+        /// <param name="req"></param>
+        /// <param name="response"></param>
         public void LogInDB(string req, string response)
         {
             var apiRequest = new api_req_api_req_requests
