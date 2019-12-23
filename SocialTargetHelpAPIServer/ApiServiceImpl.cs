@@ -1,28 +1,29 @@
-﻿using System;
-using Grpc.Core;
-using System.Collections.Generic;
-using System.Text;
-using SocialTargetHelpAPI.Contract;
-using System.Threading.Tasks;
-using System.Linq;
-using SocialTargetHelpAPIServer.Models;
-using Npgsql;
-using NLog;
-using NpgsqlTypes;
+﻿using Grpc.Core;
 using LinqToDB;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Npgsql;
+using NpgsqlTypes;
+using SocialTargetHelpAPI.Contract;
+using SocialTargetHelpAPIServer.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialTargetHelpAPIServer
 {
     class ApiServiceImpl : ApiService.ApiServiceBase
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
         private readonly String _connectionString = null;
         private readonly STH dbContext = null;
+        private readonly ILogger _logger = null;
 
         public ApiServiceImpl(String providerName, String connectionString)
         {
             _connectionString = connectionString;
             dbContext = new STH(providerName, connectionString);
+            _logger = Program.AppServiceProvider.GetService<ILogger<ApiServiceImpl>>();
         }
 
         #region Формировнаие ответа для УФСИН
@@ -88,7 +89,7 @@ namespace SocialTargetHelpAPIServer
             }
             catch (Exception exception)
             {
-                logger.Error(exception);
+                _logger.LogError(exception, "GetPersonsLifeStatus error");
             }
 
             return Task.FromResult(result);
@@ -165,7 +166,7 @@ namespace SocialTargetHelpAPIServer
                 {
                     Errors = { new Error() { Code = "unknown_error", Description = "Непредвиденная ошибка" } }
                 };
-                logger.Error(exception);
+                _logger.LogError(exception, "GetPersonPayments error");
 
                 return Task.FromResult(result);
             }
@@ -306,7 +307,7 @@ namespace SocialTargetHelpAPIServer
             }
             catch (Exception exception)
             {
-                logger.Error(exception);
+                _logger.LogError(exception, "GetVeteranDictionaries error");
 
                 var errorResult = new GetVeteranDictionariesResponse()
                 {
