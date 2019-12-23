@@ -82,12 +82,13 @@ message GetVeteranDictionariesRequest {
 
 message GetVeteranDictionariesResponse {
 	repeated Organization organizations = 1;
-	repeated VeteranAwardGroup awardGroupsWithAwards = 2;
-	repeated VeteranDocumentType documentTypes = 3;
+	//repeated VeteranAwardGroup awardGroupsWithAwards = 2;
+	//repeated VeteranDocumentType documentTypes = 3;
 	repeated CitizenCategory citizenCategories = 4;
 	repeated SocialServiceGroup serviceGroups = 5;
 	repeated SocialService services = 6;
-	repeated SocialSerciceCitizenCategory serviceCitizenCategories = 7;
+	//repeated SocialServiceCitizenCategory serviceCitizenCategories = 7;
+	repeated Error errors = 8;
 }
 
 message Organization {
@@ -103,6 +104,7 @@ message Organization {
 	string fax = 10;
 }
 
+/*
 message VeteranAward {
 	string id = 1;
 	string name = 2;
@@ -122,6 +124,7 @@ message VeteranDocumentType {
 	int32 id = 1;
 	string name = 2;
 }
+*/
 
 message CitizenCategory {
 	string id = 1;
@@ -140,6 +143,7 @@ message SocialServiceGroup {
 }
 
 message SocialService {
+/*
 	enum PaymentPeriodType {
 		PaymentPeriodTypeNone = 0;
 		FirstDayOfNextMonth = 1;
@@ -158,19 +162,22 @@ message SocialService {
 		BudgetFederal = 4;
 		NonBudgetFunds = 8;
 	}
+*/
 
 	string id = 1;
 	string name = 2;
-	PaymentPeriodType paymentPeriod = 3;
-	string description = 4;
+	//PaymentPeriodType paymentPeriod = 3;
+	//string description = 4;
 	string conditions = 5;
-	PaymentForm paymentForm = 6;
-	PaymentSource paymentSource = 7;
+	//PaymentForm paymentForm = 6;
+	//PaymentSource paymentSource = 7;
 	repeated string socialServiceGroupIds = 8;
 	repeated string socialServiceOrgIds = 9;
+	repeated string normDocs = 10;
+	repeated SocialServiceCitizenCategory citizenCategoriesData = 11;
 }
 
-message SocialSerciceCitizenCategory {
+message SocialServiceCitizenCategory {
 	enum PaymentType {
 		PaymentTypeNone = 0;
 		NonRecurrent = 1;
@@ -179,28 +186,31 @@ message SocialSerciceCitizenCategory {
 		Yearly = 4;
 	}
 
-	string socialServiceId = 1;
+	//string socialServiceId = 1;
 	string citizenCategoryId = 2;
 	PaymentType paymentType = 3;
-	string calcMethod = 4;
-	repeated SocialSerciceCitizenCategoryAward awards = 5;
-	repeated SocialSerciceCitizenCategoryBaseDocument documents = 6;
-	repeated SocialSerciceCitizenCategorySizes sizes = 7;
+	//string calcMethod = 4;
+	//repeated SocialServiceCitizenCategoryAward awards = 5;
+	//repeated SocialServiceCitizenCategoryBaseDocument documents = 6;
+	//repeated SocialServiceCitizenCategorySizes sizes = 7;
+	string size = 8;
 }
 
-message SocialSerciceCitizenCategoryAward {
+/*
+message SocialServiceCitizenCategoryAward {
 	string awardId = 1;
 	int32 priority = 2;
 }
 
-message SocialSerciceCitizenCategoryBaseDocument {
+message SocialServiceCitizenCategoryBaseDocument {
 	int32 documentId = 1;
 	int32 priority = 2;
 }
 
-message SocialSerciceCitizenCategorySizes {
+message SocialServiceCitizenCategorySizes {
 	string dateBegin = 1;
 	string dateEnd = 2;
 	double amount = 3;
 	double expensePercentage = 4;
 }
+*/

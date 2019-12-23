@@ -77,6 +77,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		public ITable<common_common_cd_rsmv_applications_base>                              common_cd_rsmv_applications_base                             { get { return this.GetTable<common_common_cd_rsmv_applications_base>(); } }
 		/// <summary>
+		/// [XMeta.DisplayName=Файлы результата]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cd_rsmv_attachments_result>                             common_cd_rsmv_attachments_result                            { get { return this.GetTable<common_common_cd_rsmv_attachments_result>(); } }
+		/// <summary>
 		/// [XMeta.DisplayName=Операции]
 		/// [XMeta.IgnoreForNavigate]
 		/// </summary>
@@ -97,6 +103,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DefaultProperty=c_name]
 		/// </summary>
 		public ITable<common_common_cs_calculation_type>                                    common_cs_calculation_type                                   { get { return this.GetTable<common_common_cs_calculation_type>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Услуги связи]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cs_communication_services>                              common_cs_communication_services                             { get { return this.GetTable<common_common_cs_communication_services>(); } }
 		/// <summary>
 		/// [XMeta.DisplayName=Связь родственных отношений и вкладок]
 		/// </summary>
@@ -176,6 +188,16 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		public ITable<common_common_cs_tabs>                                                common_cs_tabs                                               { get { return this.GetTable<common_common_cs_tabs>(); } }
 		/// <summary>
+		/// [XMeta.DisplayName=Тарифы операторов связи]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<common_common_cs_telecom_operator_tarifs>                             common_cs_telecom_operator_tarifs                            { get { return this.GetTable<common_common_cs_telecom_operator_tarifs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Операторы связи]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<common_common_cs_telecom_operators>                                   common_cs_telecom_operators                                  { get { return this.GetTable<common_common_cs_telecom_operators>(); } }
+		/// <summary>
 		/// [XMeta.DisplayName=Типы]
 		/// [XMeta.DefaultProperty=c_type_name]
 		/// [XMeta.IgnoreForNavigate]
@@ -217,6 +239,7 @@ namespace SocialTargetHelpAPIServer.Models
 		public ITable<fatalzp_fatalzp_sv_cd_umer>                                           fatalzp_sv_cd_umer                                           { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer>(); } }
 		public ITable<fatalzp_fatalzp_sv_cd_umer_all>                                       fatalzp_sv_cd_umer_all                                       { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_all>(); } }
 		public ITable<fatalzp_fatalzp_sv_cd_umer_cut>                                       fatalzp_sv_cd_umer_cut                                       { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_cut>(); } }
+		public ITable<fatalzp_fatalzp_sv_cd_umer_general>                                   fatalzp_sv_cd_umer_general                                   { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_general>(); } }
 		public ITable<fatalzp_fatalzp_sv_cd_umer_pension>                                   fatalzp_sv_cd_umer_pension                                   { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_pension>(); } }
 		public ITable<fatalzp_fatalzp_sv_cd_umer_poor>                                      fatalzp_sv_cd_umer_poor                                      { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_poor>(); } }
 		public ITable<fatalzp_fatalzp_sv_cd_umer_subsidy>                                   fatalzp_sv_cd_umer_subsidy                                   { get { return this.GetTable<fatalzp_fatalzp_sv_cd_umer_subsidy>(); } }
@@ -851,6 +874,11 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
 		public ITable<public_PaymentOneTimeSubsidy>                                         public_PaymentOneTimeSubsidy                                 { get { return this.GetTable<public_PaymentOneTimeSubsidy>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<public_PaymentOneTimeVet>                                             public_PaymentOneTimeVet                                     { get { return this.GetTable<public_PaymentOneTimeVet>(); } }
 		public ITable<public_pens_paymentlist>                                              public_pens_paymentlist                                      { get { return this.GetTable<public_pens_paymentlist>(); } }
 		/// <summary>
 		/// [XMeta.IgnoreForGenerate]
@@ -888,6 +916,10 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
 		public ITable<public_PFR_FileAttachment>                                            public_PFR_FileAttachment                                    { get { return this.GetTable<public_PFR_FileAttachment>(); } }
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		public ITable<public_PFR_FileAttachment_Response>                                   public_PFR_FileAttachment_Response                           { get { return this.GetTable<public_PFR_FileAttachment_Response>(); } }
 		/// <summary>
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
@@ -1320,8 +1352,15 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Расчёты]
 		/// [XMeta.IgnoreForNavigate]
+		/// [XMeta.BaseType=common_cd_calculation_base]
+		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
 		/// </summary>
 		public ITable<veterans_veterans_cd_calculations>                                    veterans_cd_calculations                                     { get { return this.GetTable<veterans_veterans_cd_calculations>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Начисления]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_accruals>                                   veterans_cd_case_accruals                                    { get { return this.GetTable<veterans_veterans_cd_case_accruals>(); } }
 		/// <summary>
 		/// [XMeta.DisplayName=Назначение ежемесячной денежной компенсации, установленной частями 9, 10 и 13 статьи 3 Федерального закона « денежном довольствии военнослужащих и предоставлении им отдельных выплат», военнослужащим и гражданам, призванным на военные сборы, пенсионное обеспечение которых осуществляется Пенсионным фондом Российской Федерации, и членам их семей]
 		/// [XMeta.BaseType=veterans_cd_cases]
@@ -1412,6 +1451,10 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		public ITable<veterans_veterans_cd_case_edv_trud>                                   veterans_cd_case_edv_trud                                    { get { return this.GetTable<veterans_veterans_cd_case_edv_trud>(); } }
 		/// <summary>
+		/// [XMeta.DisplayName=Лицевой счет]
+		/// </summary>
+		public ITable<veterans_veterans_cd_case_fond_cap_r>                                 veterans_cd_case_fond_cap_r                                  { get { return this.GetTable<veterans_veterans_cd_case_fond_cap_r>(); } }
+		/// <summary>
 		/// [XMeta.DisplayName=Назначение и выплата инвалидам (в том числе детям-инвалидам), имеющим транспортные средства в соответствии с медицинскими показаниями, или их законным представителям компенсации уплаченной ими страховой премии по договору]
 		/// [XMeta.BaseType=veterans_cd_cases]
 		/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
@@ -1444,15 +1487,58 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		public ITable<veterans_veterans_cd_cases_management_companies>                      veterans_cd_cases_management_companies                       { get { return this.GetTable<veterans_veterans_cd_cases_management_companies>(); } }
 		/// <summary>
+		/// [XMeta.DisplayName=Операторы связи]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_cases_telecom_operators>                         veterans_cd_cases_telecom_operators                          { get { return this.GetTable<veterans_veterans_cd_cases_telecom_operators>(); } }
+		/// <summary>
 		/// [XMeta.DisplayName=Умершие]
 		/// [XMeta.IgnoreForNavigate]
 		/// </summary>
 		public ITable<veterans_veterans_cd_death_persons>                                   veterans_cd_death_persons                                    { get { return this.GetTable<veterans_veterans_cd_death_persons>(); } }
 		/// <summary>
+		/// [XMeta.DisplayName=ЕУПП]
+		/// </summary>
+		public ITable<veterans_veterans_cd_eupp>                                            veterans_cd_eupp                                             { get { return this.GetTable<veterans_veterans_cd_eupp>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Документы для ЕУПП]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_eupp_docs>                                       veterans_cd_eupp_docs                                        { get { return this.GetTable<veterans_veterans_cd_eupp_docs>(); } }
+		/// <summary>
 		/// [XMeta.DisplayName=Состав семьи]
 		/// [XMeta.IgnoreForNavigate]
 		/// </summary>
 		public ITable<veterans_veterans_cd_family>                                          veterans_cd_family                                           { get { return this.GetTable<veterans_veterans_cd_family>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Бесплатная юридическая помощь]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_free_jur_help>                                   veterans_cd_free_jur_help                                    { get { return this.GetTable<veterans_veterans_cd_free_jur_help>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=ЖКУ]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_ghku>                                            veterans_cd_ghku                                             { get { return this.GetTable<veterans_veterans_cd_ghku>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Услуги ЖКУ]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_ghku_services>                                   veterans_cd_ghku_services                                    { get { return this.GetTable<veterans_veterans_cd_ghku_services>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Случаи бесплатной юридической помощи]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_jur_help_cases>                                  veterans_cd_jur_help_cases                                   { get { return this.GetTable<veterans_veterans_cd_jur_help_cases>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Связь юридической помощи с типами]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_jur_help_types>                                  veterans_cd_jur_help_types                                   { get { return this.GetTable<veterans_veterans_cd_jur_help_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Открытие месяца]
+		/// </summary>
+		public ITable<veterans_veterans_cd_open_months>                                     veterans_cd_open_months                                      { get { return this.GetTable<veterans_veterans_cd_open_months>(); } }
 		/// <summary>
 		/// [XMeta.DisplayName=Награды ФЛ]
 		/// [XMeta.IgnoreForNavigate]
@@ -1468,6 +1554,10 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		public ITable<veterans_veterans_cd_person_citizen_categories>                       veterans_cd_person_citizen_categories                        { get { return this.GetTable<veterans_veterans_cd_person_citizen_categories>(); } }
 		/// <summary>
+		/// [XMeta.DisplayName=Перерасчёты]
+		/// </summary>
+		public ITable<veterans_veterans_cd_recalculations>                                  veterans_cd_recalculations                                   { get { return this.GetTable<veterans_veterans_cd_recalculations>(); } }
+		/// <summary>
 		/// [XMeta.DisplayName=Файл запроса]
 		/// </summary>
 		public ITable<veterans_veterans_cd_req_res_files_jkh>                               veterans_cd_req_res_files_jkh                                { get { return this.GetTable<veterans_veterans_cd_req_res_files_jkh>(); } }
@@ -1476,9 +1566,38 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		public ITable<veterans_veterans_cd_request_response_files>                          veterans_cd_request_response_files                           { get { return this.GetTable<veterans_veterans_cd_request_response_files>(); } }
 		/// <summary>
+		/// [XMeta.DisplayName=Услуги связи]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_telecom_services>                                veterans_cd_telecom_services                                 { get { return this.GetTable<veterans_veterans_cd_telecom_services>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=История по транспортной карте]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_transport_card_histories>                        veterans_cd_transport_card_histories                         { get { return this.GetTable<veterans_veterans_cd_transport_card_histories>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Транспортные карты]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_transport_cards>                                 veterans_cd_transport_cards                                  { get { return this.GetTable<veterans_veterans_cd_transport_cards>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Имя файла]
+		/// </summary>
+		public ITable<veterans_veterans_cd_transport_cards_response>                        veterans_cd_transport_cards_response                         { get { return this.GetTable<veterans_veterans_cd_transport_cards_response>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Документы ветеранов]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cd_trud_docs>                                       veterans_cd_trud_docs                                        { get { return this.GetTable<veterans_veterans_cd_trud_docs>(); } }
+		/// <summary>
 		/// [XMeta.DisplayName=Факты осуществления трудовой деятельности]
 		/// </summary>
 		public ITable<veterans_veterans_cd_work_facts>                                      veterans_cd_work_facts                                       { get { return this.GetTable<veterans_veterans_cd_work_facts>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Основания назначения выплаты]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_appointment_reasons>                             veterans_cs_appointment_reasons                              { get { return this.GetTable<veterans_veterans_cs_appointment_reasons>(); } }
 		/// <summary>
 		/// [XMeta.DisplayName=Виды наград]
 		/// [XMeta.DefaultProperty=c_name]
@@ -1490,10 +1609,46 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		public ITable<veterans_veterans_cs_awards>                                          veterans_cs_awards                                           { get { return this.GetTable<veterans_veterans_cs_awards>(); } }
 		/// <summary>
+		/// [XMeta.DisplayName=Типы карт]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cs_card_types>                                      veterans_cs_card_types                                       { get { return this.GetTable<veterans_veterans_cs_card_types>(); } }
+		/// <summary>
 		/// [XMeta.DisplayName=Категории граждан]
 		/// [XMeta.DefaultProperty=c_name]
 		/// </summary>
 		public ITable<veterans_veterans_cs_citizen_categories>                              veterans_cs_citizen_categories                               { get { return this.GetTable<veterans_veterans_cs_citizen_categories>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Константы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_consts>                                          veterans_cs_consts                                           { get { return this.GetTable<veterans_veterans_cs_consts>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Федеральное ЕДВ]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_fed_edv>                                         veterans_cs_fed_edv                                          { get { return this.GetTable<veterans_veterans_cs_fed_edv>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Случаи бесплатной юридической помощи]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_jur_help_cases>                                  veterans_cs_jur_help_cases                                   { get { return this.GetTable<veterans_veterans_cs_jur_help_cases>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Виды бесплатной юридической помощи]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_jur_help_types>                                  veterans_cs_jur_help_types                                   { get { return this.GetTable<veterans_veterans_cs_jur_help_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Минимальный размер взноса за капремонт]
+		/// </summary>
+		public ITable<veterans_veterans_cs_min_capital_repair_payments>                     veterans_cs_min_capital_repair_payments                      { get { return this.GetTable<veterans_veterans_cs_min_capital_repair_payments>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Действия по открытию месяца]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cs_month_actions>                                   veterans_cs_month_actions                                    { get { return this.GetTable<veterans_veterans_cs_month_actions>(); } }
 		/// <summary>
 		/// [XMeta.DisplayName=Периоды выплаты]
 		/// [XMeta.IgnoreForNavigate]
@@ -1506,6 +1661,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		public ITable<veterans_veterans_cs_payment_sources>                                 veterans_cs_payment_sources                                  { get { return this.GetTable<veterans_veterans_cs_payment_sources>(); } }
 		/// <summary>
+		/// [XMeta.DisplayName=Кварталы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cs_quarters>                                        veterans_cs_quarters                                         { get { return this.GetTable<veterans_veterans_cs_quarters>(); } }
+		/// <summary>
 		/// [XMeta.DisplayName=Виды причин]
 		/// [XMeta.IgnoreForNavigate]
 		/// [XMeta.DefaultProperty=c_name]
@@ -1517,29 +1678,53 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		public ITable<veterans_veterans_cs_reasons>                                         veterans_cs_reasons                                          { get { return this.GetTable<veterans_veterans_cs_reasons>(); } }
 		/// <summary>
-		/// [XMeta.DisplayName=Услуги-категории-награды]
+		/// [XMeta.DisplayName=Основания перерасчёта]
+		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_recalculation_reasons>                           veterans_cs_recalculation_reasons                            { get { return this.GetTable<veterans_veterans_cs_recalculation_reasons>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Средняя стоимость ремонта 1 кв.м общей площади индивидуального жилого дома]
+		/// </summary>
+		public ITable<veterans_veterans_cs_repair_costs>                                    veterans_cs_repair_costs                                     { get { return this.GetTable<veterans_veterans_cs_repair_costs>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=МСП-категории-награды]
 		/// </summary>
 		public ITable<veterans_veterans_cs_service_category_awards>                         veterans_cs_service_category_awards                          { get { return this.GetTable<veterans_veterans_cs_service_category_awards>(); } }
 		/// <summary>
-		/// [XMeta.DisplayName=Услуга-категория-НПА]
+		/// [XMeta.DisplayName=МСП-категория-НПА]
 		/// </summary>
 		public ITable<veterans_veterans_cs_service_category_base_docs>                      veterans_cs_service_category_base_docs                       { get { return this.GetTable<veterans_veterans_cs_service_category_base_docs>(); } }
 		/// <summary>
-		/// [XMeta.DisplayName=Категории-услуги]
+		/// [XMeta.DisplayName=Категории-МСП]
 		/// </summary>
 		public ITable<veterans_veterans_cs_service_citizen_categories>                      veterans_cs_service_citizen_categories                       { get { return this.GetTable<veterans_veterans_cs_service_citizen_categories>(); } }
 		/// <summary>
-		/// [XMeta.DisplayName=Размеры услуг-категорий]
+		/// [XMeta.DisplayName=Размеры МСП-категорий]
 		/// </summary>
 		public ITable<veterans_veterans_cs_service_citizen_category_sizes>                  veterans_cs_service_citizen_category_sizes                   { get { return this.GetTable<veterans_veterans_cs_service_citizen_category_sizes>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Коэффициент индексации]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cs_service_coeff_indexation>                        veterans_cs_service_coeff_indexation                         { get { return this.GetTable<veterans_veterans_cs_service_coeff_indexation>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=Необходимые документы]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cs_service_documents>                               veterans_cs_service_documents                                { get { return this.GetTable<veterans_veterans_cs_service_documents>(); } }
 		/// <summary>
 		/// [XMeta.DisplayName=Группа МСП]
 		/// [XMeta.DefaultProperty=c_name]
 		/// </summary>
 		public ITable<veterans_veterans_cs_service_group>                                   veterans_cs_service_group                                    { get { return this.GetTable<veterans_veterans_cs_service_group>(); } }
 		/// <summary>
-		/// [XMeta.DisplayName=МСП]
+		/// [XMeta.DisplayName=Типы МСП]
 		/// [XMeta.DefaultProperty=c_name]
+		/// </summary>
+		public ITable<veterans_veterans_cs_service_types>                                   veterans_cs_service_types                                    { get { return this.GetTable<veterans_veterans_cs_service_types>(); } }
+		/// <summary>
+		/// [XMeta.DisplayName=МСП]
+		/// [XMeta.DefaultProperty=c_name_short]
 		/// </summary>
 		public ITable<veterans_veterans_cs_services>                                        veterans_cs_services                                         { get { return this.GetTable<veterans_veterans_cs_services>(); } }
 		/// <summary>
@@ -1558,11 +1743,23 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		public ITable<veterans_veterans_cs_services_orgs>                                   veterans_cs_services_orgs                                    { get { return this.GetTable<veterans_veterans_cs_services_orgs>(); } }
 		/// <summary>
+		/// [XMeta.DisplayName=Статусы]
+		/// [XMeta.DefaultProperty=c_name]
+		/// [XMeta.IgnoreForNavigate]
+		/// </summary>
+		public ITable<veterans_veterans_cs_trud_doc_statuses>                               veterans_cs_trud_doc_statuses                                { get { return this.GetTable<veterans_veterans_cs_trud_doc_statuses>(); } }
+		public ITable<veterans_veterans_cv_citizen_categories>                              veterans_cv_citizen_categories                               { get { return this.GetTable<veterans_veterans_cv_citizen_categories>(); } }
+		public ITable<veterans_veterans_cv_services>                                        veterans_cv_services                                         { get { return this.GetTable<veterans_veterans_cv_services>(); } }
+		/// <summary>
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
 		public ITable<veterans_veterans_import_awards>                                      veterans_import_awards                                       { get { return this.GetTable<veterans_veterans_import_awards>(); } }
+		public ITable<veterans_veterans_sv_documents>                                       veterans_sv_documents                                        { get { return this.GetTable<veterans_veterans_sv_documents>(); } }
+		public ITable<veterans_veterans_sv_msp_category>                                    veterans_sv_msp_category                                     { get { return this.GetTable<veterans_veterans_sv_msp_category>(); } }
+		public ITable<veterans_veterans_sv_normative_docs>                                  veterans_sv_normative_docs                                   { get { return this.GetTable<veterans_veterans_sv_normative_docs>(); } }
 		public ITable<veterans_veterans_sv_veterans_comm_services>                          veterans_sv_veterans_comm_services                           { get { return this.GetTable<veterans_veterans_sv_veterans_comm_services>(); } }
 		public ITable<veterans_veterans_sv_veterans_communal>                               veterans_sv_veterans_communal                                { get { return this.GetTable<veterans_veterans_sv_veterans_communal>(); } }
+		public ITable<veterans_veterans_sv_veterans_for_fkr>                                veterans_sv_veterans_for_fkr                                 { get { return this.GetTable<veterans_veterans_sv_veterans_for_fkr>(); } }
 		public ITable<veterans_veterans_sv_veterans_for_request>                            veterans_sv_veterans_for_request                             { get { return this.GetTable<veterans_veterans_sv_veterans_for_request>(); } }
 		public ITable<zags_zags_ОКСМ>                                                       zags_ОКСМ                                                    { get { return this.GetTable<zags_zags_ОКСМ>(); } }
 		public ITable<zags_zags_СВЗАГС>                                                     zags_СВЗАГС                                                  { get { return this.GetTable<zags_zags_СВЗАГС>(); } }
@@ -1666,6 +1863,22 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region get_work_facts
+
+		[Sql.TableFunction(Schema="veterans", Name="get_work_facts")]
+		public ITable<get_work_factsResult> get_work_facts(string json_obj)
+		{
+			return this.GetTable<get_work_factsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				json_obj);
+		}
+
+		public partial class get_work_factsResult
+		{
+			public string res { get; set; }
+		}
+
+		#endregion
+
 		#region rpt_payments_inventory_summary_list
 
 		[Sql.TableFunction(Schema="public", Name="rpt_payments_inventory_summary_list")]
@@ -1760,23 +1973,6 @@ namespace SocialTargetHelpAPIServer.Models
 			public int?        _total_good  { get; set; }
 			public string      _oszn        { get; set; }
 			public int?        _total_bad   { get; set; }
-		}
-
-		#endregion
-
-		#region get_msp_by_snils
-
-		[Sql.TableFunction(Schema="public", Name="get_msp_by_snils")]
-		public ITable<get_msp_by_snilsResult> get_msp_by_snils(object snils_array)
-		{
-			return this.GetTable<get_msp_by_snilsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
-				snils_array);
-		}
-
-		public partial class get_msp_by_snilsResult
-		{
-			public string snils      { get; set; }
-			public Array  msp_string { get; set; }
 		}
 
 		#endregion
@@ -2512,6 +2708,54 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region get_person_all
+
+		[Sql.TableFunction(Schema="common", Name="get_person_all")]
+		public ITable<get_person_allResult> get_person_all(int? pers)
+		{
+			return this.GetTable<get_person_allResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				pers);
+		}
+
+		public partial class get_person_allResult
+		{
+			public int?        _row_number { get; set; }
+			public int?        _pers       { get; set; }
+			public string      _number     { get; set; }
+			public NpgsqlDate? _case_date  { get; set; }
+			public string      _status     { get; set; }
+			public string      _msz        { get; set; }
+			public string      _rel        { get; set; }
+			public DateTime?   _begin      { get; set; }
+			public DateTime?   _end        { get; set; }
+			public string      _oszn       { get; set; }
+		}
+
+		#endregion
+
+		#region get_msp_by_snils
+
+		[Sql.TableFunction(Schema="public", Name="get_msp_by_snils")]
+		public ITable<get_msp_by_snilsResult> get_msp_by_snils(object snils_array)
+		{
+			return this.GetTable<get_msp_by_snilsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				snils_array);
+		}
+
+		public partial class get_msp_by_snilsResult
+		{
+			public string      snils     { get; set; }
+			public string      entrytype { get; set; }
+			public NpgsqlDate? nowdate   { get; set; }
+			public int?        msp       { get; set; }
+			public decimal?    summ0     { get; set; }
+			public decimal?    summ      { get; set; }
+			public NpgsqlDate? d_begin   { get; set; }
+			public NpgsqlDate? d_end     { get; set; }
+		}
+
+		#endregion
+
 		#region dblink_get_notify
 
 		[Sql.TableFunction(Schema="public", Name="dblink_get_notify")]
@@ -2876,40 +3120,6 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
-		#region rpt_pension_decision_long_service_stoped
-
-		[Sql.TableFunction(Schema="public", Name="rpt_pension_decision_long_service_stoped")]
-		public ITable<rpt_pension_decision_long_service_stopedResult> rpt_pension_decision_long_service_stoped(Guid? _calc, string _status)
-		{
-			return this.GetTable<rpt_pension_decision_long_service_stopedResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
-				_calc,
-				_status);
-		}
-
-		public partial class rpt_pension_decision_long_service_stopedResult
-		{
-			public NpgsqlDate? _decision_ministry { get; set; }
-			public string      _number_ministry   { get; set; }
-			public string      _fio               { get; set; }
-			public string      _boss_post         { get; set; }
-			public string      _boss_fio          { get; set; }
-			public string      _cancel_reason     { get; set; }
-			public string      _stop_type         { get; set; }
-			public NpgsqlDate? _date_stop         { get; set; }
-			public string      _post              { get; set; }
-			public string      _company           { get; set; }
-			public string      _type              { get; set; }
-			public string      status             { get; set; }
-			public NpgsqlDate? date_start         { get; set; }
-			public decimal?    summ               { get; set; }
-			public int?        experience_percent { get; set; }
-			public string      _month             { get; set; }
-			public decimal?    _insurance_pension { get; set; }
-			public decimal?    _pens_sum          { get; set; }
-		}
-
-		#endregion
-
 		#region rpt_spravka_poor_person_padej
 
 		[Sql.TableFunction(Schema="public", Name="rpt_spravka_poor_person_padej")]
@@ -3189,6 +3399,27 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region rpt_subsidy_000
+
+		[Sql.TableFunction(Schema="public", Name="rpt_subsidy_000")]
+		public ITable<rpt_subsidy_000Result> rpt_subsidy_000(NpgsqlDate? _begin, NpgsqlDate? _end)
+		{
+			return this.GetTable<rpt_subsidy_000Result>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_begin,
+				_end);
+		}
+
+		public partial class rpt_subsidy_000Result
+		{
+			public string      c_e_number    { get; set; }
+			public NpgsqlDate? d_submit_date { get; set; }
+			public string      c_e_status    { get; set; }
+			public string      c_case_nuber  { get; set; }
+			public int?        n_days        { get; set; }
+		}
+
+		#endregion
+
 		#region rpt_poor_count_all
 
 		[Sql.TableFunction(Schema="public", Name="rpt_poor_count_all")]
@@ -3221,16 +3452,16 @@ namespace SocialTargetHelpAPIServer.Models
 		#region generate_bank_paymentdocs
 
 		[Sql.TableFunction(Schema="subsidy", Name="generate_bank_paymentdocs")]
-		public ITable<generate_bank_paymentdocsResult> generate_bank_paymentdocs(int? bank_filial, int? org, int? payment_type, string subsystem)
+		public ITable<generate_bank_paymentdocsResult0> generate_bank_paymentdocs0(int? bank_filial, int? org, int? payment_type, string subsystem)
 		{
-			return this.GetTable<generate_bank_paymentdocsResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+			return this.GetTable<generate_bank_paymentdocsResult0>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
 				bank_filial,
 				org,
 				payment_type,
 				subsystem);
 		}
 
-		public partial class generate_bank_paymentdocsResult
+		public partial class generate_bank_paymentdocsResult0
 		{
 			public string _number           { get; set; }
 			public int?   _payment_array_id { get; set; }
@@ -3308,6 +3539,34 @@ namespace SocialTargetHelpAPIServer.Models
 			public string      _comment     { get; set; }
 			public string      _oszn        { get; set; }
 			public int?        _count       { get; set; }
+		}
+
+		#endregion
+
+		#region get_veterans_for_fkr
+
+		[Sql.TableFunction(Schema="veterans", Name="get_veterans_for_fkr")]
+		public ITable<get_veterans_for_fkrResult> get_veterans_for_fkr(string _inn)
+		{
+			return this.GetTable<get_veterans_for_fkrResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_inn);
+		}
+
+		public partial class get_veterans_for_fkrResult
+		{
+			public string   c_account     { get; set; }
+			public decimal? n_summ        { get; set; }
+			public string   c_last_name   { get; set; }
+			public string   c_first_name  { get; set; }
+			public string   c_middle_name { get; set; }
+			public string   c_cladr_code  { get; set; }
+			public string   c_address     { get; set; }
+			public string   c_corps       { get; set; }
+			public string   c_house       { get; set; }
+			public string   c_flat        { get; set; }
+			public decimal? n_area        { get; set; }
+			public string   c_inn         { get; set; }
+			public Guid?    f_case        { get; set; }
 		}
 
 		#endregion
@@ -3476,6 +3735,81 @@ namespace SocialTargetHelpAPIServer.Models
 			public NpgsqlDate? _now           { get; set; }
 			public int?        _total_count   { get; set; }
 			public decimal?    _total_sum     { get; set; }
+		}
+
+		#endregion
+
+		#region generate_bank_paymentdocs
+
+		[Sql.TableFunction(Schema="veterans", Name="generate_bank_paymentdocs")]
+		public ITable<generate_bank_paymentdocsResult1> generate_bank_paymentdocs1(int? bank_filial, int? org, int? payment_type, string subsystem, Guid? msp_type)
+		{
+			return this.GetTable<generate_bank_paymentdocsResult1>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				bank_filial,
+				org,
+				payment_type,
+				subsystem,
+				msp_type);
+		}
+
+		public partial class generate_bank_paymentdocsResult1
+		{
+			public string _number           { get; set; }
+			public int?   _payment_array_id { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_pension_decision_long_service_stoped
+
+		[Sql.TableFunction(Schema="public", Name="rpt_pension_decision_long_service_stoped")]
+		public ITable<rpt_pension_decision_long_service_stopedResult> rpt_pension_decision_long_service_stoped(Guid? _calc, string _status)
+		{
+			return this.GetTable<rpt_pension_decision_long_service_stopedResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_calc,
+				_status);
+		}
+
+		public partial class rpt_pension_decision_long_service_stopedResult
+		{
+			public NpgsqlDate? _decision_ministry { get; set; }
+			public string      _number_ministry   { get; set; }
+			public string      _fio               { get; set; }
+			public string      _boss_post         { get; set; }
+			public string      _boss_fio          { get; set; }
+			public string      _cancel_reason     { get; set; }
+			public string      _stop_type         { get; set; }
+			public NpgsqlDate? _date_stop         { get; set; }
+			public string      _post              { get; set; }
+			public string      _company           { get; set; }
+			public string      _type              { get; set; }
+			public string      status             { get; set; }
+			public NpgsqlDate? date_start         { get; set; }
+			public decimal?    summ               { get; set; }
+			public int?        experience_percent { get; set; }
+			public string      _month             { get; set; }
+			public decimal?    _insurance_pension { get; set; }
+			public string      _pens_sum_n        { get; set; }
+			public string      _pens_sum_k        { get; set; }
+		}
+
+		#endregion
+
+		#region rpt_subsidy_issue_date_expiring
+
+		[Sql.TableFunction(Schema="public", Name="rpt_subsidy_issue_date_expiring")]
+		public ITable<rpt_subsidy_issue_date_expiringResult> rpt_subsidy_issue_date_expiring(NpgsqlDate? _date)
+		{
+			return this.GetTable<rpt_subsidy_issue_date_expiringResult>(this, (MethodInfo)MethodBase.GetCurrentMethod(),
+				_date);
+		}
+
+		public partial class rpt_subsidy_issue_date_expiringResult
+		{
+			public string      c_e_number    { get; set; }
+			public NpgsqlDate? d_submit_date { get; set; }
+			public string      c_e_status    { get; set; }
+			public NpgsqlDate? d_issue_date  { get; set; }
 		}
 
 		#endregion
@@ -3768,18 +4102,15 @@ namespace SocialTargetHelpAPIServer.Models
 		[Column,     NotNull    ] public int    f_bank_filial      { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Расчётный счёт]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,        Nullable] public string c_checking_account { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Доставочный участок]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 100)]
 		/// </summary>
 		[Column,        Nullable] public int?   n_post_site        { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Дата доставки]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 100)]
 		/// </summary>
 		[Column,        Nullable] public int?   n_post_day         { get; set; } // integer
@@ -4359,6 +4690,63 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
+	/// [XMeta.DisplayName=Файлы результата]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cd_rsmv_attachments_result")]
+	public partial class common_common_cd_rsmv_attachments_result
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id             { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Заявление]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_application  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Имя вложения]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name         { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Тип содержимого]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string c_content_type { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Хэш]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.VisibleInLookupListView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public string c_digest       { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Описание]
+		/// [XMeta.Delayed]
+		/// </summary>
+		[Column,        Nullable] public string c_description  { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Размер вложения]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public long?  n_size         { get; set; } // bigint
+
+		#region Associations
+
+		/// <summary>
+		/// cd_rsmv_attachments_result_fkey_f_application
+		/// </summary>
+		[Association(ThisKey="f_application", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_rsmv_attachments_result_fkey_f_application")]
+		public common_common_cd_rsmv_applications_base cdrsmvattachmentsresultfkeyfapplication { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
 	/// [XMeta.DisplayName=Операции]
 	/// [XMeta.IgnoreForNavigate]
 	/// </summary>
@@ -4491,6 +4879,24 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Название]
 		/// </summary>
 		[Column,     NotNull] public string c_name { get; set; } // character varying(200)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Услуги связи]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cs_communication_services")]
+	public partial class common_common_cs_communication_services
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
 	}
 
 	/// <summary>
@@ -4911,6 +5317,77 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Псевдоним]
 		/// </summary>
 		[Column,     NotNull] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Тарифы операторов связи]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="common", Name="cs_telecom_operator_tarifs")]
+	public partial class common_common_cs_telecom_operator_tarifs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Оператор]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_operator { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_service  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_begin    { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end      { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_summ     { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cs_telecom_operator_tarifs_fkey_f_operator
+		/// </summary>
+		[Association(ThisKey="f_operator", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_telecom_operator_tarifs_fkey_f_operator")]
+		public common_common_cs_telecom_operators cstelecomoperatortarifsfkeyfoperator { get; set; }
+
+		/// <summary>
+		/// cs_telecom_operator_tarifs_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_telecom_operator_tarifs_fkey_f_service")]
+		public common_common_cs_communication_services cstelecomoperatortarifsfkeyfservice { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Операторы связи]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="common", Name="cs_telecom_operators")]
+	public partial class common_common_cs_telecom_operators
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН]
+		/// </summary>
+		[Column,     NotNull] public string c_inn  { get; set; } // character varying(10)
 	}
 
 	/// <summary>
@@ -5762,6 +6239,29 @@ namespace SocialTargetHelpAPIServer.Models
 		[Column(SkipOnUpdate=true), Nullable] public string    СерияСвидет    { get; set; } // character varying(8)
 		[Column(SkipOnUpdate=true), Nullable] public string    НомерСвидет    { get; set; } // character varying(8)
 		[Column(SkipOnUpdate=true), Nullable] public Guid?     fatalzprequest { get; set; } // uuid
+	}
+
+	[Table(Schema="fatalzp", Name="sv_cd_umer_general", IsView=true)]
+	public partial class fatalzp_fatalzp_sv_cd_umer_general
+	{
+		[Column(SkipOnUpdate=true), Nullable] public long?       row_number             { get; set; } // bigint
+		[Column(SkipOnUpdate=true), Nullable] public string      c_surname              { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_first_name           { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string      c_patronymic           { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public NpgsqlDate? d_birthday             { get; set; } // date
+		[Column(SkipOnUpdate=true), Nullable] public string      address_reg1           { get; set; } // character varying(512)
+		[Column(SkipOnUpdate=true), Nullable] public string      doc                    { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public string      address_reg2           { get; set; } // character varying(512)
+		[Column(SkipOnUpdate=true), Nullable] public string      pers_status            { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public string      c_number               { get; set; } // character varying(8)
+		[Column(SkipOnUpdate=true), Nullable] public string      status_case            { get; set; } // character varying
+		[Column(SkipOnUpdate=true), Nullable] public DateTime?   death_date             { get; set; } // timestamp (6) without time zone
+		[Column(SkipOnUpdate=true), Nullable] public DateTime?   certificate_issue_date { get; set; } // timestamp (6) without time zone
+		[Column(SkipOnUpdate=true), Nullable] public string      certificate_serial     { get; set; } // character varying(8)
+		[Column(SkipOnUpdate=true), Nullable] public string      certificate_number     { get; set; } // character varying(8)
+		[Column(SkipOnUpdate=true), Nullable] public int?        f_org                  { get; set; } // integer
+		[Column(SkipOnUpdate=true), Nullable] public string      c_type                 { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public string      c_name_short           { get; set; } // character varying(250)
 	}
 
 	[Table(Schema="fatalzp", Name="sv_cd_umer_pension", IsView=true)]
@@ -7415,12 +7915,6 @@ namespace SocialTargetHelpAPIServer.Models
 		#region Associations
 
 		/// <summary>
-		/// cs_local_msz_category_fkey_f_fed_msz_category
-		/// </summary>
-		[Association(ThisKey="f_fed_msz_category", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_local_msz_category_fkey_f_fed_msz_category")]
-		public msz_msz_cs_fed_msz_category cslocalcategoryfkeyffedcategory { get; set; }
-
-		/// <summary>
 		/// cs_local_msz_category_fkey_f_parent_supplier
 		/// </summary>
 		[Association(ThisKey="f_parent_supplier", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_local_msz_category_fkey_f_parent_supplier")]
@@ -7775,6 +8269,7 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Дата расчёта]
 		/// [XMeta.ReadOnly]
+		/// [XMeta.DisplayFormat=g]
 		/// </summary>
 		[Column,     NotNull    ] public DateTime    d_date                 { get; set; } // timestamp (6) without time zone
 		/// <summary>
@@ -8033,7 +8528,7 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Адрес]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public string      c_address                { get; set; } // character varying(500)
+		[Column,        Nullable] public string      c_address                { get; set; } // character varying(500)
 		/// <summary>
 		/// [XMeta.DisplayName=Дата окончания госслужбы]
 		/// </summary>
@@ -8485,44 +8980,46 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Идентификатор]
 		/// </summary>
-		[PrimaryKey, NotNull    ] public Guid       id         { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid     id         { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Дата перерасчёта]
+		/// [XMeta.DisplayFormat=g]
 		/// </summary>
-		[Column,     NotNull    ] public NpgsqlDate d_created  { get; set; } // date
+		[Column,     NotNull    ] public DateTime d_created  { get; set; } // timestamp (6) without time zone
 		/// <summary>
 		/// [XMeta.DisplayName=Номер]
 		/// </summary>
-		[Column,     NotNull    ] public string     c_number   { get; set; } // character varying(10)
+		[Column,     NotNull    ] public string   c_number   { get; set; } // character varying(10)
 		/// <summary>
 		/// [XMeta.DisplayName=Дата нового перерасчёта]
+		/// [XMeta.DisplayFormat=g]
 		/// </summary>
-		[Column,     NotNull    ] public NpgsqlDate d_date     { get; set; } // date
+		[Column,     NotNull    ] public DateTime d_date     { get; set; } // timestamp (6) without time zone
 		/// <summary>
 		/// [XMeta.DisplayName=Утверждён]
 		/// </summary>
-		[Column,     NotNull    ] public bool       b_approved { get; set; } // boolean
+		[Column,     NotNull    ] public bool     b_approved { get; set; } // boolean
 		/// <summary>
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public int        f_org      { get; set; } // integer
+		[Column,     NotNull    ] public int      f_org      { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Статистика]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public string     c_info     { get; set; } // text
+		[Column,        Nullable] public string   c_info     { get; set; } // text
 		/// <summary>
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string     c_bigger   { get; set; } // text
+		[Column,        Nullable] public string   c_bigger   { get; set; } // text
 		/// <summary>
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string     c_less     { get; set; } // text
+		[Column,        Nullable] public string   c_less     { get; set; } // text
 		/// <summary>
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string     c_equal    { get; set; } // text
+		[Column,        Nullable] public string   c_equal    { get; set; } // text
 
 		#region Associations
 
@@ -10068,85 +10565,76 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Фамилия]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// [XMeta.Raw=RuleRegularExpression("SurnameRegex", DefaultContexts.Save, @"^[а-яА-ЯЁё]+([- ][а-яА-ЯЁё])*$", "В поле \"Фамилия\" можно вводить только кириллические символы")]
 		/// </summary>
-		[Column,     NotNull    ] public string      c_surname                 { get; set; } // character varying(64)
+		[Column,     NotNull    ] public string      c_surname                       { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Имя]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// [XMeta.Raw=RuleRegularExpression("FirstNameRegex", DefaultContexts.Save, @"^[а-яА-ЯЁё]+([- ][а-яА-ЯЁё]+)*$", "В поле \"Имя\" можно вводить только кириллические символы")]
 		/// </summary>
-		[Column,     NotNull    ] public string      c_first_name              { get; set; } // character varying(64)
+		[Column,     NotNull    ] public string      c_first_name                    { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Отчество]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// [XMeta.Raw=RuleRegularExpression("PatronymicRegex", DefaultContexts.Save, @"^[а-яА-ЯЁё]+([- ][а-яА-ЯЁё]+)*$", "В поле \"Отчество\" можно вводить только кириллические символы")]
 		/// </summary>
-		[Column,        Nullable] public string      c_patronymic              { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_patronymic                    { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Дата рождения]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// [XMeta.Raw=RuleRange("DateRange", DefaultContexts.Save, "GetDate(MinDate)", "Today()", "Значение \"Дата рождения\" должно быть в пределах диапазона от 01.01.1900 до текущей даты, включая границы.", ParametersMode.Expression)]
 		/// [XMeta.VisibleInDetailView=false]
 		/// </summary>
-		[Column,     NotNull    ] public NpgsqlDate  d_birthday                { get; set; } // date
+		[Column,     NotNull    ] public NpgsqlDate  d_birthday                      { get; set; } // date
 		/// <summary>
 		/// [XMeta.DisplayName=Серия документа, удостоверяющего личность]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,     NotNull    ] public string      c_document_seria          { get; set; } // character varying(6)
+		[Column,     NotNull    ] public string      c_document_seria                { get; set; } // character varying(6)
 		/// <summary>
 		/// [XMeta.DisplayName=Номер документа, удостоверяющего личность]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,     NotNull    ] public string      c_document_number         { get; set; } // character varying(7)
+		[Column,     NotNull    ] public string      c_document_number               { get; set; } // character varying(7)
 		/// <summary>
 		/// [XMeta.DisplayName=Контактный телефон]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_phone                   { get; set; } // character varying(32)
+		[Column,        Nullable] public string      c_phone                         { get; set; } // character varying(32)
 		/// <summary>
 		/// [XMeta.DisplayName=Идентификатор]
 		/// [XMeta.VisibleInDetailView=false]
 		/// </summary>
-		[PrimaryKey, Identity   ] public int         id                        { get; set; } // integer
+		[PrimaryKey, Identity   ] public int         id                              { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=ИНН]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,        Nullable] public string      c_inn                     { get; set; } // character varying(12)
+		[Column,        Nullable] public string      c_inn                           { get; set; } // character varying(12)
 		/// <summary>
 		/// [XMeta.DisplayName=СНИЛС]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,     NotNull    ] public string      c_snils                   { get; set; } // character varying(14)
+		[Column,     NotNull    ] public string      c_snils                         { get; set; } // character varying(14)
 		/// <summary>
 		/// [XMeta.DisplayName=Документ, удостоверяющий личность]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// [XMeta.Raw=DataSourceCriteria("f_group.c_alias = 'identified'")]
+		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,     NotNull    ] public int         f_document_type           { get; set; } // integer
+		[Column,     NotNull    ] public int         f_document_type                 { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Место рождения]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,        Nullable] public string      c_birth_place             { get; set; } // character varying(512)
+		[Column,        Nullable] public string      c_birth_place                   { get; set; } // character varying(512)
 		/// <summary>
 		/// [XMeta.DisplayName=Дата выдачи документа]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.Raw=RuleRequiredField("", DefaultContexts.Save)]
 		/// [XMeta.Raw=RuleRange("DateRange2", DefaultContexts.Save, "GetDate(d_birthday)", "Today()", "Значение \"Дата выдачи документа\" должна быть позже \"Даты рождения\".", ParametersMode.Expression)]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// [XMeta.VisibleInDetailView=false]
 		/// </summary>
-		[Column,        Nullable] public NpgsqlDate? d_date_issue              { get; set; } // date
+		[Column,        Nullable] public NpgsqlDate? d_date_issue                    { get; set; } // date
 		/// <summary>
 		/// [XMeta.DisplayName=Организация выдавшая документ]
 		/// [XMeta.VisibleInListView=false]
@@ -10154,189 +10642,231 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.Raw=DataSourceCriteria("f_group.c_alias = 'identified'")]
 		/// 
 		/// </summary>
-		[Column,        Nullable] public int?        f_issued_by               { get; set; } // integer
+		[Column,        Nullable] public int?        f_issued_by                     { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Согласен на обработку персональных данных]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,     NotNull    ] public bool        b_agreed                  { get; set; } // boolean
+		[Column,     NotNull    ] public bool        b_agreed                        { get; set; } // boolean
 		/// <summary>
 		/// [XMeta.DisplayName=Ведомство]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.ReadOnly]
 		/// </summary>
-		[Column,     NotNull    ] public int         f_department              { get; set; } // integer
+		[Column,     NotNull    ] public int         f_department                    { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Уполномоченный орган по АСП]
 		/// [XMeta.ReadOnly]
 		/// [XMeta.Raw=RuleRequiredField("", DefaultContexts.Save)]
+		/// [XMeta.VisibleInDetailView=false]
 		/// </summary>
-		[Column,        Nullable] public int?        f_org                     { get; set; } // integer
+		[Column,        Nullable] public int?        f_org                           { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации (код ФИАС)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public Guid?       f_address_reg_fias_code   { get; set; } // uuid
+		[Column,        Nullable] public Guid?       f_address_reg_fias_code         { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации (дом)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_reg_house       { get; set; } // character varying(20)
+		[Column,        Nullable] public string      c_address_reg_house             { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации(корпус)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_reg_corpus      { get; set; } // character varying(20)
+		[Column,        Nullable] public string      c_address_reg_corpus            { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации (квартира)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_reg_flat        { get; set; } // character varying(20)
+		[Column,        Nullable] public string      c_address_reg_flat              { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации]
 		/// [XMeta.VisibleInDetailView=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_reg_plain       { get; set; } // character varying(512)
+		[Column,        Nullable] public string      c_address_reg_plain             { get; set; } // character varying(512)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации (регион)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_reg_region      { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_address_reg_region            { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации (район)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_reg_district    { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_address_reg_district          { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации (город)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_reg_city        { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_address_reg_city              { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации (населённый пункт)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_reg_settlement  { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_address_reg_settlement        { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации (улица)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_reg_street      { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_address_reg_street            { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес фактического проживания (код ФИАС)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public Guid?       f_address_live_fias_code  { get; set; } // uuid
+		[Column,        Nullable] public Guid?       f_address_live_fias_code        { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес фактического проживания (дом)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_live_house      { get; set; } // character varying(20)
+		[Column,        Nullable] public string      c_address_live_house            { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес фактического проживания (корпус)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_live_corpus     { get; set; } // character varying(20)
+		[Column,        Nullable] public string      c_address_live_corpus           { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес фактического проживания (квартира)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_live_flat       { get; set; } // character varying(20)
+		[Column,        Nullable] public string      c_address_live_flat             { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес фактического проживания]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_live_plain      { get; set; } // character varying(512)
+		[Column,        Nullable] public string      c_address_live_plain            { get; set; } // character varying(512)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес фактического проживания (регион)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_live_region     { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_address_live_region           { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес фактического проживания (район)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_live_district   { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_address_live_district         { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес фактического проживания (город)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_live_city       { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_address_live_city             { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес фактического проживания (населённый пункт)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_live_settlement { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_address_live_settlement       { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес фактического проживания (улица)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_live_street     { get; set; } // character varying(64)
+		[Column,        Nullable] public string      c_address_live_street           { get; set; } // character varying(64)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес регистрации и адрес фактического проживания совпадают]
 		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,     NotNull    ] public bool        b_addresses_match         { get; set; } // boolean
+		[Column,     NotNull    ] public bool        b_addresses_match               { get; set; } // boolean
 		/// <summary>
 		/// [XMeta.DisplayName=Почтовый адрес]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public int?        f_post_address            { get; set; } // integer
+		[Column,        Nullable] public int?        f_post_address                  { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Пол]
 		/// [XMeta.Raw=RuleRequiredField("", DefaultContexts.Save)]
 		/// </summary>
-		[Column,        Nullable] public int?        f_sex                     { get; set; } // integer
+		[Column,        Nullable] public int?        f_sex                           { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Код страны по ОКСМ]
 		/// </summary>
-		[Column,        Nullable] public string      c_citizenship             { get; set; } // character varying(3)
+		[Column,        Nullable] public string      c_citizenship                   { get; set; } // character varying(3)
 		/// <summary>
 		/// [XMeta.DisplayName=Фамилия при рождении]
 		/// </summary>
-		[Column,        Nullable] public string      c_maidenfamilyname        { get; set; } // character varying(100)
+		[Column,        Nullable] public string      c_maidenfamilyname              { get; set; } // character varying(100)
 		/// <summary>
 		/// [XMeta.DisplayName=Данные документа-основания пребывания или проживания в Российской Федерации]
 		/// </summary>
-		[Column,        Nullable] public string      c_residencepermitinfo     { get; set; } // character varying(100)
+		[Column,        Nullable] public string      c_residencepermitinfo           { get; set; } // character varying(100)
 		/// <summary>
 		/// [XMeta.DisplayName=Предыдущий ОСЗН]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public int?        f_prev_org                { get; set; } // integer
+		[Column,        Nullable] public int?        f_prev_org                      { get; set; } // integer
 		/// <summary>
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[Column,        Nullable] public int?        imp_id                    { get; set; } // integer
+		[Column,        Nullable] public int?        imp_id                          { get; set; } // integer
 		/// <summary>
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_reg_kladr       { get; set; } // character varying(200)
+		[Column,        Nullable] public string      c_address_reg_kladr             { get; set; } // character varying(200)
 		/// <summary>
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_live_kladr      { get; set; } // character varying(200)
+		[Column,        Nullable] public string      c_address_live_kladr            { get; set; } // character varying(200)
 		/// <summary>
 		/// [XMeta.DisplayName=Идентификатор дома ФИАС по месту регистрации]
 		/// [XMeta.Browsable=false]
 		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,        Nullable] public Guid?       f_house_fias_reg_code     { get; set; } // uuid
+		[Column,        Nullable] public Guid?       f_house_fias_reg_code           { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Идентификатор дома ФИАС по месту проживания]
 		/// [XMeta.Browsable=false]
 		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,        Nullable] public Guid?       f_house_fias_live_code    { get; set; } // uuid
+		[Column,        Nullable] public Guid?       f_house_fias_live_code          { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Статус валидации СНИЛСа]
 		/// </summary>
-		[Column,        Nullable] public int?        f_snils_validation_status { get; set; } // integer
+		[Column,        Nullable] public int?        f_snils_validation_status       { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=СНИЛС]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_snils11                 { get; set; } // character(11)
+		[Column,        Nullable] public string      c_snils11                       { get; set; } // character(11)
+		/// <summary>
+		/// [XMeta.DisplayName=Запрос валидации СНИЛС]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_snils_validation_smev_request { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Умерший]
+		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_dead                          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Дата смерти]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_death                         { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Номер записи акта]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_death_number                  { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата составления записи акта]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_death_act                     { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Федеральное ЕДВ]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_fed_edv                       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Работает]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_work                          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Срок окончания временной регистрации]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_tmp_registration              { get; set; } // date
 
 		#region Associations
 
@@ -10351,6 +10881,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="f_document_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_document_type")]
 		public public_cs_document_types cdpersonsfkeyfdocumenttype { get; set; }
+
+		/// <summary>
+		/// cd_persons_fkey_f_fed_edv
+		/// </summary>
+		[Association(ThisKey="f_fed_edv", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_fed_edv")]
+		public veterans_veterans_cs_fed_edv cdpersonsfkeyffededv { get; set; }
 
 		/// <summary>
 		/// cd_persons_fkey_f_issued_by
@@ -10381,6 +10917,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="f_sex", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_sex")]
 		public public_cs_sex cdpersonsfkeyfsex { get; set; }
+
+		/// <summary>
+		/// cd_persons_fkey_f_snils_validation_smev_request
+		/// </summary>
+		[Association(ThisKey="f_snils_validation_smev_request", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_persons_fkey_f_snils_validation_smev_request")]
+		public smev_smev_cd_outgoing_requests cdpersonsfkeyfsnilsvalidationsmevrequest { get; set; }
 
 		/// <summary>
 		/// cd_persons_fkey_f_snils_validation_status
@@ -10957,6 +11499,9 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
 		[Column,        Nullable] public string c_code_mun          { get; set; } // character varying(2)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
 		[Column,        Nullable] public int?   n_code_for_veterans { get; set; } // integer
 
 		#region Associations
@@ -11312,104 +11857,108 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Идентификатор]
 		/// [XMeta.VisibleInDetailView=false]
 		/// </summary>
-		[PrimaryKey, Identity   ] public int    id                    { get; set; } // integer
+		[PrimaryKey, Identity   ] public int    id                     { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Наименование]
 		/// </summary>
-		[Column,     NotNull    ] public string c_name                { get; set; } // character varying(250)
+		[Column,     NotNull    ] public string c_name                 { get; set; } // character varying(250)
 		/// <summary>
 		/// [XMeta.DisplayName=Наименование в родительском падеже]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public string c_name_rp             { get; set; } // character varying(250)
+		[Column,        Nullable] public string c_name_rp              { get; set; } // character varying(250)
 		/// <summary>
 		/// [XMeta.DisplayName=Наименование краткое]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public string c_name_short          { get; set; } // character varying(250)
+		[Column,        Nullable] public string c_name_short           { get; set; } // character varying(250)
 		/// <summary>
 		/// [XMeta.DisplayName=Код поселения]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public string c_kpos                { get; set; } // character varying(6)
+		[Column,        Nullable] public string c_kpos                 { get; set; } // character varying(6)
 		/// <summary>
 		/// [XMeta.DisplayName=Ф.И.О. руководителя]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public string c_boss_fio            { get; set; } // character varying(250)
+		[Column,        Nullable] public string c_boss_fio             { get; set; } // character varying(250)
 		/// <summary>
 		/// [XMeta.DisplayName=Отчётный год]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public int?   n_year                { get; set; } // integer
+		[Column,        Nullable] public int?   n_year                 { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Отчётный месяц]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.Raw=RuleRange("OrgMonth", DefaultContexts.Save, 1, 12)]
 		/// </summary>
-		[Column,        Nullable] public int?   n_month               { get; set; } // integer
+		[Column,        Nullable] public int?   n_month                { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Начальный номер ведомости перечислений через почту]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public int?   n_num_ved             { get; set; } // integer
+		[Column,        Nullable] public int?   n_num_ved              { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Год начала истории]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public int?   n_year_begin          { get; set; } // integer
+		[Column,        Nullable] public int?   n_year_begin           { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Месяц начала истории]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.Raw=RuleRange("OrgMonthBegin", DefaultContexts.Save, 1, 12)]
 		/// </summary>
-		[Column,        Nullable] public int?   n_month_begin         { get; set; } // integer
+		[Column,        Nullable] public int?   n_month_begin          { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Должность руководителя]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,     NotNull    ] public int    f_boss_post           { get; set; } // integer
+		[Column,     NotNull    ] public int    f_boss_post            { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Ведомство]
 		/// </summary>
-		[Column,     NotNull    ] public int    f_department          { get; set; } // integer
+		[Column,     NotNull    ] public int    f_department           { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Код ЕГИССО]
 		/// </summary>
-		[Column,        Nullable] public string c_code_egiso          { get; set; } // character varying(20)
+		[Column,        Nullable] public string c_code_egiso           { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Код ЕГИССО поставщика]
 		/// </summary>
-		[Column,        Nullable] public string c_code_provider_egiso { get; set; } // character varying(20)
+		[Column,        Nullable] public string c_code_provider_egiso  { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Ф.И.О. главного бухгалтера]
 		/// </summary>
-		[Column,        Nullable] public string c_glavbuh_fio         { get; set; } // character varying(250)
+		[Column,        Nullable] public string c_glavbuh_fio          { get; set; } // character varying(250)
 		/// <summary>
 		/// [XMeta.DisplayName=Регистрационный номер]
 		/// </summary>
-		[Column,        Nullable] public string c_registry_number     { get; set; } // character varying(14)
+		[Column,        Nullable] public string c_registry_number      { get; set; } // character varying(14)
 		/// <summary>
 		/// [XMeta.DisplayName=ИНН]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.VisibleInLookupListView=false]
 		/// [XMeta.DisplayFormat=0000000000]
 		/// </summary>
-		[Column,        Nullable] public string c_inn                 { get; set; } // character(10)
+		[Column,        Nullable] public string c_inn                  { get; set; } // character(10)
 		/// <summary>
 		/// [XMeta.DisplayName=КПП]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.VisibleInLookupListView=false]
 		/// [XMeta.DisplayFormat=000000000]
 		/// </summary>
-		[Column,        Nullable] public string c_kpp                 { get; set; } // character(9)
+		[Column,        Nullable] public string c_kpp                  { get; set; } // character(9)
 		/// <summary>
 		/// [XMeta.DisplayName=ОГРН]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.VisibleInLookupListView=false]
 		/// [XMeta.DisplayFormat=0000000000000]
 		/// </summary>
-		[Column,        Nullable] public string c_ogrn                { get; set; } // character(13)
+		[Column,        Nullable] public string c_ogrn                 { get; set; } // character(13)
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор офиса]
+		/// </summary>
+		[Column,        Nullable] public string f_equeue_department_id { get; set; } // character varying
 
 		#region Associations
 
@@ -12050,6 +12599,63 @@ namespace SocialTargetHelpAPIServer.Models
 		#endregion
 	}
 
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="public", Name="PaymentOneTimeVet")]
+	public partial class public_PaymentOneTimeVet
+	{
+		[PrimaryKey, NotNull    ] public Guid      Oid              { get; set; } // uuid
+		[Column,        Nullable] public Guid?     Case             { get; set; } // uuid
+		[Column,        Nullable] public int?      Person           { get; set; } // integer
+		[Column,        Nullable] public int?      PaymentMethod    { get; set; } // integer
+		[Column,        Nullable] public int?      LocalMsz         { get; set; } // integer
+		[Column,        Nullable] public int?      LocalMszCategory { get; set; } // integer
+		[Column,        Nullable] public DateTime? DateStart        { get; set; } // timestamp (6) without time zone
+		[Column,        Nullable] public DateTime? DateEnd          { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PaymentOneTimeVet_Case
+		/// </summary>
+		[Association(ThisKey="Case", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimeVet_Case")]
+		public veterans_veterans_cd_cases FK_PaymentOneTimeVet_Case { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimeVet_LocalMsz
+		/// </summary>
+		[Association(ThisKey="LocalMsz", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimeVet_LocalMsz")]
+		public msz_msz_cs_local_msz FK_PaymentOneTimeVet_LocalMsz { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimeVet_LocalMszCategory
+		/// </summary>
+		[Association(ThisKey="LocalMszCategory", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimeVet_LocalMszCategory")]
+		public msz_msz_cs_local_msz_category FK_PaymentOneTimeVet_LocalMszCategory { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimeVet_PaymentMethod
+		/// </summary>
+		[Association(ThisKey="PaymentMethod", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimeVet_PaymentMethod")]
+		public subsidy_subsidy_cs_payment_methods FK_PaymentOneTimeVet_PaymentMethod { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimeVet_Person
+		/// </summary>
+		[Association(ThisKey="Person", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PaymentOneTimeVet_Person")]
+		public public_cd_persons FK_PaymentOneTimeVet_Person { get; set; }
+
+		/// <summary>
+		/// FK_PaymentOneTimeVet_Oid
+		/// </summary>
+		[Association(ThisKey="Oid", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="FK_PaymentOneTimeVet_Oid")]
+		public public_PaymentOneTime O { get; set; }
+
+		#endregion
+	}
+
 	[Table(Schema="public", Name="pens_paymentlist", IsView=true)]
 	public partial class public_pens_paymentlist
 	{
@@ -12275,11 +12881,15 @@ namespace SocialTargetHelpAPIServer.Models
 	[Table(Schema="public", Name="PFR_FileAttachment")]
 	public partial class public_PFR_FileAttachment
 	{
-		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
-		[Column,        Nullable] public Guid?  File                { get; set; } // uuid
-		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
-		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
-		[Column,        Nullable] public string Path                { get; set; } // text
+		[PrimaryKey, NotNull    ] public Guid        Oid                 { get; set; } // uuid
+		[Column,        Nullable] public Guid?       File                { get; set; } // uuid
+		[Column,        Nullable] public int?        OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?        GCRecord            { get; set; } // integer
+		[Column,        Nullable] public string      Path                { get; set; } // text
+		[Column,        Nullable] public int?        f_file_type         { get; set; } // integer
+		[Column,        Nullable] public NpgsqlDate? d_date              { get; set; } // date
+		[Column,        Nullable] public string      FileType            { get; set; } // character varying(100)
+		[Column,        Nullable] public string      DateLoad            { get; set; } // character varying(100)
 
 		#region Associations
 
@@ -12288,6 +12898,31 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="File", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PFR_FileAttachment_File")]
 		public public_FileData PFRFileAttachmentFile { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.IgnoreForGenerate]
+	/// </summary>
+	[Table(Schema="public", Name="PFR_FileAttachment_Response")]
+	public partial class public_PFR_FileAttachment_Response
+	{
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public Guid?  File                { get; set; } // uuid
+		[Column,        Nullable] public string FileType            { get; set; } // character varying(100)
+		[Column,        Nullable] public string DateLoad            { get; set; } // character varying(100)
+		[Column,        Nullable] public string Path                { get; set; } // character varying(100)
+		[Column,        Nullable] public int?   OptimisticLockField { get; set; } // integer
+		[Column,        Nullable] public int?   GCRecord            { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_PFR_FileAttachment_Response_File
+		/// </summary>
+		[Association(ThisKey="File", OtherKey="Oid", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_PFR_FileAttachment_Response_File")]
+		public public_FileData PFRFileAttachmentResponseFile { get; set; }
 
 		#endregion
 	}
@@ -12502,13 +13137,21 @@ namespace SocialTargetHelpAPIServer.Models
 	[Table(Schema="public", Name="UserPolicyModel")]
 	public partial class public_UserPolicyModel
 	{
-		[PrimaryKey, NotNull    ] public Guid   Oid          { get; set; } // uuid
-		[Column,        Nullable] public string Surname      { get; set; } // character varying(100)
-		[Column,        Nullable] public string Name         { get; set; } // character varying(100)
-		[Column,        Nullable] public string Patronymic   { get; set; } // character varying(100)
-		[Column,        Nullable] public string Post         { get; set; } // character varying(100)
-		[Column,        Nullable] public int?   TamilyNumber { get; set; } // integer
-		[Column,     NotNull    ] public int    f_org        { get; set; } // integer
+		[PrimaryKey, NotNull    ] public Guid   Oid                 { get; set; } // uuid
+		[Column,        Nullable] public string Surname             { get; set; } // character varying(100)
+		[Column,        Nullable] public string Name                { get; set; } // character varying(100)
+		[Column,        Nullable] public string Patronymic          { get; set; } // character varying(100)
+		[Column,        Nullable] public string Post                { get; set; } // character varying(100)
+		[Column,        Nullable] public int?   TamilyNumber        { get; set; } // integer
+		[Column,     NotNull    ] public int    f_org               { get; set; } // integer
+		[Column,        Nullable] public Guid?  f_current_appeals   { get; set; } // uuid
+		[Column,        Nullable] public short? n_state             { get; set; } // smallint
+		[Column,        Nullable] public string f_ticket            { get; set; } // character varying(100)
+		[Column,        Nullable] public string f_workstation       { get; set; } // character varying(100)
+		[Column,        Nullable] public string c_workstation_num   { get; set; } // character varying(100)
+		[Column,        Nullable] public string c_ticket_label      { get; set; } // character varying(100)
+		[Column,        Nullable] public string c_ticket_pin_code   { get; set; } // character varying(100)
+		[Column,        Nullable] public short? n_postpone_interval { get; set; } // smallint
 
 		#region Associations
 
@@ -15436,14 +16079,12 @@ namespace SocialTargetHelpAPIServer.Models
 		[Column,     NotNull    ] public int      f_sdg                        { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Признак ответственного плательщика]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
 		[Column,     NotNull    ] public bool     b_declarant                  { get; set; } // boolean
 		/// <summary>
 		/// [XMeta.DisplayName=Родств. отношение]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public int      f_family_relation            { get; set; } // integer
 		/// <summary>
@@ -15521,7 +16162,6 @@ namespace SocialTargetHelpAPIServer.Models
 		[Column,        Nullable] public string   c_address_init_flat          { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес]
-		/// [XMeta.Browsable=false]
 		/// [XMeta.ReadOnly]
 		/// </summary>
 		[Column,        Nullable] public string   c_address_init_plain         { get; set; } // character varying(512)
@@ -15558,27 +16198,23 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Собственник]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public bool     b_owner                      { get; set; } // boolean
 		/// <summary>
 		/// [XMeta.DisplayName=Числитель]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 0, 1000)]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public int      n_numerator                  { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Знаменатель]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 1, 1000)]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public int      n_denominator                { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Семья]
 		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 1, 100)]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public int      n_family                     { get; set; } // integer
 
@@ -15753,7 +16389,6 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Вид субсидии]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public int         f_subsidy_type               { get; set; } // integer
 		/// <summary>
@@ -15852,7 +16487,6 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Общая (расчётная) площадь жилого помещения]
 		/// [XMeta.VisibleInListView=false]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public decimal     n_area                       { get; set; } // numeric(10,2)
 		/// <summary>
@@ -16117,7 +16751,6 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Поселение]
 		/// [XMeta.Raw=DataSourceCriteria("f_district == '@This.f_district'")]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,        Nullable] public int?        f_settlement             { get; set; } // integer
 		/// <summary>
@@ -16367,12 +17000,10 @@ namespace SocialTargetHelpAPIServer.Models
 		[Column,     NotNull] public Guid     f_case     { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Месяц]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull] public int      f_month    { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Год]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull] public int      n_year     { get; set; } // integer
 		/// <summary>
@@ -17047,55 +17678,55 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Идентификатор]
 		/// </summary>
-		[PrimaryKey, Identity   ] public int        id               { get; set; } // integer
+		[PrimaryKey, Identity   ] public int      id               { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Филиал доставочной организации]
 		/// </summary>
-		[Column,     NotNull    ] public int        f_bank_filial    { get; set; } // integer
+		[Column,     NotNull    ] public int      f_bank_filial    { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Месяц]
 		/// </summary>
-		[Column,     NotNull    ] public int        n_current_month  { get; set; } // integer
+		[Column,     NotNull    ] public int      n_current_month  { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Год]
 		/// </summary>
-		[Column,     NotNull    ] public int        n_current_year   { get; set; } // integer
+		[Column,     NotNull    ] public int      n_current_year   { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Номер]
 		/// </summary>
-		[Column,     NotNull    ] public string     c_number         { get; set; } // character varying(5)
+		[Column,     NotNull    ] public string   c_number         { get; set; } // character varying(5)
 		/// <summary>
 		/// [XMeta.DisplayName=Дата выгрузки]
 		/// </summary>
-		[Column,     NotNull    ] public NpgsqlDate d_date_generate  { get; set; } // date
+		[Column,     NotNull    ] public DateTime d_date_generate  { get; set; } // timestamp (6) without time zone
 		/// <summary>
 		/// [XMeta.DisplayName=Вид выплаты]
 		/// </summary>
-		[Column,     NotNull    ] public int        f_payment_type   { get; set; } // integer
+		[Column,     NotNull    ] public int      f_payment_type   { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Статус]
 		/// </summary>
-		[Column,     NotNull    ] public int        f_status         { get; set; } // integer
+		[Column,     NotNull    ] public int      f_status         { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=ОСЗН]
 		/// XMeta.VisibleInListView=false]
 		/// XMeta.VisibleInDetailView=false]
 		/// </summary>
-		[Column,     NotNull    ] public int        f_org            { get; set; } // integer
+		[Column,     NotNull    ] public int      f_org            { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Сводная ведомость]
 		/// </summary>
-		[Column,        Nullable] public Guid?      f_inventory_main { get; set; } // uuid
+		[Column,        Nullable] public Guid?    f_inventory_main { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Подсистема]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public int?       f_subsystem      { get; set; } // integer
+		[Column,        Nullable] public int?     f_subsystem      { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Отменён]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public bool       b_canceled       { get; set; } // boolean
+		[Column,     NotNull    ] public bool     b_canceled       { get; set; } // boolean
 
 		#region Associations
 
@@ -17584,18 +18215,15 @@ namespace SocialTargetHelpAPIServer.Models
 		[PrimaryKey, NotNull    ] public Guid      id                   { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Вид]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public int       f_type               { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Сумма]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public decimal   n_value              { get; set; } // numeric(10,2)
 		/// <summary>
 		/// [XMeta.DisplayName=Кол-во доходных месяцев]
 		/// [XMeta.Raw=RuleRange("", DefaultContexts.Save, 1, 6)]
-		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public int       n_months             { get; set; } // integer
 		/// <summary>
@@ -17665,6 +18293,7 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Дата создания]
 		/// [XMeta.ReadOnly]
+		/// [XMeta.DisplayFormat=g]
 		/// </summary>
 		[Column,     NotNull    ] public DateTime    d_created      { get; set; } // timestamp (6) without time zone
 		/// <summary>
@@ -18166,8 +18795,18 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
 		[Column,        Nullable] public int?   imp_id      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Район]
+		/// </summary>
+		[Column,        Nullable] public int?   f_district  { get; set; } // integer
 
 		#region Associations
+
+		/// <summary>
+		/// cs_companies_fkey_f_district
+		/// </summary>
+		[Association(ThisKey="f_district", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_companies_fkey_f_district")]
+		public public_cs_districts cscompaniesfkeyfdistrict { get; set; }
 
 		/// <summary>
 		/// cs_companies_fkey_f_subsystem
@@ -19362,66 +20001,211 @@ namespace SocialTargetHelpAPIServer.Models
 	/// <summary>
 	/// [XMeta.DisplayName=Расчёты]
 	/// [XMeta.IgnoreForNavigate]
+	/// [XMeta.BaseType=common_cd_calculation_base]
+	/// [XMeta.Raw=MapInheritance(MapInheritanceType.OwnTable)]
 	/// </summary>
 	[Table(Schema="veterans", Name="cd_calculations")]
 	public partial class veterans_veterans_cd_calculations
 	{
 		/// <summary>
 		/// [XMeta.DisplayName=Идентификатор]
+		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[PrimaryKey, NotNull    ] public Guid        id          { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid        id                      { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Назначение]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public Guid        f_case      { get; set; } // uuid
+		[Column,     NotNull    ] public Guid        f_case                  { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Дата расчёта]
 		/// [XMeta.ReadOnly]
 		/// </summary>
-		[Column,        Nullable] public NpgsqlDate? d_calculate { get; set; } // date
+		[Column,        Nullable] public NpgsqlDate? d_calculate             { get; set; } // date
 		/// <summary>
 		/// [XMeta.DisplayName=Номер]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public int         n_number    { get; set; } // integer
+		[Column,     NotNull    ] public int         n_number                { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Начало периода]
 		/// [XMeta.ReadOnly]
 		/// </summary>
-		[Column,        Nullable] public NpgsqlDate? d_begin     { get; set; } // date
+		[Column,        Nullable] public NpgsqlDate? d_begin                 { get; set; } // date
 		/// <summary>
 		/// [XMeta.DisplayName=Окончание периода]
 		/// [XMeta.ReadOnly]
 		/// </summary>
-		[Column,        Nullable] public NpgsqlDate? d_end       { get; set; } // date
+		[Column,        Nullable] public NpgsqlDate? d_end                   { get; set; } // date
 		/// <summary>
 		/// [XMeta.DisplayName=Сумма]
 		/// [XMeta.ReadOnly]
 		/// </summary>
-		[Column,        Nullable] public decimal?    n_summ      { get; set; } // numeric(10,2)
+		[Column,        Nullable] public decimal?    n_summ                  { get; set; } // numeric(10,2)
 		/// <summary>
 		/// [XMeta.DisplayName=Протокол]
 		/// [XMeta.ReadOnly]
 		/// </summary>
-		[Column,        Nullable] public string      c_protocol  { get; set; } // text
+		[Column,        Nullable] public string      c_protocol              { get; set; } // text
 		/// <summary>
 		/// [XMeta.DisplayName=Рассчитан]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public bool        b_executed  { get; set; } // boolean
+		[Column,     NotNull    ] public bool        b_executed              { get; set; } // boolean
 		/// <summary>
 		/// [XMeta.DisplayName=Дата заявления]
 		/// </summary>
-		[Column,     NotNull    ] public NpgsqlDate  d_state     { get; set; } // date
+		[Column,     NotNull    ] public NpgsqlDate  d_state                 { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_status                { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата возникновения права]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_occurrence_right      { get; set; } // date
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_protocol_doc          { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Общее кол-во граждан, зарегистрированных в жилом доме]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_count_location        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во получателей средств, проживающих в жилом доме]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int         n_count_location_family { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Перерасчёт]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_recalculation         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Перерасчитанный]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_recalculated          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=ФН]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,        Nullable] public int?        f_egisso                { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Пользователь]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_user                  { get; set; } // uuid
 
 		#region Associations
+
+		/// <summary>
+		/// cd_calculations_fkey_id
+		/// </summary>
+		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_calculations_fkey_id")]
+		public common_common_cd_calculation_base cd_calculation_base { get; set; }
 
 		/// <summary>
 		/// cd_calculations_fkey_f_case
 		/// </summary>
 		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_case")]
 		public veterans_veterans_cd_cases cdcalculationsfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_egisso
+		/// </summary>
+		[Association(ThisKey="f_egisso", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_egisso")]
+		public msz_msz_cd_case cdcalculationsfkeyfegisso { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_recalculation
+		/// </summary>
+		[Association(ThisKey="f_recalculation", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_recalculation")]
+		public veterans_veterans_cd_recalculations cdcalculationsfkeyfrecalculation { get; set; }
+
+		/// <summary>
+		/// cd_calculations_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_calculations_fkey_f_status")]
+		public common_common_cs_statuses cdcalculationsfkeyfstatu { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Начисления]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_accruals")]
+	public partial class veterans_veterans_cd_case_accruals
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid       id                { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_case            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=С]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_begin           { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=По]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_end             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// </summary>
+		[Column,     NotNull    ] public decimal    n_summ            { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Выплата]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_payment         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=История выплаты]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_payment_history { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Выплачено]
+		/// </summary>
+		[Column,     NotNull    ] public bool       b_payout          { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Расчёт]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_calculation     { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_accruals_fkey_f_calculation
+		/// </summary>
+		[Association(ThisKey="f_calculation", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_accruals_fkey_f_calculation")]
+		public veterans_veterans_cd_calculations cdcaseaccrualsfkeyfcalculation { get; set; }
+
+		/// <summary>
+		/// cd_case_accruals_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_accruals_fkey_f_case")]
+		public veterans_veterans_cd_cases cdcaseaccrualsfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_case_accruals_fkey_f_payment
+		/// </summary>
+		[Association(ThisKey="f_payment", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_case_accruals_fkey_f_payment")]
+		public subsidy_subsidy_cd_payments cdcaseaccrualsfkeyfpayment { get; set; }
+
+		/// <summary>
+		/// cd_case_accruals_fkey_f_payment_history
+		/// </summary>
+		[Association(ThisKey="f_payment_history", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_case_accruals_fkey_f_payment_history")]
+		public subsidy_subsidy_cd_payments_history cdcaseaccrualsfkeyfpaymenthistory { get; set; }
 
 		#endregion
 	}
@@ -19439,7 +20223,15 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Идентификатор]
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid        id                   { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата решения о назначении]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_appointment        { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Номер решения о назначении]
+		/// </summary>
+		[Column,        Nullable] public string      c_number_appointment { get; set; } // character varying(10)
 
 		#region Associations
 
@@ -19465,7 +20257,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Идентификатор]
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+		[PrimaryKey, NotNull] public Guid    id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Площадь жилого дома]
+		/// [XMeta.DisplayFormat=N2]
+		/// </summary>
+		[Column,     NotNull] public decimal n_area { get; set; } // numeric(10,2)
 
 		#region Associations
 
@@ -19552,7 +20349,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Идентификатор]
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+		[PrimaryKey, NotNull] public Guid    id         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Расстояние]
+		/// [XMeta.DisplayFormat=N2]
+		/// </summary>
+		[Column,     NotNull] public decimal n_distance { get; set; } // numeric(10,2)
 
 		#region Associations
 
@@ -19578,7 +20380,21 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Идентификатор]
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid id            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Место работы]
+		/// </summary>
+		[Column,        Nullable] public int? f_company     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Числитель]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int  n_numerator   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Знаменатель]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public int  n_denominator { get; set; } // integer
 
 		#region Associations
 
@@ -19587,6 +20403,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_communal_fkey_id")]
 		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		/// <summary>
+		/// cd_case_communal_fkey_f_company
+		/// </summary>
+		[Association(ThisKey="f_company", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_case_communal_fkey_f_company")]
+		public subsidy_subsidy_cs_companies cdcasecommunalfkeyfcompany { get; set; }
 
 		#endregion
 	}
@@ -19604,7 +20426,35 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Идентификатор]
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[PrimaryKey, NotNull] public Guid id { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid      id                  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_card_series       { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string    c_card_number       { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?     f_card_type         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public decimal?  n_first_month_summ  { get; set; } // numeric(28,8)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public decimal?  n_second_month_summ { get; set; } // numeric(28,8)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public decimal?  n_third_month_summ  { get; set; } // numeric(28,8)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public DateTime? d_upload_date       { get; set; } // timestamp (6) without time zone
 
 		#region Associations
 
@@ -19613,6 +20463,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_comp_movement_fkey_id")]
 		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		/// <summary>
+		/// FK_veterans_cd_case_comp_movement_f_card_type_EABAA60C
+		/// </summary>
+		[Association(ThisKey="f_card_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_veterans_cd_case_comp_movement_f_card_type_EABAA60C")]
+		public veterans_veterans_cs_card_types cdcasecompmovementfcardtypeEABAA60C { get; set; }
 
 		#endregion
 	}
@@ -19624,86 +20480,104 @@ namespace SocialTargetHelpAPIServer.Models
 	[Table(Schema="veterans", Name="cd_case_comp_res")]
 	public partial class veterans_veterans_cd_case_comp_res
 	{
-		[PrimaryKey, NotNull    ] public Guid   id                   { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid     id                   { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=КР]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public int    c_district_code      { get; set; } // integer
+		[Column,     NotNull    ] public int      c_district_code      { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=N ЛД]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public string c_deal_number        { get; set; } // character varying(20)
+		[Column,     NotNull    ] public string   c_deal_number        { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Фамилия]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public string c_last_name          { get; set; } // character varying(255)
+		[Column,     NotNull    ] public string   c_last_name          { get; set; } // character varying(255)
 		/// <summary>
 		/// [XMeta.DisplayName=Имя]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public string c_first_name         { get; set; } // character varying(255)
+		[Column,     NotNull    ] public string   c_first_name         { get; set; } // character varying(255)
 		/// <summary>
 		/// [XMeta.DisplayName=Отчество]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string c_middle_name        { get; set; } // character varying(255)
+		[Column,        Nullable] public string   c_middle_name        { get; set; } // character varying(255)
 		/// <summary>
 		/// [XMeta.DisplayName=Код адреса]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string c_address_code       { get; set; } // character varying(50)
+		[Column,        Nullable] public string   c_address_code       { get; set; } // character varying(50)
 		/// <summary>
 		/// [XMeta.DisplayName=Нас.пункт]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string c_locality_name      { get; set; } // character varying(256)
+		[Column,        Nullable] public string   c_locality_name      { get; set; } // character varying(256)
 		/// <summary>
 		/// [XMeta.DisplayName=Улица]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string c_street             { get; set; } // character varying(256)
+		[Column,        Nullable] public string   c_street             { get; set; } // character varying(256)
 		/// <summary>
 		/// [XMeta.DisplayName=Дом]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string c_house              { get; set; } // character varying(5)
+		[Column,        Nullable] public string   c_house              { get; set; } // character varying(5)
 		/// <summary>
 		/// [XMeta.DisplayName=Корп.]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string c_corps              { get; set; } // character varying(5)
+		[Column,        Nullable] public string   c_corps              { get; set; } // character varying(5)
 		/// <summary>
 		/// [XMeta.DisplayName=Кв]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string c_flat               { get; set; } // character varying(10)
+		[Column,        Nullable] public string   c_flat               { get; set; } // character varying(10)
 		/// <summary>
 		/// [XMeta.DisplayName=Телефон]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string c_phone_number       { get; set; } // character varying(20)
+		[Column,        Nullable] public string   c_phone_number       { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Лиц. счет]
+		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string c_account_number     { get; set; } // character varying(20)
+		[Column,        Nullable] public string   c_account_number     { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Усл.тел]
 		/// </summary>
-		[Column,        Nullable] public short? c_phone_compensation { get; set; } // smallint
+		[Column,        Nullable] public short?   c_phone_compensation { get; set; } // smallint
 		/// <summary>
 		/// [XMeta.DisplayName=Усл.радио]
 		/// </summary>
-		[Column,        Nullable] public short? c_radio_compensation { get; set; } // smallint
+		[Column,        Nullable] public short?   c_radio_compensation { get; set; } // smallint
 		/// <summary>
 		/// [XMeta.DisplayName=Усл.КТВ]
 		/// </summary>
-		[Column,        Nullable] public short? c_tv_compensation    { get; set; } // smallint
+		[Column,        Nullable] public short?   c_tv_compensation    { get; set; } // smallint
 		/// <summary>
 		/// [XMeta.DisplayName=Пакет]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public int    f_package            { get; set; } // integer
+		[Column,     NotNull    ] public int      f_package            { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=ИНН]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public string inn                  { get; set; } // character varying
+		[Column,        Nullable] public string   inn                  { get; set; } // character varying
 		/// <summary>
 		/// [XMeta.DisplayName=Дело]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public Guid   f_case               { get; set; } // uuid
+		[Column,     NotNull    ] public Guid     f_case               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки ответа]
+		/// [XMeta.DisplayFormat=g]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime d_created            { get; set; } // timestamp (6) without time zone
 
 		#region Associations
 
@@ -19839,23 +20713,17 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Идентификатор]
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[PrimaryKey, NotNull    ] public Guid        id           { get; set; } // uuid
+		[PrimaryKey, NotNull] public Guid id          { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Достиг пенсионного возраста]
-		/// [XMeta.ReadOnly]
 		/// </summary>
-		[Column,     NotNull    ] public bool        b_pensioner  { get; set; } // boolean
+		[Column,     NotNull] public bool b_pensioner { get; set; } // boolean
 		/// <summary>
 		/// [XMeta.DisplayName=Работает]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,     NotNull    ] public bool        b_worked     { get; set; } // boolean
-		/// <summary>
-		/// [XMeta.DisplayName=На дату]
-		/// [XMeta.VisibleInListView=false]
-		/// </summary>
-		[Column,        Nullable] public NpgsqlDate? d_work_start { get; set; } // date
+		[Column,     NotNull] public bool b_worked    { get; set; } // boolean
 
 		#region Associations
 
@@ -19864,6 +20732,93 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_case_edv_trud_fkey_id")]
 		public veterans_veterans_cd_cases cd_case { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Лицевой счет]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_case_fond_cap_r")]
+	public partial class veterans_veterans_cd_case_fond_cap_r
+	{
+		[PrimaryKey, NotNull    ] public Guid     id            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Лицевой счет]
+		/// </summary>
+		[Column,     NotNull    ] public string   c_account     { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма задолженности]
+		/// </summary>
+		[Column,        Nullable] public decimal? n_summ        { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Фамилия]
+		/// </summary>
+		[Column,        Nullable] public string   c_last_name   { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Имя]
+		/// </summary>
+		[Column,        Nullable] public string   c_first_name  { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Отчество]
+		/// </summary>
+		[Column,        Nullable] public string   c_middle_name { get; set; } // character varying(50)
+		/// <summary>
+		/// [XMeta.DisplayName=Код адреса (КЛАДР)]
+		/// </summary>
+		[Column,        Nullable] public string   c_cladr_code  { get; set; } // character varying(20)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес]
+		/// </summary>
+		[Column,        Nullable] public string   c_address     { get; set; } // character varying(200)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер дома]
+		/// </summary>
+		[Column,        Nullable] public string   c_house       { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Корпус]
+		/// </summary>
+		[Column,        Nullable] public string   c_corps       { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Квартира]
+		/// </summary>
+		[Column,        Nullable] public string   c_flat        { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Площадь]
+		/// [XMeta.DisplayFormat=N2]
+		/// </summary>
+		[Column,        Nullable] public decimal? n_area        { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public int      f_package     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=ИНН]
+		/// </summary>
+		[Column,        Nullable] public string   inn           { get; set; } // character varying
+		/// <summary>
+		/// [XMeta.DisplayName=Дело]
+		/// </summary>
+		[Column,     NotNull    ] public Guid     f_case        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки ответа]
+		/// [XMeta.DisplayFormat=g]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime d_created     { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// cd_case_fond_cap_r_f_cd_cases
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_fond_cap_r_f_cd_cases")]
+		public veterans_veterans_cd_cases cdcasefondcaprfcdcas { get; set; }
+
+		/// <summary>
+		/// cd_case_fond_cap_r_f_cd_request_response_files
+		/// </summary>
+		[Association(ThisKey="f_package", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_case_fond_cap_r_f_cd_request_response_files")]
+		public veterans_veterans_cd_request_response_files cdcasefondcaprfcdrequestresponsefile { get; set; }
 
 		#endregion
 	}
@@ -19958,116 +20913,143 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Идентификатор]
 		/// [XMeta.IgnoreForGenerate]
 		/// </summary>
-		[PrimaryKey, NotNull    ] public Guid        id                  { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid        id                   { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Номер]
 		/// [XMeta.VisibleInDetailView=false]
 		/// </summary>
-		[Column,     NotNull    ] public string      c_number_addition   { get; set; } // character varying(10)
+		[Column,     NotNull    ] public string      c_number_addition    { get; set; } // character varying(10)
 		/// <summary>
 		/// [XMeta.DisplayName=Район]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull    ] public int         f_district          { get; set; } // integer
+		[Column,     NotNull    ] public int         f_district           { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес]
 		/// </summary>
-		[Column,     NotNull    ] public string      c_address           { get; set; } // character varying(300)
+		[Column,     NotNull    ] public string      c_address            { get; set; } // character varying(300)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес (код ФИАС)]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public Guid?       f_address_fias_code { get; set; } // uuid
+		[Column,        Nullable] public Guid?       f_address_fias_code  { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Идентификатор дома ФИАС]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,        Nullable] public Guid?       f_house_fias_code   { get; set; } // uuid
+		[Column,        Nullable] public Guid?       f_house_fias_code    { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=МСП]
 		/// [XMeta.Raw=ImmediatePostData]
 		/// [XMeta.ReadOnly]
 		/// </summary>
-		[Column,     NotNull    ] public Guid        f_service           { get; set; } // uuid
+		[Column,     NotNull    ] public Guid        f_service            { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Категория]
 		/// </summary>
-		[Column,     NotNull    ] public Guid        f_category          { get; set; } // uuid
+		[Column,     NotNull    ] public Guid        f_category           { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Статус]
 		/// [XMeta.ReadOnly]
 		/// </summary>
-		[Column,     NotNull    ] public Guid        f_status            { get; set; } // uuid
+		[Column,     NotNull    ] public Guid        f_status             { get; set; } // uuid
 		/// <summary>
-		/// [XMeta.DisplayName=Дата обращения]
+		/// [XMeta.DisplayName=Дата первичного обращения]
 		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,     NotNull    ] public NpgsqlDate  d_appeal            { get; set; } // date
+		[Column,     NotNull    ] public NpgsqlDate  d_appeal             { get; set; } // date
 		/// <summary>
 		/// [XMeta.DisplayName=Основание прекращения]
 		/// [XMeta.Raw=DataSourceCriteria("f_type.c_alias == 'stop'")]
 		/// [XMeta.VisibleInListView=false]
+		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,        Nullable] public Guid?       f_reason_stop       { get; set; } // uuid
+		[Column,        Nullable] public Guid?       f_reason_stop        { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Основание отказа]
 		/// [XMeta.Raw=DataSourceCriteria("f_type.c_alias == 'refuse'")]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public Guid?       f_reason_refuse     { get; set; } // uuid
+		[Column,        Nullable] public Guid?       f_reason_refuse      { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Расходы]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,     NotNull    ] public decimal     n_cost              { get; set; } // numeric(10,2)
+		[Column,     NotNull    ] public decimal     n_cost               { get; set; } // numeric(10,2)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес (квартира)]
 		/// [XMeta.Browsable=false]
 		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_flat      { get; set; } // character varying(20)
+		[Column,        Nullable] public string      c_address_flat       { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Адрес (корпус)]
 		/// [XMeta.Browsable=false]
 		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,        Nullable] public string      c_address_corpus    { get; set; } // character varying(20)
+		[Column,        Nullable] public string      c_address_corpus     { get; set; } // character varying(20)
 		/// <summary>
 		/// [XMeta.DisplayName=Физлицо]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public int?        f_representer_pers  { get; set; } // integer
+		[Column,        Nullable] public int?        f_representer_pers   { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Уполномоченный представитель]
 		/// [XMeta.VisibleInListView=false]
 		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,     NotNull    ] public bool        b_representer       { get; set; } // boolean
+		[Column,     NotNull    ] public bool        b_representer        { get; set; } // boolean
 		/// <summary>
 		/// [XMeta.DisplayName=Вид документа]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public int?        f_rep_doc           { get; set; } // integer
+		[Column,        Nullable] public int?        f_rep_doc            { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Кем выдан]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public int?        f_rep_doc_issuer    { get; set; } // integer
+		[Column,        Nullable] public int?        f_rep_doc_issuer     { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Дата выдачи]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public NpgsqlDate? d_rep_doc_issued    { get; set; } // date
+		[Column,        Nullable] public NpgsqlDate? d_rep_doc_issued     { get; set; } // date
 		/// <summary>
 		/// [XMeta.DisplayName=Серия]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_rep_doc_series    { get; set; } // character varying(10)
+		[Column,        Nullable] public string      c_rep_doc_series     { get; set; } // character varying(10)
 		/// <summary>
 		/// [XMeta.DisplayName=Номер]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,        Nullable] public string      c_rep_doc_number    { get; set; } // character varying(10)
+		[Column,        Nullable] public string      c_rep_doc_number     { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Основание назначения выплаты]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_appointment_reason { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Контроль дела]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public bool        b_control            { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Причина постановки на контроль]
+		/// [XMeta.Raw=DataSourceCriteria("f_type.c_alias == 'control'")]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?       f_reason_control     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата прекращения]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_stoped             { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Причина доработки]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_rework_reason      { get; set; } // character varying(500)
 
 		#region Associations
 
@@ -20076,6 +21058,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="id", OtherKey="id", CanBeNull=false, Relationship=Relationship.OneToOne, KeyName="cd_cases_fkey_id")]
 		public common_common_cd_case_base cd_case_base { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_appointment_reason
+		/// </summary>
+		[Association(ThisKey="f_appointment_reason", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_appointment_reason")]
+		public veterans_veterans_cs_appointment_reasons cdcasesfkeyfappointmentreason { get; set; }
 
 		/// <summary>
 		/// cd_cases_fkey_f_category
@@ -20088,6 +21076,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="f_district", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_district")]
 		public public_cs_districts cdcasesfkeyfdistrict { get; set; }
+
+		/// <summary>
+		/// cd_cases_fkey_f_reason_control
+		/// </summary>
+		[Association(ThisKey="f_reason_control", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_cases_fkey_f_reason_control")]
+		public veterans_veterans_cs_reasons cdcasesfkeyfreasoncontrol { get; set; }
 
 		/// <summary>
 		/// cd_cases_fkey_f_reason_refuse
@@ -20177,6 +21171,54 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="f_company", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_management_companies_fkey_f_company")]
 		public subsidy_subsidy_cs_management_companies cdcasesmanagementcompaniesfkeyfcompany { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Операторы связи]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_cases_telecom_operators")]
+	public partial class veterans_veterans_cd_cases_telecom_operators
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid    id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid    f_case    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Оператор связи]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public Guid    f_company { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Лицевой счёт]
+		/// </summary>
+		[Column,        Nullable] public string  c_account { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Тариф]
+		/// [XMeta.DisplayFormat=N4]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public decimal n_tarif   { get; set; } // numeric(10,4)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_cases_telecom_operators_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_telecom_operators_fkey_f_case")]
+		public veterans_veterans_cd_cases cdcasestelecomoperatorsfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_cases_telecom_operators_fkey_f_company
+		/// </summary>
+		[Association(ThisKey="f_company", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_cases_telecom_operators_fkey_f_company")]
+		public common_common_cs_telecom_operators cdcasestelecomoperatorsfkeyfcompany { get; set; }
 
 		#endregion
 	}
@@ -20308,6 +21350,72 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
+	/// [XMeta.DisplayName=ЕУПП]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_eupp")]
+	public partial class veterans_veterans_cd_eupp
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid     id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=МСП]
+		/// </summary>
+		[Column,     NotNull] public Guid     f_service { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания]
+		/// [XMeta.DisplayFormat=g]
+		/// </summary>
+		[Column,     NotNull] public DateTime d_created { get; set; } // timestamp (6) without time zone
+
+		#region Associations
+
+		/// <summary>
+		/// cd_eupp_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_eupp_fkey_f_service")]
+		public veterans_veterans_cs_services cdeuppfkeyfservice { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Документы для ЕУПП]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_eupp_docs")]
+	public partial class veterans_veterans_cd_eupp_docs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Ссылка]
+		/// </summary>
+		[Column,     NotNull] public string c_url  { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=ЕУПП]
+		/// </summary>
+		[Column,     NotNull] public Guid   f_eupp { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_eupp_docs_fkey_f_eupp
+		/// </summary>
+		[Association(ThisKey="f_eupp", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_eupp_docs_fkey_f_eupp")]
+		public veterans_veterans_cd_eupp cdeuppdocsfkeyfeupp { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
 	/// [XMeta.DisplayName=Состав семьи]
 	/// [XMeta.IgnoreForNavigate]
 	/// </summary>
@@ -20317,30 +21425,54 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Идентификатор]
 		/// </summary>
-		[PrimaryKey, NotNull] public Guid id            { get; set; } // uuid
+		[PrimaryKey, NotNull    ] public Guid   id                  { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Назначение]
 		/// [XMeta.Browsable=false]
 		/// </summary>
-		[Column,     NotNull] public Guid f_case        { get; set; } // uuid
+		[Column,     NotNull    ] public Guid   f_case              { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Физлицо]
 		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
-		[Column,     NotNull] public int  f_person      { get; set; } // integer
+		[Column,     NotNull    ] public int    f_person            { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Числитель]
+		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,     NotNull] public int  n_numerator   { get; set; } // integer
+		[Column,     NotNull    ] public int    n_numerator         { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Знаменатель]
+		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,     NotNull] public int  n_denominator { get; set; } // integer
+		[Column,     NotNull    ] public int    n_denominator       { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Достиг пенсионного возраста]
-		/// [XMeta.ReadOnly]
+		/// [XMeta.VisibleInListView=false]
 		/// </summary>
-		[Column,     NotNull] public bool b_pensioner   { get; set; } // boolean
+		[Column,     NotNull    ] public bool   b_pensioner         { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации]
+		/// [XMeta.VisibleInDetailView=false]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,     NotNull    ] public string c_address_reg       { get; set; } // character varying(500)
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации(ФИАС)]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_address_reg_fias  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Адрес регистрации(ФИАС) дом]
+		/// [XMeta.Browsable=false]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_address_reg_house { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Родственное отношение]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_relation          { get; set; } // integer
 
 		#region Associations
 
@@ -20348,13 +21480,326 @@ namespace SocialTargetHelpAPIServer.Models
 		/// cd_family_fkey_f_case
 		/// </summary>
 		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_family_fkey_f_case")]
-		public veterans_veterans_cd_case_capital_repair cdfamilyfkeyfcase { get; set; }
+		public veterans_veterans_cd_cases cdfamilyfkeyfcase { get; set; }
 
 		/// <summary>
 		/// cd_family_fkey_f_person
 		/// </summary>
 		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_family_fkey_f_person")]
 		public public_cd_persons cdfamilyfkeyfperson { get; set; }
+
+		/// <summary>
+		/// cd_family_fkey_f_relation
+		/// </summary>
+		[Association(ThisKey="f_relation", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_family_fkey_f_relation")]
+		public subsidy_subsidy_cs_family_relations cdfamilyfkeyfrelation { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Бесплатная юридическая помощь]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_free_jur_help")]
+	public partial class veterans_veterans_cd_free_jur_help
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid       id         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=ФЛ]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public int        f_person   { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Дата регистрации заявления]
+		/// </summary>
+		[Column,     NotNull] public NpgsqlDate d_register { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull] public Guid       f_service  { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_free_jur_help_fkey_f_person
+		/// </summary>
+		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_free_jur_help_fkey_f_person")]
+		public public_cd_persons cdfreejurhelpfkeyfperson { get; set; }
+
+		/// <summary>
+		/// cd_free_jur_help_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_free_jur_help_fkey_f_service")]
+		public veterans_veterans_cs_services cdfreejurhelpfkeyfservice { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=ЖКУ]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_ghku")]
+	public partial class veterans_veterans_cd_ghku
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid    id               { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Год]
+		/// </summary>
+		[Column,     NotNull] public int     n_year           { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Месяц]
+		/// </summary>
+		[Column,     NotNull] public int     f_month          { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid    f_case           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Антенна]
+		/// </summary>
+		[Column,     NotNull] public decimal n_antenna        { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Радио]
+		/// </summary>
+		[Column,     NotNull] public decimal n_radio          { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Телефон]
+		/// </summary>
+		[Column,     NotNull] public decimal n_phone          { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Коммунальные услуги]
+		/// </summary>
+		[Column,     NotNull] public decimal n_communal       { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Жилищные услуги]
+		/// </summary>
+		[Column,     NotNull] public decimal n_livin          { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Капитальный ремонт]
+		/// </summary>
+		[Column,     NotNull] public decimal n_capital_repair { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Кол-во ПМЖ]
+		/// </summary>
+		[Column,     NotNull] public int     n_count_family   { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_ghku_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_ghku_fkey_f_case")]
+		public veterans_veterans_cd_cases cdghkufkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_ghku_fkey_f_month
+		/// </summary>
+		[Association(ThisKey="f_month", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_ghku_fkey_f_month")]
+		public common_common_cs_months cdghkufkeyfmonth { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Услуги ЖКУ]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_ghku_services")]
+	public partial class veterans_veterans_cd_ghku_services
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid    id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=ЖКУ]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid    f_ghku { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга]
+		/// </summary>
+		[Column,     NotNull] public Guid    f_type { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// </summary>
+		[Column,     NotNull] public decimal n_summ { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_ghku_services_fkey_f_ghku
+		/// </summary>
+		[Association(ThisKey="f_ghku", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_ghku_services_fkey_f_ghku")]
+		public veterans_veterans_cd_ghku cdghkuservicesfkeyfghku { get; set; }
+
+		/// <summary>
+		/// cd_ghku_services_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_ghku_services_fkey_f_type")]
+		public subsidy_subsidy_cs_ghku_types cdghkuservicesfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Случаи бесплатной юридической помощи]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_jur_help_cases")]
+	public partial class veterans_veterans_cd_jur_help_cases
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Юрпомощь]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid f_jur_help { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Случай]
+		/// </summary>
+		[Column,     NotNull] public Guid f_case     { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_jur_help_cases_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_jur_help_cases_fkey_f_case")]
+		public veterans_veterans_cs_jur_help_cases cdjurhelpcasesfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_jur_help_cases_fkey_f_jur_help
+		/// </summary>
+		[Association(ThisKey="f_jur_help", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_jur_help_cases_fkey_f_jur_help")]
+		public veterans_veterans_cd_free_jur_help cdjurhelpcasesfkeyfjurhelp { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Связь юридической помощи с типами]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_jur_help_types")]
+	public partial class veterans_veterans_cd_jur_help_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Юридическая помощь]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid f_jur_help { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Вид]
+		/// </summary>
+		[Column,     NotNull] public Guid f_type     { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_jur_help_types_fkey_f_jur_help
+		/// </summary>
+		[Association(ThisKey="f_jur_help", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_jur_help_types_fkey_f_jur_help")]
+		public veterans_veterans_cd_free_jur_help cdjurhelptypesfkeyfjurhelp { get; set; }
+
+		/// <summary>
+		/// cd_jur_help_types_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_jur_help_types_fkey_f_type")]
+		public veterans_veterans_cs_jur_help_types cdjurhelptypesfkeyftype { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Открытие месяца]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_open_months")]
+	public partial class veterans_veterans_cd_open_months
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid     id         { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=ОСЗН]
+		/// </summary>
+		[Column,     NotNull] public int      f_org      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Тип МСП]
+		/// </summary>
+		[Column,     NotNull] public Guid     f_msp_type { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Год]
+		/// </summary>
+		[Column,     NotNull] public int      n_year     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Месяц]
+		/// </summary>
+		[Column,     NotNull] public int      f_month    { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Пользователь]
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,     NotNull] public Guid     f_user     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата и время]
+		/// [XMeta.DisplayFormat=g]
+		/// </summary>
+		[Column,     NotNull] public DateTime d_date     { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Действие]
+		/// </summary>
+		[Column,     NotNull] public Guid     f_action   { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_open_months_fkey_f_action
+		/// </summary>
+		[Association(ThisKey="f_action", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_open_months_fkey_f_action")]
+		public veterans_veterans_cs_month_actions cdopenmonthsfkeyfaction { get; set; }
+
+		/// <summary>
+		/// cd_open_months_fkey_f_month
+		/// </summary>
+		[Association(ThisKey="f_month", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_open_months_fkey_f_month")]
+		public common_common_cs_months cdopenmonthsfkeyfmonth { get; set; }
+
+		/// <summary>
+		/// cd_open_months_fkey_f_msp_type
+		/// </summary>
+		[Association(ThisKey="f_msp_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_open_months_fkey_f_msp_type")]
+		public veterans_veterans_cs_service_types cdopenmonthsfkeyfmsptype { get; set; }
+
+		/// <summary>
+		/// cd_open_months_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_open_months_fkey_f_org")]
+		public public_cs_organizations cdopenmonthsfkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_open_months_fkey_f_user
+		/// </summary>
+		[Association(ThisKey="f_user", OtherKey="Oid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_open_months_fkey_f_user")]
+		public public_UserPolicyModel cdopenmonthsfkeyfuser { get; set; }
 
 		#endregion
 	}
@@ -20428,6 +21873,7 @@ namespace SocialTargetHelpAPIServer.Models
 		/// <summary>
 		/// [XMeta.DisplayName=Документ]
 		/// [XMeta.Raw=DataSourceCriteria("f_base_doc_veterans_cs_service_category_base_docsCollection[f_service_citizen_category.f_category == '@This.f_pers_category.f_category']")]
+		/// [XMeta.Raw=ImmediatePostData]
 		/// </summary>
 		[Column,     NotNull    ] public int         f_doc           { get; set; } // integer
 		/// <summary>
@@ -20443,10 +21889,6 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Column,        Nullable] public NpgsqlDate? d_issue         { get; set; } // date
 		/// <summary>
-		/// [XMeta.DisplayName=Кем выдан]
-		/// </summary>
-		[Column,        Nullable] public string      c_issuer        { get; set; } // character varying(300)
-		/// <summary>
 		/// [XMeta.DisplayName=С]
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
@@ -20456,14 +21898,39 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
 		[Column,        Nullable] public NpgsqlDate? d_doc_end       { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Район получения пенсии]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public int?        f_district      { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Кем выдан]
+		/// </summary>
+		[Column,        Nullable] public int?        f_issuer        { get; set; } // integer
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string      c_issuer        { get; set; } // character varying(300)
 
 		#region Associations
+
+		/// <summary>
+		/// cd_person_category_docs_fkey_f_district
+		/// </summary>
+		[Association(ThisKey="f_district", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_person_category_docs_fkey_f_district")]
+		public public_cs_districts cdpersoncategorydocsfkeyfdistrict { get; set; }
 
 		/// <summary>
 		/// cd_person_category_docs_fkey_f_doc
 		/// </summary>
 		[Association(ThisKey="f_doc", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_category_docs_fkey_f_doc")]
 		public public_cs_document_types cdpersoncategorydocsfkeyfdoc { get; set; }
+
+		/// <summary>
+		/// cd_person_category_docs_fkey_f_issuer
+		/// </summary>
+		[Association(ThisKey="f_issuer", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_person_category_docs_fkey_f_issuer")]
+		public public_cs_document_issues_orgs cdpersoncategorydocsfkeyfissuer { get; set; }
 
 		/// <summary>
 		/// cd_person_category_docs_fkey_f_per_category
@@ -20534,6 +22001,87 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="f_person", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_person_citizen_categories_fkey_f_person")]
 		public public_cd_persons cdpersoncitizencategoriesfkeyfperson { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Перерасчёты]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_recalculations")]
+	public partial class veterans_veterans_cd_recalculations
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid       id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата создания]
+		/// [XMeta.DisplayFormat=g]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime   d_created { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,     NotNull    ] public int        n_number  { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=С]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_begin   { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Основание]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_reason  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=ОСЗН]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public int        f_org     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=МСП]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_service { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.IgnoreForGenerate]
+		/// </summary>
+		[Column,        Nullable] public string     c_result  { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Статистика]
+		/// [XMeta.VisibleInListView=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_info    { get; set; } // text
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_bigger  { get; set; } // text
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_less    { get; set; } // text
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,        Nullable] public string     c_equal   { get; set; } // text
+
+		#region Associations
+
+		/// <summary>
+		/// cd_recalculations_fkey_f_org
+		/// </summary>
+		[Association(ThisKey="f_org", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_recalculations_fkey_f_org")]
+		public public_cs_organizations cdrecalculationsfkeyforg { get; set; }
+
+		/// <summary>
+		/// cd_recalculations_fkey_f_reason
+		/// </summary>
+		[Association(ThisKey="f_reason", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_recalculations_fkey_f_reason")]
+		public veterans_veterans_cs_recalculation_reasons cdrecalculationsfkeyfreason { get; set; }
+
+		/// <summary>
+		/// cd_recalculations_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_recalculations_fkey_f_service")]
+		public veterans_veterans_cs_services cdrecalculationsfkeyfservice { get; set; }
 
 		#endregion
 	}
@@ -20618,6 +22166,249 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Дата загрузки ответа]
 		/// </summary>
 		[Column,     Nullable] public NpgsqlDate? d_response_loading_date { get; set; } // date
+		[Column,     Nullable] public int?        ObjectType              { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// FK_veterans_cd_request_response_files_ObjectType_A4725007
+		/// </summary>
+		[Association(ThisKey="ObjectType", OtherKey="OID", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="FK_veterans_cd_request_response_files_ObjectType_A4725007")]
+		public public_XPObjectType cdrequestresponsefilesObjectTypeA { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Услуги связи]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_telecom_services")]
+	public partial class veterans_veterans_cd_telecom_services
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid    id        { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid    f_ghku    { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Услуга]
+		/// </summary>
+		[Column,     NotNull] public Guid    f_service { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма]
+		/// </summary>
+		[Column,     NotNull] public decimal n_summ    { get; set; } // numeric(10,2)
+
+		#region Associations
+
+		/// <summary>
+		/// cd_telecom_services_fkey_f_ghku
+		/// </summary>
+		[Association(ThisKey="f_ghku", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_telecom_services_fkey_f_ghku")]
+		public veterans_veterans_cd_ghku cdtelecomservicesfkeyfghku { get; set; }
+
+		/// <summary>
+		/// cd_telecom_services_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_telecom_services_fkey_f_service")]
+		public common_common_cs_communication_services cdtelecomservicesfkeyfservice { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=История по транспортной карте]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_transport_card_histories")]
+	public partial class veterans_veterans_cd_transport_card_histories
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid     id                  { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Карта]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid     f_card              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма в 1-й мес.]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_first_month_summ  { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма во 2-й мес.]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_second_month_summ { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Сумма в 3-й мес.]
+		/// </summary>
+		[Column,     NotNull    ] public decimal  n_third_month_summ  { get; set; } // numeric(10,2)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки ответа]
+		/// [XMeta.ReadOnly]
+		/// </summary>
+		[Column,     NotNull    ] public DateTime d_upload_date       { get; set; } // timestamp (6) without time zone
+		/// <summary>
+		/// [XMeta.DisplayName=Добавлено вручную]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,     NotNull    ] public bool     b_manual_added      { get; set; } // boolean
+		/// <summary>
+		/// [XMeta.DisplayName=Квартал]
+		/// </summary>
+		[Column,        Nullable] public int?     f_quarter           { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cd_transport_card_histories_fkey_f_card
+		/// </summary>
+		[Association(ThisKey="f_card", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_transport_card_histories_fkey_f_card")]
+		public veterans_veterans_cd_transport_cards cdtransportcardhistoriesfkeyfcard { get; set; }
+
+		/// <summary>
+		/// cd_transport_card_histories_fkey_f_quarter
+		/// </summary>
+		[Association(ThisKey="f_quarter", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_transport_card_histories_fkey_f_quarter")]
+		public veterans_veterans_cs_quarters cdtransportcardhistoriesfkeyfquarter { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Транспортные карты]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_transport_cards")]
+	public partial class veterans_veterans_cd_transport_cards
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id          { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_case      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Серия]
+		/// </summary>
+		[Column,        Nullable] public string c_series    { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,        Nullable] public string c_number    { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Тип]
+		/// </summary>
+		[Column,     NotNull    ] public Guid   f_card_type { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_transport_cards_fkey_f_card_type
+		/// </summary>
+		[Association(ThisKey="f_card_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_transport_cards_fkey_f_card_type")]
+		public veterans_veterans_cs_card_types cdtransportcardsfkeyfcardtype { get; set; }
+
+		/// <summary>
+		/// cd_transport_cards_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_transport_cards_fkey_f_case")]
+		public veterans_veterans_cd_case_comp_movement cdtransportcardsfkeyfcase { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Имя файла]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_transport_cards_response")]
+	public partial class veterans_veterans_cd_transport_cards_response
+	{
+		[PrimaryKey, NotNull    ] public Guid        id            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Имя файла]
+		/// </summary>
+		[Column,        Nullable] public string      c_file_name   { get; set; } // character varying
+		/// <summary>
+		/// [XMeta.DisplayName=Файл ответа]
+		/// </summary>
+		[Column,        Nullable] public string      c_file_path   { get; set; } // character varying
+		/// <summary>
+		/// [XMeta.DisplayName=Дата загрузки файла]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_upload_date { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Квартал]
+		/// </summary>
+		[Column,        Nullable] public string      c_quarter     { get; set; } // character varying
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Документы ветеранов]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cd_trud_docs")]
+	public partial class veterans_veterans_cd_trud_docs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid       id           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Назначение]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid       f_case       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Серия]
+		/// </summary>
+		[Column,     NotNull    ] public string     c_series     { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Номер]
+		/// </summary>
+		[Column,     NotNull    ] public string     c_number     { get; set; } // character varying(10)
+		/// <summary>
+		/// [XMeta.DisplayName=Дата выдачи]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate d_date_issue { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Кем выдан]
+		/// </summary>
+		[Column,        Nullable] public int?       f_issuer     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Статус]
+		/// </summary>
+		[Column,        Nullable] public Guid?      f_status     { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cd_trud_docs_fkey_f_case
+		/// </summary>
+		[Association(ThisKey="f_case", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cd_trud_docs_fkey_f_case")]
+		public veterans_veterans_cd_case_edv_trud cdtruddocsfkeyfcase { get; set; }
+
+		/// <summary>
+		/// cd_trud_docs_fkey_f_issuer
+		/// </summary>
+		[Association(ThisKey="f_issuer", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_trud_docs_fkey_f_issuer")]
+		public public_cs_document_issues_orgs cdtruddocsfkeyfissuer { get; set; }
+
+		/// <summary>
+		/// cd_trud_docs_fkey_f_status
+		/// </summary>
+		[Association(ThisKey="f_status", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cd_trud_docs_fkey_f_status")]
+		public veterans_veterans_cs_trud_doc_statuses cdtruddocsfkeyfstatu { get; set; }
+
+		#endregion
 	}
 
 	/// <summary>
@@ -20631,7 +22422,7 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[PrimaryKey, NotNull] public Guid       id      { get; set; } // uuid
 		/// <summary>
-		/// [XMeta.DisplayName=Дата сведения]
+		/// [XMeta.DisplayName=Дата внесения сведений]
 		/// </summary>
 		[Column,     NotNull] public NpgsqlDate d_info  { get; set; } // date
 		/// <summary>
@@ -20667,6 +22458,23 @@ namespace SocialTargetHelpAPIServer.Models
 		public public_cs_document_types cdworkfactsfkeyfdoc { get; set; }
 
 		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Основания назначения выплаты]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_appointment_reasons")]
+	public partial class veterans_veterans_cs_appointment_reasons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
 	}
 
 	/// <summary>
@@ -20734,6 +22542,24 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
+	/// [XMeta.DisplayName=Типы карт]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_card_types")]
+	public partial class veterans_veterans_cs_card_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+	}
+
+	/// <summary>
 	/// [XMeta.DisplayName=Категории граждан]
 	/// [XMeta.DefaultProperty=c_name]
 	/// </summary>
@@ -20778,6 +22604,134 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
+	/// [XMeta.DisplayName=Константы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_consts")]
+	public partial class veterans_veterans_cs_consts
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid    id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string  c_name  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull] public string  c_alias { get; set; } // character varying(100)
+		/// <summary>
+		/// [XMeta.DisplayName=Значение]
+		/// [XMeta.DisplayFormat=N4]
+		/// </summary>
+		[Column,     NotNull] public decimal n_value { get; set; } // numeric(10,4)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Федеральное ЕДВ]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_fed_edv")]
+	public partial class veterans_veterans_cs_fed_edv
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Случаи бесплатной юридической помощи]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_jur_help_cases")]
+	public partial class veterans_veterans_cs_jur_help_cases
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(1000)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Виды бесплатной юридической помощи]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_jur_help_types")]
+	public partial class veterans_veterans_cs_jur_help_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Минимальный размер взноса за капремонт]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_min_capital_repair_payments")]
+	public partial class veterans_veterans_cs_min_capital_repair_payments
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_begin { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end   { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Значение]
+		/// [XMeta.DisplayFormat=N2]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_value { get; set; } // numeric(10,2)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Действия по открытию месяца]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_month_actions")]
+	public partial class veterans_veterans_cs_month_actions
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name  { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Псевдоним]
+		/// </summary>
+		[Column,     NotNull] public string c_alias { get; set; } // character varying(100)
+	}
+
+	/// <summary>
 	/// [XMeta.DisplayName=Периоды выплаты]
 	/// [XMeta.IgnoreForNavigate]
 	/// [XMeta.DefaultProperty=c_name]
@@ -20818,6 +22772,24 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Код]
 		/// </summary>
 		[Column,     NotNull] public string c_code { get; set; } // character varying(4)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Кварталы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_quarters")]
+	public partial class veterans_veterans_cs_quarters
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public int    id     { get; set; } // integer
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(2)
 	}
 
 	/// <summary>
@@ -20874,7 +22846,48 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
-	/// [XMeta.DisplayName=Услуги-категории-награды]
+	/// [XMeta.DisplayName=Основания перерасчёта]
+	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_recalculation_reasons")]
+	public partial class veterans_veterans_cs_recalculation_reasons
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Средняя стоимость ремонта 1 кв.м общей площади индивидуального жилого дома]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_repair_costs")]
+	public partial class veterans_veterans_cs_repair_costs
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id      { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Дата начала]
+		/// </summary>
+		[Column,     NotNull    ] public NpgsqlDate  d_begin { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Дата окончания]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end   { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Стоимость]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_cost  { get; set; } // numeric(10,2)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=МСП-категории-награды]
 	/// </summary>
 	[Table(Schema="veterans", Name="cs_service_category_awards")]
 	public partial class veterans_veterans_cs_service_category_awards
@@ -20915,7 +22928,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
-	/// [XMeta.DisplayName=Услуга-категория-НПА]
+	/// [XMeta.DisplayName=МСП-категория-НПА]
 	/// </summary>
 	[Table(Schema="veterans", Name="cs_service_category_base_docs")]
 	public partial class veterans_veterans_cs_service_category_base_docs
@@ -20957,7 +22970,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
-	/// [XMeta.DisplayName=Категории-услуги]
+	/// [XMeta.DisplayName=Категории-МСП]
 	/// </summary>
 	[Table(Schema="veterans", Name="cs_service_citizen_categories")]
 	public partial class veterans_veterans_cs_service_citizen_categories
@@ -20973,6 +22986,7 @@ namespace SocialTargetHelpAPIServer.Models
 		[Column,     NotNull    ] public Guid   f_service      { get; set; } // uuid
 		/// <summary>
 		/// [XMeta.DisplayName=Категория граждан]
+		/// [XMeta.Raw=DataSourceCriteria("f_local_msz_category.f_local_msz_category_msz_cs_link_msz_category_mszCollection[f_local_msz == '@This.f_local_msz']")]
 		/// </summary>
 		[Column,     NotNull    ] public Guid   f_category     { get; set; } // uuid
 		/// <summary>
@@ -20983,6 +22997,11 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Методика расчёта]
 		/// </summary>
 		[Column,        Nullable] public string c_methodic     { get; set; } // text
+		/// <summary>
+		/// [XMeta.DisplayName=Локальная МСЗ]
+		/// [XMeta.Raw=ImmediatePostData]
+		/// </summary>
+		[Column,     NotNull    ] public int    f_local_msz    { get; set; } // integer
 
 		#region Associations
 
@@ -20991,6 +23010,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="f_category", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_citizen_categories_fkey_f_category")]
 		public veterans_veterans_cs_citizen_categories csservicecitizencategoriesfkeyfcategory { get; set; }
+
+		/// <summary>
+		/// cs_service_citizen_categories_fkey_f_local_msz
+		/// </summary>
+		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_citizen_categories_fkey_f_local_msz")]
+		public msz_msz_cs_local_msz csservicecitizencategoriesfkeyflocalmsz { get; set; }
 
 		/// <summary>
 		/// cs_service_citizen_categories_fkey_f_payment_type
@@ -21008,7 +23033,7 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
-	/// [XMeta.DisplayName=Размеры услуг-категорий]
+	/// [XMeta.DisplayName=Размеры МСП-категорий]
 	/// </summary>
 	[Table(Schema="veterans", Name="cs_service_citizen_category_sizes")]
 	public partial class veterans_veterans_cs_service_citizen_category_sizes
@@ -21051,6 +23076,85 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
+	/// [XMeta.DisplayName=Коэффициент индексации]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_service_coeff_indexation")]
+	public partial class veterans_veterans_cs_service_coeff_indexation
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid        id            { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Начало периода]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_begin       { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Окончание периода]
+		/// </summary>
+		[Column,        Nullable] public NpgsqlDate? d_end         { get; set; } // date
+		/// <summary>
+		/// [XMeta.DisplayName=Коэффициент]
+		/// [XMeta.DisplayFormat=N5]
+		/// </summary>
+		[Column,     NotNull    ] public decimal     n_coefficient { get; set; } // numeric(10,5)
+		/// <summary>
+		/// [XMeta.DisplayName=МСП]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull    ] public Guid        f_service     { get; set; } // uuid
+
+		#region Associations
+
+		/// <summary>
+		/// cs_service_coeff_indexation_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_coeff_indexation_fkey_f_service")]
+		public veterans_veterans_cs_services csservicecoeffindexationfkeyfservice { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=Необходимые документы]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_service_documents")]
+	public partial class veterans_veterans_cs_service_documents
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid id              { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=МСП]
+		/// [XMeta.Browsable=false]
+		/// </summary>
+		[Column,     NotNull] public Guid f_service       { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Вид документа]
+		/// </summary>
+		[Column,     NotNull] public int  f_document_type { get; set; } // integer
+
+		#region Associations
+
+		/// <summary>
+		/// cs_service_documents_fkey_f_document_type
+		/// </summary>
+		[Association(ThisKey="f_document_type", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_documents_fkey_f_document_type")]
+		public public_cs_document_types csservicedocumentsfkeyfdocumenttype { get; set; }
+
+		/// <summary>
+		/// cs_service_documents_fkey_f_service
+		/// </summary>
+		[Association(ThisKey="f_service", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_service_documents_fkey_f_service")]
+		public veterans_veterans_cs_services csservicedocumentsfkeyfservice { get; set; }
+
+		#endregion
+	}
+
+	/// <summary>
 	/// [XMeta.DisplayName=Группа МСП]
 	/// [XMeta.DefaultProperty=c_name]
 	/// </summary>
@@ -21072,8 +23176,29 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
-	/// [XMeta.DisplayName=МСП]
+	/// [XMeta.DisplayName=Типы МСП]
 	/// [XMeta.DefaultProperty=c_name]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_service_types")]
+	public partial class veterans_veterans_cs_service_types
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull    ] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull    ] public string c_name { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Код]
+		/// </summary>
+		[Column,        Nullable] public string c_code { get; set; } // character varying(100)
+	}
+
+	/// <summary>
+	/// [XMeta.DisplayName=МСП]
+	/// [XMeta.DefaultProperty=c_name_short]
 	/// </summary>
 	[Table(Schema="veterans", Name="cs_services")]
 	public partial class veterans_veterans_cs_services
@@ -21094,10 +23219,6 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.DisplayName=Индивидуальный НПА]
 		/// </summary>
 		[Column,     NotNull    ] public bool   b_individual_npa { get; set; } // boolean
-		/// <summary>
-		/// [XMeta.DisplayName=Локальная МСЗ]
-		/// </summary>
-		[Column,     NotNull    ] public int    f_local_msz      { get; set; } // integer
 		/// <summary>
 		/// [XMeta.DisplayName=Код]
 		/// </summary>
@@ -21131,6 +23252,19 @@ namespace SocialTargetHelpAPIServer.Models
 		/// [XMeta.VisibleInListView=false]
 		/// </summary>
 		[Column,        Nullable] public Guid?  f_payment_source { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Краткое название]
+		/// </summary>
+		[Column,        Nullable] public string c_name_short     { get; set; } // character varying(300)
+		/// <summary>
+		/// [XMeta.DisplayName=Тип]
+		/// </summary>
+		[Column,        Nullable] public Guid?  f_type           { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Закон]
+		/// [XMeta.VisibleInDetailView=false]
+		/// </summary>
+		[Column,        Nullable] public string c_law            { get; set; } // text
 
 		#region Associations
 
@@ -21139,12 +23273,6 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="f_fed_form", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_services_fkey_f_fed_form")]
 		public msz_msz_cs_fed_form csservicesfkeyffedform { get; set; }
-
-		/// <summary>
-		/// cs_services_fkey_f_local_msz
-		/// </summary>
-		[Association(ThisKey="f_local_msz", OtherKey="id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="cs_services_fkey_f_local_msz")]
-		public msz_msz_cs_local_msz csservicesfkeyflocalmsz { get; set; }
 
 		/// <summary>
 		/// cs_services_fkey_f_payment_period
@@ -21157,6 +23285,12 @@ namespace SocialTargetHelpAPIServer.Models
 		/// </summary>
 		[Association(ThisKey="f_payment_source", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_services_fkey_f_payment_source")]
 		public veterans_veterans_cs_payment_sources csservicesfkeyfpaymentsource { get; set; }
+
+		/// <summary>
+		/// cs_services_fkey_f_type
+		/// </summary>
+		[Association(ThisKey="f_type", OtherKey="id", CanBeNull=true, Relationship=Relationship.ManyToOne, KeyName="cs_services_fkey_f_type")]
+		public veterans_veterans_cs_service_types csservicesfkeyftype { get; set; }
 
 		/// <summary>
 		/// FK_veterans_cs_services_f_payment_type_83E65F88
@@ -21282,6 +23416,39 @@ namespace SocialTargetHelpAPIServer.Models
 	}
 
 	/// <summary>
+	/// [XMeta.DisplayName=Статусы]
+	/// [XMeta.DefaultProperty=c_name]
+	/// [XMeta.IgnoreForNavigate]
+	/// </summary>
+	[Table(Schema="veterans", Name="cs_trud_doc_statuses")]
+	public partial class veterans_veterans_cs_trud_doc_statuses
+	{
+		/// <summary>
+		/// [XMeta.DisplayName=Идентификатор]
+		/// </summary>
+		[PrimaryKey, NotNull] public Guid   id     { get; set; } // uuid
+		/// <summary>
+		/// [XMeta.DisplayName=Название]
+		/// </summary>
+		[Column,     NotNull] public string c_name { get; set; } // character varying(300)
+	}
+
+	[Table(Schema="veterans", Name="cv_citizen_categories", IsView=true)]
+	public partial class veterans_veterans_cv_citizen_categories
+	{
+		[Column, Nullable] public Guid?  id     { get; set; } // uuid
+		[Column, Nullable] public string c_name { get; set; } // character varying(1000)
+	}
+
+	[Table(Schema="veterans", Name="cv_services", IsView=true)]
+	public partial class veterans_veterans_cv_services
+	{
+		[Column, Nullable] public Guid?  id           { get; set; } // uuid
+		[Column, Nullable] public string c_name       { get; set; } // character varying(1000)
+		[Column, Nullable] public string c_provisions { get; set; } // text
+	}
+
+	/// <summary>
 	/// [XMeta.IgnoreForGenerate]
 	/// </summary>
 	[Table(Schema="veterans", Name="import_awards")]
@@ -21295,6 +23462,32 @@ namespace SocialTargetHelpAPIServer.Models
 		[Column, Nullable] public string prmark   { get; set; } // character varying(500)
 		[Column, Nullable] public string _type    { get; set; } // character varying(100)
 		[Column, Nullable] public string aa       { get; set; } // character varying(10)
+	}
+
+	[Table(Schema="veterans", Name="sv_documents", IsView=true)]
+	public partial class veterans_veterans_sv_documents
+	{
+		[Column(SkipOnUpdate=true), Nullable] public Guid?  f_service  { get; set; } // uuid
+		[Column(SkipOnUpdate=true), Nullable] public Guid?  f_category { get; set; } // uuid
+		[Column(SkipOnUpdate=true), Nullable] public string c_document { get; set; } // character varying(128)
+	}
+
+	[Table(Schema="veterans", Name="sv_msp_category", IsView=true)]
+	public partial class veterans_veterans_sv_msp_category
+	{
+		[Column(SkipOnUpdate=true), Nullable] public Guid?  f_service      { get; set; } // uuid
+		[Column(SkipOnUpdate=true), Nullable] public string c_name         { get; set; } // character varying(1000)
+		[Column(SkipOnUpdate=true), Nullable] public string c_provisions   { get; set; } // text
+		[Column(SkipOnUpdate=true), Nullable] public Guid?  f_category     { get; set; } // uuid
+		[Column(SkipOnUpdate=true), Nullable] public string c_payment_type { get; set; } // character varying(300)
+		[Column(SkipOnUpdate=true), Nullable] public string c_size         { get; set; } // text
+	}
+
+	[Table(Schema="veterans", Name="sv_normative_docs", IsView=true)]
+	public partial class veterans_veterans_sv_normative_docs
+	{
+		[Column(SkipOnUpdate=true), Nullable] public Guid?  f_service   { get; set; } // uuid
+		[Column(SkipOnUpdate=true), Nullable] public string c_full_name { get; set; } // character varying(1000)
 	}
 
 	[Table(Schema="veterans", Name="sv_veterans_comm_services", IsView=true)]
@@ -21346,6 +23539,24 @@ namespace SocialTargetHelpAPIServer.Models
 		[Column(SkipOnUpdate=true), Nullable] public string      c_count_of_space  { get; set; } // character varying
 		[Column(SkipOnUpdate=true), Nullable] public string      c_count_of_jkh    { get; set; } // character varying
 		[Column(SkipOnUpdate=true), Nullable] public string      c_comment         { get; set; } // character varying
+	}
+
+	[Table(Schema="veterans", Name="sv_veterans_for_fkr", IsView=true)]
+	public partial class veterans_veterans_sv_veterans_for_fkr
+	{
+		[Column(SkipOnUpdate=true), Nullable] public long?    row_number    { get; set; } // bigint
+		[Column(SkipOnUpdate=true), Nullable] public string   c_account     { get; set; } // character varying(300)
+		[Column(SkipOnUpdate=true), Nullable] public decimal? n_summ        { get; set; } // numeric(10,2)
+		[Column(SkipOnUpdate=true), Nullable] public string   c_last_name   { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string   c_first_name  { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string   c_middle_name { get; set; } // character varying(64)
+		[Column(SkipOnUpdate=true), Nullable] public string   c_cladr_code  { get; set; } // character varying(17)
+		[Column(SkipOnUpdate=true), Nullable] public string   c_address     { get; set; } // character varying(512)
+		[Column(SkipOnUpdate=true), Nullable] public string   c_corps       { get; set; } // character varying(20)
+		[Column(SkipOnUpdate=true), Nullable] public string   c_house       { get; set; } // character varying(20)
+		[Column(SkipOnUpdate=true), Nullable] public string   c_flat        { get; set; } // character varying(20)
+		[Column(SkipOnUpdate=true), Nullable] public decimal? n_area        { get; set; } // numeric(10,2)
+		[Column(SkipOnUpdate=true), Nullable] public string   c_inn         { get; set; } // character varying(15)
 	}
 
 	[Table(Schema="veterans", Name="sv_veterans_for_request")]
@@ -21433,7 +23644,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region dblink_close
 
 		[Sql.Function(Name="public.dblink_close", ServerSideOnly=true)]
-		public static string dblink_close(string par2919, string par2920, bool? par2921)
+		public static string dblink_close(string par2922, string par2923, bool? par2924)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21560,6 +23771,16 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region get_month_name
+
+		[Sql.Function(Name="common.get_month_name", ServerSideOnly=true)]
+		public static string get_month_name0(int? m)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
 		#region payments_count
 
 		[Sql.Function(Name="common.payments_count", ServerSideOnly=true)]
@@ -21593,7 +23814,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region dblink_send_query
 
 		[Sql.Function(Name="public.dblink_send_query", ServerSideOnly=true)]
-		public static int? dblink_send_query(string par733, string par734)
+		public static int? dblink_send_query(string par734, string par735)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21614,6 +23835,16 @@ namespace SocialTargetHelpAPIServer.Models
 
 		[Sql.Function(Name="subsidy.get_subsidy_report_data", ServerSideOnly=true)]
 		public static NpgsqlDate? get_subsidy_report_data(NpgsqlDate? _d_end)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region copy_role
+
+		[Sql.Function(Name="common.copy_role", ServerSideOnly=true)]
+		public static object copy_role0(Guid? _old)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21683,7 +23914,17 @@ namespace SocialTargetHelpAPIServer.Models
 		#region dblink_cancel_query
 
 		[Sql.Function(Name="public.dblink_cancel_query", ServerSideOnly=true)]
-		public static string dblink_cancel_query(string par1158)
+		public static string dblink_cancel_query(string par1160)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region copy_veterans_for_fkr
+
+		[Sql.Function(Name="veterans.copy_veterans_for_fkr", ServerSideOnly=true)]
+		public static object copy_veterans_for_fkr(string inn, int? f_package)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21723,7 +23964,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region gtrgm_distance
 
 		[Sql.Function(Name="public.gtrgm_distance", ServerSideOnly=true)]
-		public static double? gtrgm_distance(object par1299, string par1300, int? par1301, int? par1302)
+		public static double? gtrgm_distance(object par1301, string par1302, int? par1303, int? par1304)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21740,10 +23981,20 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region upd_cost
+
+		[Sql.Function(Name="veterans.upd_cost", ServerSideOnly=true)]
+		public static object upd_cost(Guid? _case, decimal? _cost)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
 		#region gtrgm_picksplit
 
 		[Sql.Function(Name="public.gtrgm_picksplit", ServerSideOnly=true)]
-		public static object gtrgm_picksplit(object par1484, object par1485)
+		public static object gtrgm_picksplit(object par1486, object par1487)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21760,10 +24011,30 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region somewhere_progress_running
+
+		[Sql.Function(Name="common.somewhere_progress_running", ServerSideOnly=true)]
+		public static string somewhere_progress_running(string _type)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
 		#region send_calculation_on_payment
 
 		[Sql.Function(Name="pension.send_calculation_on_payment", ServerSideOnly=true)]
 		public static object send_calculation_on_payment0(Guid? n_calc)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region approve_cases
+
+		[Sql.Function(Name="veterans.approve_cases", ServerSideOnly=true)]
+		public static object approve_cases(string _cases)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21780,10 +24051,20 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region create_egisso_fact
+
+		[Sql.Function(Name="veterans.create_egisso_fact", ServerSideOnly=true)]
+		public static object create_egisso_fact(Guid? calc_id)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
 		#region set_limit
 
 		[Sql.Function(Name="public.set_limit", ServerSideOnly=true)]
-		public static float? set_limit(float? par1734)
+		public static float? set_limit(float? par1737)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21800,10 +24081,20 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region open_month
+
+		[Sql.Function(Name="veterans.open_month", ServerSideOnly=true)]
+		public static object open_month(int? _org, Guid? _user, Guid? _msp_type, int? _year, int? _month)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
 		#region dblink_open
 
 		[Sql.Function(Name="public.dblink_open", ServerSideOnly=true)]
-		public static string dblink_open(string par7687, string par7688, bool? par7689)
+		public static string dblink_open(string par7691, string par7692, bool? par7693)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21843,7 +24134,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region gtrgm_consistent
 
 		[Sql.Function(Name="public.gtrgm_consistent", ServerSideOnly=true)]
-		public static bool? gtrgm_consistent(object par2021, string par2022, int? par2023, int? par2024, object par2025)
+		public static bool? gtrgm_consistent(object par2025, string par2026, int? par2027, int? par2028, object par2029)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21873,7 +24164,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region dblink_error_message
 
 		[Sql.Function(Name="public.dblink_error_message", ServerSideOnly=true)]
-		public static string dblink_error_message(string par2295)
+		public static string dblink_error_message(string par2297)
 		{
 			throw new InvalidOperationException();
 		}
@@ -21883,7 +24174,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region gtrgm_out
 
 		[Sql.Function(Name="public.gtrgm_out", ServerSideOnly=true)]
-		public static object gtrgm_out(object par2300)
+		public static object gtrgm_out(object par2311)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22003,7 +24294,17 @@ namespace SocialTargetHelpAPIServer.Models
 		#region dblink_is_busy
 
 		[Sql.Function(Name="public.dblink_is_busy", ServerSideOnly=true)]
-		public static int? dblink_is_busy(string par2699)
+		public static int? dblink_is_busy(string par2701)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region check_address_veteran
+
+		[Sql.Function(Name="veterans.check_address_veteran", ServerSideOnly=true)]
+		public static string check_address_veteran(string json_obj)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22023,7 +24324,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region similarity
 
 		[Sql.Function(Name="public.similarity", ServerSideOnly=true)]
-		public static float? similarity(string par2855, string par2856)
+		public static float? similarity(string par2858, string par2859)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22033,7 +24334,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region gtrgm_same
 
 		[Sql.Function(Name="public.gtrgm_same", ServerSideOnly=true)]
-		public static object gtrgm_same(object par2858, object par2859, object par2860)
+		public static object gtrgm_same(object par2861, object par2862, object par2863)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22093,7 +24394,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region num_to_text
 
 		[Sql.Function(Name="public.num_to_text", ServerSideOnly=true)]
-		public static string num_to_text(decimal? par3083)
+		public static string num_to_text(decimal? par3086)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22123,7 +24424,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region get_month_name
 
 		[Sql.Function(Name="public.get_month_name", ServerSideOnly=true)]
-		public static string get_month_name(int? m)
+		public static string get_month_name1(int? m)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22143,7 +24444,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region dblink_exec
 
 		[Sql.Function(Name="public.dblink_exec", ServerSideOnly=true)]
-		public static string dblink_exec(string par7006, bool? par7007)
+		public static string dblink_exec(string par7010, bool? par7011)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22213,7 +24514,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region dblink_connect
 
 		[Sql.Function(Name="public.dblink_connect", ServerSideOnly=true)]
-		public static string dblink_connect(string par4255)
+		public static string dblink_connect(string par4258)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22303,7 +24604,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region gtrgm_compress
 
 		[Sql.Function(Name="public.gtrgm_compress", ServerSideOnly=true)]
-		public static object gtrgm_compress(object par4271)
+		public static object gtrgm_compress(object par4274)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22370,6 +24671,16 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region create_retention_history
+
+		[Sql.Function(Name="common.create_retention_history", ServerSideOnly=true)]
+		public static string create_retention_history(int? org, string subsystem)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
 		#region to_center
 
 		[Sql.Function(Name="common.to_center", ServerSideOnly=true)]
@@ -22390,6 +24701,16 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region get_payment_for_eupp
+
+		[Sql.Function(Name="veterans.get_payment_for_eupp", ServerSideOnly=true)]
+		public static string get_payment_for_eupp(Guid? msp)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
 		#region import_post_addresses
 
 		[Sql.Function(Name="public.import_post_addresses", ServerSideOnly=true)]
@@ -22403,7 +24724,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region gtrgm_decompress
 
 		[Sql.Function(Name="public.gtrgm_decompress", ServerSideOnly=true)]
-		public static object gtrgm_decompress(object par4911)
+		public static object gtrgm_decompress(object par4916)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22483,7 +24804,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region gtrgm_in
 
 		[Sql.Function(Name="public.gtrgm_in", ServerSideOnly=true)]
-		public static object gtrgm_in(object par5241)
+		public static object gtrgm_in(object par5246)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22503,7 +24824,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region gtrgm_penalty
 
 		[Sql.Function(Name="public.gtrgm_penalty", ServerSideOnly=true)]
-		public static object gtrgm_penalty(object par5293, object par5294, object par5295)
+		public static object gtrgm_penalty(object par5298, object par5299, object par5300)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22523,7 +24844,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region dblink_build_sql_update
 
 		[Sql.Function(Name="public.dblink_build_sql_update", ServerSideOnly=true)]
-		public static string dblink_build_sql_update(string par5319, object par5320, int? par5321, object par5322, object par5323)
+		public static string dblink_build_sql_update(string par5324, object par5325, int? par5326, object par5327, object par5328)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22573,7 +24894,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region copy_role
 
 		[Sql.Function(Name="public.copy_role", ServerSideOnly=true)]
-		public static object copy_role(Guid? id, string rolename)
+		public static object copy_role1(Guid? id, string rolename)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22590,10 +24911,20 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region clone_ghku
+
+		[Sql.Function(Name="veterans.clone_ghku", ServerSideOnly=true)]
+		public static object clone_ghku(Guid? _id)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
 		#region gin_extract_query_trgm
 
 		[Sql.Function(Name="public.gin_extract_query_trgm", ServerSideOnly=true)]
-		public static object gin_extract_query_trgm(string par5761, object par5762, short? par5763, object par5764, object par5765, object par5766, object par5767)
+		public static object gin_extract_query_trgm(string par5766, object par5767, short? par5768, object par5769, object par5770, object par5771, object par5772)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22640,10 +24971,30 @@ namespace SocialTargetHelpAPIServer.Models
 
 		#endregion
 
+		#region create_payments
+
+		[Sql.Function(Name="veterans.create_payments", ServerSideOnly=true)]
+		public static object create_payments(int? _org, Guid? _service_type, Guid? progress_id, int? _year, int? _month)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
 		#region dblink_connect_u
 
 		[Sql.Function(Name="public.dblink_connect_u", ServerSideOnly=true)]
-		public static string dblink_connect_u(string par6749, string par6750)
+		public static string dblink_connect_u(string par6753, string par6754)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region send_to_provide_arrays_vet
+
+		[Sql.Function(Name="subsidy.send_to_provide_arrays_vet", ServerSideOnly=true)]
+		public static object send_to_provide_arrays_vet(Guid? _progress_id, string _payment_arrays)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22663,7 +25014,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region gin_extract_value_trgm
 
 		[Sql.Function(Name="public.gin_extract_value_trgm", ServerSideOnly=true)]
-		public static object gin_extract_value_trgm(string par6059, object par6060)
+		public static object gin_extract_value_trgm(string par6064, object par6065)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22674,16 +25025,6 @@ namespace SocialTargetHelpAPIServer.Models
 
 		[Sql.Function(Name="public.drop_filedata", ServerSideOnly=true)]
 		public static string drop_filedata()
-		{
-			throw new InvalidOperationException();
-		}
-
-		#endregion
-
-		#region create_retention_history
-
-		[Sql.Function(Name="common.create_retention_history", ServerSideOnly=true)]
-		public static string create_retention_history(int? org)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22733,7 +25074,17 @@ namespace SocialTargetHelpAPIServer.Models
 		#region show_trgm
 
 		[Sql.Function(Name="public.show_trgm", ServerSideOnly=true)]
-		public static object show_trgm(string par6235)
+		public static object show_trgm(string par6239)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region apply_rsmv_application_operation
+
+		[Sql.Function(Name="common.apply_rsmv_application_operation", ServerSideOnly=true)]
+		public static object apply_rsmv_application_operation(Guid? rsmv_app_id, string operation_type_code, string user_login)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22873,7 +25224,17 @@ namespace SocialTargetHelpAPIServer.Models
 		#region similarity_op
 
 		[Sql.Function(Name="public.similarity_op", ServerSideOnly=true)]
-		public static bool? similarity_op(string par7049, string par7050)
+		public static bool? similarity_op(string par7053, string par7054)
+		{
+			throw new InvalidOperationException();
+		}
+
+		#endregion
+
+		#region create_recalculation
+
+		[Sql.Function(Name="veterans.create_recalculation", ServerSideOnly=true)]
+		public static object create_recalculation1(string _params)
 		{
 			throw new InvalidOperationException();
 		}
@@ -22943,7 +25304,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region similarity_dist
 
 		[Sql.Function(Name="public.similarity_dist", ServerSideOnly=true)]
-		public static float? similarity_dist(string par7527, string par7528)
+		public static float? similarity_dist(string par7531, string par7532)
 		{
 			throw new InvalidOperationException();
 		}
@@ -23033,7 +25394,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region dblink_build_sql_insert
 
 		[Sql.Function(Name="public.dblink_build_sql_insert", ServerSideOnly=true)]
-		public static string dblink_build_sql_insert(string par7791, object par7792, int? par7793, object par7794, object par7795)
+		public static string dblink_build_sql_insert(string par7795, object par7796, int? par7797, object par7798, object par7799)
 		{
 			throw new InvalidOperationException();
 		}
@@ -23043,7 +25404,7 @@ namespace SocialTargetHelpAPIServer.Models
 		#region create_recalculation
 
 		[Sql.Function(Name="subsidy.create_recalculation", ServerSideOnly=true)]
-		public static string create_recalculation1(int? org, NpgsqlDate? _date, Guid? _user, bool? decrease)
+		public static string create_recalculation3(int? org, NpgsqlDate? _date, Guid? _user, bool? decrease)
 		{
 			throw new InvalidOperationException();
 		}

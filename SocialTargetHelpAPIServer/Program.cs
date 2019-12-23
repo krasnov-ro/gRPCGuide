@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Serilog;
-using System.Threading;
 using Grpc.Core;
 using Topshelf;
 using SocialTargetHelpAPI.Contract;
