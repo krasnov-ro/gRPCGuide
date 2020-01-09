@@ -185,38 +185,6 @@ namespace SocialTargetHelpAPIServer
         {
             try
             {
-                //var awardData = dbContext.veterans_cs_awards
-                //    .Select(p => new
-                //    {
-                //        groupId = p.csawardsfkeyftype.id,
-                //        groupName = p.csawardsfkeyftype.c_name,
-                //        award = new VeteranAward()
-                //        {
-                //            Id = p.id.ToString(),
-                //            Name = p.c_name,
-                //            NameShort = p.c_name_short,
-                //            Code = p.c_code,
-                //            Archived = p.b_archive,
-                //            IsRegional = p.b_chr
-                //        }
-                //    })
-                //    .ToArray()
-                //    .GroupBy(p => new { p.groupId, p.groupName })
-                //    .Select(p => new VeteranAwardGroup()
-                //    {
-                //        Id = p.Key.groupId.ToString(),
-                //        Name = p.Key.groupName,
-                //        Awards = { p.Select(pp => pp.award) }
-                //    });
-
-                //var docTypes = dbContext.public_cs_document_types
-                //    .Select(p => new VeteranDocumentType()
-                //    {
-                //        Id = p.id,
-                //        Name = p.c_name
-                //    })
-                //    .ToArray();
-
                 var organizations = dbContext.common_cs_orgs
                     .ToArray()
                     .Select(p => new Organization()
@@ -258,6 +226,7 @@ namespace SocialTargetHelpAPIServer
                 var svcGroups = dbContext.veterans_cs_services_groups.ToArray();
                 var svcOrgs = dbContext.veterans_cs_services_orgs.ToArray();
                 var svcNormDocs = dbContext.veterans_sv_normative_docs.ToArray();
+                var svcCitizenCategoryDocs = dbContext.veterans_sv_documents.ToArray();
 
                 var services = dbContext.veterans_sv_msp_category
                     .ToArray()
@@ -274,33 +243,29 @@ namespace SocialTargetHelpAPIServer
                             SocialServiceOrgIds = { svcOrgs.Where(p1 => p1.f_service == first.f_service.Value).Select(p1 => p1.f_org.ToString()) },
                             NormDocs = { svcNormDocs.Where(p1 => p1.f_service == first.f_service.Value).Select(p1 => p1.c_full_name) },
                             CitizenCategoriesData = {
-                            p.Select(p1 => new SocialServiceCitizenCategory()
-                            {
-                                CitizenCategoryId = p1.f_category.Value.ToString(),
-                                PaymentType = ParsePaymentType(p1.c_payment_type),
-                                Size = p1.c_size ?? ""
-                            })
+                                p.Select(p1 => new SocialServiceCitizenCategory()
+                                {
+                                    CitizenCategoryId = p1.f_category.Value.ToString(),
+                                    PaymentType = ParsePaymentType(p1.c_payment_type),
+                                    Size = p1.c_size ?? ""
+                                })
+                            },
+                            CitizenCategoryDocuments = {
+                                svcCitizenCategoryDocs.Where(p1=>p1.f_service == first.f_service.Value).Select(p1=> new SocialServiceCitizenCategoryDocument()
+                                {
+                                    CitizenCategoryId = p1.f_category.Value.ToString(),
+                                    DocumentName = p1.c_document
+                                })
                             }
                         };
                     });
 
-                //var serviceCategories = dbContext.veterans_cs_service_citizen_categories
-                //    .ToArray()
-                //    .Select(p => new SocialSerciceCitizenCategory()
-                //    {
-                //        SocialServiceId = p.f_service.ToString(),
-                //        CitizenCategoryId = p.f_category.ToString(), PaymentType = null, Size = p.
-                //    });
-
                 var result = new GetVeteranDictionariesResponse()
                 {
                     Organizations = { organizations },
-                    //AwardGroupsWithAwards = { awardData },
-                    //DocumentTypes = { docTypes },
                     CitizenCategories = { citizenCategories },
                     ServiceGroups = { serviceGroups },
                     Services = { services }
-                    //ServiceCitizenCategories = { },
                 };
 
                 return Task.FromResult(result);
