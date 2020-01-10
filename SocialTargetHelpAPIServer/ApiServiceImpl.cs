@@ -9,6 +9,13 @@ using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.IO;
 using System.Text.RegularExpressions;
+using SocialTargetHelpAPI.Contract;
+using System;
+using SocialTargetHelpAPIServer.Models;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
+using System.Collections.Generic;
 
 namespace SocialTargetHelpAPIServer
 {
@@ -33,10 +40,6 @@ namespace SocialTargetHelpAPIServer
         {
             var result = new GetPersonsLifeStatusResponse();
 
-            foreach (var d in req.RequestData)
-            { }
-
-            GetPersonsLifeStatusResponse result = new GetPersonsLifeStatusResponse();
             String personDocData = null;
             PersonLifeStatusRequest[] persons;
             IQueryable<fatalzp_fatalzp_sv_cd_umer> men = null;
@@ -45,7 +48,7 @@ namespace SocialTargetHelpAPIServer
 
             try
             {
-                foreach (var reqPerson in req.RequestData)
+                foreach (var dbPerson in req.RequestData)
                 {
 
                     var decriptedDoc = Decrypt(dbPerson.DocSeria) + Decrypt(dbPerson.DocNumber);
@@ -368,23 +371,27 @@ namespace SocialTargetHelpAPIServer
             {
                 _logger.LogError(exception, "GetVeteranDictionaries error");
 
-        //public object JsonGenerate(string where, string fullName, string serial, string number)
-        //{
-        //    object result = new
-        //    {
-        //        Person = fullName,
-        //        Passport = new
-        //        {
-        //            Serial = serial,
-        //            Number = number
-        //        }
-        //    }
-        //};
+                //public object JsonGenerate(string where, string fullName, string serial, string number)
+                //{
+                //    object result = new
+                //    {
+                //        Person = fullName,
+                //        Passport = new
+                //        {
+                //            Serial = serial,
+                //            Number = number
+                //        }
+                //    }
+                //};
+
                 var errorResult = new GetVeteranDictionariesResponse()
                 {
                     Errors = { new Error() { Code = "error" } }
                 };
 
+                return Task.FromResult(errorResult);
+            }
+        }
         #region Формирование Json в ручную
         //if (where != null)
         //{
@@ -419,6 +426,7 @@ namespace SocialTargetHelpAPIServer
             };
             dbContext.Insert(apiRequest);
         }
+
 
         // Decrypt
         public static string Decrypt(string cipherText)
@@ -465,6 +473,22 @@ namespace SocialTargetHelpAPIServer
                 }
             }
             return clearText;
+        }
+
+        private readonly IDictionary<String, SocialServiceCitizenCategory.Types.PaymentType> _paymentTypesMap = new Dictionary<String, SocialServiceCitizenCategory.Types.PaymentType>()
+        {
+            ["monthly"] = SocialServiceCitizenCategory.Types.PaymentType.Monthly,
+            ["quarter"] = SocialServiceCitizenCategory.Types.PaymentType.Quarterly,
+            ["year"] = SocialServiceCitizenCategory.Types.PaymentType.Yearly,
+            ["one_time"] = SocialServiceCitizenCategory.Types.PaymentType.NonRecurrent
+        };
+
+        private SocialServiceCitizenCategory.Types.PaymentType ParsePaymentType(String code)
+        {
+            if (!String.IsNullOrEmpty(code) && _paymentTypesMap.ContainsKey(code))
+                return _paymentTypesMap[code];
+            else
+                return SocialServiceCitizenCategory.Types.PaymentType.None;
         }
     }
 }
