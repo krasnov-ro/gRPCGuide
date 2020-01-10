@@ -13,11 +13,14 @@ namespace SocialTargetHelpAPIClient
 {
     class Program
     {
+        private static readonly CultureInfo cultureEnUs = CultureInfo.CreateSpecificCulture("en-US");
+
         static void Main(string[] args)
         {
-            Channel channel = new Channel("localhost:8088", ChannelCredentials.Insecure);
+            var endpoint = "localhost:8088";
+
+            var channel = new Channel(endpoint, ChannelCredentials.Insecure);
             var client = new ApiService.ApiServiceClient(channel);
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
 
             var builder = new ConfigurationBuilder()
                  .SetBasePath(Directory.GetCurrentDirectory())
@@ -103,11 +106,11 @@ namespace SocialTargetHelpAPIClient
                 var socPortalRes = client.GetPersonPayments(socPortalReq);
                 #endregion
 
-                foreach(var t in socPortalRes.Payments)
+                foreach (var t in socPortalRes.Payments)
                 {
-                    Console.WriteLine("\nCalculationDate: " + t.DateCalculation.ToString(culture) +
-                                      "\nBeginDate: " + t.DateBegin.ToString(culture) +
-                                      "\nEndDate: " + t.DateEnd.ToString(culture) +
+                    Console.WriteLine("\nCalculationDate: " + t.DateCalculation.ToString(cultureEnUs) +
+                                      "\nBeginDate: " + t.DateBegin.ToString(cultureEnUs) +
+                                      "\nEndDate: " + t.DateEnd.ToString(cultureEnUs) +
                                       "\nTitle: " + t.Title +
                                       "\nName: " + t.Name +
                                       "\nPaymentSum: " + t.PaymentSum);

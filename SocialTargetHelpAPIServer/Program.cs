@@ -1,23 +1,22 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Grpc.Core;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using SocialTargetHelpAPI.Contract;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Serilog;
-using System.Threading;
-using Grpc.Core;
 using Topshelf;
-using SocialTargetHelpAPI.Contract;
 
 namespace SocialTargetHelpAPIServer
 {
     class Program
     {
+        internal static ServiceProvider AppServiceProvider = null;
+
         private static IConfigurationRoot ApplicationConfig = null;
 
         static void Main(string[] args)
@@ -32,11 +31,9 @@ namespace SocialTargetHelpAPIServer
 
             ConfigureLogging();
 
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
-            var serviceProvider = serviceCollection.BuildServiceProvider();
+            AppServiceProvider = ConfigureServices();
 
-            var logger = serviceProvider.GetService<ILogger<Program>>();
+            var logger = AppServiceProvider.GetService<ILogger<Program>>();
 
             var grpcServer = CreateGrpcServer();
 
@@ -73,9 +70,17 @@ namespace SocialTargetHelpAPIServer
             Log.CloseAndFlush();
         }
 
-        private static void ConfigureServices(IServiceCollection services)
+        private static ServiceProvider ConfigureServices()
         {
-            services.AddLogging(configure => configure.AddSerilog());
+            var serviceCollection = new ServiceCollection();
+
+            serviceCollection.AddLogging(configure => configure.AddSerilog());
+
+            //serviceCollection.AddSingleton<ApiService.ApiServiceBase, ApiServiceImpl>();
+
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            return serviceProvider;
         }
 
         private static IConfigurationRoot GetApplicationConfiguration()

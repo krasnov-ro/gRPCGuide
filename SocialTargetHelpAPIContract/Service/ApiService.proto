@@ -3,7 +3,6 @@
 option csharp_namespace = "SocialTargetHelpAPI.Contract";
 
 service ApiService {
-
 	rpc GetPersonPayments(GetPersonPaymentsRequest) returns (GetPersonPaymentsResponse) {}
 
 	rpc GetPersonsLifeStatus(GetPersonsLifeStatusRequest) returns (GetPersonsLifeStatusResponse) {}
@@ -86,12 +85,10 @@ message GetVeteranDictionariesRequest {
 
 message GetVeteranDictionariesResponse {
 	repeated Organization organizations = 1;
-	repeated VeteranAwardGroup awardGroupsWithAwards = 2;
-	repeated VeteranDocumentType documentTypes = 3;
 	repeated CitizenCategory citizenCategories = 4;
 	repeated SocialServiceGroup serviceGroups = 5;
 	repeated SocialService services = 6;
-	repeated SocialSerciceCitizenCategory serviceCitizenCategories = 7;
+	repeated Error errors = 8;
 }
 
 message Organization {
@@ -105,26 +102,6 @@ message Organization {
 	repeated string phones = 8;
 	repeated string emails = 9;
 	string fax = 10;
-}
-
-message VeteranAward {
-	string id = 1;
-	string name = 2;
-	string nameShort = 3;
-	string code = 4;
-	bool archived = 5;
-	bool isRegional = 6;
-}
-
-message VeteranAwardGroup {
-	string id = 1;
-	string name = 2;
-	repeated VeteranAward awards = 3;
-}
-
-message VeteranDocumentType {
-	int32 id = 1;
-	string name = 2;
 }
 
 message CitizenCategory {
@@ -144,37 +121,17 @@ message SocialServiceGroup {
 }
 
 message SocialService {
-	enum PaymentPeriodType {
-		PaymentPeriodTypeNone = 0;
-		FirstDayOfNextMonth = 1;
-	}
-	enum PaymentForm {
-		PaymentFormNone = 0;
-		Money = 1;
-		Natural = 2;
-		Facility = 3;
-		Service = 4;
-	}
-	enum PaymentSource {
-		PaymentSourceNone = 0;
-		BudgetMunicipal = 1;
-		BudgetRegional = 2;
-		BudgetFederal = 4;
-		NonBudgetFunds = 8;
-	}
-
 	string id = 1;
 	string name = 2;
-	PaymentPeriodType paymentPeriod = 3;
-	string description = 4;
 	string conditions = 5;
-	PaymentForm paymentForm = 6;
-	PaymentSource paymentSource = 7;
 	repeated string socialServiceGroupIds = 8;
 	repeated string socialServiceOrgIds = 9;
+	repeated string normDocs = 10;
+	repeated SocialServiceCitizenCategory citizenCategoriesData = 11;
+	repeated SocialServiceCitizenCategoryDocument citizenCategoryDocuments = 12;
 }
 
-message SocialSerciceCitizenCategory {
+message SocialServiceCitizenCategory {
 	enum PaymentType {
 		PaymentTypeNone = 0;
 		NonRecurrent = 1;
@@ -183,28 +140,12 @@ message SocialSerciceCitizenCategory {
 		Yearly = 4;
 	}
 
-	string socialServiceId = 1;
 	string citizenCategoryId = 2;
 	PaymentType paymentType = 3;
-	string calcMethod = 4;
-	repeated SocialSerciceCitizenCategoryAward awards = 5;
-	repeated SocialSerciceCitizenCategoryBaseDocument documents = 6;
-	repeated SocialSerciceCitizenCategorySizes sizes = 7;
+	string size = 8;
 }
 
-message SocialSerciceCitizenCategoryAward {
-	string awardId = 1;
-	int32 priority = 2;
-}
-
-message SocialSerciceCitizenCategoryBaseDocument {
-	int32 documentId = 1;
-	int32 priority = 2;
-}
-
-message SocialSerciceCitizenCategorySizes {
-	string dateBegin = 1;
-	string dateEnd = 2;
-	double amount = 3;
-	double expensePercentage = 4;
+message SocialServiceCitizenCategoryDocument {
+	string citizenCategoryId = 1;
+	string documentName = 2;
 }
