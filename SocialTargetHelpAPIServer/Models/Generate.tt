@@ -22,7 +22,7 @@ using System.Linq;
 	DataContextName = "STH";
 	NamespaceName = "SocialTargetHelpAPIServer.Models";
 
-	LoadPostgreSQLMetadata("192.168.2.179", "5432", "social_target_help", "postgres", "motorhead33");
+	LoadPostgreSQLMetadata("192.168.2.16", "5432", "social_target_help", "postgres", "motorhead33");
 
 	var schemasIncluded = new[] { "public", "common", "fatalzp", "api_req", "veterans", "fias", "subsidy", "msz", "pension", "smev" };
 	var tablesIncluded = new Dictionary<String, String[]>

@@ -37,15 +37,15 @@ namespace SocialTargetHelpAPIServer
         public override Task<GetPersonsLifeStatusResponse> GetPersonsLifeStatus(GetPersonsLifeStatusRequest req, ServerCallContext context)
         {
 
-            foreach(var d in req.RequestData)
+            foreach (var d in req.RequestData)
             { }
 
             GetPersonsLifeStatusResponse result = new GetPersonsLifeStatusResponse();
             String personDocData = null;
             PersonLifeStatusRequest[] persons;
-            IQueryable<fatalzp_sv_cd_umer> men = null;
-            IQueryable<fatalzp_sv_cd_umer> docMen = null;
-            IQueryable<fatalzp_sv_cd_umer> menWithDoc = null;
+            IQueryable<fatalzp_fatalzp_sv_cd_umer> men = null;
+            IQueryable<fatalzp_fatalzp_sv_cd_umer> docMen = null;
+            IQueryable<fatalzp_fatalzp_sv_cd_umer> menWithDoc = null;
 
             try
             {
@@ -376,39 +376,40 @@ namespace SocialTargetHelpAPIServer
             return Task.FromResult(result);
         }
 
-        public object JsonGenerate(string where, string fullName, string serial, string number)
-        {
-            object result = new
-            {
-                Person = fullName,
-                Passport = new
-                {
-                    Serial = serial,
-                    Number = number
-                }
-            };
+        //public object JsonGenerate(string where, string fullName, string serial, string number)
+        //{
+        //    object result = new
+        //    {
+        //        Person = fullName,
+        //        Passport = new
+        //        {
+        //            Serial = serial,
+        //            Number = number
+        //        }
+        //    }
+        //};
 
-            #region Формирование Json в ручную
-            //if (where != null)
-            //{
-            //    where = where.Substring(0, where.Length - 3) +
-            //        ",\n'Person': '" + fullName + "', " +
-            //        "'Passport': " +
-            //            "{ 'Serial': '" + serial + "'," +
-            //            "'Number': '" + number + "' }" +
-            //        "}";
-            //    result = JsonConvert.DeserializeObject(where);
-            //}
-            //else
-            //{
-            //    where = "{ " + "'Person': '" + fullName + "', " +
-            //            "'Passport': " +
-            //                "{ 'Serial': '" + serial + "'," +
-            //                " 'Number': '" + number + "' }," +
-            //            "}";
-            //    result = JsonConvert.DeserializeObject(where);
-            //}
-            #endregion
+        #region Формирование Json в ручную
+        //if (where != null)
+        //{
+        //    where = where.Substring(0, where.Length - 3) +
+        //        ",\n'Person': '" + fullName + "', " +
+        //        "'Passport': " +
+        //            "{ 'Serial': '" + serial + "'," +
+        //            "'Number': '" + number + "' }" +
+        //        "}";
+        //    result = JsonConvert.DeserializeObject(where);
+        //}
+        //else
+        //{
+        //    where = "{ " + "'Person': '" + fullName + "', " +
+        //            "'Passport': " +
+        //                "{ 'Serial': '" + serial + "'," +
+        //                " 'Number': '" + number + "' }," +
+        //            "}";
+        //    result = JsonConvert.DeserializeObject(where);
+        //}
+        #endregion
 
         // Сохранение запроса и ответа в базу данных
         public void LogInDB(string req, string response)
