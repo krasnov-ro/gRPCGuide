@@ -6,6 +6,8 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace SocialTargetHelpAPIClient
 {
@@ -47,14 +49,33 @@ namespace SocialTargetHelpAPIClient
                         dbPersonsFilter = cd_persons.Where(p => p.id == dbDeal.f_cd_persons);
                 }
 
+                // Передадим инфу о наших челиках, персональные данные зашифруем
                 var personsData = dbPersonsFilter.Select(dbPerson => new PersonLifeStatusRequest()
                 {
                     LastName = dbPerson.c_surname.ToUpper(),
                     FirstName = dbPerson.c_first_name.ToUpper(),
                     MiddleName = dbPerson.c_patronymic.ToUpper(),
                     BirthDate = dbPerson.d_birthday.ToString(),
+                    DocSeria = Encrypt(dbPerson.c_document_seria),
+                    DocNumber = Encrypt(dbPerson.c_document_number),
                     Guid = Guid.NewGuid().ToString()
                 }).ToArray();
+
+                #region
+                //byte[] toEncryptData = Encoding.ASCII.GetBytes(personsData.ToString());
+                //// Generate open and close keys
+                //RSACryptoServiceProvider rsaKeysGen = new RSACryptoServiceProvider();
+                //string privateKey = rsaKeysGen.ToXmlString(true);
+                //string publicKey = rsaKeysGen.ToXmlString(false);
+
+                //// Encode with public key 
+                //RSACryptoServiceProvider rsaPublicKey = new RSACryptoServiceProvider();
+                //rsaPublicKey.FromXmlString(publicKey);
+                //byte[] encryptedData = rsaPublicKey.Encrypt(toEncryptData, false);
+                //string EncryptedResult = Encoding.Default.GetString(encryptedData);
+
+                //// Decode with private key
+                #endregion
 
                 GetPersonsLifeStatusRequest FsinRequest = new GetPersonsLifeStatusRequest()
                 {
@@ -71,6 +92,7 @@ namespace SocialTargetHelpAPIClient
 
                 #region Запрос от социального портала
 
+                // Передаем период выплат за который мы хотим получить информацию о выплатах челика с передаваемым снилсом
                 var socPortalReq = new GetPersonPaymentsRequest()
                 {
                     PeriodBegin = "2016-10-23",
@@ -96,6 +118,28 @@ namespace SocialTargetHelpAPIClient
             while (Console.ReadKey().Key != ConsoleKey.Escape);
 
             channel.ShutdownAsync().Wait();
+        }
+
+        public static string Encrypt(string clearText)
+        {
+            string EncryptionKey = "abc123";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
         }
     }
 }
