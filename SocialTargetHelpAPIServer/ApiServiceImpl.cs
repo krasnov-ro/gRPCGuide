@@ -251,9 +251,9 @@ namespace SocialTargetHelpAPIServer
                                 })
                             },
                             CitizenCategoryDocuments = {
-                                svcCitizenCategoryDocs.Where(p1=>p1.f_service == first.f_service.Value).Select(p1=> new SocialServiceCitizenCategoryDocument()
+                                svcCitizenCategoryDocs.Where(p1 => p1.f_service == first.f_service.Value).Select(p1=> new SocialServiceCitizenCategoryDocument()
                                 {
-                                    CitizenCategoryId = p1.f_category.Value.ToString(),
+                                    CitizenCategoryId = p1.f_category.HasValue ? p1.f_category.Value.ToString() : "",
                                     DocumentName = p1.c_document
                                 })
                             }
