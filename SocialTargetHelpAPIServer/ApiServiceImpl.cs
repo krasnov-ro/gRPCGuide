@@ -157,7 +157,7 @@ namespace SocialTargetHelpAPIServer
                                         LastName = oneMen.Фамилия,
                                         FirstName = oneMen.Имя,
                                         MiddleName = oneMen.Отчество,
-                                        BirthDate = oneMen.BirthDate.ToString(),
+                                        BirthDate = oneMen.BirthDate.Value.ToString("yyyy-MM-dd"),
                                         Status = PersonLifeStatus.NotSure
                                     });
                                 check++;

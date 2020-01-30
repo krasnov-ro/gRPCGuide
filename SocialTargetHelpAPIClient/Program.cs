@@ -52,6 +52,9 @@ namespace SocialTargetHelpAPIClient
                         dbPersonsFilter = cd_persons.Where(p => p.id == dbDeal.f_cd_persons);
                 }
 
+                dbPersonsFilter = dbContext.public_cd_persons;
+                dbPersonsFilter = dbPersonsFilter.Where(p=>p.c_first_name != null && p.c_patronymic != null && p.c_surname != null).Take(150);
+
                 // Передадим инфу о наших челиках, персональные данные зашифруем
                 var personsData = dbPersonsFilter.Select(dbPerson => new PersonLifeStatusRequest()
                 {
@@ -86,6 +89,8 @@ namespace SocialTargetHelpAPIClient
                 };
 
                 var FsinResponse = client.GetPersonsLifeStatus(FsinRequest);
+
+                if(FsinResponse.ResponseData.First().Status == PersonLifeStatus.Alive)
 
                 Console.WriteLine();
                 Console.WriteLine($"Информация о человеке: ");
