@@ -9,6 +9,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Topshelf;
 
 namespace SocialTargetHelpAPIServer
@@ -31,7 +32,7 @@ namespace SocialTargetHelpAPIServer
 
             ConfigureLogging();
 
-            AppServiceProvider = ConfigureServices();
+            ConfigureServices();
 
             var logger = AppServiceProvider.GetService<ILogger<Program>>();
 
@@ -70,7 +71,7 @@ namespace SocialTargetHelpAPIServer
             Log.CloseAndFlush();
         }
 
-        private static ServiceProvider ConfigureServices()
+        private static void ConfigureServices()
         {
             var serviceCollection = new ServiceCollection();
 
@@ -78,9 +79,7 @@ namespace SocialTargetHelpAPIServer
 
             //serviceCollection.AddSingleton<ApiService.ApiServiceBase, ApiServiceImpl>();
 
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-
-            return serviceProvider;
+            AppServiceProvider = serviceCollection.BuildServiceProvider();
         }
 
         private static IConfigurationRoot GetApplicationConfiguration()
@@ -104,11 +103,12 @@ namespace SocialTargetHelpAPIServer
 
         private static Server CreateGrpcServer()
         {
-            var connectionString = Program.ApplicationConfig.GetConnectionString("MyDb");
+            var serverCredentials = GetGrpcServerCredentials();
             var listenPorts = Program.ApplicationConfig.GetSection("listenPorts").GetChildren()
-                .Select(p => new ServerPort(p.GetSection("host").Value, Convert.ToInt32(p.GetSection("port").Value), ServerCredentials.Insecure))
+                .Select(p => new ServerPort(p.GetSection("host").Value, Convert.ToInt32(p.GetSection("port").Value), serverCredentials))
                 .ToArray();
 
+            var connectionString = Program.ApplicationConfig.GetConnectionString("MyDb");
             var server = new Server
             {
                 Services = { ApiService.BindService(new ApiServiceImpl("PostgreSQL.9.5", connectionString)) }
@@ -117,6 +117,20 @@ namespace SocialTargetHelpAPIServer
                 server.Ports.Add(listenPort);
 
             return server;
+        }
+
+        private static ServerCredentials GetGrpcServerCredentials()
+        {
+            return ServerCredentials.Insecure;
+
+            var certChainPath = @"D:\a-mikhailov\!Work\Certs\OpenSSL_GrpcTest\OpenSSL_GrpcTest.crt";
+            var certPrivateKeyPath = @"D:\a-mikhailov\!Work\Certs\OpenSSL_GrpcTest\OpenSSL_GrpcTest.key";
+            var rootCertPath = @"D:\a-mikhailov\!Work\Certs\OpenSSL_CA_A_Mikhailov\OpenSSL_CA_A_Mikhailov.crt";
+
+            var keyCertPair = new KeyCertificatePair(File.ReadAllText(certChainPath), File.ReadAllText(certPrivateKeyPath));
+            var credentials = new SslServerCredentials(new[] { keyCertPair }, File.ReadAllText(rootCertPath), SslClientCertificateRequestType.RequestAndRequireAndVerify);
+
+            return credentials;
         }
     }
 }

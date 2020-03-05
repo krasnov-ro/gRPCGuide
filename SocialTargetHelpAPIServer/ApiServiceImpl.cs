@@ -4,18 +4,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 using NpgsqlTypes;
-using LinqToDB;
-using Newtonsoft.Json;
-using System.Security.Cryptography;
-using System.IO;
-using System.Text.RegularExpressions;
 using SocialTargetHelpAPI.Contract;
-using System;
 using SocialTargetHelpAPIServer.Models;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Text;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace SocialTargetHelpAPIServer
 {
@@ -23,14 +21,14 @@ namespace SocialTargetHelpAPIServer
     // Она имеет информацию о всех родившихся и умерших, информацию она получает от Загса, и содержит все выплаты человека в рамках социальной помощи
     class ApiServiceImpl : ApiService.ApiServiceBase
     {
-        private readonly String _connectionString = null;
-        private readonly STH dbContext = null;
+        private readonly String _dbProviderName;
+        private readonly String _dbConnectionString = null;
         private readonly ILogger _logger = null;
 
-        public ApiServiceImpl(String providerName, String connectionString)
+        public ApiServiceImpl(String dbProviderName, String dbConnectionString)
         {
-            _connectionString = connectionString;
-            dbContext = new STH(providerName, connectionString);
+            _dbProviderName = dbProviderName;
+            _dbConnectionString = dbConnectionString;
             _logger = Program.AppServiceProvider.GetService<ILogger<ApiServiceImpl>>();
         }
 
@@ -38,19 +36,18 @@ namespace SocialTargetHelpAPIServer
 
         public override Task<GetPersonsLifeStatusResponse> GetPersonsLifeStatus(GetPersonsLifeStatusRequest req, ServerCallContext context)
         {
-            var result = new GetPersonsLifeStatusResponse();
-
-            String personDocData = null;
-            PersonLifeStatusRequest[] persons;
-            IQueryable<fatalzp_fatalzp_sv_cd_umer> men = null;
-            IQueryable<fatalzp_fatalzp_sv_cd_umer> docMen = null;
-            IQueryable<fatalzp_fatalzp_sv_cd_umer> menWithDoc = null;
-
-            try
+            var result = ExecuteDbContextQuery(dbContext =>
             {
+                var response = new GetPersonsLifeStatusResponse();
+
+                String personDocData = null;
+                PersonLifeStatusRequest[] persons;
+                IQueryable<fatalzp_fatalzp_sv_cd_umer> men = null;
+                IQueryable<fatalzp_fatalzp_sv_cd_umer> docMen = null;
+                IQueryable<fatalzp_fatalzp_sv_cd_umer> menWithDoc = null;
+
                 foreach (var dbPerson in req.RequestData)
                 {
-
                     var decriptedDoc = Decrypt(dbPerson.DocSeria) + Decrypt(dbPerson.DocNumber);
 
                     // Найдем людей по ФИО и дате рождения
@@ -78,7 +75,7 @@ namespace SocialTargetHelpAPIServer
                     if (menWithDoc.Count() == 1)
                     {
                         var filteredMen = menWithDoc.SingleOrDefault();
-                        result.ResponseData.Add(
+                        response.ResponseData.Add(
                             new PersonLifeStatusResponse
                             {
                                 LastName = filteredMen.Фамилия,
@@ -150,7 +147,7 @@ namespace SocialTargetHelpAPIServer
                             {
                                 if (check != 0)
                                     guid = Guid.NewGuid().ToString();
-                                result.ResponseData.Add(
+                                response.ResponseData.Add(
                                     new PersonLifeStatusResponse
                                     {
                                         Guid = guid,
@@ -167,7 +164,7 @@ namespace SocialTargetHelpAPIServer
                         // Ну а если же, людей с таким ФИО и ДР не нашлось, то мы передаем информацию о них со статусом "Жив"
                         else
                         {
-                            result.ResponseData.Add(
+                            response.ResponseData.Add(
                                 new PersonLifeStatusResponse
                                 {
                                     Guid = dbPerson.Guid,
@@ -182,11 +179,9 @@ namespace SocialTargetHelpAPIServer
                         }
                     }
                 }
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(exception, "GetPersonsLifeStatus error");
-            }
+
+                return response;
+            });
 
             return Task.FromResult(result);
         }
@@ -197,11 +192,11 @@ namespace SocialTargetHelpAPIServer
         // Ищем выплаты человека с полученным снилс за полученный период 
         public override Task<GetPersonPaymentsResponse> GetPersonPayments(GetPersonPaymentsRequest req, ServerCallContext context)
         {
-            try
+            var result = ExecuteDbContextQuery(dbContext =>
             {
                 var payments = new List<PersonPayment>();
 
-                using (var conn = new NpgsqlConnection(_connectionString))
+                using (var conn = new NpgsqlConnection(_dbConnectionString))
                 {
                     conn.Open();
 
@@ -249,24 +244,25 @@ namespace SocialTargetHelpAPIServer
                     conn.Close();
                 }
 
-                var result = new GetPersonPaymentsResponse()
+                var response = new GetPersonPaymentsResponse()
                 {
                     Payments = { payments }
                 };
-                LogInDB(req.ToString(), result.Payments.ToString());
 
-                return Task.FromResult(result);
-            }
-            catch (Exception exception)
+                LogInDB(dbContext, req.ToString(), response.Payments.ToString());
+
+                return response;
+            });
+
+            if (result == null)
             {
-                var result = new GetPersonPaymentsResponse()
+                result = new GetPersonPaymentsResponse()
                 {
                     Errors = { new Error() { Code = "unknown_error", Description = "Непредвиденная ошибка" } }
                 };
-                _logger.LogError(exception, "GetPersonPayments error");
-
-                return Task.FromResult(result);
             }
+
+            return Task.FromResult(result);
         }
 
         private DateTime ReadDate(NpgsqlDataReader reader, String fieldName)
@@ -280,7 +276,7 @@ namespace SocialTargetHelpAPIServer
 
         public override Task<GetVeteranDictionariesResponse> GetVeteranDictionaries(GetVeteranDictionariesRequest request, ServerCallContext context)
         {
-            try
+            var result = ExecuteDbContextQuery(dbContext =>
             {
                 var organizations = dbContext.common_cs_orgs
                     .ToArray()
@@ -357,7 +353,7 @@ namespace SocialTargetHelpAPIServer
                         };
                     });
 
-                var result = new GetVeteranDictionariesResponse()
+                var response = new GetVeteranDictionariesResponse()
                 {
                     Organizations = { organizations },
                     CitizenCategories = { citizenCategories },
@@ -365,32 +361,18 @@ namespace SocialTargetHelpAPIServer
                     Services = { services }
                 };
 
-                return Task.FromResult(result);
-            }
-            catch (Exception exception)
+                return response;
+            });
+
+            if (result == null)
             {
-                _logger.LogError(exception, "GetVeteranDictionaries error");
-
-                //public object JsonGenerate(string where, string fullName, string serial, string number)
-                //{
-                //    object result = new
-                //    {
-                //        Person = fullName,
-                //        Passport = new
-                //        {
-                //            Serial = serial,
-                //            Number = number
-                //        }
-                //    }
-                //};
-
-                var errorResult = new GetVeteranDictionariesResponse()
+                result = new GetVeteranDictionariesResponse()
                 {
                     Errors = { new Error() { Code = "error" } }
                 };
-
-                return Task.FromResult(errorResult);
             }
+
+            return Task.FromResult(result);
         }
         #region Формирование Json в ручную
         //if (where != null)
@@ -415,7 +397,7 @@ namespace SocialTargetHelpAPIServer
         #endregion
 
         // Сохранение запроса и ответа в базу данных
-        private void LogInDB(string req, string response)
+        private void LogInDB(STH dbContext, string req, string response)
         {
             var apiRequest = new api_req_api_req_requests
             {
@@ -489,6 +471,25 @@ namespace SocialTargetHelpAPIServer
                 return _paymentTypesMap[code];
             else
                 return SocialServiceCitizenCategory.Types.PaymentType.None;
+        }
+
+        private T ExecuteDbContextQuery<T>(Func<STH, T> executeFunc)
+        {
+            try
+            {
+                using (var dbContext = new STH(_dbProviderName, _dbConnectionString))
+                {
+                    var result = executeFunc(dbContext);
+
+                    return result;
+                }
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Exception occured");
+
+                return default;
+            }
         }
     }
 }

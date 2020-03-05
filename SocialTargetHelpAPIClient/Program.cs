@@ -19,7 +19,9 @@ namespace SocialTargetHelpAPIClient
         {
             var endpoint = "localhost:8088";
 
-            var channel = new Channel(endpoint, ChannelCredentials.Insecure);
+            var clientCredentials = GetGrpcClientCredentials();
+
+            var channel = new Channel(endpoint, clientCredentials);
             var client = new ApiService.ApiServiceClient(channel);
 
             var builder = new ConfigurationBuilder()
@@ -31,7 +33,7 @@ namespace SocialTargetHelpAPIClient
 
             var dbContext = new STH("PostgreSQL.9.5", configuration.GetConnectionString("MyDb"));
 
-            //var res = client.GetVeteranDictionaries(new GetVeteranDictionariesRequest() { });
+            var res = client.GetVeteranDictionaries(new GetVeteranDictionariesRequest() { });
 
             do
             {
@@ -143,6 +145,20 @@ namespace SocialTargetHelpAPIClient
                 }
             }
             return clearText;
+        }
+
+        private static ChannelCredentials GetGrpcClientCredentials()
+        {
+            return ChannelCredentials.Insecure;
+
+            var certChainPath = @"D:\a-mikhailov\!Work\Certs\OpenSSL_GrpcTest\OpenSSL_GrpcTest.crt";
+            var certPrivateKeyPath = @"D:\a-mikhailov\!Work\Certs\OpenSSL_GrpcTest\OpenSSL_GrpcTest.key";
+            var rootCertPath = @"D:\a-mikhailov\!Work\Certs\OpenSSL_CA_A_Mikhailov\OpenSSL_CA_A_Mikhailov.crt";
+
+            var keyCertPair = new KeyCertificatePair(File.ReadAllText(certChainPath), File.ReadAllText(certPrivateKeyPath));
+            var credentials = new SslCredentials(File.ReadAllText(rootCertPath), keyCertPair);
+
+            return credentials;
         }
     }
 }
